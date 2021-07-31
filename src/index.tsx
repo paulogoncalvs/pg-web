@@ -19,7 +19,7 @@ function init(): void {
 
 init();
 
-console.log('Hi! Check https://github.com/paulogoncalvs/website/ to view the code.'); // eslint-disable-line no-console
+console.log('Hi! Check https://github.com/paulogoncalvs/pg-web/ to view the code.'); // eslint-disable-line no-console
 
 // PWA - Register service worker
 if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
