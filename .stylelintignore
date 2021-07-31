@@ -1,0 +1,12 @@
+node_modules
+build
+dist
+coverage
+.history
+.husky
+.vscode
+*.js
+*.jsx
+*.ts
+*.tsx
+*.md

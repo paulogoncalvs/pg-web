@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should render Link component 1`] = `"<a href=\\"/test/\\"></a>"`;
+
+exports[`Link should render Link component that opens on a new window 1`] = `"<a href=\\"/test/\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\"></a>"`;

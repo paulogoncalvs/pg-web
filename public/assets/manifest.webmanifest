@@ -1,0 +1,37 @@
+{
+    "name": "Paulo Gonçalves - Front-End Engineer",
+    "short_name" : "PG",
+    "description": "Personal webpage",
+    "start_url": "/?source=pwa",
+    "scope" : "/",
+    "icons": [
+        {
+            "src": "./manifest/pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./manifest/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "./manifest/pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./manifest/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "theme_color": "#fff",
+    "background_color": "#fff",
+    "display": "standalone",
+    "prefer_related_applications": false
+}

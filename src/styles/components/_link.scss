@@ -1,0 +1,13 @@
+a {
+    @apply hover:text-gray-500 focus:text-gray-500 dark:hover:text-gray-400 dark:focus:text-gray-400 outline-none;
+}
+
+.ic-link {
+    &._hdr {
+        @apply ml-2 p-2;
+    }
+
+    &._ftr {
+        @apply md:transition md:transform md:duration-100 md:hover:-translate-y-1 p-3;
+    }
+}
