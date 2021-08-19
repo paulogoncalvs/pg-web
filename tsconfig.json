@@ -7,7 +7,6 @@
         "jsxFactory": "h",
         "jsxFragmentFactory": "Fragment",
         "outDir": "dist",
-        "rootDir": "src",
         "baseUrl": "src",
         "sourceMap": false,
         "noImplicitAny": true,
@@ -22,7 +21,8 @@
         "resolveJsonModule": true,
         "lib": [
             "DOM",
-            "ES2015"
+            "ES2015",
+            "DOM.Iterable",
         ],
         "paths": { 
             "@/*": ["*"]

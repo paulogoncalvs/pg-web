@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -7,6 +8,7 @@ const HtmlWebpackDeployPlugin = require('html-webpack-deploy-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const WebpackModuleNomodulePlugin = require('webpack-module-nomodule-plugin');
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
 const paths = require('./paths');
@@ -23,6 +25,8 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.ProgressPlugin(),
+
         new CleanWebpackPlugin(),
 
         new CopyWebpackPlugin({
@@ -48,6 +52,7 @@ module.exports = {
             template: paths.src + '/templates/Html/index.tsx',
             filename: 'index.html',
             inject: 'body',
+            scriptLoading: 'blocking', // set as blocking because we're using WebpackModuleNomodulePlugin
         }),
 
         new HtmlWebpackTagsPlugin({
@@ -78,6 +83,8 @@ module.exports = {
                 files: './src/**/*.{ts,tsx,js,jsx}', // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
             },
         }),
+
+        new WebpackModuleNomodulePlugin('modern'),
     ],
 
     resolve: {

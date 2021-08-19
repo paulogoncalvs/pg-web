@@ -5,19 +5,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 import { h, render } from 'preact';
-import App from '@/app/App';
+import App from '@/App';
 import { isBrowser } from '@/utils/browser';
 import './styles/index.scss';
 
-const store = isBrowser() ? __STORE__ : undefined;
-
-function init(): void {
-    const el = document.getElementById('root');
-
-    render(<App store={store} />, el as Element);
-}
-
-init();
+render(<App store={isBrowser() ? __STORE__ : undefined} />, document.getElementById('root') as Element);
 
 console.log('Hi! Check https://github.com/paulogoncalvs/pg-web/ to view the code.'); // eslint-disable-line no-console
 

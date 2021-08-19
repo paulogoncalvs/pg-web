@@ -1,7 +1,8 @@
 import { useContext } from 'preact/hooks';
 import { RouterOnChangeArgs } from 'preact-router';
 import { createBrowserHistory, BrowserHistory } from 'history';
-import { AppContext } from '@/app/AppContext';
+import { StoreContext } from '@/store';
+import { useLanguage } from '@/modules/language';
 import { isBrowser } from '@/utils/browser';
 
 let history: BrowserHistory;
@@ -20,21 +21,14 @@ if (isBrowser()) {
 
     // @todo language - history back
     HandleRouterOnChange = ({ current }: RouterOnChangeArgs): void => {
-        const { dispatch, store, ...otherContext } = useContext(AppContext);
-
+        const { dispatch, ...otherContext } = useContext(StoreContext);
+        const { setLanguage } = useLanguage();
         const {
             // @ts-ignore
             props: { locale, url },
         } = current;
 
-        if (locale) {
-            dispatch({
-                type: 'SET_LANGUAGE',
-                payload: { lang: locale },
-            });
-
-            window.document.documentElement.setAttribute('lang', locale);
-        }
+        locale && setLanguage(locale);
 
         history.replace(url, otherContext);
     };

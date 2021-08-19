@@ -1,34 +1,37 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import { VNode } from 'preact';
 import { useContext } from 'preact/hooks';
-import { AppContext } from '@/app/AppContext';
-import { Language } from '@/app/language';
-import translations from './translations';
+import { StoreContext } from '@/store';
+import { Language, LANGUAGE_DEFAULT } from '@/modules/language';
+import translations from '@/translations';
 
-interface TranslationParams {
-    [key: string]: string;
+export interface TranslationParams {
+    [key: string]: VNode | string;
 }
 
-const getTranslation = (lang: Language, key: string, params?: TranslationParams): string => {
-    let translation = (translations[lang] && translations[lang][key]) || key;
+const getTranslation = (lang: Language, key: string, params?: TranslationParams): VNode => {
+    let translation =
+        (translations[lang] && translations[lang][key]) ||
+        (translations[LANGUAGE_DEFAULT] && translations[LANGUAGE_DEFAULT][key]) ||
+        key;
 
     if (params) {
         Object.keys(params).forEach((key) => {
-            translation = translation.replace(`%${key}%`, params[key]);
+            translation = translation.split(/(%\w+?%)/g).map((value: string) => {
+                return `%${key}%` === value ? params[key] : value;
+            });
         });
     }
 
     return translation;
 };
 
-export const getTranslate =
-    (lang = Language.en) =>
-    (key: string, params?: TranslationParams): string =>
-        getTranslation(lang, key, params);
+export const useTranslate = (): { t: (key: string, params?: TranslationParams) => VNode; lang: string } => {
+    const { lang } = useContext(StoreContext);
 
-export const t = (key: string, params?: TranslationParams): string => {
-    const { lang } = useContext(AppContext);
-
-    return getTranslation(lang, key, params);
+    return {
+        t: (key: string, params?: TranslationParams): VNode => getTranslation(lang, key, params),
+        lang,
+    };
 };
 
 export { translations };

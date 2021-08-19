@@ -1,5 +1,6 @@
+import { useContext } from 'preact/hooks';
+import { StoreContext } from '@/store';
 import { isBrowser } from '@/utils/browser';
-import { useTheme } from '@/app/theme/useTheme';
 
 export enum Theme {
     Dark = 'dark',
@@ -44,4 +45,19 @@ export const rawSetTheme = (theme: Theme): void => {
     localStorage.setItem('color-theme', theme);
 };
 
-export { useTheme };
+export const useTheme = (): {
+    theme: Theme;
+    setTheme: (theme: Theme) => void;
+} => {
+    const { theme, dispatch } = useContext(StoreContext);
+
+    return {
+        theme,
+        setTheme: (theme): void => {
+            dispatch({
+                type: 'SET_THEME',
+                payload: { theme },
+            });
+        },
+    };
+};

@@ -1,6 +1,4 @@
-# README
-
-Paulo Gonçalves - Front-End Engineer Webpage
+# Paulo Gonçalves Website
 
 ## Commands
 
@@ -34,4 +32,5 @@ yarn lint-fix
 - [ ] Improve router, history handling, i18n...
 - [ ] Update head when route changes
 - [ ] Pre-render all routes
+- [ ] Tests
 - [ ] API

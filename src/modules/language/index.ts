@@ -1,5 +1,6 @@
+import { useContext } from 'preact/hooks';
 import { getCurrentUrl } from 'preact-router';
-import { useLanguage } from '@/app/language/useLanguage';
+import { StoreContext } from '@/store';
 import { isBrowser } from '@/utils/browser';
 
 export enum Language {
@@ -29,4 +30,21 @@ export const getInitialLanguage = (): Language => {
     return LANGUAGE_DEFAULT;
 };
 
-export { useLanguage };
+export const useLanguage = (): {
+    lang: Language;
+    setLanguage(lang: Language): void;
+} => {
+    const { lang, dispatch } = useContext(StoreContext);
+
+    return {
+        lang,
+        setLanguage: (lang): void => {
+            dispatch({
+                type: 'SET_LANGUAGE',
+                payload: { lang },
+            });
+
+            window.document.documentElement.setAttribute('lang', lang);
+        },
+    };
+};

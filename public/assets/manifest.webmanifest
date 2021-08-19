@@ -1,7 +1,7 @@
 {
     "name": "Paulo Gonçalves - Front-End Engineer",
     "short_name" : "PG",
-    "description": "Personal webpage",
+    "description": "Personal Website",
     "start_url": "/?source=pwa",
     "scope" : "/",
     "icons": [

@@ -14,16 +14,18 @@ module.exports = merge(common, {
     devtool: 'inline-cheap-source-map',
 
     devServer: {
-        historyApiFallback: true,
-        contentBase: paths.build,
-        open: false,
-        compress: true,
-        port: 4000,
-        watchOptions: {
-            ignored: /node_modules/,
-        },
         hot: true,
-        // writeToDisk: true,
+        open: false,
+        port: 4000,
+        static: {
+            directory: paths.build,
+            serveIndex: true,
+            watch: true,
+        },
+        devMiddleware: {
+            // serverSideRender: false,
+            // writeToDisk: true,
+        },
     },
 
     module: {

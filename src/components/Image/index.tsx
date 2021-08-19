@@ -51,7 +51,7 @@ export const Image: FunctionalComponent<{
                 {
                     lazy: isLazy,
                     '_loaded animate-fade-in opacity-0': isLoaded,
-                    'animate-pulse bg-gray-200 dark:bg-gray-900': !isLoaded,
+                    'animate-pulse bg-gray-200': !isLoaded,
                 },
                 classes,
             )}

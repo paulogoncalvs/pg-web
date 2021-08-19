@@ -4,7 +4,9 @@ module.exports = {
             '@babel/preset-env',
             {
                 modules: 'auto',
-                targets: '> 0.25%, not dead',
+                targets: {
+                    esmodules: true,
+                },
             },
         ],
         [

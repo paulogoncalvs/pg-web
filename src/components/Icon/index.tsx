@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from 'preact';
 import { useContext } from 'preact/hooks';
-import { AppContext } from '@/app/AppContext';
+import { StoreContext } from '@/store';
 
 interface IconComponentProps {
     src: IconSrc;
@@ -18,11 +18,11 @@ export const Icon: FunctionalComponent<IconComponentProps> = ({
     classes = 'fill-current',
     ...otherProps
 }) => {
-    const { store } = useContext(AppContext);
+    const { filenames } = useContext(StoreContext);
 
     return (
         <svg {...otherProps} class={classes} width={width} height={height} {...(viewBox ? { viewBox } : {})}>
-            <use href={`${store.filenames?.sprite}${hash}`} />
+            <use href={`${filenames?.sprite}${hash}`} />
         </svg>
     );
 };

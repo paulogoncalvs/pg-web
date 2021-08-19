@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import { h } from 'preact';
 import render from 'preact-render-to-string';
-import App from '@/app/App';
+import App from '@/App';
 import globalConfig from '@/../global.config.js';
 import { initStore, initialScript } from './scripts';
 
@@ -80,9 +80,9 @@ const Page = (props: Partial<PageProps>): string =>
                 {props.metas ? generateMetaTags(props.metas) : undefined}
                 {props.inlineCss ? getInlineCSS(props.inlineCss) : undefined}
                 {props.links ? generateLinkTags(props.links) : undefined}
-                {props.initialScript ? getInlineJS(`(${props.initialScript}())`) : undefined}
+                {props.initialScript ? getInlineJS(`(${props.initialScript})()`) : undefined}
             </head>
-            <body className="font-serif text-gray-900 dark:text-gray-200 bg-white dark:bg-gray-800">
+            <body className="font-serif text-gray-900 bg-white">
                 <div id="root">
                     <App store={props.store} />
                 </div>

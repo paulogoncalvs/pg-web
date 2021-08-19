@@ -2,15 +2,16 @@ const url = 'https://www.paulogoncalves.dev/';
 
 module.exports = {
     title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
-    description: 'Personal webpage',
+    description: 'Personal Website',
     scripts: [{ src: 'https://www.google-analytics.com/analytics.js', async: true }],
     metas: [
         { attributes: { name: 'viewport', content: 'width=device-width,initial-scale=1' } },
-        { attributes: { name: 'description', content: 'Personal webpage' } },
+        { attributes: { name: 'description', content: 'Personal Website' } },
         {
             attributes: {
                 name: 'keywords',
-                content: 'HTML, CSS, JavaScript, TypeScript, Preact, Webpack, Front-End, Frontend, Paulo Gonçalves',
+                content:
+                    'HTML, CSS, JavaScript, TypeScript, Preact, Webpack, Tailwind, Front-End, Frontend, Paulo Gonçalves',
             },
         },
         { attributes: { name: 'author', content: 'Paulo Gonçalves | contact@paulogoncalves.dev' } },
@@ -27,7 +28,7 @@ module.exports = {
         { attributes: { content: 'paulogoncalves.dev', property: 'twitter:domain' } },
         { path: '/assets/img/me.jpeg', attributes: { property: 'twitter:image' } },
         { attributes: { content: 'Paulo Gonçalves - Front-End Engineer from Portugal', property: 'og:title' } },
-        { attributes: { content: 'Personal webpage', property: 'og:description' } },
+        { attributes: { content: 'Personal Website', property: 'og:description' } },
         { attributes: { content: url, property: 'og:url' } },
         { attributes: { content: 'website', property: 'og:type' } },
         { path: '/assets/img/me.jpeg', attributes: { property: 'og:image' } },
@@ -65,7 +66,7 @@ module.exports = {
             },
         },
         {
-            path: '/favicon.svg"',
+            path: '/favicon.svg',
             attributes: {
                 rel: 'icon',
                 type: 'image/svg+xml',

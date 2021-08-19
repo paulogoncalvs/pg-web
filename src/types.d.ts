@@ -10,6 +10,8 @@ declare interface PageStore {
     filenames?: {
         sprite?: 'string';
     };
+    theme?: Theme;
+    lang?: Language;
 }
 
 declare let __STORE__: PageStore;

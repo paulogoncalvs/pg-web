@@ -1,12 +1,10 @@
 import { h, FunctionalComponent } from 'preact';
 import { route } from 'preact-router';
-import { useContext } from 'preact/hooks';
-import { AppContext } from '@/app/AppContext';
-import { Language } from '@/app/language';
-import { t, translations } from '@/modules/i18n';
+import { Language } from '@/modules/language';
+import { useTranslate, translations } from '@/modules/i18n';
 
 const LanguageSelector: FunctionalComponent<{ classes?: string }> = ({ classes }) => {
-    const { lang } = useContext(AppContext);
+    const { t, lang } = useTranslate();
 
     // @todo language
     const onLanguageSelect = (event: Event): void => {
@@ -25,7 +23,7 @@ const LanguageSelector: FunctionalComponent<{ classes?: string }> = ({ classes }
     return (
         <select
             key={`lang-${lang}`}
-            class={`lang-sel text-sm bg-white dark:bg-gray-800 border-gray-800 hover:bg-gray-300 dark:hover:bg-gray-400 dark:border-white border-2 outline-none ${classes}`}
+            class={`lang-sel text-sm bg-white border-gray-800 hover:bg-gray-300 border-2 outline-none ${classes}`}
             onChange={onLanguageSelect}
         >
             {(Object.keys(translations) as Array<Language>).map((lang: Language) => renderOption(lang))}

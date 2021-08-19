@@ -3,7 +3,13 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     purge: ['./src/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'class', // false or 'media' or 'class'
+
     theme: {
+        nightwind: {
+            colors: {
+                white: 'gray.900',
+            },
+        },
         fontFamily: {
             sans: ['Roboto', ...defaultTheme.fontFamily.sans.filter((item) => item !== 'Roboto')],
             serif: ['Roboto Slab', ...defaultTheme.fontFamily.serif],
@@ -36,14 +42,6 @@ module.exports = {
             },
         },
     },
-    variants: {
-        extend: {
-            backgroundColor: ['dark'],
-            borderColor: ['dark'],
-            textColor: ['dark'],
-            fill: ['dark'],
-        },
-    },
     corePlugins: {
         filter: false,
         blur: false,
@@ -52,5 +50,5 @@ module.exports = {
         grayscale: false,
         hueRotate: false,
     },
-    plugins: [],
+    plugins: [require('nightwind')],
 };

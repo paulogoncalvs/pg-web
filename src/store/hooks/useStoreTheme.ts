@@ -1,8 +1,8 @@
 import { useEffect } from 'preact/hooks';
-import { AppContextAction } from '@/app/AppContext';
-import { rawSetTheme, Theme, getPrefersScheme, COLOR_SCHEME_QUERY } from '@/app/theme';
+import { StoreContextAction } from '@/store';
+import { rawSetTheme, Theme, getPrefersScheme, COLOR_SCHEME_QUERY } from '@/modules/theme';
 
-export const useTheme = (theme: Theme, dispatch: (action: AppContextAction) => void): void => {
+export const useStoreTheme = (theme: Theme, dispatch: (action: StoreContextAction) => void): void => {
     useEffect(() => {
         const handler = (): void => {
             dispatch({
