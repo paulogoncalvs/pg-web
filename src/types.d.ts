@@ -6,12 +6,19 @@ declare interface IconSrc {
     hash?: string;
 }
 
+declare interface Head {
+    title: string;
+    links: Partial<PageLinks>[];
+    metas: Partial<PageMetas>[];
+}
+
 declare interface PageStore {
     filenames?: {
         sprite?: 'string';
     };
     theme?: Theme;
     lang?: Language;
+    url?: string;
 }
 
 declare let __STORE__: PageStore;

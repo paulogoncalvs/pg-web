@@ -8,6 +8,7 @@ interface IconComponentProps {
     height?: string;
     classes?: string;
     viewBox?: string;
+    ariaHidden?: boolean;
     otherProps?: unknown;
 }
 
@@ -16,12 +17,20 @@ export const Icon: FunctionalComponent<IconComponentProps> = ({
     width = '24',
     height = '24',
     classes = 'fill-current',
+    ariaHidden,
     ...otherProps
 }) => {
     const { filenames } = useContext(StoreContext);
 
     return (
-        <svg {...otherProps} class={classes} width={width} height={height} {...(viewBox ? { viewBox } : {})}>
+        <svg
+            {...otherProps}
+            aria-hidden={ariaHidden}
+            class={classes}
+            width={width}
+            height={height}
+            {...(viewBox ? { viewBox } : {})}
+        >
             <use href={`${filenames?.sprite}${hash}`} />
         </svg>
     );

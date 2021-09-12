@@ -21,17 +21,37 @@ if (isBrowser()) {
 
     // @todo language - history back
     HandleRouterOnChange = ({ current }: RouterOnChangeArgs): void => {
-        const { dispatch, ...otherContext } = useContext(StoreContext);
+        const { dispatch, lang, ...otherContext } = useContext(StoreContext);
         const { setLanguage } = useLanguage();
+        const { setRoute } = useRouter();
         const {
             // @ts-ignore
             props: { locale, url },
         } = current;
 
-        locale && setLanguage(locale);
+        locale && locale !== lang && setLanguage(locale);
+
+        setRoute(url);
 
         history.replace(url, otherContext);
     };
 }
 
 export { history, HandleRouterOnChange };
+
+export const useRouter = (): {
+    url: string;
+    setRoute(url: string): void;
+} => {
+    const { url = '', dispatch } = useContext(StoreContext);
+
+    return {
+        url,
+        setRoute: (url): void => {
+            dispatch({
+                type: 'SET_ROUTE',
+                payload: { url },
+            });
+        },
+    };
+};

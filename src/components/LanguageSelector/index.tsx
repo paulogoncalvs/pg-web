@@ -2,6 +2,7 @@ import { h, FunctionalComponent } from 'preact';
 import { route } from 'preact-router';
 import { Language } from '@/modules/language';
 import { useTranslate, translations } from '@/modules/i18n';
+import classNames from 'classnames';
 
 const LanguageSelector: FunctionalComponent<{ classes?: string }> = ({ classes }) => {
     const { t, lang } = useTranslate();
@@ -23,8 +24,12 @@ const LanguageSelector: FunctionalComponent<{ classes?: string }> = ({ classes }
     return (
         <select
             key={`lang-${lang}`}
-            class={`lang-sel text-sm bg-white border-gray-800 hover:bg-gray-300 border-2 outline-none ${classes}`}
+            class={classNames(
+                'lang-sel text-sm bg-white border-gray-800 hover:bg-gray-300 hover:text-black focus:bg-gray-300 border-2 focus:text-black',
+                classes,
+            )}
             onChange={onLanguageSelect}
+            aria-label={t('language_selection')}
         >
             {(Object.keys(translations) as Array<Language>).map((lang: Language) => renderOption(lang))}
         </select>

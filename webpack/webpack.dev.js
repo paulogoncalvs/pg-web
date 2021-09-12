@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const { merge } = require('webpack-merge');
 const PreactRefreshPlugin = require('@prefresh/webpack');
@@ -14,9 +13,14 @@ module.exports = merge(common, {
     devtool: 'inline-cheap-source-map',
 
     devServer: {
-        hot: true,
         open: false,
         port: 4000,
+        client: {
+            overlay: false,
+            // progress: true,
+        },
+        compress: true,
+        // historyApiFallback: true,
         static: {
             directory: paths.build,
             serveIndex: true,
@@ -25,7 +29,12 @@ module.exports = merge(common, {
         devMiddleware: {
             // serverSideRender: false,
             // writeToDisk: true,
+            // ignored: /node_modules/,
         },
+    },
+
+    watchOptions: {
+        ignored: ['**/dist', '**/node_modules'],
     },
 
     module: {
@@ -48,15 +57,8 @@ module.exports = merge(common, {
                 test: /\.[jt]sx?$/,
                 exclude: /node_modules/,
                 use: [
-                    // other loaders
                     {
                         loader: require.resolve('babel-loader'),
-                        options: {
-                            // other options
-                            plugins: [
-                                // other plugins
-                            ].filter(Boolean),
-                        },
                     },
                 ],
             },
@@ -68,8 +70,6 @@ module.exports = merge(common, {
         }),
 
         new StylelintPlugin(),
-
-        new webpack.HotModuleReplacementPlugin(),
 
         new PreactRefreshPlugin(),
 

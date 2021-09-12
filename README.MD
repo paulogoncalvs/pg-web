@@ -1,5 +1,9 @@
 # Paulo Gonçalves Website
 
+## Status
+
+Work in progress.
+
 ## Commands
 
 ### Development server

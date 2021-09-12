@@ -10,6 +10,7 @@ export interface StoreContextAction {
     payload: {
         theme?: Theme;
         lang?: Language;
+        url?: string;
     };
 }
 
@@ -17,17 +18,23 @@ interface StoreContextState extends PageStore {
     dispatch(action: StoreContextAction): void;
 }
 
-const initialState: StoreContextState = {
-    dispatch: (action: StoreContextAction) => console.warn('INVALID DISPATCH: ', action), // eslint-disable-line no-console
-    theme: getInitialTheme(),
-    lang: getInitialLanguage(),
-};
+const getInitialState = (store: PageStore): StoreContextState => ({
+    dispatch: (action: StoreContextAction): void => console.warn('INVALID DISPATCH: ', action), // eslint-disable-line no-console
+    theme: store.theme || getInitialTheme(),
+    lang: store.lang || getInitialLanguage(),
+    ...store,
+});
 
 export const StoreReducer = (
     StoreContextState: StoreContextState,
     { type, payload }: StoreContextAction,
 ): StoreContextState => {
     switch (type) {
+        case 'SET_ROUTE':
+            return {
+                ...StoreContextState,
+                url: payload.url || '/',
+            };
         case 'SET_LANGUAGE':
             return {
                 ...StoreContextState,
@@ -44,10 +51,10 @@ export const StoreReducer = (
     }
 };
 
-export const StoreContext = createContext(initialState);
+export const StoreContext = createContext(getInitialState({}));
 
 export const Store: FunctionalComponent<{ store: PageStore }> = ({ store, children }) => {
-    const [state, dispatch] = useReducer(StoreReducer, { ...store, ...initialState });
+    const [state, dispatch] = useReducer(StoreReducer, getInitialState(store));
     useStoreTheme(state.theme, dispatch);
     useStoreLanguage(state.lang);
 

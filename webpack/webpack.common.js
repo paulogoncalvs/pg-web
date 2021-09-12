@@ -12,7 +12,7 @@ const WebpackModuleNomodulePlugin = require('webpack-module-nomodule-plugin');
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
 const paths = require('./paths');
-const globalConfig = require('../global.config');
+const globalConfig = require('../src/shared/config');
 
 module.exports = {
     entry: [paths.src + '/index.tsx'],
@@ -47,13 +47,16 @@ module.exports = {
             ],
         }),
 
-        new HtmlWebpackPlugin({
-            favicon: paths.public + '/assets/favicon.ico',
-            template: paths.src + '/templates/Html/index.tsx',
-            filename: 'index.html',
-            inject: 'body',
-            scriptLoading: 'blocking', // set as blocking because we're using WebpackModuleNomodulePlugin
-        }),
+        ...Object.keys(globalConfig.routes).map(
+            (key) =>
+                new HtmlWebpackPlugin({
+                    favicon: paths.public + '/assets/favicon.ico',
+                    template: paths.src + '/shared/template.tsx',
+                    inject: 'body',
+                    scriptLoading: 'blocking',
+                    ...globalConfig.routes[key],
+                }),
+        ),
 
         new HtmlWebpackTagsPlugin({
             append: true,
@@ -95,7 +98,11 @@ module.exports = {
     module: {
         rules: [
             // JavaScript / TypeScript
-            { test: /\.[jt]sx?$/, exclude: /node_modules/, use: ['babel-loader'] },
+            {
+                test: /\.[jt]sx?$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
+            },
 
             // Style
             {
@@ -132,7 +139,10 @@ module.exports = {
             },
 
             // Fonts: Inline
-            { test: /\.(woff(2)?|eot|ttf|otf|)$/, type: 'asset/inline' },
+            {
+                test: /\.(woff(2)?|eot|ttf|otf|)$/,
+                type: 'asset/inline',
+            },
 
             // SVG Icons: Content to use with preact component
             {
@@ -178,10 +188,5 @@ module.exports = {
                 ],
             },
         ],
-    },
-
-    experiments: {
-        topLevelAwait: true,
-        asyncWebAssembly: true,
     },
 };

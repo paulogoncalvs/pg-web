@@ -4,12 +4,11 @@ if (process.env.NODE_ENV === 'development') {
     require('preact/debug');
 }
 
-import { h, render } from 'preact';
+import { h, hydrate } from 'preact';
 import App from '@/App';
-import { isBrowser } from '@/utils/browser';
 import './styles/index.scss';
 
-render(<App store={isBrowser() ? __STORE__ : undefined} />, document.getElementById('root') as Element);
+hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
 
 console.log('Hi! Check https://github.com/paulogoncalvs/pg-web/ to view the code.'); // eslint-disable-line no-console
 

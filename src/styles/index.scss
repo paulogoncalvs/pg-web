@@ -7,6 +7,6 @@
 
 @layer base {
     a {
-      @apply hover:text-gray-500 focus:text-gray-500 outline-none;
+      @apply hover:text-gray-500 focus:text-gray-500;
     }
   }

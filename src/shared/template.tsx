@@ -2,8 +2,8 @@
 import { h } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
-import globalConfig from '@/../global.config.js';
-import { initStore, initialScript } from './scripts';
+import { headScript, bodyScript } from './scripts';
+import globalConfig from '@/shared/config.js';
 
 interface PageLinks {
     path: string;
@@ -32,16 +32,14 @@ interface PageScripts {
 
 export interface PageProps {
     title: string;
-    description: string;
     links: Partial<PageLinks>[];
     metas: Partial<PageMetas>[];
     scripts: Partial<PageScripts>[];
+    headScript(): void;
+    bodyScript(store?: PageStore): string;
     inlineCss: string;
-    inlineScripts: string;
-    initStore(store: PageStore): string;
-    initialScript(): void;
-    endScript(): void;
     store: PageStore;
+    head: Head;
 }
 
 const generateMetaTags = (metas: Partial<PageMetas>[]): JSX.Element[] => {
@@ -80,32 +78,41 @@ const Page = (props: Partial<PageProps>): string =>
                 {props.metas ? generateMetaTags(props.metas) : undefined}
                 {props.inlineCss ? getInlineCSS(props.inlineCss) : undefined}
                 {props.links ? generateLinkTags(props.links) : undefined}
-                {props.initialScript ? getInlineJS(`(${props.initialScript})()`) : undefined}
+                {props.headScript ? getInlineJS(`(${props.headScript})()`) : undefined}
             </head>
             <body className="font-serif text-gray-900 bg-white">
                 <div id="root">
                     <App store={props.store} />
                 </div>
-                {props.initStore ? getInlineJS(initStore(props.store)) : undefined}
+                {props.bodyScript ? getInlineJS(props.bodyScript(props.store)) : undefined}
                 {props.scripts ? generateScriptTags(props.scripts) : undefined}
                 <script async src="https://www.google-analytics.com/analytics.js" />
             </body>
         </html>,
     );
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default (templateParams: { webpackConfig: { plugins: Array<any> } }): string => {
-    const sprite = templateParams.webpackConfig.plugins.find((plugin) => plugin?.filenames?.spritemap).filenames
-        ?.spritemap;
+export default ({
+    lang,
+    head,
+    webpackConfig,
+}: {
+    lang: string;
+    head: Head;
+    webpackConfig: { plugins: Array<any> }; // eslint-disable-line @typescript-eslint/no-explicit-any
+}): string => {
+    const sprite = webpackConfig.plugins.find((plugin) => plugin?.filenames?.spritemap).filenames?.spritemap;
 
     return Page({
-        initialScript,
-        initStore,
         title: globalConfig.title,
+        headScript,
+        bodyScript,
+        metas: head.metas,
+        links: head.links,
         store: {
             filenames: {
                 sprite: sprite && `/${sprite}`,
             },
+            lang,
         },
     });
 };

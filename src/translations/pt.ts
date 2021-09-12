@@ -1,6 +1,7 @@
 export default {
     language_pt: 'PT',
     language_en: 'EN',
+    language_selection: 'Seleccionar língua',
     home_page_description_1: 'Nascido em Vila Nova de Gaia, Portugal.',
     home_page_description_2: 'A trabalhar atualmente como Lead Front-End Engineer no Porto Tech Center - Jumia.',
     home_page_description_3: 'Consulte o %link% para mais informações.',
@@ -12,4 +13,5 @@ export default {
     theme_toggle: 'Mudar para modo %theme%',
     theme_light: 'claro',
     theme_dark: 'escuro',
+    accessibility_new_window: '%text% (abre numa nova janela)',
 };

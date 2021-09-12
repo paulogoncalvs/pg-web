@@ -27,18 +27,22 @@ export const Home: FunctionalComponent = () => {
                     <p>{t('home_page_description_1')}</p>
                     <p>{t('home_page_description_2')}</p>
                     <p>
-                        {t('home_page_description_3', {
-                            link: (
-                                <a
-                                    href="https://pt.linkedin.com/in/paulogoncalvs"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="underline"
-                                >
-                                    {t('home_page_description_3_link_text')}
-                                </a>
-                            ),
-                        })}
+                        {t(
+                            'home_page_description_3',
+                            {
+                                link: (
+                                    <a
+                                        href="https://pt.linkedin.com/in/paulogoncalvs"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="underline"
+                                    >
+                                        {t('home_page_description_3_link_text')}
+                                    </a>
+                                ),
+                            },
+                            false,
+                        )}
                     </p>
                 </div>
                 <div class="pb-14">
@@ -49,7 +53,7 @@ export const Home: FunctionalComponent = () => {
                         rel="noopener noreferrer"
                         class="transition transform duration-100 hover:translate-x-1 inline-flex px-4 py-2 sm:py-3 items-center justify-center rounded-full shadow-md bg-gradient-to-r from-green-300 via-green-100 to-green-100 hover:from-green-300 hover:via-green-050 hover:to-green-050"
                     >
-                        <Icon src={mailIcon} />
+                        <Icon src={mailIcon} classes="" ariaHidden />
                         <span class="pl-2 sm:text-xl text-gray-900 dark:text-gray-900">
                             {t('home_page_email_button_label')}
                         </span>

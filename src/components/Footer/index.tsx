@@ -28,44 +28,54 @@ export const Footer: FunctionalComponent = () => {
                 <div class="container mx-auto px-6 pt-14 pb-12 flex flex-col items-center">
                     <div class="pb-6 text-gray-600 text-sm sm:text-base">{t('footer_description_1')}</div>
                     <div class="flex flex-wrap justify-center align-middle">
-                        <Link href="https://www.typescriptlang.org/" classes="ic-link _ftr" newWindow>
-                            <Icon src={typeScriptLogo} aria-label="TypeScript" width="32" height="32" />
+                        <Link
+                            href="https://www.typescriptlang.org/"
+                            classes="ic-link _ftr"
+                            ariaLabel="TypeScript"
+                            newWindow
+                        >
+                            <Icon src={typeScriptLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://preactjs.com/" classes="ic-link _ftr" newWindow>
-                            <Icon src={preactLogo} aria-label="Preact" width="32" height="32" />
+                        <Link href="https://preactjs.com/" classes="ic-link _ftr" ariaLabel="Preact" newWindow>
+                            <Icon src={preactLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://webpack.js.org/" classes="ic-link _ftr" newWindow>
-                            <Icon src={webpackLogo} aria-label="Webpack" width="32" height="32" />
+                        <Link href="https://webpack.js.org/" classes="ic-link _ftr" ariaLabel="Webpack" newWindow>
+                            <Icon src={webpackLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://yarnpkg.com/" classes="ic-link _ftr" newWindow>
-                            <Icon src={yarnLogo} aria-label="Yarn" width="32" height="32" />
+                        <Link href="https://yarnpkg.com/" classes="ic-link _ftr" ariaLabel="Yarn" newWindow>
+                            <Icon src={yarnLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://eslint.org/" classes="ic-link _ftr" newWindow>
-                            <Icon src={esLintLogo} aria-label="ESLint" width="32" height="32" />
+                        <Link href="https://eslint.org/" classes="ic-link _ftr" ariaLabel="ESLint" newWindow>
+                            <Icon src={esLintLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://stylelint.io/" classes="ic-link _ftr" newWindow>
-                            <Icon src={styleLintLogo} aria-label="StyleLint" width="32" height="32" />
+                        <Link href="https://stylelint.io/" classes="ic-link _ftr" ariaLabel="StyleLint" newWindow>
+                            <Icon src={styleLintLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://developers.google.com/web/tools/workbox" classes="ic-link _ftr" newWindow>
-                            <Icon src={workboxLogo} aria-label="Workbox" width="32" height="32" />
+                        <Link
+                            href="https://developers.google.com/web/tools/workbox"
+                            classes="ic-link _ftr"
+                            ariaLabel="Workbox"
+                            newWindow
+                        >
+                            <Icon src={workboxLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://tailwindcss.com/" classes="ic-link _ftr" newWindow>
-                            <Icon src={tailwindLogo} aria-label="Tailwind CSS" width="32" height="32" />
+                        <Link href="https://tailwindcss.com/" classes="ic-link _ftr" ariaLabel="Tailwind CSS" newWindow>
+                            <Icon src={tailwindLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://prettier.io/" classes="ic-link _ftr" newWindow>
-                            <Icon src={prettierLogo} aria-label="Prettier" width="32" height="32" />
+                        <Link href="https://prettier.io/" classes="ic-link _ftr" ariaLabel="Prettier" newWindow>
+                            <Icon src={prettierLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://jestjs.io/" classes="ic-link _ftr" newWindow>
-                            <Icon src={jestLogo} aria-label="Jest" width="32" height="32" />
+                        <Link href="https://jestjs.io/" classes="ic-link _ftr" ariaLabel="Jest" newWindow>
+                            <Icon src={jestLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://postcss.org/" classes="ic-link _ftr" newWindow>
-                            <Icon src={postCSSLogo} aria-label="PostCSS" width="32" height="32" />
+                        <Link href="https://postcss.org/" classes="ic-link _ftr" ariaLabel="PostCSS" newWindow>
+                            <Icon src={postCSSLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://sass-lang.com/" classes="ic-link _ftr" newWindow>
-                            <Icon src={sassLogo} aria-label="Sass" width="32" height="32" />
+                        <Link href="https://sass-lang.com/" classes="ic-link _ftr" ariaLabel="Sass" newWindow>
+                            <Icon src={sassLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://babeljs.io/" classes="ic-link _ftr" newWindow>
-                            <Icon src={babelLogo} aria-label="Babel" width="60" height="32" />
+                        <Link href="https://babeljs.io/" classes="ic-link _ftr" ariaLabel="Babel" newWindow>
+                            <Icon src={babelLogo} width="60" height="32" ariaHidden />
                         </Link>
                     </div>
                 </div>

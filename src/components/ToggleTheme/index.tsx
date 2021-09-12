@@ -5,6 +5,7 @@ import { Icon } from '@/components/Icon';
 import { isBrowser } from '@/utils/browser';
 import lightModeIcon from '@/assets/icons/light_mode.svg';
 import darkModeIcon from '@/assets/icons/dark_mode.svg';
+import classNames from 'classnames';
 
 const getToggleIcon = (theme: Theme): IconSrc => (theme === Theme.Dark ? lightModeIcon : darkModeIcon);
 
@@ -19,12 +20,12 @@ export const ToggleTheme: FunctionalComponent<{ classes?: string }> = ({ classes
     };
 
     return isBrowser() && window.CSS && CSS.supports('color', 'var(--primary)') ? (
-        <div class={`ic-link cursor-pointer select-none ${classes}`} onClick={handleOnClick}>
-            <Icon
-                src={getToggleIcon(theme)}
-                aria-label={t('theme_toggle', { theme: t(`theme_${getToggleTheme(theme)}`) })}
-                classes="fill-current"
-            />
-        </div>
+        <button
+            class={classNames('ic-link _hdr', classes)}
+            onClick={handleOnClick}
+            aria-label={t('theme_toggle', { theme: t(`theme_${getToggleTheme(theme)}`) })}
+        >
+            <Icon src={getToggleIcon(theme)} ariaHidden />
+        </button>
     ) : null;
 };

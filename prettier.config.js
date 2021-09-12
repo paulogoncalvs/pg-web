@@ -9,6 +9,5 @@ module.exports = {
     useTabs: false,
     quoteProps: 'as-needed',
     bracketSpacing: true,
-    jsxBracketSameLine: false,
     arrowParens: 'always',
 };

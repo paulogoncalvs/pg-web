@@ -1,6 +1,7 @@
 export default {
     language_pt: 'PT',
     language_en: 'EN',
+    language_selection: 'Language selection',
     home_page_description_1: 'Born in Vila Nova de Gaia, Portugal.',
     home_page_description_2: 'Currently working as a Lead Front-End Engineer at Porto Tech Center - Jumia.',
     home_page_description_3: 'Check the %link% for more information.',
@@ -12,4 +13,5 @@ export default {
     theme_toggle: 'Toggle to %theme% mode',
     theme_light: 'light',
     theme_dark: 'dark',
+    accessibility_new_window: '%text% (opens in a new window)',
 };

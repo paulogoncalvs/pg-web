@@ -7,7 +7,7 @@ module.exports = {
     },
     parser: '@typescript-eslint/parser',
     parserOptions: {
-        ecmaVersion: 2015,
+        ecmaVersion: 2018,
         sourceType: 'module',
         ecmaFeatures: {
             modules: true,
