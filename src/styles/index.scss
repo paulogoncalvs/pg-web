@@ -1,5 +1,5 @@
 @import 'components/link';
-@import 'components/language-selector';
+@import 'components/button';
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +7,6 @@
 
 @layer base {
     a {
-      @apply hover:text-gray-500 focus:text-gray-500;
+      @apply hover:text-emerald-400 focus:text-emerald-400 dark:hover:text-emerald-400 dark:focus:text-emerald-400;
     }
   }

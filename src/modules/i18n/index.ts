@@ -1,8 +1,8 @@
 import { VNode } from 'preact';
 import { useContext } from 'preact/hooks';
-import { StoreContext } from '@/store';
+import { StoreContext } from '@/modules/store';
 import { Language, LANGUAGE_DEFAULT } from '@/modules/language';
-import translations from '@/translations';
+import { translations } from '@/config/translations';
 
 export interface TranslationParams {
     [key: string]: VNode | string;

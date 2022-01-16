@@ -23,6 +23,8 @@ declare interface PageStore {
 
 declare let __STORE__: PageStore;
 
+declare module 'wouter-preact/static-location';
+
 declare interface NodeModule {
     hot?: ImportMeta['hot'] | void;
 }

@@ -1,0 +1,28 @@
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center rounded-full;
+        @apply transform-gpu md:transition-transform md:ease-in-out md:duration-200;
+        @apply shadow-md hover:shadow-lg md:focus:shadow-lg;
+        @apply px-4 py-2 sm:py-3;
+        @apply sm:text-xl text-zinc-900 dark:text-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-900;
+        
+        @screen md {
+            &:hover,
+            &:focus {
+                transform: translateX(0) translateY(-2px) translateZ(0);
+            }
+        }
+
+        // With icon
+        &._i {
+            span {
+                @apply pl-2;
+            }
+        }
+
+        // Primary
+        &._prim {
+            @apply bg-emerald-300 hover:bg-emerald-200 focus:bg-emerald-200 dark:bg-emerald-400 dark:hover:bg-emerald-300 dark:focus:bg-emerald-300;
+        }
+    } 
+}

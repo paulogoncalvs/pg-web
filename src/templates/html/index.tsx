@@ -2,8 +2,8 @@
 import { h } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
+import globalConfig from '@/config/global/index.js';
 import { headScript, bodyScript } from './scripts';
-import globalConfig from '@/shared/config.js';
 
 interface PageLinks {
     path: string;
@@ -80,32 +80,32 @@ const Page = (props: Partial<PageProps>): string =>
                 {props.links ? generateLinkTags(props.links) : undefined}
                 {props.headScript ? getInlineJS(`(${props.headScript})()`) : undefined}
             </head>
-            <body className="font-serif text-gray-900 bg-white">
+            <body class="font-serif bg-white text-zinc-900 dark:text-zinc-200 dark:bg-zinc-900 transition-colors duration-200 ease-linear">
                 <div id="root">
                     <App store={props.store} />
                 </div>
                 {props.bodyScript ? getInlineJS(props.bodyScript(props.store)) : undefined}
                 {props.scripts ? generateScriptTags(props.scripts) : undefined}
-                <script async src="https://www.google-analytics.com/analytics.js" />
             </body>
         </html>,
     );
 
-export default ({
-    lang,
-    head,
-    webpackConfig,
-}: {
+/* @TODO SCRIPTS TAGS - ANALYTICS */
+interface HtmlTemplateProps {
     lang: string;
+    url: string;
     head: Head;
     webpackConfig: { plugins: Array<any> }; // eslint-disable-line @typescript-eslint/no-explicit-any
-}): string => {
+}
+
+export default ({ lang, url, head, webpackConfig }: HtmlTemplateProps): string => {
     const sprite = webpackConfig.plugins.find((plugin) => plugin?.filenames?.spritemap).filenames?.spritemap;
 
     return Page({
-        title: globalConfig.title,
         headScript,
         bodyScript,
+        title: globalConfig.title,
+        scripts: globalConfig.scripts,
         metas: head.metas,
         links: head.links,
         store: {
@@ -113,6 +113,7 @@ export default ({
                 sprite: sprite && `/${sprite}`,
             },
             lang,
+            url,
         },
     });
 };

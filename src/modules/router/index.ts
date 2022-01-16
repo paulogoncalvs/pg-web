@@ -1,43 +1,33 @@
-import { useContext } from 'preact/hooks';
-import { RouterOnChangeArgs } from 'preact-router';
-import { createBrowserHistory, BrowserHistory } from 'history';
-import { StoreContext } from '@/store';
-import { useLanguage } from '@/modules/language';
+import { FunctionalComponent } from 'preact';
+import { useContext, useEffect } from 'preact/hooks';
+import { useRoute, useLocation } from 'wouter-preact';
+import { StoreContext } from '@/modules/store';
+import { Language, useLanguage, isValidLanguage } from '@/modules/language';
+import { trackPageView } from '@/modules/tracking';
 import { isBrowser } from '@/utils/browser';
 
-let history: BrowserHistory;
+export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
+    const { url, setRoute } = useRouter();
+    const { lang, setLanguage } = useLanguage();
+    const [location] = useLocation();
+    const [, params] = useRoute('/:lang/:path*');
 
-let HandleRouterOnChange: (props: RouterOnChangeArgs) => void;
+    const langParam = (isValidLanguage(params?.lang as Language) ? params?.lang : lang) as Language;
 
-if (isBrowser()) {
-    history = createBrowserHistory();
+    useEffect(() => {
+        langParam !== lang && setLanguage(langParam);
+        location !== url && setRoute(location);
+        setTimeout(() => trackPageView(), 500);
+    }, [langParam, location]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    /*
-    history.listen((x) => {
-        console.log('route changes', x);
-        // x.action === 'POP' && route(x.location.pathname);
-    });
-    */
+    return null;
+};
 
-    // @todo language - history back
-    HandleRouterOnChange = ({ current }: RouterOnChangeArgs): void => {
-        const { dispatch, lang, ...otherContext } = useContext(StoreContext);
-        const { setLanguage } = useLanguage();
-        const { setRoute } = useRouter();
-        const {
-            // @ts-ignore
-            props: { locale, url },
-        } = current;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useRouterLocation = (): any[] => (isBrowser() ? useLocation() : ['', (): null => null]); // eslint-disable-line react-hooks/rules-of-hooks
 
-        locale && locale !== lang && setLanguage(locale);
-
-        setRoute(url);
-
-        history.replace(url, otherContext);
-    };
-}
-
-export { history, HandleRouterOnChange };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const useRouterRoute = (route: string): any[] => (isBrowser() ? useRoute(route) : ['', (): null => null]); // eslint-disable-line react-hooks/rules-of-hooks
 
 export const useRouter = (): {
     url: string;

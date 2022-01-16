@@ -1,8 +1,8 @@
 import { useContext } from 'preact/hooks';
-import { StoreContext } from '@/store';
+import { StoreContext } from '@/modules/store';
 import { isBrowser } from '@/utils/browser';
 
-export enum Theme {
+export const enum Theme {
     Dark = 'dark',
     Light = 'light',
 }

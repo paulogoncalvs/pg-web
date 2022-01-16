@@ -1,10 +1,10 @@
 const Dotenv = require('dotenv-webpack');
 const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const paths = require('./paths');
 const common = require('./webpack.common.js');
 
@@ -15,6 +15,7 @@ module.exports = merge(common, {
         path: paths.build,
         publicPath: '/',
         filename: 'assets/js/[name].[contenthash].bundle.js',
+        assetModuleFilename: 'assets/img/[name].[contenthash:8][ext]',
         clean: true,
     },
     plugins: [
@@ -25,7 +26,7 @@ module.exports = merge(common, {
         // style-loader -> development
         // MiniCssExtractPlugin -> production
         new MiniCssExtractPlugin({
-            chunkFilename: '[id].css',
+            chunkFilename: 'assets/css/[id].[contenthash].css',
             filename: 'assets/css/[name].[contenthash].css',
         }),
 
@@ -38,8 +39,14 @@ module.exports = merge(common, {
 
         new SVGSpritemapPlugin(paths.src + '/assets/icons/**/*.svg', {
             output: {
-                filename: 'assets/img/sprite.[hash].svg',
+                filename: 'assets/img/sprite.[contenthash].svg',
             },
+        }),
+
+        new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+            analyzerMode: 'static',
+            defaultSizes: 'gzip',
         }),
     ],
     module: {
@@ -47,7 +54,7 @@ module.exports = merge(common, {
     },
     optimization: {
         minimize: true,
-        minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+        minimizer: ['...', new CssMinimizerPlugin()],
     },
     performance: {
         hints: false,

@@ -1,4 +1,4 @@
-const routes = require('./routes');
+const routes = require('../routes');
 
 const url = 'https://www.paulogoncalves.dev/';
 
@@ -23,12 +23,12 @@ const metas = [
     { attributes: { content: '@paulogoncalvs', property: 'twitter:site' } },
     { attributes: { content: '@paulogoncalvs', property: 'twitter:creator' } },
     { attributes: { content: 'paulogoncalves.dev', property: 'twitter:domain' } },
-    { path: '/assets/img/me.jpeg', attributes: { property: 'twitter:image' } },
+    { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'twitter:image' } },
     { attributes: { content: 'Paulo Gonçalves - Front-End Engineer from Portugal', property: 'og:title' } },
     { attributes: { content: 'Personal Website', property: 'og:description' } },
     { attributes: { content: url, property: 'og:url' } },
     { attributes: { content: 'website', property: 'og:type' } },
-    { path: '/assets/img/me.jpeg', attributes: { property: 'og:image' } },
+    { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'og:image' } },
 ];
 
 const links = [
@@ -98,7 +98,14 @@ const links = [
 module.exports = {
     title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
     description: 'Personal Website',
-    scripts: [{ src: 'https://www.google-analytics.com/analytics.js', async: true }],
+    // scripts: [
+    //     {
+    //         src: `https://www.google-analytics.com/analytics${
+    //             process.env.NODE_ENV === 'development' ? '_debug' : ''
+    //         }.js`,
+    //         async: true,
+    //     },
+    // ],
     metas,
     links,
     routes,

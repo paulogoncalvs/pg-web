@@ -1,12 +1,13 @@
 import { useContext } from 'preact/hooks';
-import { getCurrentUrl } from 'preact-router';
-import { StoreContext } from '@/store';
+import { StoreContext } from '@/modules/store';
 import { isBrowser } from '@/utils/browser';
 
 export enum Language {
     pt = 'pt',
     en = 'en',
 }
+
+export const isValidLanguage = (lang: string): boolean => lang in Language;
 
 export const LANGUAGE_DEFAULT = Language.en;
 
@@ -16,18 +17,6 @@ export const rawSetLanguage = (language: Language): void => {
     }
 
     window.document.documentElement.setAttribute('lang', language);
-};
-
-export const getInitialLanguage = (): Language => {
-    if (isBrowser()) {
-        const lang = getCurrentUrl().match(/^\/([\w]{2})\/?/);
-
-        if (lang) {
-            return lang[1] as Language;
-        }
-    }
-
-    return LANGUAGE_DEFAULT;
 };
 
 export const useLanguage = (): {
@@ -44,7 +33,7 @@ export const useLanguage = (): {
                 payload: { lang },
             });
 
-            window.document.documentElement.setAttribute('lang', lang);
+            rawSetLanguage(lang);
         },
     };
 };

@@ -1,0 +1,5 @@
+User-agent: *
+
+Disallow: /404/
+Disallow: /en/404
+Disallow: /pt/404

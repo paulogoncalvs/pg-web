@@ -1,21 +1,26 @@
 import { h, FunctionalComponent } from 'preact';
-import Router from 'preact-router';
-import { Store } from '@/store';
-import { history, HandleRouterOnChange } from '@/modules/router';
+import { Route, Router } from 'wouter-preact';
+import staticLocationHook from 'wouter-preact/static-location';
+import { Store } from '@/modules/store';
+import { RouterOnChange } from '@/modules/router';
+import { getPage } from '@/modules/router/pages';
 import { HeadUpdater } from '@/components/HeadUpdater';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { Home } from '@/pages/Home';
+import { isBrowser } from '@/utils/browser';
 
-export const App: FunctionalComponent<{ store?: PageStore }> = ({ store = {} }): JSX.Element => (
+interface AppProps {
+    store?: PageStore;
+}
+
+export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element => (
     <Store store={store}>
         <HeadUpdater />
         <main>
             <Header />
-            {/* @ts-ignore */}
-            <Router onChange={HandleRouterOnChange} history={history}>
-                <Home path="/" />
-                <Home path="/:locale" />
+            <Router {...(!isBrowser() ? { hook: staticLocationHook(store.url) } : {})}>
+                <RouterOnChange />
+                <Route path="/:path*">{({ path }): JSX.Element => getPage(path ? `/${path}/` : '/')}</Route>
             </Router>
         </main>
         <Footer />

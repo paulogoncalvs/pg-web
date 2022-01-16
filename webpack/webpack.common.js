@@ -1,18 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackDeployPlugin = require('html-webpack-deploy-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const WebpackModuleNomodulePlugin = require('webpack-module-nomodule-plugin');
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
 const paths = require('./paths');
-const globalConfig = require('../src/shared/config');
+const globalConfig = require('../src/config/global');
+const env = process.env.NODE_ENV;
 
 module.exports = {
     entry: [paths.src + '/index.tsx'],
@@ -20,25 +20,25 @@ module.exports = {
     output: {
         path: paths.build,
         filename: '[name].bundle.js',
+        assetModuleFilename: 'assets/img/[name][ext]',
         publicPath: '/',
         clean: true,
+        globalObject: "(typeof self === 'undefined' ? this : self)",
     },
 
     plugins: [
         new webpack.ProgressPlugin(),
-
-        new CleanWebpackPlugin(),
 
         new CopyWebpackPlugin({
             patterns: [
                 {
                     from: paths.public,
                     to: ({ absoluteFilename }) => {
-                        if (absoluteFilename.includes('/manifest/')) {
+                        if (['/manifest/', 'robots.txt'].some((el) => absoluteFilename.includes(el))) {
                             return '[path][name][ext]';
                         }
 
-                        return `[path][name]${process.env.NODE_ENV === 'production' ? '.[fullhash]' : ''}[ext]`;
+                        return `[path][name]${env === 'production' ? '.[fullhash]' : ''}[ext]`;
                     },
                     globOptions: {
                         ignore: ['*.DS_Store'],
@@ -51,7 +51,7 @@ module.exports = {
             (key) =>
                 new HtmlWebpackPlugin({
                     favicon: paths.public + '/assets/favicon.ico',
-                    template: paths.src + '/shared/template.tsx',
+                    template: paths.src + '/templates/html/index.tsx',
                     inject: 'body',
                     scriptLoading: 'blocking',
                     ...globalConfig.routes[key],
@@ -62,19 +62,13 @@ module.exports = {
             append: true,
             metas: globalConfig.metas,
             assetsPath: '/assets/',
-            hash:
-                process.env.NODE_ENV === 'production'
-                    ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`)
-                    : false,
+            hash: env === 'production' ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
             publicPath: false,
         }),
 
         new HtmlWebpackDeployPlugin({
             assetsPath: '/assets/',
-            hash:
-                process.env.NODE_ENV === 'production'
-                    ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`)
-                    : false,
+            hash: env === 'production' ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
             publicPath: false,
             assets: {
                 links: globalConfig.links,
@@ -123,6 +117,7 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             webpackImporter: false,
+                            additionalData: `$sass-env:${env};`,
                         },
                     },
                 ],
@@ -132,10 +127,6 @@ module.exports = {
             {
                 test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
                 type: 'asset/resource',
-                generator: {
-                    //If emitting file, the file path is
-                    filename: `assets/img/[name]${process.env.NODE_ENV === 'production' ? '.[hash]' : ''}[ext]`,
-                },
             },
 
             // Fonts: Inline
@@ -170,18 +161,20 @@ module.exports = {
                         maxSize: 1,
                     },
                 },
-                generator: {
-                    filename: `assets/img/[name]${process.env.NODE_ENV === 'production' ? '.[hash]' : ''}[ext]`,
-                },
                 use: [
                     {
                         loader: 'svgo-loader',
                         options: {
                             plugins: [
-                                { removeDesc: true },
-                                { removeAttrs: { attrs: 'class|style' } },
-                                { removeStyleElement: true },
-                                { removeRasterImages: true },
+                                { name: 'removeDesc' },
+                                {
+                                    name: 'removeAttrs',
+                                    params: {
+                                        attrs: ['class', 'style'],
+                                    },
+                                },
+                                { name: 'removeStyleElement' },
+                                { name: 'removeRasterImages' },
                             ],
                         },
                     },

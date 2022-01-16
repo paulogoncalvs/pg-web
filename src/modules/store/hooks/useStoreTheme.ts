@@ -1,5 +1,5 @@
 import { useEffect } from 'preact/hooks';
-import { StoreContextAction } from '@/store';
+import { StoreContextAction } from '@/modules/store';
 import { rawSetTheme, Theme, getPrefersScheme, COLOR_SCHEME_QUERY } from '@/modules/theme';
 
 export const useStoreTheme = (theme: Theme, dispatch: (action: StoreContextAction) => void): void => {

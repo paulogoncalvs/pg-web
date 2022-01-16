@@ -3,7 +3,6 @@ module.exports = {
         [
             '@babel/preset-env',
             {
-                modules: 'auto',
                 targets: {
                     esmodules: true,
                 },
@@ -13,7 +12,6 @@ module.exports = {
             '@babel/preset-typescript',
             {
                 jsxPragma: 'h',
-                allExtensions: false,
             },
         ],
         'babel-preset-preact',

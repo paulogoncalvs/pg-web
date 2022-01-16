@@ -1,8 +1,12 @@
 # Paulo Gonçalves Website
 
-## Status
 
-Work in progress.
+## Configuration
+
+
+### Environment
+
+Create `.env.development` and `.env.production` based on `.env.dist`.
 
 ## Commands
 
@@ -22,19 +26,17 @@ yarn build
 
 ```
 yarn tests
+yarn tests:update
 ```
 
 ### Lint
 
 ```
 yarn lint
-yarn lint-fix
+yarn lint:fix
 ```
 
-## Tasks
+## Status
 
-- [ ] Improve router, history handling, i18n...
-- [ ] Update head when route changes
-- [ ] Pre-render all routes
-- [ ] Tests
-- [ ] API
+Work in progress
+

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[COMPONENT] Link Component should render default 1`] = `
+<a href="/test/">
+</a>
+`;
+
+exports[`[COMPONENT] Link Component should render to open on a new window 1`] = `
+<a href="/test/"
+   target="_blank"
+   rel="noopener noreferrer"
+>
+</a>
+`;

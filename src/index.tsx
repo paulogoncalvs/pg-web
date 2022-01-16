@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 
 import { h, hydrate } from 'preact';
 import App from '@/App';
+import { initGA } from '@/modules/tracking';
 import './styles/index.scss';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
@@ -20,17 +21,4 @@ if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
 }
 
 // Tracking - Google analytics
-if (process.env.TRACK_GA_ID) {
-    window.ga =
-        window.ga ||
-        function (): void {
-            (ga.q = ga.q || []).push(arguments); // eslint-disable-line prefer-rest-params
-        };
-    ga.l = +new Date();
-
-    ga('create', process.env.TRACK_GA_ID, 'auto');
-    ga('send', 'pageview');
-}
-
-// example process.env
-// process.env.API_URL:{process.env.API_URL} !!! Make sure to put both .env.* files in gitignore
+initGA();

@@ -1,31 +1,42 @@
 import { h, FunctionalComponent } from 'preact';
-import { route } from 'preact-router';
+import { useCallback } from 'preact/hooks';
+import classNames from 'classnames';
 import { Language } from '@/modules/language';
 import { useTranslate, translations } from '@/modules/i18n';
-import classNames from 'classnames';
+import { useRouterLocation, useRouterRoute } from '@/modules/router';
 
-const LanguageSelector: FunctionalComponent<{ classes?: string }> = ({ classes }) => {
+interface LanguageSelectorProps {
+    classes?: string;
+}
+
+const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ classes }) => {
+    const [, setLocation] = useRouterLocation();
     const { t, lang } = useTranslate();
+    const [, params] = useRouterRoute('/:lang/:path*');
 
-    // @todo language
-    const onLanguageSelect = (event: Event): void => {
-        const value = (event.target as HTMLInputElement).value as Language;
+    const onLanguageSelect = useCallback(
+        (event: Event): void => {
+            const value = (event.target as HTMLInputElement).value as Language;
 
-        // @todo remove replace
-        route(`/${value}/`, true);
-    };
+            setLocation(`/${value}/${params?.path ? `${params.path}` : ''}`);
+        },
+        [setLocation, params],
+    );
 
-    const renderOption = (code: Language): JSX.Element => (
-        <option value={code} selected={code === lang}>
-            {t(`language_${code}`)}
-        </option>
+    const renderOption = useCallback(
+        (code: Language): JSX.Element => (
+            <option value={code} selected={code === lang}>
+                {t(`language_${code}`)}
+            </option>
+        ),
+        [lang, t],
     );
 
     return (
         <select
             key={`lang-${lang}`}
             class={classNames(
-                'lang-sel text-sm bg-white border-gray-800 hover:bg-gray-300 hover:text-black focus:bg-gray-300 border-2 focus:text-black',
+                'py-1 text-sm text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-900 border-zinc-800 dark:border-zinc-200 border-2 font-sans',
                 classes,
             )}
             onChange={onLanguageSelect}

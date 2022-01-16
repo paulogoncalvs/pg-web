@@ -17,8 +17,13 @@ module.exports = {
             jsx: true,
         },
     },
-    extends: ['plugin:react-hooks/recommended', 'plugin:prettier/recommended', 'eslint:recommended'],
-    plugins: ['import', 'react', 'react-hooks', 'prettier'],
+    extends: [
+        'plugin:react-hooks/recommended',
+        'plugin:prettier/recommended',
+        'eslint:recommended',
+        'plugin:jsx-a11y/recommended',
+    ],
+    plugins: ['import', 'react', 'react-hooks', 'jsx-a11y', 'prettier', 'tailwindcss'],
     rules: {
         /**
          * Preact / JSX rules
@@ -26,16 +31,8 @@ module.exports = {
         'react/display-name': [1, { ignoreTranspilerName: false }],
         'react/prefer-stateless-function': 1,
         'react/no-danger': 1,
-        'react/jsx-no-bind': [
-            1,
-            {
-                ignoreRefs: true,
-                allowFunctions: true,
-                allowArrowFunctions: true,
-            },
-        ],
         'react/jsx-no-comment-textnodes': 2,
-        'react/jsx-no-duplicate-props': 2,
+        'react/jsx-no-duplicate-props': [2, { ignoreCase: true }],
         'react/jsx-no-target-blank': 2,
         'react/jsx-no-undef': 2,
         'react/jsx-tag-spacing': [2, { beforeSelfClosing: 'always' }],
@@ -47,12 +44,8 @@ module.exports = {
         'react/require-render-return': 2,
         'react/no-deprecated': 2,
 
-        // Legacy APIs not supported in Preact
-        'react/no-did-mount-set-state': 2,
-        'react/no-did-update-set-state': 2,
-        'react/no-find-dom-node': 2,
-        'react/no-is-mounted': 2,
-        'react/no-string-refs': 2,
+        // A11y
+        'jsx-a11y/no-onchange': 0,
 
         // Other
         'no-console': 1,

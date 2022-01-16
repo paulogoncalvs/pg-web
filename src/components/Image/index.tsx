@@ -2,8 +2,7 @@ import { h, FunctionalComponent } from 'preact';
 import { useState, useRef } from 'preact/hooks';
 import classNames from 'classnames';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-
-export const Image: FunctionalComponent<{
+interface ImageComponentProps {
     isLazy?: boolean;
     src: string;
     srcset?: string;
@@ -14,12 +13,15 @@ export const Image: FunctionalComponent<{
     alt?: string;
     style?: string;
     otherProps?: unknown;
-}> = ({
+}
+
+export const Image: FunctionalComponent<ImageComponentProps> = ({
     isLazy,
     src,
     srcset,
     fallbackSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     classes,
+    alt = '',
     ...otherProps
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -48,13 +50,15 @@ export const Image: FunctionalComponent<{
             ref={imgRef}
             {...otherProps}
             class={classNames(
+                'bg-zinc-200 dark:bg-zinc-800',
                 {
                     lazy: isLazy,
-                    '_loaded animate-fade-in opacity-0': isLoaded,
-                    'animate-pulse bg-gray-200': !isLoaded,
+                    '_loaded transform opacity-0 animate-fade-in': isLoaded,
+                    'animate-pulse': !isLoaded,
                 },
                 classes,
             )}
+            alt={alt}
             src={isLazy ? (isLoaded ? src : fallbackSrc) : src}
             data-src={isLazy ? (isLoaded ? src : undefined) : undefined}
             srcset={!isLazy ? srcset : undefined}

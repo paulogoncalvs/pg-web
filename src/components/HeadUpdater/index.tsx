@@ -1,6 +1,6 @@
-import globalRoutesConfig from '@/shared/routes.js';
-import { isBrowser } from '@/utils/browser';
+import routesConfig from '@/config/routes/index.js';
 import { useRouter } from '@/modules/router';
+import { isBrowser } from '@/utils/browser';
 
 export const HeadUpdater = (): null => {
     useRouter();
@@ -9,9 +9,13 @@ export const HeadUpdater = (): null => {
         return null;
     }
 
-    const { title } = globalRoutesConfig[window.location.pathname]?.templateParameters?.head;
+    const data = routesConfig[window.location.pathname] || {};
 
-    document.title = title;
+    if (data.templateParameters) {
+        const { title } = data.templateParameters.head;
+
+        document.title = title;
+    }
 
     return null;
 };

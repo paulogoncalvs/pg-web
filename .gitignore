@@ -1,6 +1,9 @@
 node_modules
 dist
 stats.json
+todo.md
 .DS_Store
 .idea
 .history
+.env.development
+.env.production
