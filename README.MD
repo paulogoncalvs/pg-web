@@ -25,6 +25,12 @@ yarn build
 ### Tests
 
 ```
+yarn tests:unit
+yarn tests:unit:update
+
+yarn tests:regression
+yarn tests:regression:update
+
 yarn tests
 yarn tests:update
 ```
@@ -32,6 +38,12 @@ yarn tests:update
 ### Lint
 
 ```
+yarn lint:ts
+yarn lint:ts-fix
+
+yarn lint:css
+yarn lint:css-fix
+
 yarn lint
 yarn lint:fix
 ```

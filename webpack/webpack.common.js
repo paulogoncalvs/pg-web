@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackDeployPlugin = require('html-webpack-deploy-plugin');
-const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const WebpackModuleNomodulePlugin = require('webpack-module-nomodule-plugin');
@@ -143,11 +143,11 @@ module.exports = {
                     dataUrl: (content, data) => {
                         const contentString = content.toString();
 
-                        return {
-                            hash: `#sprite-${path.parse(data.filename).name}`,
-                            viewBox: (contentString.match(/viewBox="([^"]+)"/) || [])[1] || '',
-                            // content: contentString.match(/<svg[^>]*>([\s\S]*?)<\/svg>/)[1] || '',
-                        };
+                        return [
+                            `#sprite-${path.parse(data.filename).name}`,
+                            (contentString.match(/viewBox="([^"]+)"/) || [])[1] || '',
+                            // content: contentString.match(/<svg[^>]*>([\s\S]*?)<\/svg>/)[1] || ''
+                        ];
                     },
                 },
             },

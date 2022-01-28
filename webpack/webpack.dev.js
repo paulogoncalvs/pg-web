@@ -1,7 +1,7 @@
 const Dotenv = require('dotenv-webpack');
 const { merge } = require('webpack-merge');
 const PreactRefreshPlugin = require('@prefresh/webpack');
-const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const paths = require('./paths');
@@ -36,7 +36,7 @@ module.exports = merge(common, {
     },
 
     watchOptions: {
-        ignored: ['**/dist', '**/node_modules', '**/.vscode'],
+        ignored: ['**/dist', '**/tests', '**/node_modules', '**/.vscode'],
     },
 
     module: {

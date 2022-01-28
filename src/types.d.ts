@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 
 declare interface IconSrc {
-    viewBox?: string;
-    content?: string;
-    hash?: string;
+    [Symbol.iterator]();
 }
 
 declare interface Head {

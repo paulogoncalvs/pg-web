@@ -17,6 +17,7 @@ import workboxLogo from '@/assets/icons/logos/workbox.svg';
 import jestLogo from '@/assets/icons/logos/jest.svg';
 import axeLogo from '@/assets/icons/logos/axe.svg';
 import gaLogo from '@/assets/icons/logos/ga.svg';
+import playwrigthLogo from '@/assets/icons/logos/playwright.svg';
 
 const initialYear = 2021;
 const currentYear = new Date().getFullYear();
@@ -72,11 +73,14 @@ export const Footer: FunctionalComponent = () => {
                         <Link href="https://tailwindcss.com/" class="ic-link _ftr" ariaLabel="Tailwind CSS" newWindow>
                             <Icon src={tailwindLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://prettier.io/" class="ic-link _ftr" ariaLabel="Prettier" newWindow>
-                            <Icon src={prettierLogo} width="32" height="32" ariaHidden />
+                        <Link href="https://playwright.dev/" class="ic-link _ftr" ariaLabel="Playwright" newWindow>
+                            <Icon src={playwrigthLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link href="https://jestjs.io/" class="ic-link _ftr" ariaLabel="Jest" newWindow>
                             <Icon src={jestLogo} width="32" height="32" ariaHidden />
+                        </Link>
+                        <Link href="https://prettier.io/" class="ic-link _ftr" ariaLabel="Prettier" newWindow>
+                            <Icon src={prettierLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link href="https://postcss.org/" class="ic-link _ftr" ariaLabel="PostCSS" newWindow>
                             <Icon src={postCSSLogo} width="32" height="32" ariaHidden />

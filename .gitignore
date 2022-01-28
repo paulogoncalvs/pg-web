@@ -1,5 +1,6 @@
 node_modules
 dist
+src/tests/results
 stats.json
 todo.md
 .DS_Store

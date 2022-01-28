@@ -1,7 +1,7 @@
 @layer components {
     .btn {
         @apply inline-flex items-center justify-center rounded-full;
-        @apply transform-gpu md:transition-transform md:ease-in-out md:duration-200;
+        @apply md:transform-gpu md:transition-transform md:ease-in-out md:duration-200;
         @apply shadow-md hover:shadow-lg md:focus:shadow-lg;
         @apply px-4 py-2 sm:py-3;
         @apply sm:text-xl text-zinc-900 dark:text-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-900;

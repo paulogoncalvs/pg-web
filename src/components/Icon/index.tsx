@@ -13,7 +13,7 @@ interface IconComponentProps {
 }
 
 export const Icon: FunctionalComponent<IconComponentProps> = ({
-    src: { viewBox, hash = '#' } = {},
+    src: [hash = '#', viewBox] = [],
     width = '24',
     height = '24',
     classes = 'fill-current',

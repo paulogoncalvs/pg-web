@@ -23,5 +23,5 @@
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
-    "jest.jestCommandLine": "yarn tests",
+    "jest.jestCommandLine": "yarn tests:unit",
   }
