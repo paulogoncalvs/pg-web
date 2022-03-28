@@ -1,5 +1,4 @@
 {
-  "extends": [
-    "config:js-app"
-  ]
+  "baseBranches": ["renovate_test"],
+  "timezone": "Europe/Lisbon"
 }
