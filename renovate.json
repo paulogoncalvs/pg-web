@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:js-app",
+    ":assignAndReview(paulogoncalvs)",
+    ":label(dependencies)"
+  ],
+  "baseBranches": ["renovate_test"],
+  "timezone": "Europe/Lisbon",
+  "packageRules": [
+    {
+      "automerge": true,
+      "addLabels": ["automerge"],
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ]
+}
