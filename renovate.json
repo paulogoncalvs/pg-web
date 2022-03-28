@@ -3,7 +3,8 @@
     "config:js-app",
     ":assignAndReview(paulogoncalvs)",
     ":label(dependencies)",
-    ":prHourlyLimitNone"
+    ":prHourlyLimitNone",
+    ":enableVulnerabilityWithLabel(security)"
   ],
   "baseBranches": ["renovate_test"],
   "timezone": "Europe/Lisbon",
