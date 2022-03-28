@@ -3,8 +3,7 @@
     "config:js-app",
     ":assignAndReview(paulogoncalvs)",
     ":label(dependencies)",
-    ":prHourlyLimitNone",
-    ":enableVulnerabilityWithLabel(security)"
+    ":prHourlyLimitNone"
   ],
   "baseBranches": ["renovate_test"],
   "timezone": "Europe/Lisbon",
@@ -14,5 +13,11 @@
       "addLabels": ["automerge"],
       "matchUpdateTypes": ["minor", "patch"]
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "automerge": false,
+    "assignees": ["@paulogoncalvs"]
+  }
 }
