@@ -1,37 +1,34 @@
 {
   "extends": [
     ":dependencyDashboard",
-    ":semanticPrefixFixDepsChoreOthers",
     ":ignoreModulesAndTests",
     ":autodetectPinVersions",
     ":prHourlyLimitNone",
-    ":prConcurrentLimit10",
+    ":prConcurrentLimitNone",
     "group:monorepos",
     "group:recommended",
     "workarounds:all",
-    ":pinAllExceptPeerDependencies",
-    ":assignAndReview(paulogoncalvs)",
-    ":label(dependencies)"
+    "group:allNonMajor",
+    ":label(dependencies)",
+    ":timezone(Europe/Lisbon)",
+    ":preserveSemverRanges",
+    ":vulnerabilityAlertsWithLabel(security)"
   ],
-  "baseBranches": ["renovate_test"],
-  "automergeType": "pr",
-  "timezone": "Europe/Lisbon",
-  "schedule": ["before 12pm"],
-  "packageRules": [
-    {
-      "automerge": true,
-      "addLabels": ["automerge"],
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "matchPackagePatterns": ["eslint"],
-      "groupName": "eslint"
-    }
+  "baseBranches": [
+    "renovate_test"
   ],
-  "vulnerabilityAlerts": {
+  "assignees": [
+    "paulogoncalvs"
+  ],
+  "assigneesSampleSize": 1,
+  "branchPrefix": "renovate_",
+  "lockFileMaintenance": {
     "enabled": true,
-    "labels": ["security"],
-    "automerge": false,
-    "assignees": ["@paulogoncalvs"]
-  }
+    "schedule": [
+      "after 9am and before 6pm every weekday"
+    ]
+  },
+  "schedule": [
+    "after 9am and before 6pm every weekday"
+  ]
 }
