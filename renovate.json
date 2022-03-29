@@ -1,12 +1,6 @@
 {
   "extends": [
-    ":dependencyDashboard",
-    ":ignoreModulesAndTests",
-    ":prHourlyLimitNone",
-    ":prConcurrentLimitNone",
-    "group:monorepos",
-    "group:recommended",
-    "workarounds:all",
+    "config:base",
     "group:allNonMajor",
     "schedule:earlyMondays",
     ":label(dependencies)",

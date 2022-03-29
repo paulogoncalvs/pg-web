@@ -2,7 +2,7 @@ const { defaults } = require('jest-config');
 
 module.exports = {
     verbose: true,
-    rootDir: 'src/tests/unit/',
+    rootDir: 'src/tests/jest/',
     moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
     moduleNameMapper: {
         '@/assets/icons/.*\\.svg$': '<rootDir>__mocks__/iconSrcMock.ts',

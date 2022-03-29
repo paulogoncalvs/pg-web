@@ -1,3 +1,4 @@
+src/tests/**/results
 node_modules
 build
 dist

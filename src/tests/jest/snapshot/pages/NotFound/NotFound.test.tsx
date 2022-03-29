@@ -1,4 +1,4 @@
-import { pageTests } from '@/tests/unit/pages';
+import { pageTests } from '..';
 
 pageTests({
     name: 'Not Found',

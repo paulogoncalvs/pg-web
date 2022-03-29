@@ -1,0 +1,18 @@
+# Prebuilt MS image
+FROM mcr.microsoft.com/playwright:focal
+
+RUN mkdir -p /app
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install --immutable --immutable-cache --check-cache
+
+COPY . .
+
+RUN yarn build
+
+# Expose port
+EXPOSE 4040
+
+CMD ["yarn", "playwright test"]

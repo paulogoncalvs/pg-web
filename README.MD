@@ -1,54 +1,49 @@
 # Paulo Gonçalves Website
-
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/paulogoncalvs/pg-web)
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.paulogoncalves.dev/)
 
 ## Configuration
-
 
 ### Environment
 
 Create `.env.development` and `.env.production` based on `.env.dist`.
 
-## Commands
+### Commands
 
-### Development server
+<details>
+<summary>List</summary>
 
-```
-yarn start 
-```
+| COMMAND                        | DESCRIPTION                                     |
+|:-------------------------------|-------------------------------------------------|
+| **BUILD**                      |                                                 |
+| `yarn build`                   | Generate dist                                   |
+| **SERVER**                     |                                                 |
+| `yarn start:dev`               | Start **Development** server                    |
+| `yarn start:prod`              | Generate dist + Start **Production** server     |
+| `yarn start:prod:server`       | Start Production server without dist generation |
+| **TESTS**                      |                                                 |
+| `yarn tests:jest`              | Run Jest tests                                  |
+| `yarn tests:jest:update`       | Update Jest tests                               |
+| `yarn tests:playwright`        | Generate dist + Run Playwright tests            |
+| `yarn tests:playwright:update` | Generate dist + Update Playwright tests         |
+| `yarn tests:playwright:run`    | Run Playwright tests without dist generation    |
+| `yarn tests:playwright:build`  | Build Playwright docker image                   |
+| `yarn tests`                   | Run Jest and Playwright tests                   |
+| **LINT**                       |                                                 |
+| `yarn lint:ts`                 | Lint TypeScript                                 |
+| `yarn lint:ts-fix`             | Lint TypeScript - Fix                           |
+| `yarn lint:css`                | Lint CSS                                        |
+| `yarn lint:css-fix`            | Lint CSS - Fix                                  |
+| `yarn lint`                    | Lint All                                        |
+| `yarn lint:fix`                | Lint All - Fix                                  |
+| **PACKAGES**                   |                                                 |
+| `yarn upgrade:all`             | Upgrade all the packages                        |
+| `yarn upgrade:latest`          | Upgrades packages to their latest version       |
 
-### Build
+</details>
 
-```
-yarn build
-```
+---
 
-### Tests
+**STATUS: WIP**
 
-```
-yarn tests:unit
-yarn tests:unit:update
-
-yarn tests:regression
-yarn tests:regression:update
-
-yarn tests
-yarn tests:update
-```
-
-### Lint
-
-```
-yarn lint:ts
-yarn lint:ts-fix
-
-yarn lint:css
-yarn lint:css-fix
-
-yarn lint
-yarn lint:fix
-```
-
-## Status
-
-Work in progress
-
+**Made with Love :heart: in my spare time.**

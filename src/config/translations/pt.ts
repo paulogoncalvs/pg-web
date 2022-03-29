@@ -6,7 +6,7 @@ export default {
     home_page_subtitle: 'Front-End Engineer',
     home_page_description_1: 'Nascido em Vila Nova de Gaia, Portugal.',
     home_page_description_2:
-        'A trabalhar atualmente como <strong>Front-End Engineering Manager</strong>/<strong>Front-End Lead Engineer</strong> no Porto Tech Center - Jumia.',
+        'A trabalhar atualmente como <strong>Front-End Engineering Manager</strong>/<strong>Lead Front-End Engineer</strong> no Porto Tech Center - Jumia.',
     home_page_description_3: 'Consulte o %link% para mais informações.',
     home_page_description_3_link_text: 'perfil do LinkedIn',
     home_page_email_button_title: 'Quer entrar em contacto?',
