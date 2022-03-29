@@ -23,7 +23,7 @@
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
     "@jest/types": "27.4.2",
-    "@playwright/test": "1.18.1",
+    "@playwright/test": "1.20.1",
     "@prefresh/babel-plugin": "0.4.1",
     "@prefresh/webpack": "3.3.2",
     "@types/google.analytics": "0.0.42",
