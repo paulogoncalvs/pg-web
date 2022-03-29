@@ -12,7 +12,7 @@
     ":label(dependencies)",
     ":timezone(Europe/Lisbon)",
     ":preserveSemverRanges",
-    ":vulnerabilityAlertsWithLabel(security)"
+    ":enableVulnerabilityAlertsWithLabel(security)"
   ],
   "baseBranches": [
     "renovate_test"
