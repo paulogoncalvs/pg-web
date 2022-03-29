@@ -1,16 +1,19 @@
 {
   "extends": [
-    "config:js-app",
+    ":dependencyDashboard",
+    ":ignoreModulesAndTests",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
+    "group:monorepos",
+    "group:recommended",
+    "workarounds:all",
+    "group:allNonMajor",
+    ":label(dependencies)",
+    ":timezone(Europe/Lisbon)",
+    ":preserveSemverRanges",
+    ":enableVulnerabilityAlertsWithLabel(security)",
     ":assignAndReview(paulogoncalvs)",
-    ":label(dependencies)"
-  ],
-  "baseBranches": ["renovate_test"],
-  "timezone": "Europe/Lisbon",
-  "packageRules": [
-    {
-      "automerge": true,
-      "addLabels": ["automerge"],
-      "matchUpdateTypes": ["minor", "patch"]
-    }
+    ":maintainLockFilesWeekly",
+    "schedule:earlyMondays"
   ]
 }
