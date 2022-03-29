@@ -89,7 +89,7 @@
     "webpack-merge": "5.8.0",
     "webpack-module-nomodule-plugin": "1.1.1",
     "workbox-webpack-plugin": "6.4.2",
-    "yarn": "1.22.17",
+    "yarn": "1.22.18",
     "yarn-upgrade-all": "0.6.1"
   },
   "dependencies": {
