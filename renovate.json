@@ -1,17 +1,31 @@
 {
   "extends": [
-    "config:js-app",
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimit10",
+    "group:monorepos",
+    "group:recommended",
+    "workarounds:all",
+    ":pinAllExceptPeerDependencies",
     ":assignAndReview(paulogoncalvs)",
-    ":label(dependencies)",
-    ":prHourlyLimitNone"
+    ":label(dependencies)"
   ],
   "baseBranches": ["renovate_test"],
+  "automergeType": "pr",
   "timezone": "Europe/Lisbon",
+  "schedule": ["before 12pm"],
   "packageRules": [
     {
       "automerge": true,
       "addLabels": ["automerge"],
       "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "matchPackagePatterns": ["eslint"],
+      "groupName": "eslint"
     }
   ],
   "vulnerabilityAlerts": {
