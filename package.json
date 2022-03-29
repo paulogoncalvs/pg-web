@@ -78,7 +78,7 @@
     "svg-spritemap-webpack-plugin": "4.4.0",
     "svg-transform-loader": "2.0.13",
     "svgo-loader": "3.0.0",
-    "ts-loader": "9.2.6",
+    "ts-loader": "9.2.8",
     "tsconfig-paths-jest": "0.0.1",
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "typescript": "4.5.5",
