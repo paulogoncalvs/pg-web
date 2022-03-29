@@ -90,7 +90,7 @@
     "webpack-module-nomodule-plugin": "1.1.1",
     "workbox-webpack-plugin": "6.4.2",
     "yarn": "1.22.17",
-    "yarn-upgrade-all": "0.6.1"
+    "yarn-upgrade-all": "0.7.0"
   },
   "dependencies": {
     "preact": "10.6.5",
