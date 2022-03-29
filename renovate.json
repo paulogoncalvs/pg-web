@@ -12,23 +12,13 @@
     ":label(dependencies)",
     ":timezone(Europe/Lisbon)",
     ":preserveSemverRanges",
-    ":enableVulnerabilityAlertsWithLabel(security)"
+    ":enableVulnerabilityAlertsWithLabel(security)",
+    ":assignAndReview(paulogoncalvs)",
+    "schedule:earlyMondays"
   ],
-  "baseBranches": [
-    "renovate_test"
-  ],
-  "assignees": [
-    "paulogoncalvs"
-  ],
-  "assigneesSampleSize": 1,
   "branchPrefix": "renovate_",
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": [
-      "after 9am and before 6pm every weekday"
-    ]
-  },
-  "schedule": [
-    "after 9am and before 6pm every weekday"
-  ]
+    "schedule": ["before 3am every monday"]
+  }
 }
