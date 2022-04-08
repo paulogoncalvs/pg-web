@@ -16,6 +16,6 @@ jobs:
     - name: Run Jest Tests
       run: yarn tests:jest
     - name: Build Playwright
-      run: yarn:playwright:build
+      run: yarn tests:playwright:build
     - name: Run Playwright Tests
-      run: yarn:playwright
+      run: yarn tests:playwright
