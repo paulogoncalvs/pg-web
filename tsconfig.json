@@ -26,6 +26,7 @@
         ],
         "paths": { 
             "@/*": ["*"]
-        }
-	}
+        },
+	},
+    "exclude": ["node_modules", "src/tests/**/*"]
 }
