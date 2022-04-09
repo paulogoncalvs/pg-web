@@ -15,7 +15,7 @@ module.exports = merge(common, {
         path: paths.build,
         publicPath: '/',
         filename: 'assets/js/[name].[contenthash].bundle.js',
-        assetModuleFilename: 'assets/img/[name].[contenthash:8][ext]',
+        assetModuleFilename: 'assets/img/[name].[contenthash][ext]',
     },
     plugins: [
         new Dotenv({
