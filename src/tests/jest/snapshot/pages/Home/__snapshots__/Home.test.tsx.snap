@@ -390,7 +390,7 @@ exports[`[PAGE] Home Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021  - 2022 🙂
+      paulogoncalves.dev © 2021 - 2022 🙂
     </p>
   </div>
 </footer>

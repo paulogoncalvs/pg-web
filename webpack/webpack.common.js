@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
@@ -27,8 +26,6 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.ProgressPlugin(),
-
         new CopyWebpackPlugin({
             patterns: [
                 {

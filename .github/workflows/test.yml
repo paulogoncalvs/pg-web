@@ -15,7 +15,7 @@ jobs:
       run: yarn lint
     - name: Run Jest Tests
       run: yarn tests:jest
-    - name: Build Playwright
-      run: yarn tests:playwright:build
-    - name: Run Playwright Tests
-      run: yarn tests:playwright
+    #- name: Build Playwright
+    #  run: yarn tests:playwright:build
+    #- name: Run Playwright Tests
+    #  run: yarn tests:playwright:run
