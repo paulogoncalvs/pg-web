@@ -14,7 +14,7 @@ module.exports = merge(common, {
     output: {
         path: paths.build,
         publicPath: '/',
-        filename: 'assets/js/[name].[contenthash].bundle.js',
+        filename: 'assets/js/[name].bundle.[contenthash].js',
         assetModuleFilename: 'assets/img/[name].[contenthash][ext]',
     },
     plugins: [

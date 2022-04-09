@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const { merge } = require('webpack-merge');
 const PreactRefreshPlugin = require('@prefresh/webpack');
@@ -67,6 +68,8 @@ module.exports = merge(common, {
         ],
     },
     plugins: [
+        new webpack.ProgressPlugin(),
+
         new Dotenv({
             path: './.env.development',
         }),

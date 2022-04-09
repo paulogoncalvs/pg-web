@@ -18,4 +18,4 @@ jobs:
     - name: Build Playwright
       run: yarn tests:playwright:build
     - name: Run Playwright Tests
-      run: yarn tests:playwright
+      run: yarn tests:playwright:run
