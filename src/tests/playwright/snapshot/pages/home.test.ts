@@ -15,12 +15,23 @@ const stripHashes = (content = ''): string => {
     );
 };
 
+const stripEmojis = (content = ''): string => {
+    if (content === '') {
+        return '';
+    }
+
+    return content.replace(
+        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        '',
+    );
+};
+
 test.describe('PAGES SNAPSHOT', () => {
     test('Home Screenshot + Snapshot', async ({ page }) => {
         await page.goto('/');
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(2000);
 
-        expect(stripHashes(await page.content())).toMatchSnapshot('home.snap');
+        expect(stripEmojis(stripHashes(await page.content()))).toMatchSnapshot('home.snap');
         expect(await page.screenshot({ fullPage: true })).toMatchSnapshot('home.png');
     });
 });
