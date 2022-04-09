@@ -10,6 +10,8 @@ RUN yarn install --immutable --immutable-cache --check-cache
 
 COPY . .
 
+COPY .env.dist .env.production
+
 RUN yarn build
 
 # Expose port
