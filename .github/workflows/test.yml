@@ -12,7 +12,7 @@ jobs:
     - name: Install modules
       run: yarn
     - name: Build Check
-    - name: yarn build
+    - run: yarn build
     - name: Code Analysis
       run: yarn lint
     - name: Tests
