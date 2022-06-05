@@ -1,6 +1,6 @@
 const routes = require('../routes');
 
-const url = 'https://www.paulogoncalves.dev/';
+const baseUrl = 'https://www.paulogoncalves.dev/';
 
 const metas = [
     { attributes: { name: 'viewport', content: 'width=device-width,initial-scale=1' } },
@@ -12,9 +12,7 @@ const metas = [
         },
     },
     { attributes: { name: 'author', content: 'Paulo Gonçalves | contact@paulogoncalves.dev' } },
-    { attributes: { name: 'msvalidate.01', content: 'F63D2EC3D7DD2A060D742BC70B0AF5D7' } },
-    { attributes: { name: 'google-site-verification', content: 'y8An9prxi5Rtn1NfAI2JZuDghowaml2Q' } },
-    { attributes: { name: 'y_key', content: '76ba125138416496' } },
+    { attributes: { name: 'google-site-verification', content: 'rSCoSktIV5-y8An9prxi5Rtn1NfAI2JZuDghowaml2Q' } },
     { attributes: { name: 'apple-mobile-web-app-capable', content: 'yes' } },
     { attributes: { name: 'application-name', content: 'paulogoncalves.dev' } },
     { attributes: { name: 'theme-color', content: '#ffffff' } },
@@ -26,7 +24,7 @@ const metas = [
     { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'twitter:image' } },
     { attributes: { content: 'Paulo Gonçalves - Front-End Engineer from Portugal', property: 'og:title' } },
     { attributes: { content: 'Personal Website', property: 'og:description' } },
-    { attributes: { content: url, property: 'og:url' } },
+    { attributes: { content: baseUrl, property: 'og:url' } },
     { attributes: { content: 'website', property: 'og:type' } },
     { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'og:image' } },
 ];
@@ -35,25 +33,31 @@ const links = [
     {
         path: '',
         attributes: {
-            href: 'https://fonts.gstatic.com',
-            rel: 'preconnect',
-            crossorigin: '',
-        },
-    },
-    {
-        path: '',
-        attributes: {
-            href: 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900&display=swap',
+            href: '/assets/fonts/roboto-slab-v22-latin-regular.woff2',
             rel: 'preload',
-            as: 'style',
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: 'anonymous',
         },
     },
     {
         path: '',
         attributes: {
-            href: 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900&display=swap',
-            rel: 'stylesheet',
-            type: 'text/css',
+            href: '/assets/fonts/roboto-slab-v22-latin-700.woff2',
+            rel: 'preload',
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: 'anonymous',
+        },
+    },
+    {
+        path: '',
+        attributes: {
+            href: '/assets/fonts/roboto-slab-v22-latin-900.woff2',
+            rel: 'preload',
+            as: 'font',
+            type: 'font/woff2',
+            crossorigin: 'anonymous',
         },
     },
     {
@@ -98,15 +102,8 @@ const links = [
 module.exports = {
     title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
     description: 'Personal Website',
-    // scripts: [
-    //     {
-    //         src: `https://www.google-analytics.com/analytics${
-    //             process.env.NODE_ENV === 'development' ? '_debug' : ''
-    //         }.js`,
-    //         async: true,
-    //     },
-    // ],
     metas,
     links,
     routes,
+    baseUrl,
 };

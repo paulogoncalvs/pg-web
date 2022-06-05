@@ -36,7 +36,7 @@ const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ classes 
         <select
             key={`lang-${lang}`}
             class={classNames(
-                'py-1 text-sm text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-900 border-zinc-800 dark:border-zinc-200 border-2 font-sans',
+                'py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-900 border-zinc-800 dark:border-zinc-200 border-2 font-sans',
                 classes,
             )}
             onChange={onLanguageSelect}

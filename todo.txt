@@ -1,0 +1,9 @@
+# TODO
+- improve GA4 code
+- impreve default language from browser - pt/en
+
+#paulogoncalves.dev SSH
+
+- download ssh key from cpanel
+- cp -frp ~/Downloads/id_rsa.pub ~/.ssh
+- ssh pg@paulogoncalves.dev

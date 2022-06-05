@@ -34,6 +34,7 @@ module.exports = merge(common, {
             // and not allow any straggling "old" SWs to hang around
             clientsClaim: true,
             skipWaiting: true,
+            exclude: ['.DS_Store'],
         }),
 
         new SVGSpritemapPlugin(paths.src + '/assets/icons/**/*.svg', {

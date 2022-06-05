@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-		"allowJs": false,
+        "allowJs": false,
         "noEmit": true,
         "strict": true,
         "jsx": "preserve",
@@ -19,14 +19,9 @@
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
-        "lib": [
-            "DOM",
-            "ES2015",
-            "DOM.Iterable",
-        ],
-        "paths": { 
+        "lib": ["DOM", "ES2015", "DOM.Iterable"],
+        "paths": {
             "@/*": ["*"]
-        },
-	},
-    "exclude": ["node_modules", "src/tests/**/*"]
+        }
+    }
 }

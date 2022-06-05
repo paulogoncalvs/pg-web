@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[PAGE] Not Found Page should render 1`] = `
+exports[`[PAGE] Contact Page should render 1`] = `
 <main>
   <header class="container p-4 py-10 mx-auto">
     <div class="flex items-center justify-between">
       <div class="flex items-center">
-        <select class="py-1 text-sm text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-900 border-zinc-800 dark:border-zinc-200 border-2 font-sans ml-2 mr-2"
+        <select class="py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-white dark:bg-zinc-900 border-zinc-800 dark:border-zinc-200 border-2 font-sans ml-2 mr-2"
                 aria-label="Language selection"
         >
           <option value="en"
@@ -70,18 +70,51 @@ exports[`[PAGE] Not Found Page should render 1`] = `
   <div class="container px-6 pt-8 pb-8 mx-auto sm:pb-16">
     <div class="flex flex-col items-center">
       <h1 class="text-3xl font-black text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
-        Oops!
+        Contact
       </h1>
       <h2 class="text-2xl text-center lowercase opacity-0 sm:text-4xl animate-fade-in-up-2 pb-14">
-        Page not found
+        Contact me
       </h2>
-      <a href="/en/"
-         class="opacity-0 btn _prim animate-fade-in-dw-3"
-      >
-        <span>
-          Go to homepage
-        </span>
-      </a>
+    </div>
+    <div class="flex flex-col items-center sm:pt-14 pb-14">
+      <form action="undefinedcontact/">
+        <div class="mt-2">
+          <label for="firstName">
+            First Name
+          </label>
+          <input class="dark:bg-zinc-800 dark:border-zinc-600 w-full rounded-md"
+                 id="firstName"
+                 type="text"
+                 name="firstName"
+                 value
+          >
+        </div>
+        <div class="mt-2">
+          <label for="lastName">
+            Last Name
+          </label>
+          <input class="dark:bg-zinc-800 dark:border-zinc-600 w-full rounded-md"
+                 id="lastName"
+                 type="text"
+                 name="lastName"
+                 value
+          >
+        </div>
+        <div class="mt-2">
+          <label for="email">
+            Email Address
+          </label>
+          <input class="dark:bg-zinc-800 dark:border-zinc-600 w-full rounded-md"
+                 id="email"
+                 type="email"
+                 name="email"
+                 value
+          >
+        </div>
+        <button class="btn _prim mt-4">
+          Send message
+        </button>
+      </form>
     </div>
   </div>
 </main>
@@ -335,7 +368,7 @@ exports[`[PAGE] Not Found Page should render 1`] = `
       </div>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-500">
+  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
     <p>
       optimized for modern browsers
     </p>

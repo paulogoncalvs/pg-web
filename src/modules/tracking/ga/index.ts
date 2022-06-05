@@ -1,5 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getEventData, EventTrackingData } from './event';
 import { getPageViewData, PageViewTrackingData } from './pageView';
+
+declare global {
+    interface Window {
+        ga: any;
+    }
+}
 
 const hasGa = (): boolean => !!window.ga;
 
@@ -8,11 +15,11 @@ export const gaNewElem: any = {}; // eslint-disable-line @typescript-eslint/no-e
 export const gaElems: any = {}; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 export const trackPageView = (data?: PageViewTrackingData): void => {
-    hasGa() && ga('send', getPageViewData(data));
+    hasGa() && window.ga('send', getPageViewData(data));
 };
 
 export const trackEvent = (data: EventTrackingData): void => {
-    hasGa() && ga('send', getEventData(data));
+    hasGa() && window.ga('send', getEventData(data));
 };
 
 export const initGA = (): void => {
@@ -47,7 +54,7 @@ export const initGA = (): void => {
         window.ga_debug = { trace: true };
     }
 
-    ga('create', process.env.TRACK_GA_ID, 'auto');
+    window.ga('create', process.env.TRACK_GA_ID, 'auto');
 
     trackPageView();
 };

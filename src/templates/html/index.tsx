@@ -104,10 +104,10 @@ export default ({ lang, url, head, webpackConfig }: HtmlTemplateProps): string =
     return Page({
         headScript,
         bodyScript,
-        title: globalConfig.title,
         scripts: globalConfig.scripts,
-        metas: head.metas,
-        links: head.links,
+        title: head.title || globalConfig.title,
+        metas: head.metas || globalConfig.metas,
+        links: head.links || globalConfig.links,
         store: {
             filenames: {
                 sprite: sprite && `/${sprite}`,

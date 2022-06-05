@@ -47,5 +47,5 @@ module.exports = {
         grayscale: false,
         hueRotate: false,
     },
-    plugins: [],
+    plugins: [require('@tailwindcss/forms')],
 };

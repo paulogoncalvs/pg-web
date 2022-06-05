@@ -17,6 +17,7 @@ Create `.env.development` and `.env.production` based on `.env.dist`.
 | COMMAND                        | DESCRIPTION                                     |
 |:-------------------------------|-------------------------------------------------|
 | **BUILD**                      |                                                 |
+| `yarn prebuild`                | Generate sitemap                                |
 | `yarn build`                   | Generate dist                                   |
 | **SERVER**                     |                                                 |
 | `yarn start:dev`               | Start **Development** server                    |

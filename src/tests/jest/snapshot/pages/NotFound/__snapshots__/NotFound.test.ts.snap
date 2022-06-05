@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[PAGE] Home Page should render 1`] = `
+exports[`[PAGE] Not Found Page should render 1`] = `
 <main>
   <header class="container p-4 py-10 mx-auto">
     <div class="flex items-center justify-between">
@@ -70,68 +70,18 @@ exports[`[PAGE] Home Page should render 1`] = `
   <div class="container px-6 pt-8 pb-8 mx-auto sm:pb-16">
     <div class="flex flex-col items-center">
       <h1 class="text-3xl font-black text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
-        PAULO GONÇALVES
+        Oops!
       </h1>
       <h2 class="text-2xl text-center lowercase opacity-0 sm:text-4xl animate-fade-in-up-2 pb-14">
-        Front-End Engineer
+        Page not found
       </h2>
-      <div class="flex flex-col items-center sm:pt-14 pb-14 sm:flex-row">
-        <div class="flex-shrink-0 opacity-0 animate-fade-in-dw-3">
-          <img width="180"
-               height="180"
-               class="bg-zinc-200 dark:bg-zinc-800 lazy animate-pulse rounded-full"
-               alt
-               src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-          >
-        </div>
-        <div class="max-w-xs text-sm opacity-0 sm:pl-14 space-y-4 sm:text-base sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4">
-          <p>
-            Born in Vila Nova de Gaia, Portugal.
-          </p>
-          <p class="mux">
-            Currently working as a
-            <strong>
-              Front-End Engineering Manager
-            </strong>
-            /
-            <strong>
-              Lead Front-End Engineer
-            </strong>
-            at Porto Tech Center - Jumia.
-          </p>
-          <p>
-            Check the
-            <a href="https://pt.linkedin.com/in/paulogoncalvs"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="underline"
-            >
-              LinkedIn profile
-            </a>
-            for more information.
-          </p>
-        </div>
-      </div>
-      <div class="pb-8 opacity-0 sm:pt-8 animate-fade-in-dw-5">
-        <h2 class="pb-4 text-base font-bold sm:text-xl">
-          Wanna reach out?
-        </h2>
-        <a href="mailto:contact@paulogoncalves.dev"
-           class="btn _i _prim"
-        >
-          <svg aria-hidden="true"
-               class
-               width="24"
-               height="24"
-          >
-            <use href="#">
-            </use>
-          </svg>
-          <span>
-            E-mail me
-          </span>
-        </a>
-      </div>
+      <a href="/en/"
+         class="opacity-0 btn _prim animate-fade-in-dw-3"
+      >
+        <span>
+          Go to homepage
+        </span>
+      </a>
     </div>
   </div>
 </main>

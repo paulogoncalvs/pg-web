@@ -4,17 +4,13 @@ FROM mcr.microsoft.com/playwright:focal
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-
-RUN yarn install --immutable --immutable-cache --check-cache
-
 COPY . .
-
 COPY .env.dist .env.production
 
+RUN yarn install
 RUN yarn build
 
 # Expose port
 EXPOSE 4040
 
-CMD ["yarn", "playwright test"]
+CMD ["yarn", "playwright", "test"]

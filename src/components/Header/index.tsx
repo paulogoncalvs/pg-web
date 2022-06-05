@@ -1,5 +1,5 @@
 import { h, FunctionalComponent } from 'preact';
-import { trackEvent } from '@/modules/tracking';
+import { trackEvent } from '@/modules/tracking/ga4';
 import { ToggleTheme } from '@/components/ToggleTheme';
 import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
@@ -22,11 +22,13 @@ export const Header: FunctionalComponent = () => (
                     ariaLabel="Twitter"
                     newWindow
                     onClick={(): void =>
-                        trackEvent({
-                            eventCategory: 'Header Link',
-                            eventAction: 'clickLink',
-                            eventLabel: 'Twitter',
-                        })
+                        trackEvent(
+                            {
+                                category: 'Header Link',
+                                label: 'Twitter',
+                            },
+                            'link_click',
+                        )
                     }
                 >
                     <Icon src={twitterIcon} ariaHidden />
@@ -37,11 +39,13 @@ export const Header: FunctionalComponent = () => (
                     ariaLabel="GitHub"
                     newWindow
                     onClick={(): void =>
-                        trackEvent({
-                            eventCategory: 'Header Link',
-                            eventAction: 'clickLink',
-                            eventLabel: 'GitHub',
-                        })
+                        trackEvent(
+                            {
+                                category: 'Header Link',
+                                label: 'GitHub',
+                            },
+                            'link_click',
+                        )
                     }
                 >
                     <Icon src={githubIcon} ariaHidden />
@@ -52,11 +56,13 @@ export const Header: FunctionalComponent = () => (
                     ariaLabel="LinkedIn"
                     newWindow
                     onClick={(): void =>
-                        trackEvent({
-                            eventCategory: 'Header Link',
-                            eventAction: 'clickLink',
-                            eventLabel: 'LinkedIn',
-                        })
+                        trackEvent(
+                            {
+                                category: 'Header Link',
+                                label: 'LinkedIn',
+                            },
+                            'link_click',
+                        )
                     }
                 >
                     <Icon src={linkedInIcon} ariaHidden />

@@ -12,6 +12,7 @@ module.exports = {
             '@babel/preset-typescript',
             {
                 jsxPragma: 'h',
+                jsxPragmaFrag: 'Fragment',
             },
         ],
         'babel-preset-preact',

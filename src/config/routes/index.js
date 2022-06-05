@@ -34,9 +34,48 @@ module.exports = {
             url: '/pt/',
             View: 'Home',
             head: {
-                title: 'Paulo Gonçalves - Front-End Engineer from Portugal - PT',
+                title: 'Paulo Gonçalves - Front-End Engineer de Portugal - PT',
                 links: [{ path: '', attributes: { href: `${baseUrl}pt/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Website pessoal', 'data-hu': '' } }],
+            },
+        },
+    },
+    '/contact/': {
+        filename: 'contact/index.html',
+        templateParameters: {
+            lang: 'en',
+            url: '/contact/',
+            View: 'Contact',
+            head: {
+                title: 'Contact - Paulo Gonçalves',
+                links: [{ path: '', attributes: { href: `${baseUrl}contact/`, rel: 'canonical' } }],
+                metas: [{ attributes: { name: 'description', content: 'Contact Paulo Gonçalves', 'data-hu': '' } }],
+            },
+        },
+    },
+    '/en/contact/': {
+        filename: 'en/contact/index.html',
+        templateParameters: {
+            lang: 'en',
+            url: '/en/contact/',
+            View: 'Contact',
+            head: {
+                title: 'Contact - Paulo Gonçalves',
+                links: [{ path: '', attributes: { href: `${baseUrl}en/contact/`, rel: 'canonical' } }],
+                metas: [{ attributes: { name: 'description', content: 'Contact Paulo Gonçalves', 'data-hu': '' } }],
+            },
+        },
+    },
+    '/pt/contact/': {
+        filename: 'pt/contact/index.html',
+        templateParameters: {
+            lang: 'pt',
+            url: '/pt/contact/',
+            View: 'Contact',
+            head: {
+                title: 'Contactar - Paulo Gonçalves - PT',
+                links: [{ path: '', attributes: { href: `${baseUrl}pt/contact/`, rel: 'canonical' } }],
+                metas: [{ attributes: { name: 'description', content: 'Contactar Paulo Gonçalves', 'data-hu': '' } }],
             },
         },
     },
@@ -47,7 +86,7 @@ module.exports = {
             url: '/404/',
             View: 'NotFound',
             head: {
-                title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
+                title: '404 - Paulo Gonçalves',
                 links: [{ path: '', attributes: { href: `${baseUrl}404/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Page not found', 'data-hu': '' } }],
             },
@@ -60,7 +99,7 @@ module.exports = {
             url: '/en/404/',
             View: 'NotFound',
             head: {
-                title: 'Paulo Gonçalves - 404',
+                title: '404 - Paulo Gonçalves',
                 links: [{ path: '', attributes: { href: `${baseUrl}en/404/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Page not found', 'data-hu': '' } }],
             },
@@ -73,7 +112,7 @@ module.exports = {
             url: '/pt/404/',
             View: 'NotFound',
             head: {
-                title: 'Paulo Gonçalves - 404 - PT',
+                title: '404 - Paulo Gonçalves - PT',
                 links: [{ path: '', attributes: { href: `${baseUrl}pt/404/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Página não encontrada', 'data-hu': '' } }],
             },

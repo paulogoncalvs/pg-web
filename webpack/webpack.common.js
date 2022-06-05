@@ -10,6 +10,7 @@ const WebpackModuleNomodulePlugin = require('webpack-module-nomodule-plugin');
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
 const paths = require('./paths');
+const config = require('./config');
 const globalConfig = require('../src/config/global');
 const env = process.env.NODE_ENV;
 
@@ -31,14 +32,14 @@ module.exports = {
                 {
                     from: paths.public,
                     to: ({ absoluteFilename }) => {
-                        if (['/manifest/', 'robots.txt'].some((el) => absoluteFilename.includes(el))) {
+                        if (config.filesWithoutHashes.some((el) => absoluteFilename.includes(el))) {
                             return '[path][name][ext]';
                         }
 
                         return `[path][name]${env === 'production' ? '.[fullhash]' : ''}[ext]`;
                     },
                     globOptions: {
-                        ignore: ['*.DS_Store'],
+                        ignore: ['*.DS_Store', '**/.DS_Store'],
                     },
                 },
             ],
@@ -51,6 +52,9 @@ module.exports = {
                     template: paths.src + '/templates/html/index.tsx',
                     inject: 'body',
                     scriptLoading: 'blocking',
+                    minify: {
+                        removeRedundantAttributes: false, // eg. do not remove type="text"
+                    },
                     ...globalConfig.routes[key],
                 }),
         ),
@@ -122,10 +126,13 @@ module.exports = {
                 type: 'asset/resource',
             },
 
-            // Fonts: Inline
+            // Fonts: Copy fonts to build folder
             {
-                test: /\.(woff(2)?|eot|ttf|otf|)$/,
-                type: 'asset/inline',
+                test: /fonts\/.*\.(woff(2)?|eot|ttf|otf)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[name][ext]',
+                },
             },
 
             // SVG Icons: Content to use with preact component

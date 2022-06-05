@@ -1,6 +1,6 @@
 import { pageTests } from '../index';
 
 pageTests({
-    name: 'Home',
-    route: '/',
+    name: 'Contact',
+    route: '/contact/',
 });

@@ -3,7 +3,6 @@ import { useContext, useEffect } from 'preact/hooks';
 import { useRoute, useLocation } from 'wouter-preact';
 import { StoreContext } from '@/modules/store';
 import { Language, useLanguage, isValidLanguage } from '@/modules/language';
-import { trackPageView } from '@/modules/tracking';
 import { isBrowser } from '@/utils/browser';
 
 export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
@@ -17,7 +16,6 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
     useEffect(() => {
         langParam !== lang && setLanguage(langParam);
         location !== url && setRoute(location);
-        setTimeout(() => trackPageView(), 500);
     }, [langParam, location]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return null;

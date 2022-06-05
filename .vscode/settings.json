@@ -4,7 +4,7 @@
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
       },
-      "editor.formatOnSave": false
+      "editor.formatOnSave": false,
     },
     "[typescript]": {
       "editor.defaultFormatter": "dbaeumer.vscode-eslint",
@@ -20,8 +20,18 @@
       },
       "editor.formatOnSave": false
     },
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    ],
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+    },
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
-    "jest.jestCommandLine": "yarn tests:jest",
+    // "jest.jestCommandLine": "yarn tests:jest",
+    "editor.formatOnSave": true,
   }

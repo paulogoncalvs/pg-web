@@ -1,4 +1,4 @@
-import { pageTests } from '..';
+import { pageTests } from '../index';
 
 pageTests({
     name: 'Not Found',

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Theme, useTheme } from '@/modules/theme';
 import { useTranslate } from '@/modules/i18n';
 import { Icon } from '@/components/Icon';
-import { trackEvent } from '@/modules/tracking';
+import { trackEvent } from '@/modules/tracking/ga4';
 import { isBrowser } from '@/utils/browser';
 import lightModeIcon from '@/assets/icons/light_mode.svg';
 import darkModeIcon from '@/assets/icons/dark_mode.svg';
@@ -23,7 +23,7 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ cl
 
     const handleOnClick = useCallback((): void => {
         setTheme(getToggleTheme(theme));
-        trackEvent({ eventCategory: 'Theme', eventAction: 'toggleTheme', eventLabel: getToggleTheme(theme) });
+        trackEvent({ category: 'Theme', label: getToggleTheme(theme) }, 'theme_toggle');
     }, [setTheme, theme]);
 
     return isBrowser() && window.CSS && CSS.supports('color', 'var(--primary)') ? (

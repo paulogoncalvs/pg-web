@@ -3,6 +3,7 @@ dist
 src/tests/**/results
 stats.json
 todo.md
+public/sitemap.xml
 .DS_Store
 .idea
 .history

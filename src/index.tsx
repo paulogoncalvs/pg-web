@@ -6,7 +6,8 @@ if (process.env.NODE_ENV === 'development') {
 
 import { h, hydrate } from 'preact';
 import App from '@/App';
-import { initGA } from '@/modules/tracking';
+import { initGA4 } from '@/modules/tracking/ga4';
+import { reportWebVitals, sendToGoogleAnalytics } from '@/modules/webVitals';
 import './styles/index.scss';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
@@ -20,5 +21,8 @@ if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
     });
 }
 
-// Tracking - Google analytics
-initGA();
+// Tracking - Google analytics 4
+initGA4();
+
+// Web Vitals
+reportWebVitals(sendToGoogleAnalytics);

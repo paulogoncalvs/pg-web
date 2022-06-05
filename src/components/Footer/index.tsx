@@ -97,7 +97,7 @@ export const Footer: FunctionalComponent = () => {
                     </div>
                 </div>
             </div>
-            <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-500">
+            <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
                 <p>{t('footer_description_2')}</p>
                 <p class="pt-2">
                     paulogoncalves.dev &copy; {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ''} 🙂

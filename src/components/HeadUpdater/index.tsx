@@ -9,7 +9,7 @@ export const HeadUpdater = (): null => {
         return null;
     }
 
-    const data = routesConfig[window.location.pathname] || {};
+    const data = routesConfig[window.location.pathname.replace(/\/?$/, '/')] || {};
 
     if (data.templateParameters) {
         const { title } = data.templateParameters.head;

@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from 'preact';
 import { useTranslate } from '@/modules/i18n';
-import { trackEvent } from '@/modules/tracking';
+import { trackEvent } from '@/modules/tracking/ga4';
 import { Icon } from '@/components/Icon';
 import { Image } from '@/components/Image';
 import { Markup } from '@/components/Markup';
@@ -46,11 +46,13 @@ const HomePage: FunctionalComponent = () => {
                                             class="underline"
                                             newWindow
                                             onClick={(): void =>
-                                                trackEvent({
-                                                    eventCategory: 'Home Link',
-                                                    eventAction: 'clickLink',
-                                                    eventLabel: 'LinkedIn',
-                                                })
+                                                trackEvent(
+                                                    {
+                                                        category: 'Home Link',
+                                                        label: 'LinkedIn',
+                                                    },
+                                                    'link_click',
+                                                )
                                             }
                                         >
                                             {t('home_page_description_3_link_text')}
@@ -68,11 +70,13 @@ const HomePage: FunctionalComponent = () => {
                         href="mailto:contact@paulogoncalves.dev"
                         class="btn _i _prim"
                         onClick={(): void =>
-                            trackEvent({
-                                eventCategory: 'Home Link',
-                                eventAction: 'clickLink',
-                                eventLabel: 'E-mail Me',
-                            })
+                            trackEvent(
+                                {
+                                    category: 'Home Link',
+                                    label: 'E-mail Me',
+                                },
+                                'link_click',
+                            )
                         }
                     >
                         <Icon src={mailIcon} classes="" ariaHidden />
