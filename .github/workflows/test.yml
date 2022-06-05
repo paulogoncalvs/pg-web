@@ -9,13 +9,13 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: '14.x'
-    - name: Install modules
+    - name: Run Install modules
       run: yarn
-    - name: Build Check
-    - run: yarn build
-    - name: Code Analysis
+    - name: Run Build Check
+      run: yarn build
+    - name: Run Code Analysis
       run: yarn lint
-    - name: Tests
+    - name: Run Tests
       run: yarn tests:jest
     #- name: Build Playwright
     #  run: yarn tests:playwright:build
