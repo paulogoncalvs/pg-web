@@ -114,7 +114,7 @@
   },
   "resolutions": {
     "source-map-resolve": "^0.6.0",
-    "cheerio": "1.0.0-rc.10"
+    "cheerio": "1.0.0-rc.12"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
