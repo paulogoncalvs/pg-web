@@ -61,7 +61,7 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-tailwindcss": "^3.5.0",
-    "fork-ts-checker-webpack-plugin": "^7.2.11",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
     "html-webpack-deploy-plugin": "^3.0.0",
     "html-webpack-plugin": "^5.5.0",
     "html-webpack-tags-plugin": "^3.0.2",
