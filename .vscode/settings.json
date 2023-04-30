@@ -1,6 +1,6 @@
 {
     "[javascript]": {
-      "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
       },
@@ -32,6 +32,5 @@
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
-    // "jest.jestCommandLine": "yarn tests:jest",
     "editor.formatOnSave": true,
   }

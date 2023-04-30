@@ -1,12 +1,7 @@
-node_modules
-build
 dist
 coverage
+node_modules
+public
+.idea
 .history
-.husky
 .vscode
-*.js
-*.jsx
-*.ts
-*.tsx
-*.md

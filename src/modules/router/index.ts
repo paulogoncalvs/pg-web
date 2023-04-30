@@ -4,6 +4,7 @@ import { useRoute, useLocation } from 'wouter-preact';
 import { StoreContext } from '@/modules/store';
 import { Language, useLanguage, isValidLanguage } from '@/modules/language';
 import { isBrowser } from '@/utils/browser';
+import { toggleSideDrawer } from '@/components/SideDrawer';
 
 export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
     const { url, setRoute } = useRouter();
@@ -15,7 +16,12 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
 
     useEffect(() => {
         langParam !== lang && setLanguage(langParam);
-        location !== url && setRoute(location);
+
+        if (location !== url) {
+            setRoute(location);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            toggleSideDrawer(false);
+        }
     }, [langParam, location]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return null;

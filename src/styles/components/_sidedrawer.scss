@@ -1,0 +1,9 @@
+@layer components {
+    .sd-tog + .sd {
+        @apply translate-x-full;
+    }
+
+    .sd-tog:checked + .sd {
+        @apply translate-x-0;
+    }
+}

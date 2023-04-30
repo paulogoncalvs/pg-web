@@ -9,6 +9,7 @@ interface IconComponentProps {
     classes?: string;
     viewBox?: string;
     ariaHidden?: boolean;
+    onClick?(): unknown;
     otherProps?: unknown;
 }
 

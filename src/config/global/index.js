@@ -1,4 +1,4 @@
-const routes = require('../routes');
+import routes from '../routes/index.js';
 
 const baseUrl = 'https://www.paulogoncalves.dev/';
 
@@ -33,7 +33,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/roboto-slab-v22-latin-regular.woff2',
+            href: '/assets/fonts/Inter-Regular.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',
@@ -43,7 +43,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/roboto-slab-v22-latin-700.woff2',
+            href: '/assets/fonts/Inter-Bold.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',
@@ -53,7 +53,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/roboto-slab-v22-latin-900.woff2',
+            href: '/assets/fonts/Inter-Black.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',
@@ -99,7 +99,7 @@ const links = [
     },
 ];
 
-module.exports = {
+export default {
     title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
     description: 'Personal Website',
     metas,

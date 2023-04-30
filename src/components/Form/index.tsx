@@ -1,10 +1,14 @@
 import { h, FunctionalComponent, ComponentChildren, createContext } from 'preact';
 import { useState } from 'preact/hooks';
 
+export interface FormComponentData {
+    [key: string]: string;
+}
 interface FormComponentProps {
     action: string;
-    initialValues: any;
-    onSubmit(formData: any): void;
+    initialValues: FormComponentData;
+    onSubmit(formData: FormComponentData): void;
+    classes: string;
     children: ComponentChildren;
 }
 
@@ -13,7 +17,13 @@ export const FormContext = createContext({
     handleFormChange: (event: Event): void => console.warn(event), // eslint-disable-line no-console
 });
 
-export const Form: FunctionalComponent<FormComponentProps> = ({ action, initialValues, onSubmit, children }) => {
+export const Form: FunctionalComponent<FormComponentProps> = ({
+    action,
+    initialValues,
+    onSubmit,
+    classes,
+    children,
+}) => {
     const [formData, setFormData] = useState(initialValues);
 
     const handleFormChange = (event: Event): void => {
@@ -32,7 +42,7 @@ export const Form: FunctionalComponent<FormComponentProps> = ({ action, initialV
     };
 
     return (
-        <form action={action} onSubmit={triggerSubmit}>
+        <form action={action} onSubmit={triggerSubmit} class={classes}>
             <FormContext.Provider value={{ formData, handleFormChange }}>{children}</FormContext.Provider>
         </form>
     );

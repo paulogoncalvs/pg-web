@@ -1,14 +1,14 @@
-const Dotenv = require('dotenv-webpack');
-const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
-const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const paths = require('./paths');
-const common = require('./webpack.common.js');
+import Dotenv from 'dotenv-webpack';
+import { merge } from 'webpack-merge';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import WorkboxPlugin from 'workbox-webpack-plugin';
+import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin';
+import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
+import paths from './paths.js';
+import common from './webpack.common.js';
 
-module.exports = merge(common, {
+export default merge(common, {
     mode: 'production',
     devtool: false,
     output: {
@@ -21,6 +21,7 @@ module.exports = merge(common, {
         new Dotenv({
             path: './.env.production',
         }),
+
         // Extracts CSS into separate files
         // style-loader -> development
         // MiniCssExtractPlugin -> production
@@ -43,7 +44,7 @@ module.exports = merge(common, {
             },
         }),
 
-        new BundleAnalyzerPlugin({
+        new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
             openAnalyzer: false,
             analyzerMode: 'static',
             defaultSizes: 'gzip',

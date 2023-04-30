@@ -1,12 +1,14 @@
 import { h, FunctionalComponent } from 'preact';
 import { Route, Router } from 'wouter-preact';
 import staticLocationHook from 'wouter-preact/static-location';
-import { Store } from '@/modules/store';
+import { StoreContextProvider } from '@/modules/store';
 import { RouterOnChange } from '@/modules/router';
 import { getPage } from '@/modules/router/pages';
 import { HeadUpdater } from '@/components/HeadUpdater';
 import { Header } from '@/components/Header';
+import { SideDrawer } from '@/components/SideDrawer';
 import { Footer } from '@/components/Footer';
+import { Overlay } from '@/components/Overlay';
 import { isBrowser } from '@/utils/browser';
 
 interface AppProps {
@@ -14,17 +16,19 @@ interface AppProps {
 }
 
 export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element => (
-    <Store store={store}>
+    <StoreContextProvider store={store}>
         <HeadUpdater />
-        <main>
+        <Router {...(!isBrowser() ? { hook: staticLocationHook(store.url) } : {})}>
+            <RouterOnChange />
             <Header />
-            <Router {...(!isBrowser() ? { hook: staticLocationHook(store.url) } : {})}>
-                <RouterOnChange />
+            <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
                 <Route path="/:path*">{({ path }): JSX.Element => getPage(path ? `/${path}/` : '/')}</Route>
-            </Router>
-        </main>
+            </main>
+            <SideDrawer />
+        </Router>
         <Footer />
-    </Store>
+        <Overlay />
+    </StoreContextProvider>
 );
 
 export default App;

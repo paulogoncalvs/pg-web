@@ -1,14 +1,13 @@
-const webpack = require('webpack');
-const Dotenv = require('dotenv-webpack');
-const { merge } = require('webpack-merge');
-const PreactRefreshPlugin = require('@prefresh/webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const StylelintPlugin = require('stylelint-webpack-plugin');
-const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
-const paths = require('./paths');
-const common = require('./webpack.common.js');
+import webpack from 'webpack';
+import Dotenv from 'dotenv-webpack';
+import { merge } from 'webpack-merge';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import StylelintPlugin from 'stylelint-webpack-plugin';
+import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin';
+import paths from './paths.js';
+import common from './webpack.common.js';
 
-module.exports = merge(common, {
+export default merge(common, {
     mode: 'development',
 
     devtool: 'inline-cheap-source-map',
@@ -61,7 +60,7 @@ module.exports = merge(common, {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: require.resolve('babel-loader'),
+                        loader: 'babel-loader',
                     },
                 ],
             },
@@ -75,8 +74,6 @@ module.exports = merge(common, {
         }),
 
         new StylelintPlugin(),
-
-        new PreactRefreshPlugin(),
 
         new MiniCssExtractPlugin({
             chunkFilename: '[id].css',

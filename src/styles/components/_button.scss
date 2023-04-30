@@ -1,14 +1,32 @@
 @layer components {
+    .btn:focus-visible,
+    .btn:hover,
+    .btn:active {
+        @apply tracking-normal;
+
+        box-shadow: rgb(94 94 94 / 40%) 0 7px 12px 0;
+    }
+
+    .dark .btn:focus-visible,
+    .dark .btn:hover,
+    .dark .btn:active {
+        box-shadow: rgb(255 255 255 / 70%) 0 0 18px 0;
+    }
+
     .btn {
         @apply inline-flex items-center justify-center rounded-full;
-        @apply md:transform-gpu md:transition-transform md:ease-in-out md:duration-200;
-        @apply shadow-md hover:shadow-lg md:focus:shadow-lg;
+        @apply md:transform-gpu md:ease-out md:duration-500 md:transition-all;
+        @apply shadow-md;
         @apply px-4 py-2 sm:py-3;
         @apply sm:text-xl text-zinc-900 dark:text-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-900;
-        
+        @apply font-bold;
+
+        -webkit-tap-highlight-color: transparent;
+
         @screen md {
+            &:focus-visible,
             &:hover,
-            &:focus {
+            &:active {
                 transform: translateX(0) translateY(-2px) translateZ(0);
             }
         }
@@ -22,7 +40,8 @@
 
         // Primary
         &._prim {
-            @apply bg-emerald-300 hover:bg-emerald-200 focus:bg-emerald-200 dark:bg-emerald-400 dark:hover:bg-emerald-300 dark:focus:bg-emerald-300;
+            @apply bg-emerald-300;
+            @apply hover:bg-emerald-200 focus:bg-emerald-200; //  hover:bg-emerald-200 focus:bg-emerald-200 dark:bg-emerald-400 dark:hover:bg-emerald-300 dark:focus:bg-emerald-300;
         }
-    } 
+    }
 }

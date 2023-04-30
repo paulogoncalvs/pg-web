@@ -1,13 +1,27 @@
 # Prebuilt MS image
 FROM mcr.microsoft.com/playwright:focal
 
+ARG UID
+ARG UNAME=node
+
+RUN groupadd --gid $UID --non-unique node
+RUN useradd --create-home --uid $UID --gid $UID --non-unique --shell /bin/bash node
+
 RUN mkdir -p /app
+RUN chown $UNAME:$UNAME /app
+
+USER $UNAME
 WORKDIR /app
 
-COPY . .
-COPY .env.dist .env.production
+COPY --chown=$UNAME:$UNAME . .
+COPY --chown=$UNAME:$UNAME .env.dist .env.production
 
 RUN yarn install
+
+USER root
+RUN yarn playwright install --with-deps
+
+USER $UNAME
 RUN yarn build
 
 # Expose port

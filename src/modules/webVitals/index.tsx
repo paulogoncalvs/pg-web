@@ -1,5 +1,5 @@
 import { ReportHandler } from 'web-vitals';
-import { trackEvent } from '@/modules/tracking/ga4';
+import { trackEvent, hasGtag } from '@/modules/tracking/ga4';
 
 export const sendToGoogleAnalytics = ({
     name,
@@ -40,4 +40,8 @@ export const reportWebVitals = (onPerfEntry?: ReportHandler): void => {
             getTTFB(onPerfEntry);
         });
     }
+};
+
+export const reportWebVitalsToGA = (): void => {
+    hasGtag() && reportWebVitals(sendToGoogleAnalytics);
 };

@@ -1,9 +1,10 @@
 src/tests/**/results
+src/tests/**/report
+src/styles
 node_modules
-build
 dist
 coverage
-.idea
+public
 .history
-.husky
+.idea
 .vscode

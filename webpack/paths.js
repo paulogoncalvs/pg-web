@@ -1,15 +1,15 @@
-const path = require('path');
+import { resolve } from 'path';
 
-module.exports = {
+export default {
     // Root files
-    root: path.resolve(__dirname, '../'),
+    root: resolve('./'),
 
     // Source files
-    src: path.resolve(__dirname, '../src'),
+    src: resolve('./src'),
 
     // Production build files
-    build: path.resolve(__dirname, '../dist'),
+    build: resolve('./dist'),
 
     // Static files that get copied to build folder
-    public: path.resolve(__dirname, '../public'),
+    public: resolve('./public'),
 };
