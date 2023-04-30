@@ -1,27 +1,33 @@
 {
-    "compilerOptions": {
-        "allowJs": false,
-        "noEmit": true,
-        "strict": true,
-        "jsx": "preserve",
-        "jsxFactory": "h",
-        "jsxFragmentFactory": "Fragment",
-        "outDir": "dist",
-        "baseUrl": "src",
-        "sourceMap": false,
-        "noImplicitAny": true,
-        "module": "ESNext",
-        "target": "ES2015",
-        "moduleResolution": "Node",
-        "allowSyntheticDefaultImports": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "skipLibCheck": true,
-        "resolveJsonModule": true,
-        "lib": ["DOM", "ES2015", "DOM.Iterable"],
-        "paths": {
-            "@/*": ["*"]
-        }
-    }
+  "compilerOptions": {
+    "allowJs": false,
+    "noEmit": true,
+    "strict": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "outDir": "dist",
+    "baseUrl": "src",
+    "sourceMap": false,
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "target": "ES2015",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "lib": ["DOM", "ES2015", "DOM.Iterable"],
+    "paths": {
+      "@/*": ["*"]
+    },
+    "ignoreDeprecations": "5.0" // @todo remove this line
+  },
+  // Most ts-node options can be specified here using their programmatic names.
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "esm": true
+  }
 }

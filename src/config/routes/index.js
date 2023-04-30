@@ -1,6 +1,6 @@
 const baseUrl = 'https://www.paulogoncalves.dev/';
 
-module.exports = {
+export default {
     '/': {
         filename: 'index.html',
         templateParameters: {
@@ -12,6 +12,9 @@ module.exports = {
                 links: [{ path: '', attributes: { href: baseUrl, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Personal Website', 'data-hu': '' } }],
             },
+        },
+        tests: {
+            name: 'Home',
         },
     },
     '/en/': {
@@ -34,7 +37,7 @@ module.exports = {
             url: '/pt/',
             View: 'Home',
             head: {
-                title: 'Paulo Gonçalves - Front-End Engineer de Portugal - PT',
+                title: 'Paulo Gonçalves - Front-End Engineer de Portugal [PT]',
                 links: [{ path: '', attributes: { href: `${baseUrl}pt/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Website pessoal', 'data-hu': '' } }],
             },
@@ -47,10 +50,13 @@ module.exports = {
             url: '/contact/',
             View: 'Contact',
             head: {
-                title: 'Contact - Paulo Gonçalves',
+                title: 'Contacts',
                 links: [{ path: '', attributes: { href: `${baseUrl}contact/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Contact Paulo Gonçalves', 'data-hu': '' } }],
             },
+        },
+        tests: {
+            name: 'Contact',
         },
     },
     '/en/contact/': {
@@ -60,7 +66,7 @@ module.exports = {
             url: '/en/contact/',
             View: 'Contact',
             head: {
-                title: 'Contact - Paulo Gonçalves',
+                title: 'Contacts',
                 links: [{ path: '', attributes: { href: `${baseUrl}en/contact/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Contact Paulo Gonçalves', 'data-hu': '' } }],
             },
@@ -73,7 +79,7 @@ module.exports = {
             url: '/pt/contact/',
             View: 'Contact',
             head: {
-                title: 'Contactar - Paulo Gonçalves - PT',
+                title: 'Contactos [PT]',
                 links: [{ path: '', attributes: { href: `${baseUrl}pt/contact/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Contactar Paulo Gonçalves', 'data-hu': '' } }],
             },
@@ -86,10 +92,13 @@ module.exports = {
             url: '/404/',
             View: 'NotFound',
             head: {
-                title: '404 - Paulo Gonçalves',
+                title: '404',
                 links: [{ path: '', attributes: { href: `${baseUrl}404/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Page not found', 'data-hu': '' } }],
             },
+        },
+        tests: {
+            name: '404',
         },
     },
     '/en/404/': {
@@ -99,7 +108,7 @@ module.exports = {
             url: '/en/404/',
             View: 'NotFound',
             head: {
-                title: '404 - Paulo Gonçalves',
+                title: '404',
                 links: [{ path: '', attributes: { href: `${baseUrl}en/404/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Page not found', 'data-hu': '' } }],
             },
@@ -112,7 +121,7 @@ module.exports = {
             url: '/pt/404/',
             View: 'NotFound',
             head: {
-                title: '404 - Paulo Gonçalves - PT',
+                title: '404 [PT]',
                 links: [{ path: '', attributes: { href: `${baseUrl}pt/404/`, rel: 'canonical' } }],
                 metas: [{ attributes: { name: 'description', content: 'Página não encontrada', 'data-hu': '' } }],
             },

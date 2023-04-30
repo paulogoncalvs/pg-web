@@ -20,6 +20,7 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
     const { t } = useTranslate();
 
     return (
+        // @ts-ignore-begin
         <a
             href={href}
             aria-label={
@@ -30,5 +31,6 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
         >
             {children}
         </a>
+        // @ts-ignore-end
     );
 };

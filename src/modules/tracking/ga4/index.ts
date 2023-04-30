@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const hasGtag = (): boolean => !!window.gtag;
-
 declare global {
     interface Window {
         gtag: any;
         dataLayer: any;
     }
 }
+
+export const hasGtag = (): boolean => !!window.gtag;
 
 export const trackPageView = (data?: any): void => {
     hasGtag() &&
@@ -31,7 +31,7 @@ export const initGA4 = (): void => {
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.TRACK_GA_MEASUREMENT_ID}`;
 
-    document.body.appendChild(script);
+    document.head.appendChild(script);
 
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag(): void {

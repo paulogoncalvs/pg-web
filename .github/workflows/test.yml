@@ -5,19 +5,21 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '14.x'
-    - name: Run Install modules
-      run: yarn
-    - name: Run Build Check
-      run: yarn build
-    - name: Run Code Analysis
-      run: yarn lint
-    - name: Run Tests
-      run: yarn tests:jest
-    #- name: Build Playwright
-    #  run: yarn tests:playwright:build
-    #- name: Run Playwright Tests
-    #  run: yarn tests:playwright:run
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+      - name: Run Install modules
+        run: yarn
+      - name: Run Build Check
+        run: yarn build
+      - name: Run Code Analysis
+        run: |
+          yarn prettify
+          yarn lint
+      - name: Run Tests
+        run: yarn tests:jest
+      #- name: Build Playwright
+      #  run: yarn tests:pw:build
+      #- name: Run Playwright Tests
+      #  run: yarn tests:pw:run

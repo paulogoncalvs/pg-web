@@ -1,9 +1,11 @@
 import { h, createContext, FunctionalComponent } from 'preact';
 import { useReducer } from 'preact/hooks';
+import { useIsFirstRender } from '@/hooks/useIsFirstRender';
 import { Theme, getInitialTheme, THEME_DEFAULT } from '@/modules/theme';
 import { Language, LANGUAGE_DEFAULT } from '@/modules/language';
 import { useStoreLanguage } from './hooks/useStoreLanguage';
 import { useStoreTheme } from './hooks/useStoreTheme';
+import { debug } from './debug';
 
 export interface StoreContextAction {
     type: string;
@@ -28,34 +30,46 @@ export const StoreReducer = (
     StoreContextState: StoreContextState,
     { type, payload }: StoreContextAction,
 ): StoreContextState => {
+    let newState;
+
     switch (type) {
         case 'SET_ROUTE':
-            return {
+            newState = {
                 ...StoreContextState,
                 url: payload.url || '/',
             };
+            break;
         case 'SET_LANGUAGE':
-            return {
+            newState = {
                 ...StoreContextState,
                 lang: payload.lang || LANGUAGE_DEFAULT,
             };
+            break;
         case 'SET_THEME':
-            return {
+            newState = {
                 ...StoreContextState,
                 theme: payload.theme || THEME_DEFAULT,
             };
-
+            break;
         default:
-            return StoreContextState;
+            newState = StoreContextState;
     }
+
+    process.env.NODE_ENV === 'development' && debug(type, newState);
+
+    return newState;
 };
 
 export const StoreContext = createContext(getInitialState({}));
 
-export const Store: FunctionalComponent<{ store: PageStore }> = ({ store, children }) => {
+export const StoreContextProvider: FunctionalComponent<{ store: PageStore }> = ({ store, children }) => {
     const [state, dispatch] = useReducer(StoreReducer, getInitialState(store));
+    const isFirstRender = useIsFirstRender();
+
     useStoreTheme(state.theme, dispatch);
     useStoreLanguage(state.lang);
+
+    process.env.NODE_ENV === 'development' && isFirstRender && debug('@@INIT', state);
 
     return <StoreContext.Provider value={{ ...state, dispatch }}>{children}</StoreContext.Provider>;
 };

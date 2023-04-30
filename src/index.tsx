@@ -4,11 +4,11 @@ if (process.env.NODE_ENV === 'development') {
     require('preact/debug');
 }
 
+import '@/styles/index.scss';
 import { h, hydrate } from 'preact';
 import App from '@/App';
 import { initGA4 } from '@/modules/tracking/ga4';
-import { reportWebVitals, sendToGoogleAnalytics } from '@/modules/webVitals';
-import './styles/index.scss';
+import { reportWebVitalsToGA } from '@/modules/webVitals';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
 
@@ -21,8 +21,6 @@ if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
     });
 }
 
-// Tracking - Google analytics 4
-initGA4();
-
-// Web Vitals
-reportWebVitals(sendToGoogleAnalytics);
+// Tracking
+initGA4(); // Google Analytics 4
+reportWebVitalsToGA(); // Web Vitals

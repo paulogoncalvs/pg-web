@@ -33,30 +33,30 @@ export const Footer: FunctionalComponent = () => {
                     <div class="flex flex-wrap justify-center align-middle">
                         <Link
                             href="https://www.typescriptlang.org/"
-                            class="ic-link _ftr"
+                            class="ic-link _up"
                             ariaLabel="TypeScript"
                             newWindow
                         >
                             <Icon src={typeScriptLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://preactjs.com/" class="ic-link _ftr" ariaLabel="Preact" newWindow>
+                        <Link href="https://preactjs.com/" class="ic-link _up" ariaLabel="Preact" newWindow>
                             <Icon src={preactLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://webpack.js.org/" class="ic-link _ftr" ariaLabel="Webpack" newWindow>
+                        <Link href="https://webpack.js.org/" class="ic-link _up" ariaLabel="Webpack" newWindow>
                             <Icon src={webpackLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://yarnpkg.com/" class="ic-link _ftr" ariaLabel="Yarn" newWindow>
+                        <Link href="https://yarnpkg.com/" class="ic-link _up" ariaLabel="Yarn" newWindow>
                             <Icon src={yarnLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://eslint.org/" class="ic-link _ftr" ariaLabel="ESLint" newWindow>
+                        <Link href="https://eslint.org/" class="ic-link _up" ariaLabel="ESLint" newWindow>
                             <Icon src={esLintLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://stylelint.io/" class="ic-link _ftr" ariaLabel="StyleLint" newWindow>
+                        <Link href="https://stylelint.io/" class="ic-link _up" ariaLabel="StyleLint" newWindow>
                             <Icon src={styleLintLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link
                             href="https://developers.google.com/web/tools/workbox"
-                            class="ic-link _ftr"
+                            class="ic-link _up"
                             ariaLabel="Workbox"
                             newWindow
                         >
@@ -64,34 +64,34 @@ export const Footer: FunctionalComponent = () => {
                         </Link>
                         <Link
                             href="https://analytics.google.com/"
-                            class="ic-link _ftr"
+                            class="ic-link _up"
                             ariaLabel="Google Analytics"
                             newWindow
                         >
                             <Icon src={gaLogo} width="28" height="28" ariaHidden />
                         </Link>
-                        <Link href="https://tailwindcss.com/" class="ic-link _ftr" ariaLabel="Tailwind CSS" newWindow>
+                        <Link href="https://tailwindcss.com/" class="ic-link _up" ariaLabel="Tailwind CSS" newWindow>
                             <Icon src={tailwindLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://playwright.dev/" class="ic-link _ftr" ariaLabel="Playwright" newWindow>
+                        <Link href="https://playwright.dev/" class="ic-link _up" ariaLabel="Playwright" newWindow>
                             <Icon src={playwrigthLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://jestjs.io/" class="ic-link _ftr" ariaLabel="Jest" newWindow>
+                        <Link href="https://jestjs.io/" class="ic-link _up" ariaLabel="Jest" newWindow>
                             <Icon src={jestLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://prettier.io/" class="ic-link _ftr" ariaLabel="Prettier" newWindow>
+                        <Link href="https://prettier.io/" class="ic-link _up" ariaLabel="Prettier" newWindow>
                             <Icon src={prettierLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://postcss.org/" class="ic-link _ftr" ariaLabel="PostCSS" newWindow>
+                        <Link href="https://postcss.org/" class="ic-link _up" ariaLabel="PostCSS" newWindow>
                             <Icon src={postCSSLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://www.deque.com/axe/" class="ic-link _ftr" ariaLabel="Axe" newWindow>
+                        <Link href="https://www.deque.com/axe/" class="ic-link _up" ariaLabel="Axe" newWindow>
                             <Icon src={axeLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://sass-lang.com/" class="ic-link _ftr" ariaLabel="Sass" newWindow>
+                        <Link href="https://sass-lang.com/" class="ic-link _up" ariaLabel="Sass" newWindow>
                             <Icon src={sassLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://babeljs.io/" class="ic-link _ftr" ariaLabel="Babel" newWindow>
+                        <Link href="https://babeljs.io/" class="ic-link _up" ariaLabel="Babel" newWindow>
                             <Icon src={babelLogo} width="60" height="32" ariaHidden />
                         </Link>
                     </div>

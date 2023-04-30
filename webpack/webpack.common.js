@@ -1,22 +1,20 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-const HtmlWebpackDeployPlugin = require('html-webpack-deploy-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const WebpackModuleNomodulePlugin = require('webpack-module-nomodule-plugin');
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
-const paths = require('./paths');
-const config = require('./config');
-const globalConfig = require('../src/config/global');
+import path from 'path';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
+import HtmlWebpackDeployPlugin from 'html-webpack-deploy-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import paths from './paths.js';
+import config from './config.js';
+import globalConfig from '../src/config/global/index.js';
 const env = process.env.NODE_ENV;
 
-module.exports = {
+export default {
     entry: [paths.src + '/index.tsx'],
-
     output: {
         path: paths.build,
         filename: '[name].bundle.js',
@@ -50,8 +48,6 @@ module.exports = {
                 new HtmlWebpackPlugin({
                     favicon: paths.public + '/assets/favicon.ico',
                     template: paths.src + '/templates/html/index.tsx',
-                    inject: 'body',
-                    scriptLoading: 'blocking',
                     minify: {
                         removeRedundantAttributes: false, // eg. do not remove type="text"
                     },
@@ -77,8 +73,6 @@ module.exports = {
         }),
 
         new ForkTsCheckerWebpackPlugin(),
-
-        new WebpackModuleNomodulePlugin('modern'),
     ],
 
     resolve: {

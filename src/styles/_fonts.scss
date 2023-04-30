@@ -1,23 +1,23 @@
 @font-face {
-    font-family: 'Roboto Slab';
+    font-family: Inter;
     font-style: normal;
     font-weight: 400;
-    font-display: optional;
-    src: url("../assets/fonts/roboto-slab-v22-latin-regular.woff2") format('woff2');
+    font-display: swap;
+    src: url('../assets/fonts/Inter-Regular.woff2?v=3.19') format('woff2');
 }
-  
+
 @font-face {
-    font-family: 'Roboto Slab';
+    font-family: Inter;
     font-style: normal;
     font-weight: 700;
-    font-display: optional;
-    src: url("../assets/fonts/roboto-slab-v22-latin-700.woff2") format('woff2');
+    font-display: swap;
+    src: url('../assets/fonts/Inter-Bold.woff2?v=3.19') format('woff2');
 }
-  
+
 @font-face {
-    font-family: 'Roboto Slab';
+    font-family: Inter;
     font-style: normal;
     font-weight: 900;
-    font-display: optional;
-    src: url("../assets/fonts/roboto-slab-v22-latin-900.woff2") format('woff2');
+    font-display: swap;
+    src: url('../assets/fonts/Inter-Black.woff2?v=3.19') format('woff2');
 }

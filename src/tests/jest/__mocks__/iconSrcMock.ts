@@ -1,2 +1,2 @@
 // [hash, viewBox]
-module.exports = ['#', ''];
+export default ['#', ''];

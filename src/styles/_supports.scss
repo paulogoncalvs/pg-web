@@ -1,0 +1,6 @@
+// Do not supports var - hide
+.-sup-novar {
+    @supports not (color: var(--primary)) {
+        display: none;
+    }
+}

@@ -26,16 +26,19 @@ Create `.env.development` and `.env.production` based on `.env.dist`.
 | **TESTS**                      |                                                 |
 | `yarn tests:jest`              | Run Jest tests                                  |
 | `yarn tests:jest:update`       | Update Jest tests                               |
-| `yarn tests:playwright`        | Generate dist + Run Playwright tests            |
-| `yarn tests:playwright:update` | Generate dist + Update Playwright tests         |
-| `yarn tests:playwright:run`    | Run Playwright tests without dist generation    |
-| `yarn tests:playwright:build`  | Build Playwright docker image                   |
+| `yarn tests:pw`                | Generate dist + Run Playwright tests            |
+| `yarn tests:pw:update`         | Generate dist + Update Playwright tests         |
+| `yarn tests:pw:run`            | Run Playwright tests without dist generation    |
+| `yarn tests:pw:build`          | Build Playwright docker image                   |
 | `yarn tests`                   | Run Jest and Playwright tests                   |
+| **PRETTIFY**                   |                                                 |
+| `yarn prettify`                | Code formatting - Check                         |
+| `yarn prettify:fix`            | Code formatting - Fix                           |
 | **LINT**                       |                                                 |
 | `yarn lint:ts`                 | Lint TypeScript                                 |
-| `yarn lint:ts-fix`             | Lint TypeScript - Fix                           |
+| `yarn lint:ts:fix`             | Lint TypeScript - Fix                           |
 | `yarn lint:css`                | Lint CSS                                        |
-| `yarn lint:css-fix`            | Lint CSS - Fix                                  |
+| `yarn lint:css:fix`            | Lint CSS - Fix                                  |
 | `yarn lint`                    | Lint All                                        |
 | `yarn lint:fix`                | Lint All - Fix                                  |
 | **PACKAGES**                   |                                                 |

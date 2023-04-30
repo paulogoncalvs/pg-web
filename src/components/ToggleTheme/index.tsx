@@ -5,7 +5,6 @@ import { Theme, useTheme } from '@/modules/theme';
 import { useTranslate } from '@/modules/i18n';
 import { Icon } from '@/components/Icon';
 import { trackEvent } from '@/modules/tracking/ga4';
-import { isBrowser } from '@/utils/browser';
 import lightModeIcon from '@/assets/icons/light_mode.svg';
 import darkModeIcon from '@/assets/icons/dark_mode.svg';
 
@@ -26,13 +25,15 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ cl
         trackEvent({ category: 'Theme', label: getToggleTheme(theme) }, 'theme_toggle');
     }, [setTheme, theme]);
 
-    return isBrowser() && window.CSS && CSS.supports('color', 'var(--primary)') ? (
+    return (
+        // @ts-ignore-begin
         <button
-            class={classNames('ic-link _hdr', classes)}
             onClick={handleOnClick}
+            class={classNames('ic-link -sup-novar', classes)}
             aria-label={t('theme_toggle', { theme: t(`theme_${getToggleTheme(theme)}`) })}
         >
             <Icon src={getToggleIcon(theme)} ariaHidden />
         </button>
-    ) : null;
+        // @ts-ignore-end
+    );
 };

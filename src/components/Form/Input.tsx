@@ -6,10 +6,17 @@ interface FormInputComponentProps {
     label: string;
     type?: string;
     name: string;
+    disabled?: boolean;
     id: string;
 }
 
-export const FormInput: FunctionalComponent<FormInputComponentProps> = ({ label, type = 'text', name, id }) => {
+export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
+    label,
+    type = 'text',
+    name,
+    id,
+    disabled,
+}) => {
     const { formData, handleFormChange } = useContext(FormContext);
 
     return (
@@ -22,6 +29,7 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({ label,
                 name={name}
                 value={formData[name]}
                 onChange={handleFormChange}
+                disabled={disabled}
             />
         </div>
     );
