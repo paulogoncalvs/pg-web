@@ -12,7 +12,9 @@ jobs:
       - name: Run Install modules
         run: yarn
       - name: Run Build Check
-        run: yarn build
+        run: |
+          cp .env.dist .env.production
+          yarn build
       - name: Run Code Analysis
         run: |
           yarn prettify
