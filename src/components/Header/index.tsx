@@ -19,7 +19,7 @@ export const Header: FunctionalComponent = () => {
             <div class="container py-4 px-6 mx-auto flex items-center justify-between">
                 <div class="flex items-center">
                     {!isHome && (
-                        <WLink href="/" class="text-xl font-black">
+                        <WLink href="/" class="text-xl font-bold tracking-tight">
                             {t('home_page_title')}
                         </WLink>
                     )}

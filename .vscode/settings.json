@@ -4,7 +4,7 @@
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
       },
-      "editor.formatOnSave": false,
+      "editor.formatOnSave": false
     },
     "[typescript]": {
       "editor.defaultFormatter": "dbaeumer.vscode-eslint",
@@ -24,13 +24,14 @@
       "javascript",
       "javascriptreact",
       "typescript",
-      "typescriptreact",
+      "typescriptreact"
     ],
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
+      "source.fixAll.eslint": true
     },
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
     "editor.formatOnSave": true,
+    "http.proxySupport": "off"
   }

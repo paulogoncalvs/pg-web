@@ -6,7 +6,7 @@ module.exports = {
     darkMode: 'class',
     theme: {
         fontFamily: {
-            sans: ['Inter', 'Roboto', ...defaultTheme.fontFamily.sans.filter((item) => item !== 'Roboto')],
+            sans: ['Poppins', 'Roboto', ...defaultTheme.fontFamily.sans.filter((item) => item !== 'Roboto')],
         },
         extend: {
             keyframes: {

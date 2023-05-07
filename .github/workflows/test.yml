@@ -6,22 +6,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
-      - name: Run Install modules
-        run: yarn
-      - name: Run Build Check
+          node-version: '16.x'
+          cache: 'yarn'
+      - name: Dump UID & GID
+        run: |
+          echo User ID [UID]: $(id -u)
+          echo Group ID [GID]: $(id -g)
+      - name: Install Dependencies
+        run: yarn install --pure-lockfile
+      - name: Check Build
         run: |
           cp .env.dist .env.production
           yarn build
-      - name: Run Code Analysis
+      - name: Code Analysis
         run: |
           yarn prettify
           yarn lint
-      - name: Run Tests
+      - name: Jest Tests
         run: yarn tests:jest
-      #- name: Build Playwright
-      #  run: yarn tests:pw:build
-      #- name: Run Playwright Tests
-      #  run: yarn tests:pw:run
+      - name: Playwright Tests
+        run: |
+          yarn tests:pw:build
+          yarn tests:pw:run
