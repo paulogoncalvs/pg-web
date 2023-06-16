@@ -5,7 +5,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a href="/"
-         class="text-xl font-black"
+         class="text-xl font-bold tracking-tight"
       >
         PAULO GONÇALVES
       </a>
@@ -29,7 +29,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
 </header>
 <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
   <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-black text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+    <h1 class="text-3xl tracking-tight font-bold text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       Oops!
     </h1>
     <h2 class="text-2xl tracking-tight text-center lowercase opacity-0 sm:text-3xl animate-fade-in-up-2 pb-14">
@@ -90,16 +90,16 @@ exports[`[PAGE] 404 Page should render 1`] = `
         </svg>
       </label>
     </div>
-    <div class="font-semibold flex flex-col pl-10 pr-10">
+    <div class="flex flex-col pl-10 pr-10">
       <a href="/undefined/"
-         class="btn _prim text-xl"
+         class="btn _prim"
       >
         <span>
           Homepage
         </span>
       </a>
       <a href="/undefined/contact/"
-         class="btn _prim text-xl mt-4"
+         class="btn _prim mt-4"
       >
         <span>
           Contact
@@ -425,7 +425,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a href="/"
-         class="text-xl font-black"
+         class="text-xl font-bold tracking-tight"
       >
         PAULO GONÇALVES
       </a>
@@ -449,7 +449,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
 </header>
 <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
   <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-black text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+    <h1 class="text-3xl tracking-tight font-bold text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       Contact me
     </h1>
     <h2 class="text-2xl tracking-tight text-center lowercase opacity-0 sm:text-3xl animate-fade-in-up-2 pb-14">
@@ -477,7 +477,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
     <form action="undefinedcontact/"
           class="mt-16 opacity-20"
     >
-      <h2 class="text-xl sm:text-3xl font-semibold mb-4">
+      <h2 class="text-xl sm:text-3xl mb-4">
         Contact form
       </h2>
       <div class="mt-2">
@@ -571,16 +571,16 @@ exports[`[PAGE] Contact Page should render 1`] = `
         </svg>
       </label>
     </div>
-    <div class="font-semibold flex flex-col pl-10 pr-10">
+    <div class="flex flex-col pl-10 pr-10">
       <a href="/undefined/"
-         class="btn _prim text-xl"
+         class="btn _prim"
       >
         <span>
           Homepage
         </span>
       </a>
       <a href="/undefined/contact/"
-         class="btn _prim text-xl mt-4"
+         class="btn _prim mt-4"
       >
         <span>
           Contact
@@ -906,7 +906,7 @@ exports[`[PAGE] Home Page should render 1`] = `
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a href="/"
-         class="text-xl font-black"
+         class="text-xl font-bold tracking-tight"
       >
         PAULO GONÇALVES
       </a>
@@ -930,7 +930,7 @@ exports[`[PAGE] Home Page should render 1`] = `
 </header>
 <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
   <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-black text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+    <h1 class="text-3xl tracking-tight font-bold text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       PAULO GONÇALVES
     </h1>
     <h2 class="text-2xl tracking-tight text-center lowercase opacity-0 sm:text-3xl animate-fade-in-up-2 pb-14">
@@ -1035,16 +1035,16 @@ exports[`[PAGE] Home Page should render 1`] = `
         </svg>
       </label>
     </div>
-    <div class="font-semibold flex flex-col pl-10 pr-10">
+    <div class="flex flex-col pl-10 pr-10">
       <a href="/undefined/"
-         class="btn _prim text-xl"
+         class="btn _prim"
       >
         <span>
           Homepage
         </span>
       </a>
       <a href="/undefined/contact/"
-         class="btn _prim text-xl mt-4"
+         class="btn _prim mt-4"
       >
         <span>
           Contact

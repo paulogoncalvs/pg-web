@@ -59,7 +59,7 @@ export const SideDrawer: FunctionalComponent = () => {
                         <Icon src={closeIcon} ariaHidden />
                     </label>
                 </div>
-                <div class="font-semibold flex flex-col pl-10 pr-10">
+                <div class="flex flex-col pl-10 pr-10">
                     <WLink
                         href={`/${lang}/`}
                         onClick={(): void =>
@@ -69,7 +69,7 @@ export const SideDrawer: FunctionalComponent = () => {
                             })
                         }
                     >
-                        <Link class="btn _prim text-xl">
+                        <Link class="btn _prim">
                             <span>{t('sidedrawer_menu_link_home')}</span>
                         </Link>
                     </WLink>
@@ -82,7 +82,7 @@ export const SideDrawer: FunctionalComponent = () => {
                             })
                         }
                     >
-                        <Link class="btn _prim text-xl mt-4">
+                        <Link class="btn _prim mt-4">
                             <span>{t('sidedrawer_menu_link_contact')}</span>
                         </Link>
                     </WLink>

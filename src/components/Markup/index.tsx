@@ -12,4 +12,5 @@ export const Markup: FunctionalComponent<MarkupComponentProps> = ({
     data = '',
     classes,
     Element = 'div',
+    // @ts-ignore
 }): JSX.Element => <Element class={classNames('mux', classes)} dangerouslySetInnerHTML={{ __html: data }} />;

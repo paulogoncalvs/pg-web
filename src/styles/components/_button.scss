@@ -2,8 +2,6 @@
     .btn:focus-visible,
     .btn:hover,
     .btn:active {
-        @apply tracking-normal;
-
         box-shadow: rgb(94 94 94 / 40%) 0 7px 12px 0;
     }
 
@@ -19,7 +17,7 @@
         @apply shadow-md;
         @apply px-4 py-2 sm:py-3;
         @apply sm:text-xl text-zinc-900 dark:text-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-900;
-        @apply font-bold;
+        @apply font-bold tracking-tight;
 
         -webkit-tap-highlight-color: transparent;
 
@@ -41,7 +39,7 @@
         // Primary
         &._prim {
             @apply bg-emerald-300;
-            @apply hover:bg-emerald-200 focus:bg-emerald-200; //  hover:bg-emerald-200 focus:bg-emerald-200 dark:bg-emerald-400 dark:hover:bg-emerald-300 dark:focus:bg-emerald-300;
+            @apply hover:bg-emerald-200 focus:bg-emerald-200;
         }
     }
 }

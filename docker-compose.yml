@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile.tests
       args:
         UID: $UID
+        GID: $GID
     environment:
       - NODE_ENV=development
     volumes:

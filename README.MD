@@ -30,7 +30,8 @@ Create `.env.development` and `.env.production` based on `.env.dist`.
 | `yarn tests:pw:update`         | Generate dist + Update Playwright tests         |
 | `yarn tests:pw:run`            | Run Playwright tests without dist generation    |
 | `yarn tests:pw:build`          | Build Playwright docker image                   |
-| `yarn tests`                   | Run Jest and Playwright tests                   |
+| `yarn tests`                   | Run all tests                                   |
+| `yarn tests:update`            | Update all tests                                |
 | **PRETTIFY**                   |                                                 |
 | `yarn prettify`                | Code formatting - Check                         |
 | `yarn prettify:fix`            | Code formatting - Fix                           |

@@ -1,6 +1,5 @@
 import { h, FunctionalComponent } from 'preact';
 import { Route, Router } from 'wouter-preact';
-import staticLocationHook from 'wouter-preact/static-location';
 import { StoreContextProvider } from '@/modules/store';
 import { RouterOnChange } from '@/modules/router';
 import { getPage } from '@/modules/router/pages';
@@ -9,7 +8,6 @@ import { Header } from '@/components/Header';
 import { SideDrawer } from '@/components/SideDrawer';
 import { Footer } from '@/components/Footer';
 import { Overlay } from '@/components/Overlay';
-import { isBrowser } from '@/utils/browser';
 
 interface AppProps {
     store?: PageStore;
@@ -18,7 +16,7 @@ interface AppProps {
 export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element => (
     <StoreContextProvider store={store}>
         <HeadUpdater />
-        <Router {...(!isBrowser() ? { hook: staticLocationHook(store.url) } : {})}>
+        <Router ssrPath={store.url}>
             <RouterOnChange />
             <Header />
             <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
