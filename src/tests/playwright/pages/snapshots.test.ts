@@ -17,7 +17,7 @@ class BasePage {
     public async goto(url: string): Promise<void> {
         await this.page.goto(url);
         await this.page.evaluate(() => document.fonts.ready);
-        await this.page.waitForTimeout(3000); // wait for animations to finish
+        await this.page.waitForTimeout(4000); // wait for animations to finish
     }
 
     public async takeScreenshot(): Promise<boolean | void> {

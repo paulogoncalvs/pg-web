@@ -17,7 +17,7 @@ WORKDIR /app
 COPY --chown=$UNAME:$UNAME . .
 COPY --chown=$UNAME:$UNAME .env.dist .env.production
 
-RUN yarn install
+RUN yarn install --immutable
 
 USER root
 RUN yarn playwright install --with-deps
