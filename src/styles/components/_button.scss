@@ -1,19 +1,7 @@
 @layer components {
-    .btn:focus-visible,
-    .btn:hover,
-    .btn:active {
-        box-shadow: rgb(94 94 94 / 40%) 0 7px 12px 0;
-    }
-
-    .dark .btn:focus-visible,
-    .dark .btn:hover,
-    .dark .btn:active {
-        box-shadow: rgb(255 255 255 / 70%) 0 0 18px 0;
-    }
-
     .btn {
         @apply inline-flex items-center justify-center rounded-full;
-        @apply md:transform-gpu md:ease-out md:duration-500 md:transition-all;
+        @apply transform-gpu ease-out duration-500 transition-all;
         @apply shadow-md;
         @apply px-4 py-2 sm:py-3;
         @apply sm:text-xl text-zinc-900 dark:text-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-900 focus:text-zinc-900 dark:focus:text-zinc-900;
@@ -21,12 +9,11 @@
 
         -webkit-tap-highlight-color: transparent;
 
-        @screen md {
-            &:focus-visible,
-            &:hover,
-            &:active {
-                transform: translateX(0) translateY(-2px) translateZ(0);
-            }
+        &:focus-visible,
+        &:hover,
+        &:active {
+            box-shadow: rgb(94 94 94 / 40%) 0 7px 12px 0;
+            transform: translateX(0) translateY(-2px) translateZ(0);
         }
 
         // With icon
@@ -40,6 +27,15 @@
         &._prim {
             @apply bg-emerald-300;
             @apply hover:bg-emerald-200 focus:bg-emerald-200;
+        }
+    }
+
+    .dark .btn {
+        &:focus-visible,
+        &:hover,
+        &:active {
+            transform: none;
+            box-shadow: rgb(255 255 255 / 70%) 0 0 18px 0;
         }
     }
 }

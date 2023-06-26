@@ -15,7 +15,6 @@ module.exports = {
                 jsxPragmaFrag: 'Fragment',
             },
         ],
-        'babel-preset-preact',
     ],
 
     plugins: [

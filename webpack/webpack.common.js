@@ -12,6 +12,7 @@ import paths from './paths.js';
 import config from './config.js';
 import globalConfig from '../src/config/global/index.js';
 const env = process.env.NODE_ENV;
+const isProd = env === 'production';
 
 export default {
     entry: [paths.src + '/index.tsx'],
@@ -34,7 +35,7 @@ export default {
                             return '[path][name][ext]';
                         }
 
-                        return `[path][name]${env === 'production' ? '.[fullhash]' : ''}[ext]`;
+                        return `[path][name]${isProd ? '.[fullhash]' : ''}[ext]`;
                     },
                     globOptions: {
                         ignore: ['*.DS_Store', '**/.DS_Store'],
@@ -50,6 +51,9 @@ export default {
                     template: paths.src + '/templates/html/index.tsx',
                     minify: {
                         removeRedundantAttributes: false, // eg. do not remove type="text"
+                        collapseWhitespace: true,
+                        minifyJS: isProd,
+                        minifyCSS: isProd,
                     },
                     ...globalConfig.routes[key],
                 }),

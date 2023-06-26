@@ -5,5 +5,6 @@ public
 .idea
 .history
 .vscode
+.yarn
 *.svg
 *.png

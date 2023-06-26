@@ -1,7 +1,7 @@
 node_modules
 dist
 src/tests/**/results
-src/tests/**/report
+src/tests/**/report.pnp/*
 stats.json
 todo.md
 public/sitemap.xml
@@ -10,3 +10,12 @@ public/sitemap.xml
 .history
 .env.development
 .env.production
+
+# yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

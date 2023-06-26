@@ -2,6 +2,8 @@ import { writeFileSync } from 'fs';
 import prettier from 'prettier';
 import globalConfig from '../config/global/index.js';
 
+const shouldIgnoreRoute = (route: string): boolean => !!['404', '/en'].some((element) => route.includes(element));
+
 (async function generateSitemap(): Promise<void> {
     const prettierConfig = await prettier.resolveConfig('prettier.config.cjs');
     const baseUrl = globalConfig.baseUrl.replace(/\/+$/, '');
@@ -10,12 +12,12 @@ import globalConfig from '../config/global/index.js';
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         ${Object.keys(globalConfig.routes)
             .map((route) =>
-                !route.includes('404')
-                    ? `<url>
+                shouldIgnoreRoute(route)
+                    ? ''
+                    : `<url>
             <loc>${baseUrl}${route}</loc>
             </url>
-            `
-                    : '',
+            `,
             )
             .join('')}
     </urlset>`;
@@ -27,4 +29,7 @@ import globalConfig from '../config/global/index.js';
             parser: 'html',
         }),
     );
+
+    // eslint-disable-next-line no-console
+    console.info('New Sitemap Generated in /public/sitemap.xml');
 })();

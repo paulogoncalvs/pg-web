@@ -33,7 +33,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/Inter-Regular.woff2',
+            href: '/assets/fonts/Poppins-Regular.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',
@@ -43,17 +43,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/Inter-Bold.woff2',
-            rel: 'preload',
-            as: 'font',
-            type: 'font/woff2',
-            crossorigin: 'anonymous',
-        },
-    },
-    {
-        path: '',
-        attributes: {
-            href: '/assets/fonts/Inter-Black.woff2',
+            href: '/assets/fonts/Poppins-Bold.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',

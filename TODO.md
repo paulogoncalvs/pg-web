@@ -1,6 +1,6 @@
 # Paulo Gonçalves Website
 
-### To-Do
+## To-Do
 
 -   [ ] Remove toString() from contact page labels
 -   [ ] Remove ts-ignore regarding aria-labels
@@ -9,13 +9,16 @@
 -   [ ] Improve default language
 -   [ ] Mock date for tests
 -   [ ] Server
+-   [ ] Yarn 3 PnP
 
 ### In Progress
 
--   [ ] Add contact page
+-   [ ] Update contact page
 
 ### Completed ✓
 
+-   [x] Yarn 3
+-   [x] Add contact page
 -   [x] Update Jest, GA
 
 ## Other

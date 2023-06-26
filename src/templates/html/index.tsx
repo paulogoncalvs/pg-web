@@ -3,7 +3,7 @@ import { h } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
 import globalConfig from '@/config/global/index.js';
-import { iifeScript, strScript } from './scripts';
+import { strScript } from './scripts';
 
 interface PageLinks {
     path: string;
@@ -43,7 +43,6 @@ export interface PageProps {
     links?: Partial<PageLinks>[];
     metas?: Partial<PageMetas>[];
     scripts?: Partial<PageScripts>[];
-    iifeScript?(): void;
     strScript?(store?: PageStore): string;
     inlineCss?: string;
     store: PageStore;
@@ -65,7 +64,7 @@ const getInlineCSS = (css = ''): JSX.Element | void =>
 const getInlineJS = (js = ''): JSX.Element | void =>
     js ? <script dangerouslySetInnerHTML={{ __html: js }} /> : undefined;
 
-const Page = ({ title, metas, iifeScript, inlineCss, links, store, strScript, scripts }: Partial<PageProps>): string =>
+const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Partial<PageProps>): string =>
     '<!DOCTYPE html>' +
     render(
         <html lang="en">
@@ -73,7 +72,6 @@ const Page = ({ title, metas, iifeScript, inlineCss, links, store, strScript, sc
                 <meta charSet="utf-8" />
                 <title>{title}</title>
                 {strScript && getInlineJS(strScript(store))}
-                {iifeScript && getInlineJS(`(${iifeScript})()`)}
                 {generateMetaTags(metas)}
                 {generateScriptTags(scripts)}
                 {getInlineCSS(inlineCss)}
@@ -91,7 +89,6 @@ export default ({ lang, url, head, webpackConfig }: HtmlTemplateProps): string =
     const sprite = webpackConfig.plugins.find((plugin) => plugin?.filenames?.spritemap).filenames?.spritemap;
 
     return Page({
-        iifeScript,
         strScript,
         scripts: globalConfig.scripts,
         title: head.title || globalConfig.title,
