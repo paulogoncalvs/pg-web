@@ -16,7 +16,7 @@ jobs:
           echo User ID [UID]: $(id -u)
           echo Group ID [GID]: $(id -g)
       - name: Install Dependencies
-        run: yarn install --pure-lockfile
+        run: yarn install
       - name: Check Build
         run: |
           cp .env.dist .env.production
