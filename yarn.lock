@@ -2035,7 +2035,7 @@ __metadata:
     http-server: ^14.1.1
     husky: ^8.0.3
     jest: ^29.5.0
-    jest-axe: ^7.0.1
+    jest-axe: ^8.0.0
     jest-environment-jsdom: ^29.5.0
     jest-environment-node: ^29.5.0
     jest-serializer-html: ^7.1.0
@@ -3558,10 +3558,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:4.5.1":
-  version: 4.5.1
-  resolution: "axe-core@npm:4.5.1"
-  checksum: 9b8ecb90329d73d34faea3a6bf3132b9070cc7a8d3fb12e1bf02ded29e4c938276d3435e83d59d844ea62b7069caebf18ec78a6b99754d7f9bbec7eea379bec0
+"axe-core@npm:4.7.2, axe-core@npm:^4.6.2":
+  version: 4.7.2
+  resolution: "axe-core@npm:4.7.2"
+  checksum: 8dfc61f038fbd9623ae8a264c8a475d887113a027fb440a2b377b82ffd300e71d1a0bcf042ff13b517a8d548b34c44b4159eff693725c5d7cde240d0aa68feac
   languageName: node
   linkType: hard
 
@@ -3569,13 +3569,6 @@ __metadata:
   version: 3.5.6
   resolution: "axe-core@npm:3.5.6"
   checksum: f02a5b0e04e04a1024d7dc5c9931f87864c0394a218c6bd9057f0104df7f6310178bbbab47afd0c0fd4b585a08e8c599eebf5a89b6898f3fbeb7bfa33c25bfc8
-  languageName: node
-  linkType: hard
-
-"axe-core@npm:^4.6.2":
-  version: 4.7.2
-  resolution: "axe-core@npm:4.7.2"
-  checksum: 8dfc61f038fbd9623ae8a264c8a475d887113a027fb440a2b377b82ffd300e71d1a0bcf042ff13b517a8d548b34c44b4159eff693725c5d7cde240d0aa68feac
   languageName: node
   linkType: hard
 
@@ -7977,15 +7970,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-axe@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "jest-axe@npm:7.0.1"
+"jest-axe@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "jest-axe@npm:8.0.0"
   dependencies:
-    axe-core: 4.5.1
+    axe-core: 4.7.2
     chalk: 4.1.2
     jest-matcher-utils: 29.2.2
     lodash.merge: 4.6.2
-  checksum: e9199e70319a3ab8abbc407e40467cf0c69f2917fb9b5dca2c7f52d4626f9aad876e1301399f0eb997abc577ddb8a0c0879612eb0d4d7ef8dbd2b75cd6bb39f7
+  checksum: 7e7b41324695c26332803937908604e325415a34945526fa20d74a9f3c5a7bb6432e7158d6091f6e8fdd1b09bc6be093c306938c6626119f6ee613453cc913f0
   languageName: node
   linkType: hard
 
