@@ -2027,7 +2027,7 @@ __metadata:
     eslint-plugin-react: ^7.32.2
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-tailwindcss: ^3.12.1
-    fork-ts-checker-webpack-plugin: ^8.0.0
+    fork-ts-checker-webpack-plugin: ^9.0.0
     fsevents: ^2.3.2
     html-webpack-deploy-plugin: ^3.0.0
     html-webpack-plugin: ^5.5.3
@@ -6382,9 +6382,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "fork-ts-checker-webpack-plugin@npm:8.0.0"
+"fork-ts-checker-webpack-plugin@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "fork-ts-checker-webpack-plugin@npm:9.0.0"
   dependencies:
     "@babel/code-frame": ^7.16.7
     chalk: ^4.1.2
@@ -6401,7 +6401,7 @@ __metadata:
   peerDependencies:
     typescript: ">3.6.0"
     webpack: ^5.11.0
-  checksum: 1a2bb9bbd3e943e3b3a45d7fa9e8383698f5fea1ba28f7d18c8372c804460c2f13af53f791360b973fddafd3e88de7af59082c3cb3375f4e7c3365cd85accedc
+  checksum: f2fdb34912748c4596de63ae9a8b464ed58f3d8a60b074de689f6d4eef1bf08d338651fd4cb5b8d69d7df5d552f2707eecbe4e9a243ba4e79b4ea1b3bc03d65a
   languageName: node
   linkType: hard
 
