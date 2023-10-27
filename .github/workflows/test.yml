@@ -6,28 +6,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set Node.js 16.x
+      - name: Set Node.js 18.x
         uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           cache: 'yarn'
-      - name: Dump UID & GID
-        run: |
-          echo User ID [UID]: $(id -u)
-          echo Group ID [GID]: $(id -g)
       - name: Install Dependencies
         run: yarn install --immutable
       - name: Check Build
         run: |
           cp .env.dist .env.production
           yarn build
-      - name: Code Analysis
+      - name: Run Code Analysis
         run: |
           yarn prettify
           yarn lint
-      - name: Jest Tests
+      - name: Run Tests - Jest
         run: yarn tests:jest
-      - name: Playwright Tests
+      - name: Runu Tests - Playwright
         run: |
           yarn tests:pw:build
           yarn tests:pw:run
