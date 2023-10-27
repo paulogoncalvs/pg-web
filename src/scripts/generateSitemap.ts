@@ -24,7 +24,7 @@ const shouldIgnoreRoute = (route: string): boolean => !!['404', '/en'].some((ele
 
     writeFileSync(
         'public/sitemap.xml',
-        prettier.format(sitemap, {
+        await prettier.format(sitemap, {
             ...prettierConfig,
             parser: 'html',
         }),
