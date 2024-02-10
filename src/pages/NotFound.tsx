@@ -1,5 +1,4 @@
 import { h, Fragment, FunctionalComponent } from 'preact';
-import { Link as WLink } from 'wouter-preact';
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 import { Link } from '@/components/Link';
@@ -18,11 +17,9 @@ const NotFoundPage: FunctionalComponent = () => {
                     {t('not_found_page_subtitle')}
                 </h2>
                 <div class="opacity-0 animate-fade-in-dw-3">
-                    <WLink href={`/${lang}/`}>
-                        <Link class="btn _prim">
-                            <span>{t('not_found_page_button_label')}</span>
-                        </Link>
-                    </WLink>
+                    <Link useRouter class="btn _prim" href={`/${lang}/`}>
+                        <span>{t('not_found_page_button_label')}</span>
+                    </Link>
                 </div>
             </div>
         </Fragment>

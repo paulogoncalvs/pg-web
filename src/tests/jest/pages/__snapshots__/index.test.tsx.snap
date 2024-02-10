@@ -4,8 +4,8 @@ exports[`[PAGE] 404 Page should render 1`] = `
 <header class="sticky top-0 z-10 bg-white dark:bg-zinc-900 bg-opacity-95 dark:bg-opacity-95 dark:border-b dark:border-b-zinc-800 shadow-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
-      <a href="/"
-         class="text-xl font-bold tracking-tight"
+      <a class="text-xl font-bold tracking-tight"
+         href="/"
       >
         PAULO GONÇALVES
       </a>
@@ -36,8 +36,8 @@ exports[`[PAGE] 404 Page should render 1`] = `
       Page not found
     </h2>
     <div class="opacity-0 animate-fade-in-dw-3">
-      <a href="/undefined/"
-         class="btn _prim"
+      <a class="btn _prim"
+         href="/undefined/"
       >
         <span>
           Go to homepage
@@ -91,15 +91,15 @@ exports[`[PAGE] 404 Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a href="/undefined/"
-         class="btn _prim"
+      <a class="btn _prim"
+         href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a href="/undefined/contact/"
-         class="btn _prim mt-4"
+      <a class="btn _prim mt-4"
+         href="/undefined/contact/"
       >
         <span>
           Contact
@@ -410,7 +410,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2023 🙂
+      paulogoncalves.dev © 2021 - 2024 🙂
     </p>
   </div>
 </footer>
@@ -424,8 +424,8 @@ exports[`[PAGE] Contact Page should render 1`] = `
 <header class="sticky top-0 z-10 bg-white dark:bg-zinc-900 bg-opacity-95 dark:bg-opacity-95 dark:border-b dark:border-b-zinc-800 shadow-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
-      <a href="/"
-         class="text-xl font-bold tracking-tight"
+      <a class="text-xl font-bold tracking-tight"
+         href="/"
       >
         PAULO GONÇALVES
       </a>
@@ -572,15 +572,15 @@ exports[`[PAGE] Contact Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a href="/undefined/"
-         class="btn _prim"
+      <a class="btn _prim"
+         href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a href="/undefined/contact/"
-         class="btn _prim mt-4"
+      <a class="btn _prim mt-4"
+         href="/undefined/contact/"
       >
         <span>
           Contact
@@ -891,7 +891,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2023 🙂
+      paulogoncalves.dev © 2021 - 2024 🙂
     </p>
   </div>
 </footer>
@@ -905,8 +905,8 @@ exports[`[PAGE] Home Page should render 1`] = `
 <header class="sticky top-0 z-10 bg-white dark:bg-zinc-900 bg-opacity-95 dark:bg-opacity-95 dark:border-b dark:border-b-zinc-800 shadow-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
-      <a href="/"
-         class="text-xl font-bold tracking-tight"
+      <a class="text-xl font-bold tracking-tight"
+         href="/"
       >
         PAULO GONÇALVES
       </a>
@@ -973,8 +973,8 @@ exports[`[PAGE] Home Page should render 1`] = `
       <h2 class="pb-4 text-base font-bold sm:text-xl">
         Wanna reach out?
       </h2>
-      <a href="/undefined/contact/"
-         class="btn _i _prim"
+      <a class="btn _i _prim"
+         href="/undefined/contact/"
       >
         <svg aria-hidden="true"
              class
@@ -1036,15 +1036,15 @@ exports[`[PAGE] Home Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a href="/undefined/"
-         class="btn _prim"
+      <a class="btn _prim"
+         href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a href="/undefined/contact/"
-         class="btn _prim mt-4"
+      <a class="btn _prim mt-4"
+         href="/undefined/contact/"
       >
         <span>
           Contact
@@ -1355,7 +1355,7 @@ exports[`[PAGE] Home Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2023 🙂
+      paulogoncalves.dev © 2021 - 2024 🙂
     </p>
   </div>
 </footer>

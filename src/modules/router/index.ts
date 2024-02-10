@@ -10,7 +10,7 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
     const { url, setRoute } = useRouter();
     const { lang, setLanguage } = useLanguage();
     const [location] = useLocation();
-    const [, params] = useRoute('/:lang/:path*');
+    const [, params] = useRoute('/:lang/*');
 
     const langParam = (isValidLanguage(params?.lang as Language) ? params?.lang : lang) as Language;
 

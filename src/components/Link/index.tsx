@@ -1,5 +1,6 @@
 import { h, FunctionalComponent, ComponentChildren } from 'preact';
 import { useTranslate } from '@/modules/i18n';
+import { Link as WLink } from 'wouter-preact';
 
 interface LinkComponentProps {
     href?: string;
@@ -7,6 +8,7 @@ interface LinkComponentProps {
     newWindow?: boolean;
     ariaLabel?: string;
     onClick?(): void;
+    useRouter?: boolean;
     children?: ComponentChildren;
 }
 
@@ -15,13 +17,15 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
     newWindow,
     ariaLabel,
     children,
+    useRouter,
     ...otherProps
 }) => {
     const { t } = useTranslate();
+    const Comp = useRouter ? WLink : 'a';
 
     return (
         // @ts-ignore-begin
-        <a
+        <Comp
             href={href}
             aria-label={
                 ariaLabel ? (newWindow ? t('accessibility_new_window', { text: ariaLabel }) : ariaLabel) : undefined
@@ -30,7 +34,7 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
             {...otherProps}
         >
             {children}
-        </a>
+        </Comp>
         // @ts-ignore-end
     );
 };

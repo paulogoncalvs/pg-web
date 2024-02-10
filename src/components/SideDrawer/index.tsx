@@ -1,6 +1,5 @@
 import { h, FunctionalComponent, RefObject } from 'preact';
 import { useRef } from 'preact/hooks';
-import { Link as WLink } from 'wouter-preact';
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
@@ -55,12 +54,15 @@ export const SideDrawer: FunctionalComponent = () => {
                         <LanguageSelector classes="ml-2 mr-6" />
                     </div>
                     <ToggleTheme classes="p-2" />
+                    { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                     <label htmlFor="sd-tog" class="ic-link cursor-pointer ml-auto">
                         <Icon src={closeIcon} ariaHidden />
                     </label>
                 </div>
                 <div class="flex flex-col pl-10 pr-10">
-                    <WLink
+                    <Link
+                        useRouter
+                        class="btn _prim"
                         href={`/${lang}/`}
                         onClick={(): void =>
                             menuItemOnClick({
@@ -69,11 +71,11 @@ export const SideDrawer: FunctionalComponent = () => {
                             })
                         }
                     >
-                        <Link class="btn _prim">
-                            <span>{t('sidedrawer_menu_link_home')}</span>
-                        </Link>
-                    </WLink>
-                    <WLink
+                        <span>{t('sidedrawer_menu_link_home')}</span>
+                    </Link>
+                    <Link
+                        useRouter
+                        class="btn _prim mt-4"
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             menuItemOnClick({
@@ -82,10 +84,8 @@ export const SideDrawer: FunctionalComponent = () => {
                             })
                         }
                     >
-                        <Link class="btn _prim mt-4">
-                            <span>{t('sidedrawer_menu_link_contact')}</span>
-                        </Link>
-                    </WLink>
+                        <span>{t('sidedrawer_menu_link_contact')}</span>
+                    </Link>
                 </div>
                 <div class="flex pt-10 pb-4 pl-8 pr-8 sm:pl-10 sm:pr-10 mx-auto mt-auto">
                     <SocialLinks />
