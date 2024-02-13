@@ -17,13 +17,33 @@ jobs:
         run: |
           cp .env.dist .env.production
           yarn build
+  analysis:
+    timeout-minutes: 15
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Code Analysis
         run: |
           yarn prettify
           yarn lint
+  tests:
+    timeout-minutes: 15
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Tests - Jest
         run: yarn tests:jest
-      - name: Runu Tests - Playwright
+      - name: Run Tests - Playwright
         run: |
           yarn tests:pw:build
           yarn tests:pw:run
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: pw-results
+          path: src/tests/playwright/results
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: pw-report
+          path: src/tests/playwright/report
