@@ -27,7 +27,11 @@ class BasePage {
     }
 
     public async takeSnapshot(): Promise<void> {
-        await expect(this.page).toHaveScreenshot(`${this.pageName}.png`, { animations: 'disabled', fullPage: true, maxDiffPixels: 100 });
+        await expect(this.page).toHaveScreenshot(`${this.pageName}.png`, {
+            animations: 'disabled',
+            fullPage: true,
+            maxDiffPixels: 100,
+        });
     }
 }
 
