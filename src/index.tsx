@@ -12,7 +12,10 @@ import { reportWebVitalsToGA } from '@/modules/webVitals';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
 
-console.log('Hi! Check https://github.com/paulogoncalvs/pg-web/ to view the code.'); // eslint-disable-line no-console
+console.info(
+    '%c🌀 Check https://github.com/paulogoncalvs/pg-web/ to view the code.',
+    'font-size:16px;font-weight:bold;',
+); // eslint-disable-line no-console
 
 // PWA - Register service worker
 if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {

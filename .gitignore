@@ -1,7 +1,7 @@
 node_modules
 dist
 src/tests/**/results
-src/tests/**/report.pnp/*
+src/tests/**/report
 stats.json
 todo.md
 public/sitemap.xml
