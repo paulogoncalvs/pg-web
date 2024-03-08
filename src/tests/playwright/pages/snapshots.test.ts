@@ -17,7 +17,6 @@ class BasePage {
     public async goto(url: string): Promise<void> {
         await this.page.goto(url);
         await this.page.evaluate(() => document.fonts.ready);
-        await this.page.waitForTimeout(4000); // wait for animations to finish
     }
 
     public async takeScreenshot(): Promise<boolean | void> {
@@ -28,7 +27,11 @@ class BasePage {
     }
 
     public async takeSnapshot(): Promise<void> {
-        await expect(this.page).toHaveScreenshot(`${this.pageName}.png`, { fullPage: true, maxDiffPixels: 100 });
+        await expect(this.page).toHaveScreenshot(`${this.pageName}.png`, {
+            animations: 'disabled',
+            fullPage: true,
+            maxDiffPixels: 100,
+        });
     }
 }
 

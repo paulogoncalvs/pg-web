@@ -20,7 +20,7 @@ export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element 
             <RouterOnChange />
             <Header />
             <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
-                <Route path="/:path*">{({ path }): JSX.Element => getPage(path ? `/${path}/` : '/')}</Route>
+                <Route path="*">{(params): JSX.Element => getPage(params['*'] ? `/${params['*']}` : '/')}</Route>
             </main>
             <SideDrawer />
         </Router>

@@ -23,7 +23,18 @@ jobs:
           yarn lint
       - name: Run Tests - Jest
         run: yarn tests:jest
-      - name: Runu Tests - Playwright
+      - name: Run Tests - Playwright
         run: |
           yarn tests:pw:build
           yarn tests:pw:run
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pw-results
+          path: src/tests/playwright/results
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: pw-report
+          path: src/tests/playwright/report

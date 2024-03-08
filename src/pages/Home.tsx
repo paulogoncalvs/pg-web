@@ -1,5 +1,4 @@
 import { h, Fragment, FunctionalComponent } from 'preact';
-import { Link as WLink } from 'wouter-preact';
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
@@ -69,7 +68,9 @@ const HomePage: FunctionalComponent = () => {
                 </div>
                 <div class="pb-8 opacity-0 sm:pt-8 animate-fade-in-dw-5 text-center">
                     <h2 class="pb-4 text-base font-bold sm:text-xl">{t('home_page_contact_button_title')}</h2>
-                    <WLink
+                    <Link
+                        useRouter
+                        class="btn _i _prim"
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             trackEvent(
@@ -81,11 +82,9 @@ const HomePage: FunctionalComponent = () => {
                             )
                         }
                     >
-                        <Link href="mailto:contact@paulogoncalves.dev" class="btn _i _prim">
-                            <Icon src={mailIcon} classes="" ariaHidden />
-                            <span>{t('home_page_contact_button_label')}</span>
-                        </Link>
-                    </WLink>
+                        <Icon src={mailIcon} classes="" ariaHidden />
+                        <span>{t('home_page_contact_button_label')}</span>
+                    </Link>
                 </div>
             </div>
         </Fragment>

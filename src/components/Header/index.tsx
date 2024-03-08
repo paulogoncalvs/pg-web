@@ -1,10 +1,10 @@
 import { h, FunctionalComponent } from 'preact';
-import { Link as WLink } from 'wouter-preact';
 import { useRef, useContext } from 'preact/hooks';
 import routesConfig from '@/config/routes/index.js';
 import { useTranslate } from '@/modules/i18n';
 import { StoreContext } from '@/modules/store';
 import { Icon } from '@/components/Icon';
+import { Link } from '@/components/Link';
 import { SocialLinks } from '@/components/SocialLinks';
 import burgerIcon from '@/assets/icons/burger.svg';
 
@@ -19,9 +19,9 @@ export const Header: FunctionalComponent = () => {
             <div class="container py-4 px-6 mx-auto flex items-center justify-between">
                 <div class="flex items-center">
                     {!isHome && (
-                        <WLink href="/" class="text-xl font-bold tracking-tight">
+                        <Link useRouter href="/" class="text-xl font-bold tracking-tight">
                             {t('home_page_title')}
-                        </WLink>
+                        </Link>
                     )}
                     {isHome && <SocialLinks />}
                 </div>

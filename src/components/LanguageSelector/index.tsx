@@ -12,13 +12,13 @@ interface LanguageSelectorProps {
 export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ classes }) => {
     const [, setLocation] = useRouterLocation();
     const { t, lang } = useTranslate();
-    const [, params] = useRouterRoute('/:lang/:path*');
+    const [, params] = useRouterRoute('/:lang/*');
 
     const onLanguageSelect = useCallback(
         (event: Event): void => {
             const value = (event.target as HTMLInputElement).value as Language;
 
-            setLocation(`/${value}/${params?.path ? `${params.path}` : ''}`);
+            setLocation(`/${value}/${params && params['*'] ? `${params['*']}` : ''}`);
         },
         [setLocation, params],
     );
