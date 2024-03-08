@@ -12,6 +12,7 @@ import { reportWebVitalsToGA } from '@/modules/webVitals';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
 
+// eslint-disable-next-line no-console
 console.info(
     '%c🌀 Check https://github.com/paulogoncalvs/pg-web/ to view the code.',
     'font-size:16px;font-weight:bold;',

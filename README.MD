@@ -2,7 +2,6 @@
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/paulogoncalvs/pg-web)
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.paulogoncalves.dev/)
-[![CI](https://github.com/paulogoncalvs/pg-web/actions/workflows/test.yml/badge.svg)](https://github.com/paulogoncalvs/pg-web/actions/workflows/test.yml)
 
 ## Configuration
 
