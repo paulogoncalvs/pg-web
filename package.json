@@ -109,7 +109,7 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@4.3.0",
+  "packageManager": "yarn@4.3.1",
   "scripts": {
     "prebuild": "rm -rf ./dist && node --loader ts-node/esm ./src/scripts/generateSitemap.ts",
     "build": "yarn prebuild && NODE_ENV=production yarn webpack --config webpack/webpack.prod.js",
