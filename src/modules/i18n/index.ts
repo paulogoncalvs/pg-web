@@ -10,7 +10,9 @@ export interface TranslationParams {
 
 const getTranslation = (lang: Language, key: string, params?: TranslationParams, convertToString?: boolean): VNode => {
     let translation =
+        // @ts-ignore
         (translations[lang] && translations[lang][key]) ||
+        // @ts-ignore
         (translations[LANGUAGE_DEFAULT] && translations[LANGUAGE_DEFAULT][key]) ||
         key;
 

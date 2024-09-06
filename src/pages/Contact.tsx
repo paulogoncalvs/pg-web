@@ -25,14 +25,14 @@ const Contact: FunctionalComponent = () => {
     return (
         <Fragment>
             <div class="flex flex-col items-center">
-                <h1 class="text-3xl tracking-tight font-bold text-center opacity-0 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+                <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
                     {t('contact_page_title')}
                 </h1>
-                <h2 class="text-2xl tracking-tight text-center lowercase opacity-0 sm:text-3xl animate-fade-in-up-2 pb-14">
+                <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-14">
                     {t('contact_page_subtitle')}
                 </h2>
             </div>
-            <div class="flex flex-col items-center pb-16 opacity-0 animate-fade-in-dw-3">
+            <div class="flex flex-col items-center pb-16 opacity-1 animate-fade-in-dw-3">
                 <Link
                     href="mailto:contact@paulogoncalves.dev"
                     class="btn _i _up _prim text-xl sm:text-2xl"
@@ -50,7 +50,7 @@ const Contact: FunctionalComponent = () => {
                     <span>{t('contact_page_email_button_label')}</span>
                 </Link>
             </div>
-            <div class="flex flex-col items-center pb-12 opacity-0 animate-fade-in-dw-4 relative select-none pointer-events-none">
+            <div class="flex flex-col items-center pb-12 opacity-1 animate-fade-in-dw-4 relative select-none pointer-events-none">
                 <Form
                     classes="mt-16 opacity-20"
                     action={`${process.env.SERVER_URL}contact/`}

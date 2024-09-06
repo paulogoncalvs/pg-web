@@ -26,7 +26,7 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ cl
     }, [setTheme, theme]);
 
     return (
-        // @ts-ignore-begin
+        // @ts-ignore
         <button
             onClick={handleOnClick}
             class={classNames('ic-link -sup-novar', classes)}
@@ -34,6 +34,5 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ cl
         >
             <Icon src={getToggleIcon(theme)} ariaHidden />
         </button>
-        // @ts-ignore-end
     );
 };

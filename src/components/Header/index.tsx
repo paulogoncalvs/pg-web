@@ -26,7 +26,7 @@ export const Header: FunctionalComponent = () => {
                     {isHome && <SocialLinks />}
                 </div>
                 <div class="flex justify-end">
-                    {/* @ts-ignore-begin */}
+                    {/* @ts-ignore */}
                     <label
                         htmlFor="sd-tog"
                         class="ic-link cursor-pointer"
@@ -35,7 +35,6 @@ export const Header: FunctionalComponent = () => {
                     >
                         <Icon src={burgerIcon} ariaHidden />
                     </label>
-                    {/* @ts-ignore-end */}
                 </div>
             </div>
         </header>

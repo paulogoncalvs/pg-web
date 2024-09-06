@@ -82,6 +82,8 @@ module.exports = {
                 '@typescript-eslint/explicit-function-return-type': 1,
                 '@typescript-eslint/no-explicit-any': 1,
                 '@typescript-eslint/ban-ts-comment': 0,
+                '@typescript-eslint/no-empty-object-type': 1,
+                '@typescript-eslint/no-unused-expressions': 1,
             },
         },
     ],

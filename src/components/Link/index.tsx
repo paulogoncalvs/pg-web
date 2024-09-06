@@ -24,7 +24,7 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
     const Comp = useRouter ? WLink : 'a';
 
     return (
-        // @ts-ignore-begin
+        // @ts-ignore
         <Comp
             href={href}
             aria-label={
@@ -35,6 +35,5 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
         >
             {children}
         </Comp>
-        // @ts-ignore-end
     );
 };

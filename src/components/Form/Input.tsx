@@ -27,6 +27,7 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
                 id={id}
                 type={type}
                 name={name}
+                // @ts-ignore
                 value={formData[name]}
                 onChange={handleFormChange}
                 disabled={disabled}

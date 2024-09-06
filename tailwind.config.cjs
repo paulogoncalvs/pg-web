@@ -9,6 +9,9 @@ module.exports = {
             sans: ['Poppins', 'Roboto', ...defaultTheme.fontFamily.sans.filter((item) => item !== 'Roboto')],
         },
         extend: {
+            opacity: {
+                '1': '.01',
+            },
             keyframes: {
                 'fade-in': {
                     '0%': { opacity: '0' },
