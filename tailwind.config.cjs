@@ -10,7 +10,7 @@ module.exports = {
         },
         extend: {
             opacity: {
-                '1': '.01',
+                1: '.01',
             },
             keyframes: {
                 'fade-in': {
