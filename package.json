@@ -116,7 +116,7 @@
     "start:prod:server": "yarn http-server dist -p 4040",
     "start:prod": "yarn build && yarn start:prod:server",
     "start:dev": "yarn webpack serve --config webpack/webpack.dev.js",
-    "tests:jest": "NODE_ENV=production jest",
+    "tests:jest": "NODE_ENV=tests jest",
     "tests:jest:update": "yarn tests:jest -u",
     "tests:pw:build": "UID=$(id -u) GID=$(id -g) docker compose build --no-cache pg-tests-runner",
     "tests:pw:run": "UID=$(id -u) GID=$(id -g) docker compose run pg-tests-runner",

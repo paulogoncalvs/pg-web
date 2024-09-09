@@ -4,7 +4,7 @@ export const stripHashes = (content = ''): string => {
     }
 
     return content.replace(
-        /([\dA-Za-z-]*)(\.[\dA-Za-z]*)?\.([\dA-Za-z]{20})(\.(js|css|svg|jpg|jpeg|png|ico|webmanifest))/gm,
+        /([\dA-Za-z-]*)(\.[\dA-Za-z]*)?\.([\dA-Za-z]{20})(\.(js|css|svg|jpg|jpeg|png|ico|webp|webmanifest))/gm,
         '$1$2$4',
     );
 };

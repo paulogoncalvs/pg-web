@@ -7,7 +7,7 @@
 
 ### Environment
 
-Create `.env.development` and `.env.production` based on `.env.dist`.
+Create `.env.development` and `.env` based on `.env.dist`.
 
 ### Commands
 
