@@ -21,12 +21,12 @@ const metas = [
     { attributes: { content: '@paulogoncalvs', property: 'twitter:site' } },
     { attributes: { content: '@paulogoncalvs', property: 'twitter:creator' } },
     { attributes: { content: 'paulogoncalves.dev', property: 'twitter:domain' } },
-    { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'twitter:image' } },
+    { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'twitter:image' } },
     { attributes: { content: 'Paulo Gonçalves - Front-End Engineer from Portugal', property: 'og:title' } },
     { attributes: { content: 'Personal Website', property: 'og:description' } },
     { attributes: { content: baseUrl, property: 'og:url' } },
     { attributes: { content: 'website', property: 'og:type' } },
-    { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'og:image' } },
+    { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'og:image' } },
 ];
 
 const links = [

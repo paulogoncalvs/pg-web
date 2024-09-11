@@ -53,7 +53,7 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
                 'bg-zinc-200 dark:bg-zinc-800',
                 {
                     lazy: isLazy,
-                    '_loaded transform opacity-0 animate-fade-in': isLoaded,
+                    '_loaded transform opacity-1 animate-fade-in': isLoaded,
                     'animate-pulse': !isLoaded,
                 },
                 classes,

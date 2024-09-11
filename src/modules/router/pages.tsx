@@ -12,6 +12,7 @@ const pages = {
 
 export const getPage = (url: string): JSX.Element => {
     const route = routesConfig[url];
+    // @ts-ignore
     const Page = pages[route?.templateParameters?.View] || NotFound;
 
     return <Page />;

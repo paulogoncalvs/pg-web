@@ -33,7 +33,7 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ c
     );
 
     return (
-        // @ts-ignore-begin
+        // @ts-ignore
         <select
             key={`lang-${lang}`}
             class={classNames(
@@ -45,7 +45,6 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ c
         >
             {(Object.keys(translations) as Array<Language>).map((lang: Language) => renderOption(lang))}
         </select>
-        // @ts-ignore-end
     );
 };
 

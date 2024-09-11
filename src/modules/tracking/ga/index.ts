@@ -28,12 +28,17 @@ export const initGA = (): void => {
     }
 
     (function (i, s, o, g, r, a, m): void {
+        // @ts-ignore
         i['GoogleAnalyticsObject'] = r;
+        // @ts-ignore
         (i[r] =
+            // @ts-ignore
             i[r] ||
             function (): void {
+                // @ts-ignore
                 (i[r].q = i[r].q || []).push(arguments); // eslint-disable-line prefer-rest-params
             }),
+            // @ts-ignore
             (i[r].l = 1 * (new Date() as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
         (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
         a.async = 1;

@@ -120,7 +120,7 @@ export default {
 
             // Images: Copy images to build folder
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/i,
                 type: 'asset/resource',
             },
 

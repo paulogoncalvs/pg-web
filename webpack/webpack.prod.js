@@ -19,7 +19,7 @@ export default merge(common, {
     },
     plugins: [
         new Dotenv({
-            path: './.env.production',
+            path: './.env',
         }),
 
         // Extracts CSS into separate files

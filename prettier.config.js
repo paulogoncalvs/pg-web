@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     singleQuote: true,
     trailingComma: 'all',
     printWidth: 120,
@@ -6,7 +6,7 @@ module.exports = {
     tabWidth: 4,
     overrides: [
         {
-            files: ['*.json', '*.yml'],
+            files: ['*.json', '*.yml', '.*rc'],
             options: {
                 tabWidth: 2,
             },
