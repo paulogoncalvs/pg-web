@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import { h, FunctionalComponent, VNode } from 'preact';
 import classNames from 'classnames';
 

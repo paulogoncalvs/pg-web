@@ -10,9 +10,9 @@ declare global {
 
 const hasGa = (): boolean => !!window.ga;
 
-export const gaNewElem: any = {}; // eslint-disable-line @typescript-eslint/no-explicit-any
+export const gaNewElem: any = {};
 
-export const gaElems: any = {}; // eslint-disable-line @typescript-eslint/no-explicit-any
+export const gaElems: any = {};
 
 export const trackPageView = (data?: PageViewTrackingData): void => {
     hasGa() && window.ga('send', getPageViewData(data));
@@ -39,7 +39,7 @@ export const initGA = (): void => {
                 (i[r].q = i[r].q || []).push(arguments); // eslint-disable-line prefer-rest-params
             }),
             // @ts-ignore
-            (i[r].l = 1 * (new Date() as any)); // eslint-disable-line @typescript-eslint/no-explicit-any
+            (i[r].l = 1 * (new Date() as any));
         (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
         a.async = 1;
         a.src = g;

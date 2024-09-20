@@ -10,12 +10,11 @@
 -   [ ] Mock date for tests
 -   [ ] Server
 -   [ ] Update contact page
--   [ ] Uddate ESLint
 
 ### Completed ✓
 
--   [x] Yarn 4
--   [x] Yarn 3
+-   [x] Update ESLint
+-   [x] Update Yarn
 -   [x] Add menu
 -   [x] Add contact page
 -   [x] Update Jest, GA

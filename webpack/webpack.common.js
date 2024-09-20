@@ -15,7 +15,7 @@ const env = process.env.NODE_ENV;
 const isProd = env === 'production';
 
 export default {
-    entry: [paths.src + '/index.tsx'],
+    entry: [`${paths.src}/index.tsx`],
     output: {
         path: paths.build,
         filename: '[name].bundle.js',
@@ -47,8 +47,8 @@ export default {
         ...Object.keys(globalConfig.routes).map(
             (key) =>
                 new HtmlWebpackPlugin({
-                    favicon: paths.public + '/assets/favicon.ico',
-                    template: paths.src + '/templates/html/index.tsx',
+                    favicon: `${paths.public}/assets/favicon.ico`,
+                    template: `${paths.src}/templates/html/index.tsx`,
                     minify: {
                         removeRedundantAttributes: false, // eg. do not remove type="text"
                         collapseWhitespace: true,

@@ -38,7 +38,7 @@ export default merge(common, {
             exclude: ['.DS_Store'],
         }),
 
-        new SVGSpritemapPlugin(paths.src + '/assets/icons/**/*.svg', {
+        new SVGSpritemapPlugin(`${paths.src}/assets/icons/**/*.svg`, {
             output: {
                 filename: 'assets/img/sprite.[contenthash].svg',
             },
