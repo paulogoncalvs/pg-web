@@ -2,14 +2,14 @@ import globals from 'globals';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
-import _import from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import tailwindcss from 'eslint-plugin-tailwindcss';
 import tsParser from '@typescript-eslint/parser';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import js from '@eslint/js';
+import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import { FlatCompat } from '@eslint/eslintrc';
 
@@ -39,7 +39,7 @@ export default [
 
         plugins: {
             react,
-            import: fixupPluginRules(_import),
+            import: importPlugin,
             'react-hooks': fixupPluginRules(reactHooks),
             'jsx-a11y': jsxA11y,
             tailwindcss,
@@ -82,8 +82,9 @@ export default [
         },
 
         rules: {
-            ...js.configs.recommended.rules,
+            ...eslint.configs.recommended.rules,
             ...jsxA11y.flatConfigs.recommended.rules,
+            ...importPlugin.flatConfigs.recommended.rules,
 
             /**
              * Preact
@@ -171,6 +172,12 @@ export default [
              */
             'jsx-a11y/no-onchange': 0,
             'import/no-unresolved': 0,
+
+            // Disabled due to ESLint v9 incompatibilities
+            'import/no-named-as-default': 0,
+            'import/no-named-as-default-member': 0,
+            'import/namespace': 0,
+            'import/default': 0,
         },
     },
     ...tseslint.configs.recommended,
