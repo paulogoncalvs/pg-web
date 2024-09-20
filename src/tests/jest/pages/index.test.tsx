@@ -46,7 +46,7 @@ for (const pageKey of Object.keys(routesConfig)) {
 
     name &&
         pageTests({
-            name: name,
+            name,
             route: pageKey,
             storeData: routesConfig[pageKey].tests,
         });

@@ -80,7 +80,7 @@ export default merge(common, {
             filename: 'assets/css/[name].css',
         }),
 
-        new SVGSpritemapPlugin(paths.src + '/assets/icons/**/*.svg', {
+        new SVGSpritemapPlugin(`${paths.src}/assets/icons/**/*.svg`, {
             output: {
                 filename: 'assets/img/sprite.svg',
             },
