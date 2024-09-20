@@ -177,7 +177,7 @@ export default [
             'import/no-named-as-default': 0,
             'import/no-named-as-default-member': 0,
             'import/namespace': 0,
-            'import/default': 0,    
+            'import/default': 0,
         },
     },
     ...tseslint.configs.recommended,
