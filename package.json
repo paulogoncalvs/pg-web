@@ -19,7 +19,7 @@
   "author": "Paulo Gonçalves",
   "type": "module",
   "devDependencies": {
-    "@babel/core": "^7.27.1",
+    "@babel/core": "^7.27.4",
     "@babel/eslint-parser": "^7.27.5",
     "@babel/plugin-transform-async-to-generator": "^7.27.1",
     "@babel/plugin-transform-react-jsx": "^7.27.1",
@@ -112,6 +112,9 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "resolutions": {
+    "postcss": ">= 8.5.4"
   },
   "packageManager": "yarn@4.9.2",
   "scripts": {
