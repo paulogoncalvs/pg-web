@@ -15,7 +15,7 @@ const config: PlaywrightTestConfig = {
     webServer: {
         command: './node_modules/http-server/bin/http-server dist -p 4040',
         port: 4040,
-        timeout: 5000,
+        timeout: 10000,
         reuseExistingServer: false,
     },
     outputDir: './src/tests/playwright/results',
