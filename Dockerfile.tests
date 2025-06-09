@@ -15,7 +15,7 @@ USER $UNAME
 WORKDIR /app
 
 COPY --chown=$UNAME:$UNAME . .
-COPY --chown=$UNAME:$UNAME .env.tests .env
+COPY --chown=$UNAME:$UNAME .env.tests .env.production
 
 RUN yarn install --immutable
 
