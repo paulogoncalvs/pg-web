@@ -20,7 +20,7 @@ COPY --chown=$UNAME:$UNAME .env.dist .env.tests
 RUN yarn install --immutable
 
 USER root
-RUN yarn playwright install --with-deps
+RUN yarn playwright install --with-deps chromium
 
 USER $UNAME
 RUN yarn build
