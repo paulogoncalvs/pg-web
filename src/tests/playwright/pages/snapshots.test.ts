@@ -1,7 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
 import routesConfig from '@/config/routes/index.js';
-// @ts-ignore
-import { stripEmojis, stripHashes } from '@/tests/playwright/utils/index.ts';
+import { stripEmojis, stripHashes } from '@/tests/playwright/utils/index';
 
 class BasePage {
     private readonly page: Page;
@@ -19,19 +18,29 @@ class BasePage {
         await this.page.evaluate(() => document.fonts.ready);
     }
 
-    public async takeScreenshot(): Promise<boolean | void> {
+    public async takeSnapshot(): Promise<boolean | void> {
         return (
             !this.isMobile &&
             expect(stripEmojis(stripHashes(await this.page.content()))).toMatchSnapshot(`${this.pageName}.snap`)
         );
     }
 
-    public async takeSnapshot(): Promise<void> {
+    public async takeScreenshot(): Promise<void> {
         await expect(this.page).toHaveScreenshot(`${this.pageName}.png`, {
             animations: 'disabled',
             fullPage: true,
             maxDiffPixels: 100,
         });
+    }
+
+    public async ajustContent(): Promise<void> {
+        await this.page.locator('#root > footer p + p').evaluate((el) => {
+            el.textContent = 'paulogoncalves.dev © 2021';
+        });
+    }
+
+    public async close(): Promise<void> {
+        await this.page.close();
     }
 }
 
@@ -39,12 +48,15 @@ test.describe('PAGES SNAPSHOTS', () => {
     for (const pageKey of Object.keys(routesConfig)) {
         const name = routesConfig[pageKey].tests?.name;
 
-        name &&
+        if (name) {
             test(name, async ({ page, isMobile }) => {
                 const Page = new BasePage(name, page, isMobile);
                 await Page.goto(pageKey);
-                await Page.takeScreenshot();
+                await Page.ajustContent();
                 await Page.takeSnapshot();
+                await Page.takeScreenshot();
+                await Page.close();
             });
+        }
     }
 });

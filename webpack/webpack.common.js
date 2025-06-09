@@ -1,4 +1,6 @@
 import path from 'path';
+import Dotenv from 'dotenv-webpack';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
@@ -11,8 +13,8 @@ import autoprefixer from 'autoprefixer';
 import paths from './paths.js';
 import config from './config.js';
 import globalConfig from '../src/config/global/index.js';
-const env = process.env.NODE_ENV;
-const isProd = env === 'production';
+const env = process.env.NODE_ENV || 'development';
+const isProd = env === 'production' || env === 'tests';
 
 export default {
     entry: [`${paths.src}/index.tsx`],
@@ -26,6 +28,38 @@ export default {
     },
 
     plugins: [
+        new Dotenv({
+            path: `.env.${env}`,
+        }),
+
+        // @todo SW - WIP
+        // new WorkboxPlugin.InjectManifest({
+        //     swSrc: `${paths.src}/sw/index.ts`,
+        //     swDest: `service-worker.js`,
+        //     injectionPoint: 'self.__WB_MANIFEST',
+        // }),
+
+        new WorkboxPlugin.GenerateSW({
+            // these options encourage the ServiceWorkers to get in there fast
+            // and not allow any straggling "old" SWs to hang around
+            mode: env,
+            clientsClaim: true,
+            skipWaiting: true,
+            exclude: ['.DS_Store'],
+            offlineGoogleAnalytics: isProd,
+            // runtimeCaching: [
+            //         {
+            //         urlPattern: ({ request }) => request.mode === 'navigate',
+            //         handler: 'NetworkFirst',
+            //         options: {
+            //             cacheName: 'pages',
+            //             networkTimeoutSeconds: 3,
+            //         },
+            //         },
+            //     ],
+            // navigateFallback: '/offline/index.html',
+        }),
+
         new CopyWebpackPlugin({
             patterns: [
                 {
@@ -63,13 +97,13 @@ export default {
             append: true,
             metas: globalConfig.metas,
             assetsPath: '/assets/',
-            hash: env === 'production' ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
+            hash: isProd ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
             publicPath: false,
         }),
 
         new HtmlWebpackDeployPlugin({
             assetsPath: '/assets/',
-            hash: env === 'production' ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
+            hash: isProd ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
             publicPath: false,
             assets: {
                 links: globalConfig.links,
@@ -112,7 +146,6 @@ export default {
                         loader: 'sass-loader',
                         options: {
                             webpackImporter: false,
-                            additionalData: `$sass-env:${env};`,
                         },
                     },
                 ],

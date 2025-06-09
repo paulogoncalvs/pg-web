@@ -26,7 +26,6 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ cl
     }, [setTheme, theme]);
 
     return (
-        // @ts-ignore
         <button
             onClick={handleOnClick}
             class={classNames('ic-link -sup-novar', classes)}

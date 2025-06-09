@@ -33,4 +33,8 @@ export default {
     sidedrawer_toggle: 'Toggle side drawer',
     sidedrawer_menu_link_home: 'Homepage',
     sidedrawer_menu_link_contact: 'Contact',
+    offline_page_title: 'Oops!',
+    offline_page_subtitle: 'You are currently offline',
+    offline_page_description: 'You need an Internet connection.',
+    offline_page_button_label: 'Go back to homepage',
 };

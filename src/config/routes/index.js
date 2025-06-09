@@ -127,4 +127,46 @@ export default {
             },
         },
     },
+    '/offline/': {
+        filename: 'offline/index.html',
+        templateParameters: {
+            lang: 'en',
+            url: '/offline/',
+            View: 'Offline',
+            head: {
+                title: 'Offline',
+                links: [{ path: '', attributes: { href: `${baseUrl}offline/`, rel: 'canonical' } }],
+                metas: [{ attributes: { name: 'description', content: 'Offline', 'data-hu': '' } }],
+            },
+        },
+        tests: {
+            name: 'Offline',
+        },
+    },
+    '/en/offline/': {
+        filename: 'en/offline/index.html',
+        templateParameters: {
+            lang: 'en',
+            url: '/en/offline/',
+            View: 'Offline',
+            head: {
+                title: 'Offline',
+                links: [{ path: '', attributes: { href: `${baseUrl}en/offline/`, rel: 'canonical' } }],
+                metas: [{ attributes: { name: 'description', content: 'Offline', 'data-hu': '' } }],
+            },
+        },
+    },
+    '/pt/offline/': {
+        filename: 'pt/offline/index.html',
+        templateParameters: {
+            lang: 'pt',
+            url: '/pt/offline/',
+            View: 'Offline',
+            head: {
+                title: 'Offline [PT]',
+                links: [{ path: '', attributes: { href: `${baseUrl}pt/offline/`, rel: 'canonical' } }],
+                metas: [{ attributes: { name: 'description', content: 'Offline', 'data-hu': '' } }],
+            },
+        },
+    },
 };

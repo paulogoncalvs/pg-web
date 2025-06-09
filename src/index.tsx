@@ -20,7 +20,7 @@ console.info(
 );
 
 // PWA - Register service worker
-if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/service-worker.js');
     });

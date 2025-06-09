@@ -1,7 +1,4 @@
 import globals from 'globals';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import importPlugin from 'eslint-plugin-import';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -11,11 +8,6 @@ import tsParser from '@typescript-eslint/parser';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import { FlatCompat } from '@eslint/eslintrc';
-
-const compat = new FlatCompat({
-    baseDirectory: path.dirname(fileURLToPath(import.meta.url)),
-});
 
 export default [
     {
@@ -33,14 +25,13 @@ export default [
             '**/.yarn',
         ],
     },
-    ...fixupConfigRules(compat.extends('plugin:react-hooks/recommended')),
     {
         files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
 
         plugins: {
             react,
             import: importPlugin,
-            'react-hooks': fixupPluginRules(reactHooks),
+            'react-hooks': reactHooks,
             'jsx-a11y': jsxA11y,
             tailwindcss,
         },
@@ -49,10 +40,6 @@ export default [
             globals: {
                 ...globals.browser,
                 ...globals.node,
-                browser: 'readonly',
-                page: 'readonly',
-                global: 'readonly',
-                __STORE__: 'writable',
             },
 
             parser: tsParser,
@@ -85,6 +72,7 @@ export default [
             ...eslint.configs.recommended.rules,
             ...jsxA11y.flatConfigs.recommended.rules,
             ...importPlugin.flatConfigs.recommended.rules,
+            ...reactHooks.rules.recommended,
 
             /**
              * Preact
@@ -199,11 +187,7 @@ export default [
                 },
             ],
 
-            '@typescript-eslint/explicit-function-return-type': 1,
-            '@typescript-eslint/no-explicit-any': 1,
             '@typescript-eslint/ban-ts-comment': 0,
-            '@typescript-eslint/no-empty-object-type': 1,
-            '@typescript-eslint/no-unused-expressions': 1,
         },
     },
 ];

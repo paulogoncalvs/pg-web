@@ -32,7 +32,6 @@ const HomePage: FunctionalComponent = () => {
                             width="180"
                             height="180"
                             alt=""
-                            isLazy
                         />
                     </div>
                     <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:text-base sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4">

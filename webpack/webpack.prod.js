@@ -1,8 +1,6 @@
-import Dotenv from 'dotenv-webpack';
 import { merge } from 'webpack-merge';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import WorkboxPlugin from 'workbox-webpack-plugin';
 import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin';
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import paths from './paths.js';
@@ -18,24 +16,12 @@ export default merge(common, {
         assetModuleFilename: 'assets/img/[name].[contenthash][ext]',
     },
     plugins: [
-        new Dotenv({
-            path: './.env',
-        }),
-
         // Extracts CSS into separate files
         // style-loader -> development
         // MiniCssExtractPlugin -> production
         new MiniCssExtractPlugin({
             chunkFilename: 'assets/css/[id].[contenthash].css',
             filename: 'assets/css/[name].[contenthash].css',
-        }),
-
-        new WorkboxPlugin.GenerateSW({
-            // these options encourage the ServiceWorkers to get in there fast
-            // and not allow any straggling "old" SWs to hang around
-            clientsClaim: true,
-            skipWaiting: true,
-            exclude: ['.DS_Store'],
         }),
 
         new SVGSpritemapPlugin(`${paths.src}/assets/icons/**/*.svg`, {

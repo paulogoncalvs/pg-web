@@ -15,7 +15,7 @@ jobs:
         run: yarn install --immutable
       - name: Check Build
         run: |
-          cp .env.dist .env
+          cp .env.dist .env.tests
           yarn build
       - name: Run Code Analysis
         run: |

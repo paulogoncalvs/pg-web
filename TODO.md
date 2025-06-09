@@ -3,13 +3,14 @@
 ## To-Do
 
 -   [ ] Remove toString() from contact page labels
--   [ ] Remove ts-ignore
+-   [ ] Remove @ts-ignore related with aria-label
 -   [ ] Improve menu
 -   [ ] Improve GA4 code
 -   [ ] Improve default language
 -   [ ] Mock date for tests
 -   [ ] Server
 -   [ ] Update contact page
+-   [ ] Head links with revision by page instead of global
 
 ### Completed ✓
 

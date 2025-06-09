@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h, JSX } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
 import globalConfig from '@/config/global/index.js';

@@ -11,7 +11,7 @@ export default {
         },
         extend: {
             opacity: {
-                1: '.01',
+                1: '.001',
             },
             keyframes: {
                 'fade-in': {
