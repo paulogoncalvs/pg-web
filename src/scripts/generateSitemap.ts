@@ -2,7 +2,8 @@ import { writeFileSync } from 'fs';
 import prettier from 'prettier';
 import globalConfig from '../config/global/index.js';
 
-const shouldIgnoreRoute = (route: string): boolean => !!['404', '/en'].some((element) => route.includes(element));
+const shouldIgnoreRoute = (route: string): boolean =>
+    !!['offline', '404', '/en'].some((element) => route.includes(element));
 
 (async function generateSitemap(): Promise<void> {
     const prettierConfig = await prettier.resolveConfig('prettier.config.cjs');

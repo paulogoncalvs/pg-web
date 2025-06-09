@@ -44,10 +44,11 @@ const pageTests = ({ name, route, storeData }: PageTestsOptions): void => {
 for (const pageKey of Object.keys(routesConfig)) {
     const name = routesConfig[pageKey].tests?.name;
 
-    name &&
+    if (name) {
         pageTests({
-            name: name,
+            name,
             route: pageKey,
             storeData: routesConfig[pageKey].tests,
         });
+    }
 }

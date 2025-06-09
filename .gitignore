@@ -8,9 +8,9 @@ public/sitemap.xml
 .DS_Store
 .idea
 .history
+.env
 .env.development
 .env.production
-
 # yarn
 .pnp.*
 .yarn/*

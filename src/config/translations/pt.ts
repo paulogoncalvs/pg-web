@@ -33,4 +33,8 @@ export default {
     sidedrawer_toggle: 'Alternar menu lateral',
     sidedrawer_menu_link_home: 'Homepage',
     sidedrawer_menu_link_contact: 'Contactar',
+    offline_page_title: 'Oops!',
+    offline_page_subtitle: 'Encontra-se offline',
+    offline_page_description: 'Necessita de uma ligação à Internet.',
+    offline_page_button_label: 'Voltar à página inicial',
 };

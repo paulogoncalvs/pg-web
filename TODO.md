@@ -3,21 +3,20 @@
 ## To-Do
 
 -   [ ] Remove toString() from contact page labels
--   [ ] Remove ts-ignore regarding aria-labels
--   [ ] Add menu
+-   [ ] Remove @ts-ignore related with aria-label
+-   [ ] Improve menu
 -   [ ] Improve GA4 code
 -   [ ] Improve default language
 -   [ ] Mock date for tests
 -   [ ] Server
--   [ ] Yarn 3 PnP
-
-### In Progress
-
 -   [ ] Update contact page
+-   [ ] Head links with revision by page instead of global
 
 ### Completed ✓
 
--   [x] Yarn 3
+-   [x] Update ESLint
+-   [x] Update Yarn
+-   [x] Add menu
 -   [x] Add contact page
 -   [x] Update Jest, GA
 

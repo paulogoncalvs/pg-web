@@ -4,39 +4,37 @@ import { StoreContext } from '@/modules/store';
 import { Language, LANGUAGE_DEFAULT } from '@/modules/language';
 import { translations } from '@/config/translations';
 
-export interface TranslationParams {
-    [key: string]: VNode | string;
+type TranslateParam = VNode | string;
+interface TranslationParams {
+    [key: string]: TranslateParam;
 }
 
-const getTranslation = (lang: Language, key: string, params?: TranslationParams, convertToString?: boolean): VNode => {
-    let translation =
-        (translations[lang] && translations[lang][key]) ||
-        (translations[LANGUAGE_DEFAULT] && translations[LANGUAGE_DEFAULT][key]) ||
-        key;
+const getTranslation = (
+    lang: Language,
+    key: string,
+    params?: TranslationParams,
+    convertToString?: boolean,
+): TranslateParam | TranslateParam[] => {
+    const translation = translations[lang]?.[key] || translations[LANGUAGE_DEFAULT]?.[key] || key;
 
     if (params) {
-        Object.keys(params).forEach((key) => {
-            translation = translation
-                .split(/(%\w+?%)/g)
-                .map((value: string) => {
-                    return `%${key}%` === value ? params[key] : value;
-                })
-                .filter(Boolean);
-        });
+        const transf = translation
+            .split(/(%\w+?%)/g)
+            .map((value) => params[value.slice(1, -1)] || value)
+            .filter(Boolean);
+
+        return convertToString ? transf.join('') : transf;
     }
 
-    return params && convertToString ? translation.join('') : translation;
+    return translation;
 };
 
-export const useTranslate = (): {
-    t: (key: string, params?: TranslationParams, convertToString?: boolean) => VNode;
-    lang: string;
-} => {
+export const useTranslate = () => {
     const { lang } = useContext(StoreContext);
 
     return {
-        t: (key: string, params?: TranslationParams, convertToString = true): VNode =>
-            getTranslation(lang, key, params, convertToString),
+        t: (key: string, params?: TranslationParams, convertToString = true) =>
+            getTranslation(lang, key, params, convertToString) as string,
         lang,
     };
 };

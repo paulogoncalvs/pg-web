@@ -36,7 +36,9 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
             .then(() => {
                 setIsLoading(false);
                 setIsLoaded(true);
-                entry && observer?.unobserve(entry.target);
+                if (entry) {
+                    observer?.unobserve(entry.target);
+                }
             })
             .catch((err) => {
                 setIsLoading(false);
@@ -53,7 +55,7 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
                 'bg-zinc-200 dark:bg-zinc-800',
                 {
                     lazy: isLazy,
-                    '_loaded transform opacity-0 animate-fade-in': isLoaded,
+                    '_loaded transform opacity-1 animate-fade-in': isLoaded,
                     'animate-pulse': !isLoaded,
                 },
                 classes,

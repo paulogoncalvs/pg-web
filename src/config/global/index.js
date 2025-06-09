@@ -13,7 +13,7 @@ const metas = [
     },
     { attributes: { name: 'author', content: 'Paulo Gonçalves | contact@paulogoncalves.dev' } },
     { attributes: { name: 'google-site-verification', content: 'rSCoSktIV5-y8An9prxi5Rtn1NfAI2JZuDghowaml2Q' } },
-    { attributes: { name: 'apple-mobile-web-app-capable', content: 'yes' } },
+    { attributes: { name: 'mobile-web-app-capable', content: 'yes' } },
     { attributes: { name: 'application-name', content: 'paulogoncalves.dev' } },
     { attributes: { name: 'theme-color', content: '#ffffff' } },
     { attributes: { name: 'apple-mobile-web-app-status-bar-style', content: 'black' } },
@@ -21,12 +21,12 @@ const metas = [
     { attributes: { content: '@paulogoncalvs', property: 'twitter:site' } },
     { attributes: { content: '@paulogoncalvs', property: 'twitter:creator' } },
     { attributes: { content: 'paulogoncalves.dev', property: 'twitter:domain' } },
-    { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'twitter:image' } },
+    { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'twitter:image' } },
     { attributes: { content: 'Paulo Gonçalves - Front-End Engineer from Portugal', property: 'og:title' } },
     { attributes: { content: 'Personal Website', property: 'og:description' } },
     { attributes: { content: baseUrl, property: 'og:url' } },
     { attributes: { content: 'website', property: 'og:type' } },
-    { path: '/assets/img/paulo-goncalves.jpeg', attributes: { property: 'og:image' } },
+    { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'og:image' } },
 ];
 
 const links = [
@@ -87,6 +87,8 @@ const links = [
             sizes: '180x180',
         },
     },
+    // { path: '/img/paulo-goncalves.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
+    // { path: '/img/paulo-goncalves_sm.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
 ];
 
 export default {

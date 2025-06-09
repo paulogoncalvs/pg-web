@@ -15,12 +15,12 @@ USER $UNAME
 WORKDIR /app
 
 COPY --chown=$UNAME:$UNAME . .
-COPY --chown=$UNAME:$UNAME .env.dist .env.production
+COPY --chown=$UNAME:$UNAME .env.tests .env.production
 
 RUN yarn install --immutable
 
 USER root
-RUN yarn playwright install --with-deps
+RUN yarn playwright install --with-deps chromium
 
 USER $UNAME
 RUN yarn build

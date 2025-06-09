@@ -1,4 +1,4 @@
-import { FunctionalComponent } from 'preact';
+import { FunctionalComponent, JSX } from 'preact';
 import { useContext, useEffect } from 'preact/hooks';
 import { useRoute, useLocation } from 'wouter-preact';
 import { StoreContext } from '@/modules/store';
@@ -15,7 +15,9 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
     const langParam = (isValidLanguage(params?.lang as Language) ? params?.lang : lang) as Language;
 
     useEffect(() => {
-        langParam !== lang && setLanguage(langParam);
+        if (langParam !== lang) {
+            setLanguage(langParam);
+        }
 
         if (location !== url) {
             setRoute(location);

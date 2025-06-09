@@ -1,7 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
 
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'class',
     theme: {
@@ -9,6 +10,9 @@ module.exports = {
             sans: ['Poppins', 'Roboto', ...defaultTheme.fontFamily.sans.filter((item) => item !== 'Roboto')],
         },
         extend: {
+            opacity: {
+                1: '.001',
+            },
             keyframes: {
                 'fade-in': {
                     '0%': { opacity: '0' },
@@ -46,5 +50,5 @@ module.exports = {
         grayscale: false,
         hueRotate: false,
     },
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [forms],
 };

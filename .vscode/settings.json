@@ -14,18 +14,13 @@
     "editor.formatOnSave": false
   },
   "[json]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     },
     "editor.formatOnSave": false
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -39,9 +34,10 @@
     "**/.pnp.*": true
   },
   "eslint.nodePath": ".yarn/sdks",
-  "prettier.requireConfig": true,
-  "prettier.configPath": "./prettier.config.cjs",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "prettier.prettierPath": "./node_modules/prettier",
+  "prettier.ignorePath": "./.prettierignore",
+  "prettier.configPath": "./prettier.config.js",
+  "typescript.tsdk": "./.yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "[javascript][json][typescript]": {
     "editor.codeActionsOnSave": {

@@ -1,8 +1,8 @@
-import { h, FunctionalComponent } from 'preact';
+import { h, FunctionalComponent, JSX } from 'preact';
 import { Route, Router } from 'wouter-preact';
 import { StoreContextProvider } from '@/modules/store';
 import { RouterOnChange } from '@/modules/router';
-import { getPage } from '@/modules/router/pages';
+import { RouterPage } from '@/modules/router/pages';
 import { HeadUpdater } from '@/components/HeadUpdater';
 import { Header } from '@/components/Header';
 import { SideDrawer } from '@/components/SideDrawer';
@@ -20,7 +20,7 @@ export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element 
             <RouterOnChange />
             <Header />
             <main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
-                <Route path="*">{(params): JSX.Element => getPage(params['*'] ? `/${params['*']}` : '/')}</Route>
+                <Route path="*">{(params): JSX.Element => RouterPage(params['*'] ? `/${params['*']}` : '/')}</Route>
             </main>
             <SideDrawer />
         </Router>

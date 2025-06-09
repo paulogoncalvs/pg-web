@@ -1,5 +1,4 @@
-/* eslint-disable react/no-danger */
-import { h } from 'preact';
+import { h, JSX } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
 import globalConfig from '@/config/global/index.js';
@@ -59,14 +58,13 @@ const generateScriptTags = (paths: Partial<PageScripts>[] = []): JSX.Element[] =
     paths.map((attrs, index) => <script {...attrs} key={`js-${index++}`} />);
 
 const getInlineCSS = (css = ''): JSX.Element | void =>
-    css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : undefined;
+    css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : undefined; // eslint-disable-line react/no-danger
 
 const getInlineJS = (js = ''): JSX.Element | void =>
-    js ? <script dangerouslySetInnerHTML={{ __html: js }} /> : undefined;
+    js ? <script dangerouslySetInnerHTML={{ __html: js }} /> : undefined; // eslint-disable-line react/no-danger
 
 const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Partial<PageProps>): string =>
-    '<!DOCTYPE html>' +
-    render(
+    `<!DOCTYPE html>${render(
         <html lang="en">
             <head>
                 <meta charSet="utf-8" />
@@ -83,7 +81,7 @@ const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Par
                 </div>
             </body>
         </html>,
-    );
+    )}`;
 
 export default ({ lang, url, head, webpackConfig }: HtmlTemplateProps): string => {
     const sprite = webpackConfig.plugins.find((plugin) => plugin?.filenames?.spritemap).filenames?.spritemap;

@@ -50,6 +50,8 @@ Create `.env.development` and `.env.production` based on `.env.dist`.
 
 ---
 
-**STATUS: WIP**
+**STATUS: 👷 Work in Progress – occasional experiments and updates**
 
-**Made with Love :heart: in my spare time.**
+This is supported on Linux and macOS, but not on Windows.
+
+**Lovingly crafted in my spare time. ❤️**

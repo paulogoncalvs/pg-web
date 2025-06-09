@@ -54,7 +54,7 @@ export const SideDrawer: FunctionalComponent = () => {
                         <LanguageSelector classes="ml-2 mr-6" />
                     </div>
                     <ToggleTheme classes="p-2" />
-                    {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+                    {}
                     <label htmlFor="sd-tog" class="ic-link cursor-pointer ml-auto">
                         <Icon src={closeIcon} ariaHidden />
                     </label>

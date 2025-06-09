@@ -9,16 +9,19 @@ declare global {
 export const hasGtag = (): boolean => !!window.gtag;
 
 export const trackPageView = (data?: any): void => {
-    hasGtag() &&
+    if (hasGtag()) {
         window.gtag('event', 'page_view', {
             page_location: window.location.href,
             send_to: process.env.TRACK_GA_MEASUREMENT_ID,
             ...data,
         });
+    }
 };
 
 export const trackEvent = (data: any, name: string): void => {
-    hasGtag() && window.gtag('event', name, data);
+    if (hasGtag()) {
+        window.gtag('event', name, data);
+    }
 };
 
 export const initGA4 = (): void => {

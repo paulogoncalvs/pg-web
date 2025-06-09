@@ -1,4 +1,4 @@
-import { h, FunctionalComponent } from 'preact';
+import { h, FunctionalComponent, JSX } from 'preact';
 import { useCallback } from 'preact/hooks';
 import classNames from 'classnames';
 import { Language } from '@/modules/language';
@@ -33,7 +33,6 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ c
     );
 
     return (
-        // @ts-ignore-begin
         <select
             key={`lang-${lang}`}
             class={classNames(
@@ -41,11 +40,11 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ c
                 classes,
             )}
             onChange={onLanguageSelect}
+            // @ts-ignore
             aria-label={t('language_selection')}
         >
             {(Object.keys(translations) as Array<Language>).map((lang: Language) => renderOption(lang))}
         </select>
-        // @ts-ignore-end
     );
 };
 

@@ -26,16 +26,15 @@ export const Header: FunctionalComponent = () => {
                     {isHome && <SocialLinks />}
                 </div>
                 <div class="flex justify-end">
-                    {/* @ts-ignore-begin */}
                     <label
                         htmlFor="sd-tog"
                         class="ic-link cursor-pointer"
                         ref={labelEl}
+                        // @ts-ignore
                         aria-label={t('sidedrawer_toggle')}
                     >
                         <Icon src={burgerIcon} ariaHidden />
                     </label>
-                    {/* @ts-ignore-end */}
                 </div>
             </div>
         </header>
