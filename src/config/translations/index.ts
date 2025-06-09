@@ -1,7 +1,15 @@
 import en from './en';
 import pt from './pt';
 
-export const translations = {
+export interface Translation {
+    [key: string]: string;
+}
+
+export interface Translations {
+    [key: string]: Translation;
+}
+
+export const translations: Translations = {
     en,
     pt,
 };

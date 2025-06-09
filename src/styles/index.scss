@@ -1,8 +1,8 @@
-@import 'fonts';
-@import 'supports';
-@import 'components/link';
-@import 'components/button';
-@import 'components/sidedrawer';
+@use 'fonts';
+@use 'supports';
+@use 'components/link';
+@use 'components/button';
+@use 'components/sidedrawer';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

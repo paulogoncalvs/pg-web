@@ -15,6 +15,7 @@ declare interface PageStore {
     theme?: Theme;
     lang?: Language;
     url?: string;
+    isOffline?: boolean;
 }
 
 declare let __STORE__: PageStore;
@@ -26,6 +27,9 @@ declare interface NodeModule {
 }
 
 declare let module: NodeModule;
+
+/// <reference types="gtag.js" />
+declare module 'gtag.js';
 
 /** Maps authored classNames to their CSS Modules -suffixed generated classNames. */
 type Mapping = Record<string, string>;
@@ -127,20 +131,4 @@ declare module '*.ttf' {
 declare module '*.otf' {
     const url: string;
     export default url;
-}
-
-// Make Preact's JSX the global JSX
-declare namespace JSX {
-    interface IntrinsicElements extends preact.JSX.IntrinsicElements {}
-    interface IntrinsicAttributes extends preact.JSX.IntrinsicAttributes {}
-    interface Element extends preact.JSX.Element {}
-    interface ElementClass extends preact.JSX.ElementClass {}
-    interface ElementAttributesProperty extends preact.JSX.ElementAttributesProperty {}
-    interface ElementChildrenAttribute extends preact.JSX.ElementChildrenAttribute {}
-    interface CSSProperties extends preact.JSX.CSSProperties {}
-    interface SVGAttributes extends preact.JSX.SVGAttributes {}
-    interface PathAttributes extends preact.JSX.PathAttributes {}
-    interface TargetedEvent extends preact.JSX.TargetedEvent {}
-    interface DOMAttributes<Target extends EventTarget> extends preact.JSX.DOMAttributes<Target> {}
-    interface HTMLAttributes<RefType extends EventTarget = EventTarget> extends preact.JSX.HTMLAttributes<RefType> {}
 }

@@ -43,5 +43,7 @@ export const reportWebVitals = (onPerfEntry?: (metric: MetricType) => void): voi
 };
 
 export const reportWebVitalsToGA = (): void => {
-    hasGtag() && reportWebVitals(sendToGoogleAnalytics);
+    if (hasGtag()) {
+        reportWebVitals(sendToGoogleAnalytics);
+    }
 };

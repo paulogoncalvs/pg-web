@@ -13,7 +13,7 @@ interface FormComponentProps {
 }
 
 export const FormContext = createContext({
-    formData: {},
+    formData: {} as FormComponentData,
     handleFormChange: (event: Event): void => console.warn(event), // eslint-disable-line no-console
 });
 

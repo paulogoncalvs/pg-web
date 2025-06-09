@@ -1,4 +1,4 @@
-import { h, FunctionalComponent, RefObject } from 'preact';
+import { h, FunctionalComponent, RefObject, JSX } from 'preact';
 import { useRef } from 'preact/hooks';
 import { toggleSideDrawer } from '@/components/SideDrawer';
 

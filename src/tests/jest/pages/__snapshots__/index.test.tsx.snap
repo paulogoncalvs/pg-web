@@ -410,7 +410,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2024 🙂
+      paulogoncalves.dev © 2021 - 2022 🙂
     </p>
   </div>
 </footer>
@@ -891,7 +891,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2024 🙂
+      paulogoncalves.dev © 2021 - 2022 🙂
     </p>
   </div>
 </footer>
@@ -940,9 +940,10 @@ exports[`[PAGE] Home Page should render 1`] = `
       <div class="flex-shrink-0 opacity-1 animate-fade-in-dw-3">
         <img width="180"
              height="180"
-             class="bg-zinc-200 dark:bg-zinc-800 lazy animate-pulse rounded-full"
+             class="bg-zinc-200 dark:bg-zinc-800 animate-pulse rounded-full"
              alt
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+             src="test-file-stub"
+             srcset="test-file-stub, test-file-stub 2x"
         >
       </div>
       <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:text-base sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4">
@@ -1355,7 +1356,430 @@ exports[`[PAGE] Home Page should render 1`] = `
       optimized for modern browsers
     </p>
     <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2024 🙂
+      paulogoncalves.dev © 2021 - 2022 🙂
+    </p>
+  </div>
+</footer>
+<div class="fixed overflow-hidden z-10 bg-zinc-900 bg-opacity-80 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
+     aria-hidden="false"
+>
+</div>
+`;
+
+exports[`[PAGE] Offline Page should render 1`] = `
+<header class="sticky top-0 z-10 bg-white dark:bg-zinc-900 bg-opacity-95 dark:bg-opacity-95 dark:border-b dark:border-b-zinc-800 shadow-xl">
+  <div class="container py-4 px-6 mx-auto flex items-center justify-between">
+    <div class="flex items-center">
+      <a class="text-xl font-bold tracking-tight"
+         href="/"
+      >
+        PAULO GONÇALVES
+      </a>
+    </div>
+    <div class="flex justify-end">
+      <label for="sd-tog"
+             class="ic-link cursor-pointer"
+             aria-label="Toggle side drawer"
+      >
+        <svg aria-hidden="true"
+             class="fill-current"
+             width="24"
+             height="24"
+        >
+          <use href="#">
+          </use>
+        </svg>
+      </label>
+    </div>
+  </div>
+</header>
+<main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
+  <div class="flex flex-col items-center">
+    <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+      Oops!
+    </h1>
+    <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-8">
+      You are currently offline
+    </h2>
+    <p class="mux text-l opacity-1 animate-fade-in-dw-4 pb-14 text-center">
+      You need an Internet connection.
+    </p>
+    <div class="opacity-1 animate-fade-in-dw-3">
+      <a class="btn _prim"
+         href="/undefined/"
+      >
+        <span>
+          Go back to homepage
+        </span>
+      </a>
+    </div>
+  </div>
+</main>
+<aside>
+  <input class="sd-tog hidden"
+         type="checkbox"
+         id="sd-tog"
+  >
+  <div class="sd shadow-sm top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] bg-zinc-100 dark:bg-zinc-800 fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
+    <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
+      <div>
+        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-all py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-emerald-200 dark:hover:border-emerald-400 focus:border-emerald-200 dark:focus:border-emerald-400 ml-2 mr-6"
+                aria-label="Language selection"
+        >
+          <option value="en">
+            EN
+          </option>
+          <option value="pt">
+            PT
+          </option>
+        </select>
+      </div>
+      <button class="ic-link -sup-novar p-2"
+              aria-label="Toggle to light mode"
+      >
+        <svg aria-hidden="true"
+             class="fill-current"
+             width="24"
+             height="24"
+        >
+          <use href="#">
+          </use>
+        </svg>
+      </button>
+      <label for="sd-tog"
+             class="ic-link cursor-pointer ml-auto"
+      >
+        <svg aria-hidden="true"
+             class="fill-current"
+             width="24"
+             height="24"
+        >
+          <use href="#">
+          </use>
+        </svg>
+      </label>
+    </div>
+    <div class="flex flex-col pl-10 pr-10">
+      <a class="btn _prim"
+         href="/undefined/"
+      >
+        <span>
+          Homepage
+        </span>
+      </a>
+      <a class="btn _prim mt-4"
+         href="/undefined/contact/"
+      >
+        <span>
+          Contact
+        </span>
+      </a>
+    </div>
+    <div class="flex pt-10 pb-4 pl-8 pr-8 sm:pl-10 sm:pr-10 mx-auto mt-auto">
+      <a href="https://www.twitter.com/paulogoncalvs"
+         aria-label="Twitter (opens in a new window)"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="ic-link"
+      >
+        <svg aria-hidden="true"
+             class="fill-current"
+             width="24"
+             height="24"
+        >
+          <use href="#">
+          </use>
+        </svg>
+      </a>
+      <a href="https://www.github.com/paulogoncalvs"
+         aria-label="GitHub (opens in a new window)"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="ic-link ml-4 mr-4"
+      >
+        <svg aria-hidden="true"
+             class="fill-current"
+             width="24"
+             height="24"
+        >
+          <use href="#">
+          </use>
+        </svg>
+      </a>
+      <a href="https://pt.linkedin.com/in/paulogoncalvs"
+         aria-label="LinkedIn (opens in a new window)"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="ic-link"
+      >
+        <svg aria-hidden="true"
+             class="fill-current"
+             width="24"
+             height="24"
+        >
+          <use href="#">
+          </use>
+        </svg>
+      </a>
+    </div>
+  </div>
+</aside>
+<footer>
+  <div class="text-center bg-zinc-100 dark:bg-zinc-800">
+    <div class="container flex flex-col items-center px-6 pt-16 mx-auto pb-14">
+      <div class="pb-6 text-sm sm:text-base">
+        Site built from scratch with:
+      </div>
+      <div class="flex flex-wrap justify-center align-middle">
+        <a href="https://www.typescriptlang.org/"
+           aria-label="TypeScript (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://preactjs.com/"
+           aria-label="Preact (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://webpack.js.org/"
+           aria-label="Webpack (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://yarnpkg.com/"
+           aria-label="Yarn (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://eslint.org/"
+           aria-label="ESLint (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://stylelint.io/"
+           aria-label="StyleLint (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://developers.google.com/web/tools/workbox"
+           aria-label="Workbox (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://analytics.google.com/"
+           aria-label="Google Analytics (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="28"
+               height="28"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://tailwindcss.com/"
+           aria-label="Tailwind CSS (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://playwright.dev/"
+           aria-label="Playwright (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://jestjs.io/"
+           aria-label="Jest (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://prettier.io/"
+           aria-label="Prettier (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://postcss.org/"
+           aria-label="PostCSS (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://www.deque.com/axe/"
+           aria-label="Axe (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://sass-lang.com/"
+           aria-label="Sass (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+        <a href="https://babeljs.io/"
+           aria-label="Babel (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="ic-link _up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="60"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
+    <p>
+      optimized for modern browsers
+    </p>
+    <p class="pt-2">
+      paulogoncalves.dev © 2021 - 2022 🙂
     </p>
   </div>
 </footer>

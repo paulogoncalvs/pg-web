@@ -3,3 +3,6 @@ User-agent: *
 Disallow: /404/
 Disallow: /en/404
 Disallow: /pt/404
+Disallow: /offline/
+Disallow: /en/offline
+Disallow: /pt/offline

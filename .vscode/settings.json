@@ -34,10 +34,10 @@
     "**/.pnp.*": true
   },
   "eslint.nodePath": ".yarn/sdks",
-  "prettier.prettierPath": "node_modules/prettier",
-  "prettier.ignorePath": ".prettierignore",
-  "prettier.configPath": "prettier.config.js",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "prettier.prettierPath": "./node_modules/prettier",
+  "prettier.ignorePath": "./.prettierignore",
+  "prettier.configPath": "./prettier.config.js",
+  "typescript.tsdk": "./.yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "[javascript][json][typescript]": {
     "editor.codeActionsOnSave": {

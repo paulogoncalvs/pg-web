@@ -36,7 +36,9 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
             .then(() => {
                 setIsLoading(false);
                 setIsLoaded(true);
-                entry && observer?.unobserve(entry.target);
+                if (entry) {
+                    observer?.unobserve(entry.target);
+                }
             })
             .catch((err) => {
                 setIsLoading(false);

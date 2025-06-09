@@ -5,6 +5,7 @@ import { getPageViewData, PageViewTrackingData } from './pageView';
 declare global {
     interface Window {
         ga: any;
+        ga_debug: any;
     }
 }
 
@@ -15,11 +16,15 @@ export const gaNewElem: any = {};
 export const gaElems: any = {};
 
 export const trackPageView = (data?: PageViewTrackingData): void => {
-    hasGa() && window.ga('send', getPageViewData(data));
+    if (hasGa()) {
+        window.ga('send', getPageViewData(data));
+    }
 };
 
 export const trackEvent = (data: EventTrackingData): void => {
-    hasGa() && window.ga('send', getEventData(data));
+    if (hasGa()) {
+        window.ga('send', getEventData(data));
+    }
 };
 
 export const initGA = (): void => {
@@ -31,6 +36,7 @@ export const initGA = (): void => {
         // @ts-ignore
         i['GoogleAnalyticsObject'] = r;
         // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         (i[r] =
             // @ts-ignore
             i[r] ||
@@ -40,6 +46,7 @@ export const initGA = (): void => {
             }),
             // @ts-ignore
             (i[r].l = 1 * (new Date() as any));
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
         a.async = 1;
         a.src = g;
@@ -55,7 +62,6 @@ export const initGA = (): void => {
     );
 
     if (process.env.NODE_ENV === 'development') {
-        // @ts-ignore
         window.ga_debug = { trace: true };
     }
 
