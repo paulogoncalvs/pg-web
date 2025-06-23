@@ -33,7 +33,7 @@
     "@jest/types": "30.0.1",
     "@playwright/test": "^1.52.0",
     "@tailwindcss/forms": "^0.5.10",
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^22.15.30",
     "@types/webpack": "^5.28.5",
