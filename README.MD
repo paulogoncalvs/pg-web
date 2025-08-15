@@ -32,9 +32,9 @@ Create `.env.development` and `.env.production` based on `.env.dist`.
 | `yarn tests:pw:build`    | Build Playwright docker image                   |
 | `yarn tests`             | Run all tests                                   |
 | `yarn tests:update`      | Update all tests                                |
-| **PRETTIFY**             |                                                 |
-| `yarn prettify`          | Code formatting - Check                         |
-| `yarn prettify:fix`      | Code formatting - Fix                           |
+| **FORMAT**               |                                                 |
+| `yarn format`            | Code formatting - Check                         |
+| `yarn format:fix`        | Code formatting - Fix                           |
 | **LINT**                 |                                                 |
 | `yarn lint:ts`           | Lint TypeScript                                 |
 | `yarn lint:ts:fix`       | Lint TypeScript - Fix                           |

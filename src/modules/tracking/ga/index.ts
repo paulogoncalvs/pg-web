@@ -37,7 +37,7 @@ export const initGA = (): void => {
         i['GoogleAnalyticsObject'] = r;
         // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        (i[r] =
+        ((i[r] =
             // @ts-ignore
             i[r] ||
             function (): void {
@@ -45,9 +45,9 @@ export const initGA = (): void => {
                 (i[r].q = i[r].q || []).push(arguments); // eslint-disable-line prefer-rest-params
             }),
             // @ts-ignore
-            (i[r].l = 1 * (new Date() as any));
+            (i[r].l = 1 * (new Date() as any)));
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a, m);
