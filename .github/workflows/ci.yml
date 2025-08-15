@@ -4,9 +4,11 @@ jobs:
   build:
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    env:
+      YARN_ENABLE_TELEMETRY: 0
     steps:
       - uses: actions/checkout@v4
-      - name: Set Node.js 18.x
+      - name: Set Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
