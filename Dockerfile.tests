@@ -1,8 +1,8 @@
 # Prebuilt MS image
 FROM mcr.microsoft.com/playwright:focal
 
-ARG UID
-ARG GID
+ARG UID=1000
+ARG GID=1000
 ARG UNAME=node
 
 RUN groupadd --gid $GID --non-unique node

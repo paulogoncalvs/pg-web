@@ -2695,6 +2695,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@epic-web/invariant@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@epic-web/invariant@npm:1.0.0"
+  checksum: 10c0/72dbeb026e4e4eb3bc9c65739b91408ca77ab7d603a2494fa2eff3790ec22892c4caba751cffdf30f5ccf0e7ba79c1e9c96cf0a357404b9432bf1365baac23ca
+  languageName: node
+  linkType: hard
+
 "@eslint-community/eslint-utils@npm:^4.2.0, @eslint-community/eslint-utils@npm:^4.7.0":
   version: 4.7.0
   resolution: "@eslint-community/eslint-utils@npm:4.7.0"
@@ -3735,6 +3742,7 @@ __metadata:
     "@types/jest": "npm:^30.0.0"
     "@types/jest-axe": "npm:^3.5.9"
     "@types/node": "npm:^22.15.30"
+    "@types/svg4everybody": "npm:^2.1.5"
     "@types/webpack": "npm:^5.28.5"
     "@typescript-eslint/eslint-plugin": "npm:^8.33.1"
     "@typescript-eslint/parser": "npm:^8.33.1"
@@ -3743,6 +3751,7 @@ __metadata:
     babel-loader: "npm:^10.0.0"
     classnames: "npm:^2.5.1"
     copy-webpack-plugin: "npm:^13.0.0"
+    cross-env: "npm:^10.0.0"
     css-loader: "npm:^7.1.2"
     css-minimizer-webpack-plugin: "npm:^7.0.2"
     dotenv-webpack: "npm:^8.1.0"
@@ -3777,6 +3786,7 @@ __metadata:
     preact: "npm:^10.26.8"
     preact-render-to-string: "npm:^6.5.13"
     prettier: "npm:^3.5.3"
+    rimraf: "npm:^6.0.1"
     sass: "npm:^1.89.1"
     sass-loader: "npm:^16.0.5"
     style-loader: "npm:^4.0.0"
@@ -3786,6 +3796,8 @@ __metadata:
     stylelint-webpack-plugin: "npm:^5.0.1"
     svg-spritemap-webpack-plugin: "npm:^5.0.0"
     svg-transform-loader: "npm:^2.0.13"
+    svg4everybody: "npm:^2.1.9"
+    svgo: "npm:^4.0.0"
     svgo-loader: "npm:^4.0.0"
     tailwindcss: "npm:^3.4.17"
     ts-loader: "npm:^9.5.2"
@@ -4398,6 +4410,13 @@ __metadata:
   version: 2.0.3
   resolution: "@types/stack-utils@npm:2.0.3"
   checksum: 10c0/1f4658385ae936330581bcb8aa3a066df03867d90281cdf89cc356d404bd6579be0f11902304e1f775d92df22c6dd761d4451c804b0a4fba973e06211e9bd77c
+  languageName: node
+  linkType: hard
+
+"@types/svg4everybody@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "@types/svg4everybody@npm:2.1.5"
+  checksum: 10c0/62d3b581722caf1dc070ac9a771ef80c16200700bb5c9a59b088e524d8eed68998569ee65f5b648ba03612ac491a5c9915f36b59681c09a91e45468b48aa346b
   languageName: node
   linkType: hard
 
@@ -6553,6 +6572,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "commander@npm:11.1.0"
+  checksum: 10c0/13cc6ac875e48780250f723fb81c1c1178d35c5decb1abb1b628b3177af08a8554e76b2c0f29de72d69eef7c864d12613272a71fabef8047922bc622ab75a179
+  languageName: node
+  linkType: hard
+
 "commander@npm:^12.1.0":
   version: 12.1.0
   resolution: "commander@npm:12.1.0"
@@ -6794,6 +6820,19 @@ __metadata:
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
   checksum: 10c0/157cbc59b2430ae9a90034a5f3a1b398b6738bf510f713edc4d4e45e169bc514d3d99dd34d8d01ca7ae7830b5b8b537e46ae8f3c8f932371b0875c0151d7ec91
+  languageName: node
+  linkType: hard
+
+"cross-env@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "cross-env@npm:10.0.0"
+  dependencies:
+    "@epic-web/invariant": "npm:^1.0.0"
+    cross-spawn: "npm:^7.0.6"
+  bin:
+    cross-env: dist/bin/cross-env.js
+    cross-env-shell: dist/bin/cross-env-shell.js
+  checksum: 10c0/d16ffc3734106577d57b6253d81ab50294623bd59f96e161033eaf99c1c308ffbaba8463c23a6c0f72e841eff467cb7007a0a551f27554fcf2bbf6598cd828f9
   languageName: node
   linkType: hard
 
@@ -9272,7 +9311,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^11.0.3":
+"glob@npm:^11.0.0, glob@npm:^11.0.3":
   version: 11.0.3
   resolution: "glob@npm:11.0.3"
   dependencies:
@@ -14761,6 +14800,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rimraf@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "rimraf@npm:6.0.1"
+  dependencies:
+    glob: "npm:^11.0.0"
+    package-json-from-dist: "npm:^1.0.0"
+  bin:
+    rimraf: dist/esm/bin.mjs
+  checksum: 10c0/b30b6b072771f0d1e73b4ca5f37bb2944ee09375be9db5f558fcd3310000d29dfcfa93cf7734d75295ad5a7486dc8e40f63089ced1722a664539ffc0c3ece8c6
+  languageName: node
+  linkType: hard
+
 "rollup@npm:^2.43.1":
   version: 2.79.1
   resolution: "rollup@npm:2.79.1"
@@ -14925,6 +14976,13 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 10c0/4406c441f71f5e0ec056345e6091cef51fd1786dac6e5b3eb1e87df464c40b3278219cc51df98309c36794503787ab0fe88fd45f2b0464f22000b68e755883ee
+  languageName: node
+  linkType: hard
+
+"sax@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "sax@npm:1.4.1"
+  checksum: 10c0/6bf86318a254c5d898ede6bd3ded15daf68ae08a5495a2739564eb265cd13bcc64a07ab466fb204f67ce472bb534eb8612dac587435515169593f4fffa11de7c
   languageName: node
   linkType: hard
 
@@ -16141,6 +16199,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svg4everybody@npm:^2.1.9":
+  version: 2.1.9
+  resolution: "svg4everybody@npm:2.1.9"
+  checksum: 10c0/033ba59c4b8b3466c0abcb42bb750e255b5b245b591e5e585a6ab39baf87c19ae2269fb4921589ad94700380c46929e92a88362e180d12e7d1d1a601f27d5c2c
+  languageName: node
+  linkType: hard
+
 "svgo-loader@npm:^4.0.0":
   version: 4.0.0
   resolution: "svgo-loader@npm:4.0.0"
@@ -16164,6 +16229,23 @@ __metadata:
   bin:
     svgo: ./bin/svgo
   checksum: 10c0/a6badbd3d1d6dbb177f872787699ab34320b990d12e20798ecae915f0008796a0f3c69164f1485c9def399e0ce0a5683eb4a8045e51a5e1c364bb13a0d9f79e1
+  languageName: node
+  linkType: hard
+
+"svgo@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "svgo@npm:4.0.0"
+  dependencies:
+    commander: "npm:^11.1.0"
+    css-select: "npm:^5.1.0"
+    css-tree: "npm:^3.0.1"
+    css-what: "npm:^6.1.0"
+    csso: "npm:^5.0.5"
+    picocolors: "npm:^1.1.1"
+    sax: "npm:^1.4.1"
+  bin:
+    svgo: ./bin/svgo.js
+  checksum: 10c0/2b01c910d59d10bb15e17714181a8fa96531b09a4e2cf2ca1abe24dbcb8400725b6d542d6e456c62222546e334d5b344799c170c5b6be0c48e31b02c23297275
   languageName: node
   linkType: hard
 

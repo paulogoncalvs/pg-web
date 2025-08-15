@@ -13,7 +13,6 @@
         &:hover,
         &:active {
             box-shadow: rgb(94 94 94 / 40%) 0 7px 12px 0;
-            transform: translateX(0) translateY(-2px) translateZ(0);
         }
 
         // With icon
@@ -28,13 +27,17 @@
             @apply bg-emerald-300;
             @apply hover:bg-emerald-200 focus:bg-emerald-200;
         }
+
+        // Active
+        &._act {
+            @apply bg-emerald-200;
+        }
     }
 
     .dark .btn {
         &:focus-visible,
         &:hover,
         &:active {
-            transform: none;
             box-shadow: rgb(255 255 255 / 70%) 0 0 18px 0;
         }
     }
