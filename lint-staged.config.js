@@ -1,5 +1,5 @@
 export default {
-    '*': ['yarn prettify'],
+    '*': ['yarn format'],
     '*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}': ['yarn lint:ts'],
     '*.{scss,css}': ['yarn lint:css'],
 };

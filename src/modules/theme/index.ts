@@ -26,7 +26,7 @@ export const getInitialTheme = (defaultTheme: Theme = THEME_DEFAULT): Theme => {
             return storedPrefs;
         }
 
-        getPrefersScheme(defaultTheme);
+        return getPrefersScheme(defaultTheme);
     }
 
     return defaultTheme;

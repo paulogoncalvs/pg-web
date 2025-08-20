@@ -15,7 +15,7 @@ export const Header: FunctionalComponent = () => {
     const isHome = routesConfig[url]?.templateParameters?.View === 'Home';
 
     return (
-        <header class="sticky top-0 z-10 bg-white dark:bg-zinc-900 bg-opacity-95 dark:bg-opacity-95 dark:border-b dark:border-b-zinc-800 shadow-xl">
+        <header class="sticky top-0 z-10 dark:bg-zinc-900/20 border-b shadow-xl backdrop-blur-md bg-white/20 border-t-0 dark:border-white/20 border-white/50 rounded-bl-xl rounded-br-xl">
             <div class="container py-4 px-6 mx-auto flex items-center justify-between">
                 <div class="flex items-center">
                     {!isHome && (

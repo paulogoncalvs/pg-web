@@ -15,7 +15,12 @@ class BasePage {
 
     public async goto(url: string): Promise<void> {
         await this.page.goto(url);
+        await this.page.context().clearCookies();
+        await this.page.evaluate(() => localStorage.clear());
         await this.page.evaluate(() => document.fonts.ready);
+        await this.page.addStyleTag({
+            content: `*, *::before, *::after { animation-duration: 0s !important; animation-delay: 0s !important; transition-duration: 0s !important; scroll-behavior: auto !important; }`,
+        });
     }
 
     public async takeSnapshot(): Promise<boolean | void> {

@@ -35,7 +35,7 @@ const Contact: FunctionalComponent = () => {
             <div class="flex flex-col items-center pb-16 opacity-1 animate-fade-in-dw-3">
                 <Link
                     href="mailto:contact@paulogoncalves.dev"
-                    class="btn _i _up _prim text-xl sm:text-2xl"
+                    class="btn _i _prim text-xl sm:text-2xl"
                     onClick={(): void =>
                         trackEvent(
                             {

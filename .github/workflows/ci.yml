@@ -5,12 +5,14 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set Node.js 18.x
+      - uses: actions/checkout@v5
+      - name: Set Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           cache: 'yarn'
+      - name: Disable Yarn telemetry
+        run: yarn config set enableTelemetry false
       - name: Install Dependencies
         run: yarn install --immutable
       - name: Check Build
@@ -19,7 +21,7 @@ jobs:
           yarn build
       - name: Run Code Analysis
         run: |
-          yarn prettify
+          yarn format
           yarn lint
       - name: Run Tests - Jest
         run: yarn tests:jest

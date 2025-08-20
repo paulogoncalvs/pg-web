@@ -34,12 +34,32 @@ const config: PlaywrightTestConfig = {
     reporter: [['html', { open: 'never', outputFolder: './src/tests/playwright/report' }]],
     projects: [
         {
-            name: 'desktop-chromium',
-            use: { ...devices['Desktop Chrome'] },
+            name: 'desktop-chromium-dark',
+            use: {
+                ...devices['Desktop Chrome'],
+                colorScheme: 'dark',
+            },
         },
         {
-            name: 'mobile-pixel5',
-            use: { ...devices['Pixel 5'] },
+            name: 'desktop-chromium-light',
+            use: {
+                ...devices['Desktop Chrome'],
+                colorScheme: 'light',
+            },
+        },
+        {
+            name: 'mobile-pixel5-dark',
+            use: {
+                ...devices['Pixel 5'],
+                colorScheme: 'dark',
+            },
+        },
+        {
+            name: 'mobile-pixel5-light',
+            use: {
+                ...devices['Pixel 5'],
+                colorScheme: 'light',
+            },
         },
     ],
 };

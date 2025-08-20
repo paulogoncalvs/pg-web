@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile.tests
       args:
-        UID: $UID
-        GID: $GID
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     environment:
       - NODE_ENV=tests
     volumes:

@@ -1,5 +1,7 @@
 import { h, FunctionalComponent, RefObject } from 'preact';
 import { useRef } from 'preact/hooks';
+import { useLocation } from 'wouter-preact';
+import classNames from 'classnames';
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
@@ -37,6 +39,7 @@ export const toggleSideDrawer = (shouldShow?: boolean | undefined): void => {
 export const SideDrawer: FunctionalComponent = () => {
     const { t } = useTranslate();
     const { lang } = useLanguage();
+    const [location] = useLocation();
     sideDrawerInputEl = useRef<HTMLInputElement>(null);
 
     return (
@@ -62,7 +65,7 @@ export const SideDrawer: FunctionalComponent = () => {
                 <div class="flex flex-col pl-10 pr-10">
                     <Link
                         useRouter
-                        class="btn _prim"
+                        class={classNames('btn _prim', { _act: location === `/${lang}/` || location === `/` })}
                         href={`/${lang}/`}
                         onClick={(): void =>
                             menuItemOnClick({
@@ -75,7 +78,7 @@ export const SideDrawer: FunctionalComponent = () => {
                     </Link>
                     <Link
                         useRouter
-                        class="btn _prim mt-4"
+                        class={classNames('btn _prim mt-4', { _act: location === `/${lang}/contact/` })}
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             menuItemOnClick({

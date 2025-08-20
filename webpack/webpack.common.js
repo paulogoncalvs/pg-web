@@ -168,7 +168,8 @@ export default {
 
             // SVG Icons: Content to use with preact component
             {
-                test: /icons\/.*\.svg/,
+                // test: /\.svg$/i,
+                test: /[\\/]icons[\\/].*\.svg$/,
                 type: 'asset/inline',
                 generator: {
                     dataUrl: (content, data) => {
@@ -185,7 +186,7 @@ export default {
 
             // SVG Images
             {
-                test: /img\/.*\.(svg)$/,
+                test: /[\\/]img[\\/].*\.svg$/,
                 type: 'asset',
                 parser: {
                     dataUrlCondition: {
