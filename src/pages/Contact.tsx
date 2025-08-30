@@ -35,7 +35,7 @@ const Contact: FunctionalComponent = () => {
             <div class="flex flex-col items-center pb-16 opacity-1 animate-fade-in-dw-3">
                 <Link
                     href="mailto:contact@paulogoncalves.dev"
-                    class="btn _i _prim text-xl sm:text-2xl"
+                    class="btn _i _glass text-xl sm:text-2xl"
                     onClick={(): void =>
                         trackEvent(
                             {
@@ -46,7 +46,7 @@ const Contact: FunctionalComponent = () => {
                         )
                     }
                 >
-                    <Icon src={mailIcon} classes="" ariaHidden />
+                    <Icon src={mailIcon} ariaHidden />
                     <span>{t('contact_page_email_button_label')}</span>
                 </Link>
             </div>
@@ -79,7 +79,7 @@ const Contact: FunctionalComponent = () => {
                         name="email"
                         id="email"
                     />
-                    <Button disabled classes="_prim mt-4">
+                    <Button disabled classes="_glass mt-4">
                         {t('contact_page_contact_form_submit_CTA')}
                     </Button>
                 </Form>

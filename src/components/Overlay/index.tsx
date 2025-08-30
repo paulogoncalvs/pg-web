@@ -32,7 +32,7 @@ export const Overlay: FunctionalComponent = (): JSX.Element => {
     return (
         <div
             ref={overlayEl}
-            class="fixed overflow-hidden z-10 bg-zinc-900 bg-opacity-80 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
+            class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/60 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
             onClick={overlayOnClick}
             aria-hidden={!!show}
         />

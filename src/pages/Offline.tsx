@@ -23,7 +23,7 @@ const OfflinePage: FunctionalComponent = () => {
                     classes="text-l opacity-1 animate-fade-in-dw-4 pb-14 text-center"
                 />
                 <div class="opacity-1 animate-fade-in-dw-3">
-                    <Link useRouter class="btn _prim" href={`/${lang}/`}>
+                    <Link useRouter class="btn _glass" href={`/${lang}/`}>
                         <span>{t('offline_page_button_label')}</span>
                     </Link>
                 </div>
