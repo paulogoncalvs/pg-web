@@ -21,7 +21,7 @@ jobs:
               run: yarn install --immutable
             - name: Build Project
               run: |
-                  cp .env.production
+                  cp .env.production .env.production
                   yarn build
             - name: Deploy to FTP
               uses: SamKirkland/FTP-Deploy-Action@v4.3.4
