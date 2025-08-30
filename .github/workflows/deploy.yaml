@@ -21,8 +21,8 @@ jobs:
               run: yarn install --immutable
             - name: Create .env.production file
               run: |
-                  echo "TRACK_GA_ID='${{ secrets.TRACK_GA_ID }}'" > .env.production
-                  echo "TRACK_GA_MEASUREMENT_ID='${{ secrets.TRACK_GA_MEASUREMENT_ID }}'" >> .env.production
+                  echo "TRACK_GA_ID='${{ vars.TRACK_GA_ID }}'" > .env.production
+                  echo "TRACK_GA_MEASUREMENT_ID='${{ vars.TRACK_GA_MEASUREMENT_ID }}'" >> .env.production
             - name: Build Project
               run: yarn build
             - name: Deploy to FTP
