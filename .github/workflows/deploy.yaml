@@ -19,10 +19,12 @@ jobs:
               run: yarn config set enableTelemetry false
             - name: Install Dependencies
               run: yarn install --immutable
-            - name: Build Project
+            - name: Create .env.production file
               run: |
-                  cp .env.production .env.production
-                  yarn build
+                  echo "TRACK_GA_ID='${{ secrets.TRACK_GA_ID }}'" > .env.production
+                  echo "TRACK_GA_MEASUREMENT_ID='${{ secrets.TRACK_GA_MEASUREMENT_ID }}'" >> .env.production
+            - name: Build Project
+              run: yarn build
             - name: Deploy to FTP
               uses: SamKirkland/FTP-Deploy-Action@v4.3.4
               with:
