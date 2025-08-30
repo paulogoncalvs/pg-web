@@ -8,6 +8,7 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        environment: ENV
         steps:
             - uses: actions/checkout@v5
             - name: Set Node.js
