@@ -51,7 +51,7 @@ export const SideDrawer: FunctionalComponent = () => {
                 onChange={sideDrawerOnChange}
                 ref={sideDrawerInputEl}
             />
-            <div class="sd shadow-sm top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] bg-zinc-100 dark:bg-zinc-800 fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
+            <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
                 <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
                     <div>
                         <LanguageSelector classes="ml-2 mr-6" />
@@ -65,7 +65,7 @@ export const SideDrawer: FunctionalComponent = () => {
                 <div class="flex flex-col pl-10 pr-10">
                     <Link
                         useRouter
-                        class={classNames('btn _prim', { _act: location === `/${lang}/` || location === `/` })}
+                        class={classNames('btn _glass', { _act: location === `/${lang}/` || location === `/` })}
                         href={`/${lang}/`}
                         onClick={(): void =>
                             menuItemOnClick({
@@ -78,7 +78,7 @@ export const SideDrawer: FunctionalComponent = () => {
                     </Link>
                     <Link
                         useRouter
-                        class={classNames('btn _prim mt-4', { _act: location === `/${lang}/contact/` })}
+                        class={classNames('btn _glass mt-4', { _act: location === `/${lang}/contact/` })}
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             menuItemOnClick({

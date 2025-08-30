@@ -15,7 +15,7 @@ jobs:
         run: yarn config set enableTelemetry false
       - name: Install Dependencies
         run: yarn install --immutable
-      - name: Check Build
+      - name: Build Project
         run: |
           cp .env.tests .env.production
           yarn build

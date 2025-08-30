@@ -69,7 +69,7 @@ const HomePage: FunctionalComponent = () => {
                     <h2 class="pb-4 text-base font-bold sm:text-xl">{t('home_page_contact_button_title')}</h2>
                     <Link
                         useRouter
-                        class="btn _i _prim"
+                        class="btn _i _glass"
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             trackEvent(
@@ -81,7 +81,7 @@ const HomePage: FunctionalComponent = () => {
                             )
                         }
                     >
-                        <Icon src={mailIcon} classes="" ariaHidden />
+                        <Icon src={mailIcon} ariaHidden />
                         <span>{t('home_page_contact_button_label')}</span>
                     </Link>
                 </div>
