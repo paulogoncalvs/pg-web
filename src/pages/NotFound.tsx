@@ -17,7 +17,7 @@ const NotFoundPage: FunctionalComponent = () => {
                     {t('not_found_page_subtitle')}
                 </h2>
                 <div class="opacity-1 animate-fade-in-dw-3">
-                    <Link useRouter class="btn _prim" href={`/${lang}/`}>
+                    <Link useRouter class="btn _glass" href={`/${lang}/`}>
                         <span>{t('not_found_page_button_label')}</span>
                     </Link>
                 </div>
