@@ -19,6 +19,10 @@ const pkgPath = resolve(__dirname, '../package.json');
 async function bumpVersion(branch) {
   execSync(`git checkout ${branch}`, { stdio: 'inherit' });
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+  if (pkg.version === newVersion) {
+    console.log(`package.json already at version ${newVersion} on ${branch}, skipping commit.`);
+    return;
+  }
   pkg.version = newVersion;
   writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
   execSync('git add package.json', { stdio: 'inherit' });
