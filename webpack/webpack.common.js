@@ -8,7 +8,7 @@ import HtmlWebpackDeployPlugin from 'html-webpack-deploy-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import tailwindcss from 'tailwindcss';
+import tailwindcssPostcss from '@tailwindcss/postcss';
 import autoprefixer from 'autoprefixer';
 import paths from './paths.js';
 import config from './config.js';
@@ -21,7 +21,7 @@ export default {
     output: {
         path: paths.build,
         filename: '[name].bundle.js',
-        assetModuleFilename: 'assets/img/[name][ext]',
+        assetModuleFilename: 'assets/resources/[name][ext]',
         publicPath: '/',
         clean: true,
         globalObject: "(typeof self === 'undefined' ? this : self)",
@@ -39,26 +39,28 @@ export default {
         //     injectionPoint: 'self.__WB_MANIFEST',
         // }),
 
-        new WorkboxPlugin.GenerateSW({
-            // these options encourage the ServiceWorkers to get in there fast
-            // and not allow any straggling "old" SWs to hang around
-            mode: env,
-            clientsClaim: true,
-            skipWaiting: true,
-            exclude: ['.DS_Store'],
-            offlineGoogleAnalytics: isProd,
-            // runtimeCaching: [
-            //         {
-            //         urlPattern: ({ request }) => request.mode === 'navigate',
-            //         handler: 'NetworkFirst',
-            //         options: {
-            //             cacheName: 'pages',
-            //             networkTimeoutSeconds: 3,
-            //         },
-            //         },
-            //     ],
-            // navigateFallback: '/offline/index.html',
-        }),
+        isProd
+            ? new WorkboxPlugin.GenerateSW({
+                  // these options encourage the ServiceWorkers to get in there fast
+                  // and not allow any straggling "old" SWs to hang around
+                  mode: env,
+                  clientsClaim: true,
+                  skipWaiting: true,
+                  exclude: ['.DS_Store'],
+                  offlineGoogleAnalytics: isProd,
+                  // runtimeCaching: [
+                  //         {
+                  //         urlPattern: ({ request }) => request.mode === 'navigate',
+                  //         handler: 'NetworkFirst',
+                  //         options: {
+                  //             cacheName: 'pages',
+                  //             networkTimeoutSeconds: 3,
+                  //         },
+                  //         },
+                  //     ],
+                  // navigateFallback: '/offline/index.html',
+              })
+            : null,
 
         new CopyWebpackPlugin({
             patterns: [
@@ -129,7 +131,7 @@ export default {
 
             // Style
             {
-                test: /\.(sa|sc|c)ss$/,
+                test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -138,14 +140,8 @@ export default {
                         options: {
                             postcssOptions: {
                                 ident: 'postcss',
-                                plugins: [tailwindcss, autoprefixer],
+                                plugins: [tailwindcssPostcss(), autoprefixer],
                             },
-                        },
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            webpackImporter: false,
                         },
                     },
                 ],

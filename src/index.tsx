@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'development') {
     require('preact/debug');
 }
 
-import '@/styles/index.scss';
+import '@/styles/index.css';
 import { h, hydrate } from 'preact';
 import App from '@/App';
 import { initGA4 } from '@/modules/tracking/ga4';

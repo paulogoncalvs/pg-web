@@ -9,7 +9,6 @@ import babelLogo from '@/assets/icons/logos/babel.svg';
 import esLintLogo from '@/assets/icons/logos/eslint.svg';
 import postCSSLogo from '@/assets/icons/logos/postcss.svg';
 import prettierLogo from '@/assets/icons/logos/prettier.svg';
-import sassLogo from '@/assets/icons/logos/sass.svg';
 import styleLintLogo from '@/assets/icons/logos/stylelint.svg';
 import typeScriptLogo from '@/assets/icons/logos/typescript.svg';
 import yarnLogo from '@/assets/icons/logos/yarn.svg';
@@ -87,9 +86,6 @@ export const Footer: FunctionalComponent = () => {
                         </Link>
                         <Link href="https://www.deque.com/axe/" class="ic-link _up" ariaLabel="Axe" newWindow>
                             <Icon src={axeLogo} width="32" height="32" ariaHidden />
-                        </Link>
-                        <Link href="https://sass-lang.com/" class="ic-link _up" ariaLabel="Sass" newWindow>
-                            <Icon src={sassLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link href="https://babeljs.io/" class="ic-link _up" ariaLabel="Babel" newWindow>
                             <Icon src={babelLogo} width="60" height="32" ariaHidden />
