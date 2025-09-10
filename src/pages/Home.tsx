@@ -24,7 +24,7 @@ const HomePage: FunctionalComponent = () => {
                     {t('home_page_subtitle')}
                 </h2>
                 <div class="flex flex-col items-center sm:pt-14 pb-14 sm:flex-row">
-                    <div class="flex-shrink-0 opacity-1 animate-fade-in-dw-3">
+                    <div class="shrink-0 opacity-1 animate-fade-in-dw-3">
                         <Image
                             classes="rounded-full"
                             src={meImg}

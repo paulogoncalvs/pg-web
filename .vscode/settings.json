@@ -25,10 +25,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
   "editor.formatOnSave": true,
-  "http.proxySupport": "off",
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true

@@ -372,21 +372,6 @@ exports[`[PAGE] 404 Page should render 1`] = `
             </use>
           </svg>
         </a>
-        <a href="https://sass-lang.com/"
-           aria-label="Sass (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="ic-link _up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
         <a href="https://babeljs.io/"
            aria-label="Babel (opens in a new window)"
            target="_blank"
@@ -853,21 +838,6 @@ exports[`[PAGE] Contact Page should render 1`] = `
             </use>
           </svg>
         </a>
-        <a href="https://sass-lang.com/"
-           aria-label="Sass (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="ic-link _up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
         <a href="https://babeljs.io/"
            aria-label="Babel (opens in a new window)"
            target="_blank"
@@ -937,7 +907,7 @@ exports[`[PAGE] Home Page should render 1`] = `
       Front-End Engineer
     </h2>
     <div class="flex flex-col items-center sm:pt-14 pb-14 sm:flex-row">
-      <div class="flex-shrink-0 opacity-1 animate-fade-in-dw-3">
+      <div class="shrink-0 opacity-1 animate-fade-in-dw-3">
         <img width="180"
              height="180"
              class="bg-zinc-200 dark:bg-zinc-800 animate-pulse rounded-full"
@@ -1305,21 +1275,6 @@ exports[`[PAGE] Home Page should render 1`] = `
         </a>
         <a href="https://www.deque.com/axe/"
            aria-label="Axe (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="ic-link _up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
-        <a href="https://sass-lang.com/"
-           aria-label="Sass (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
            class="ic-link _up"
@@ -1728,21 +1683,6 @@ exports[`[PAGE] Offline Page should render 1`] = `
         </a>
         <a href="https://www.deque.com/axe/"
            aria-label="Axe (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="ic-link _up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
-        <a href="https://sass-lang.com/"
-           aria-label="Sass (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
            class="ic-link _up"

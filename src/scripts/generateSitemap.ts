@@ -6,7 +6,7 @@ const shouldIgnoreRoute = (route: string): boolean =>
     !!['offline', '404', '/en'].some((element) => route.includes(element));
 
 (async function generateSitemap(): Promise<void> {
-    const prettierConfig = await prettier.resolveConfig('prettier.config.cjs');
+    const prettierConfig = await prettier.resolveConfig('prettier.config.js');
     const baseUrl = globalConfig.baseUrl.replace(/\/+$/, '');
     const sitemap = `
     <?xml version="1.0" encoding="UTF-8"?>
