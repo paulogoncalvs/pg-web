@@ -120,7 +120,7 @@
     "postcss": ">= 8.5.4",
     "braces": ">= 3.0.3"
   },
-  "packageManager": "yarn@4.9.4",
+  "packageManager": "yarn@4.10.0",
   "scripts": {
     "prebuild": "rimraf ./dist && node --import ./ts-node.register.js ./src/scripts/generateSitemap.ts",
     "build": "yarn prebuild && NODE_ENV=production yarn webpack --config webpack/webpack.prod.js",
