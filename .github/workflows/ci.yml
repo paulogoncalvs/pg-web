@@ -30,13 +30,13 @@ jobs:
           yarn tests:pw:build
           yarn tests:pw:run
       - name: Upload results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: pw-results
           path: src/tests/playwright/results
       - name: Upload reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pw-report
           path: src/tests/playwright/report
