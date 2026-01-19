@@ -79,7 +79,7 @@
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "style-loader": "^4.0.0",
-    "stylelint": "^16.20.0",
+    "stylelint": "^17.0.0",
     "stylelint-config-tailwindcss": "^1.0.0",
     "stylelint-webpack-plugin": "^5.0.1",
     "svg-spritemap-webpack-plugin": "^5.0.0",
