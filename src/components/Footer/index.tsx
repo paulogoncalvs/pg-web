@@ -11,7 +11,7 @@ import postCSSLogo from '@/assets/icons/logos/postcss.svg';
 import prettierLogo from '@/assets/icons/logos/prettier.svg';
 import styleLintLogo from '@/assets/icons/logos/stylelint.svg';
 import typeScriptLogo from '@/assets/icons/logos/typescript.svg';
-import yarnLogo from '@/assets/icons/logos/yarn.svg';
+import pnpmLogo from '@/assets/icons/logos/pnpm.svg';
 import workboxLogo from '@/assets/icons/logos/workbox.svg';
 import jestLogo from '@/assets/icons/logos/jest.svg';
 import axeLogo from '@/assets/icons/logos/axe.svg';
@@ -45,8 +45,8 @@ export const Footer: FunctionalComponent = () => {
                         <Link href="https://webpack.js.org/" class="ic-link _up" ariaLabel="Webpack" newWindow>
                             <Icon src={webpackLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://yarnpkg.com/" class="ic-link _up" ariaLabel="Yarn" newWindow>
-                            <Icon src={yarnLogo} width="32" height="32" ariaHidden />
+                        <Link href="https://pnpm.io/" class="ic-link _up" ariaLabel="pnpm" newWindow>
+                            <Icon src={pnpmLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link href="https://eslint.org/" class="ic-link _up" ariaLabel="ESLint" newWindow>
                             <Icon src={esLintLogo} width="32" height="32" ariaHidden />

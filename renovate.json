@@ -1,13 +1,18 @@
 {
   "extends": [
     "config:recommended",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
+    ":configMigration",
+    "abandonments:recommended",
+    "security:minimumReleaseAgeNpm",
+    ":maintainLockFilesWeekly",
     "group:allNonMajor",
     "schedule:earlyMondays",
     ":label(dependencies)",
     ":timezone(Europe/Lisbon)",
     ":preserveSemverRanges",
     ":enableVulnerabilityAlertsWithLabel(security)",
-    ":assignAndReview(paulogoncalvs)",
-    ":maintainLockFilesWeekly"
+    ":assignAndReview(paulogoncalvs)"
   ]
 }

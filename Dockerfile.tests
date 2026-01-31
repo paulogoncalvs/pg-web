@@ -1,5 +1,5 @@
 # Prebuilt MS image
-FROM mcr.microsoft.com/playwright:focal
+FROM mcr.microsoft.com/playwright:focal@sha256:2286c685f2be91dd3ee482f1a3d382af08c9a1049406c9f7b499aec6ad691a2c
 
 ARG UID=1000
 ARG GID=1000
@@ -11,21 +11,24 @@ RUN useradd --create-home --uid $UID --gid $GID --non-unique --shell /bin/bash n
 RUN mkdir -p /app
 RUN chown $UNAME:$UNAME /app
 
+# Install PNPM globally
+RUN npm i -g pnpm@10.28.2
+
 USER $UNAME
 WORKDIR /app
 
 COPY --chown=$UNAME:$UNAME . .
 COPY --chown=$UNAME:$UNAME .env.tests .env.production
 
-RUN yarn install --immutable
+RUN pnpm install --frozen-lockfile
 
 USER root
-RUN yarn playwright install --with-deps chromium
+RUN pnpm exec playwright install --with-deps chromium
 
 USER $UNAME
-RUN yarn build
+RUN pnpm run build
 
 # Expose port
 EXPOSE 4040
 
-CMD ["yarn", "playwright", "test"]
+CMD ["pnpm", "exec", "playwright", "test"]

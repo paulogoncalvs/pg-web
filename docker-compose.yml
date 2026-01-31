@@ -10,4 +10,5 @@ services:
       - NODE_ENV=tests
     volumes:
       - ./:/app
-    command: 'yarn playwright test'
+      - /app/node_modules
+    command: 'pnpm exec playwright test'

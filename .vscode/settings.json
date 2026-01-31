@@ -21,6 +21,7 @@
     "editor.formatOnSave": false
   },
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "npm.packageManager": "pnpm",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -30,14 +31,13 @@
   "less.validate": false,
   "editor.formatOnSave": true,
   "search.exclude": {
-    "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "eslint.nodePath": ".yarn/sdks",
+  "eslint.nodePath": "./node_modules",
   "prettier.prettierPath": "./node_modules/prettier",
   "prettier.ignorePath": "./.prettierignore",
   "prettier.configPath": "./prettier.config.js",
-  "typescript.tsdk": "./.yarn/sdks/typescript/lib",
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "[javascript][json][typescript]": {
     "editor.codeActionsOnSave": {

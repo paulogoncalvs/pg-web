@@ -1,5 +1,6 @@
 node_modules
 dist
+/.pnpm-store
 src/tests/**/results
 src/tests/**/report
 stats.json
@@ -11,11 +12,3 @@ public/sitemap.xml
 .env
 .env.development
 .env.production
-# yarn
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

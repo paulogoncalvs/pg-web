@@ -207,8 +207,8 @@ exports[`[PAGE] 404 Page should render 1`] = `
             </use>
           </svg>
         </a>
-        <a href="https://yarnpkg.com/"
-           aria-label="Yarn (opens in a new window)"
+        <a href="https://pnpm.io/"
+           aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
            class="ic-link _up"
@@ -684,8 +684,8 @@ exports[`[PAGE] Contact Page should render 1`] = `
             </use>
           </svg>
         </a>
-        <a href="https://yarnpkg.com/"
-           aria-label="Yarn (opens in a new window)"
+        <a href="https://pnpm.io/"
+           aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
            class="ic-link _up"
@@ -1147,8 +1147,8 @@ exports[`[PAGE] Home Page should render 1`] = `
             </use>
           </svg>
         </a>
-        <a href="https://yarnpkg.com/"
-           aria-label="Yarn (opens in a new window)"
+        <a href="https://pnpm.io/"
+           aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
            class="ic-link _up"
@@ -1566,8 +1566,8 @@ exports[`[PAGE] Offline Page should render 1`] = `
             </use>
           </svg>
         </a>
-        <a href="https://yarnpkg.com/"
-           aria-label="Yarn (opens in a new window)"
+        <a href="https://pnpm.io/"
+           aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
            class="ic-link _up"
