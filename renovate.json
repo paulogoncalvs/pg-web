@@ -1,5 +1,4 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
     "docker:pinDigests",
@@ -11,12 +10,9 @@
     "group:allNonMajor",
     "schedule:earlyMondays",
     ":label(dependencies)",
-    ":preserveSemverRanges"
-  ],
-  "enabledPackageManagers": ["pnpm"],
-  "vulnerabilityAlerts": {
-    "labels": ["security"]
-  },
-  "reviewers": ["paulogoncalvs"],
-  "timezone": "Europe/Lisbon"
+    ":timezone(Europe/Lisbon)",
+    ":preserveSemverRanges",
+    ":enableVulnerabilityAlertsWithLabel(security)",
+    ":assignAndReview(paulogoncalvs)"
+  ]
 }
