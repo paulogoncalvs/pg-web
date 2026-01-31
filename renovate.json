@@ -11,10 +11,12 @@
     "group:allNonMajor",
     "schedule:earlyMondays",
     ":label(dependencies)",
-    ":timezone(Europe/Lisbon)",
-    ":preserveSemverRanges",
-    ":enableVulnerabilityAlertsWithLabel(security)",
-    ":assignAndReview(paulogoncalvs)"
+    ":preserveSemverRanges"
   ],
-  "enabledPackageManagers": ["pnpm"]
+  "enabledPackageManagers": ["pnpm"],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
+  "reviewers": ["paulogoncalvs"],
+  "timezone": "Europe/Lisbon"
 }
