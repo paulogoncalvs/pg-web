@@ -65,7 +65,7 @@ export const SideDrawer: FunctionalComponent = () => {
                 <div class="flex flex-col pl-10 pr-10">
                     <Link
                         useRouter
-                        class={classNames('btn _glass', { _act: location === `/${lang}/` || location === `/` })}
+                        class={classNames('btn', { _act: location === `/${lang}/` || location === `/` })}
                         href={`/${lang}/`}
                         onClick={(): void =>
                             menuItemOnClick({
@@ -78,7 +78,7 @@ export const SideDrawer: FunctionalComponent = () => {
                     </Link>
                     <Link
                         useRouter
-                        class={classNames('btn _glass mt-4', { _act: location === `/${lang}/contact/` })}
+                        class={classNames('btn mt-4', { _act: location === `/${lang}/contact/` })}
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             menuItemOnClick({

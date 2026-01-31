@@ -17,6 +17,7 @@ import jestLogo from '@/assets/icons/logos/jest.svg';
 import axeLogo from '@/assets/icons/logos/axe.svg';
 import gaLogo from '@/assets/icons/logos/ga.svg';
 import playwrigthLogo from '@/assets/icons/logos/playwright.svg';
+import { trackEvent } from '@/modules/tracking/ga4';
 
 const initialYear = 2021;
 const currentYear = new Date().getFullYear();
@@ -26,9 +27,9 @@ export const Footer: FunctionalComponent = () => {
 
     return (
         <footer>
-            <div class="text-center bg-zinc-100 dark:bg-zinc-800">
-                <div class="container flex flex-col items-center px-6 pt-16 mx-auto pb-14">
-                    <div class="pb-6 text-sm sm:text-base">{t('footer_description_1')}</div>
+            <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+                <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+                    <p class="text-sm font-bold pb-4">{t('footer_description_2')}</p>
                     <div class="flex flex-wrap justify-center align-middle">
                         <Link
                             href="https://www.typescriptlang.org/"
@@ -91,12 +92,38 @@ export const Footer: FunctionalComponent = () => {
                             <Icon src={babelLogo} width="60" height="32" ariaHidden />
                         </Link>
                     </div>
+                    <p class="text-xs pt-4">
+                        {t(
+                            'footer_description_1',
+                            {
+                                link: (
+                                    <Link
+                                        href="https://github.com/paulogoncalvs/pg-web"
+                                        class="underline"
+                                        newWindow
+                                        onClick={(): void =>
+                                            trackEvent(
+                                                {
+                                                    category: 'Footer Link',
+                                                    label: 'Github',
+                                                },
+                                                'link_click',
+                                            )
+                                        }
+                                    >
+                                        {t('footer_description_1_link_text')}
+                                    </Link>
+                                ),
+                            },
+                            false,
+                        )}
+                    </p>
                 </div>
             </div>
-            <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
-                <p>{t('footer_description_2')}</p>
-                <p class="pt-2">
-                    paulogoncalves.dev &copy; {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ''} 🙂
+            <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
+                <p>{t('footer_description_3')} 🙂</p>
+                <p class="pt-2 font-bold">
+                    paulogoncalves.dev &copy; {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ''}
                 </p>
             </div>
         </footer>

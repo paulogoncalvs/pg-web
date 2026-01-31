@@ -1,0 +1,10 @@
+/* move up */
+._up {
+    @apply md:hover:-translate-y-0.5 md:focus:-translate-y-0.5;
+}
+
+.-sup-novar {
+    @supports not (color: var(--primary)) {
+        display: none;
+    }
+}

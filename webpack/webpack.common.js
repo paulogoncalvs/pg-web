@@ -8,8 +8,6 @@ import HtmlWebpackDeployPlugin from 'html-webpack-deploy-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import tailwindcssPostcss from '@tailwindcss/postcss';
-import autoprefixer from 'autoprefixer';
 import paths from './paths.js';
 import config from './config.js';
 import globalConfig from '../src/config/global/index.js';
@@ -132,19 +130,7 @@ export default {
             // Style
             {
                 test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                ident: 'postcss',
-                                plugins: [tailwindcssPostcss(), autoprefixer],
-                            },
-                        },
-                    },
-                ],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
             },
 
             // Images: Copy images to build folder

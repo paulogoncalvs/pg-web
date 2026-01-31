@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`[PAGE] 404 Page should render 1`] = `
-<header class="sticky top-0 z-10 dark:bg-zinc-900/20 border-b shadow-xl backdrop-blur-md bg-white/20 border-t-0 dark:border-white/20 border-white/50 rounded-bl-xl rounded-br-xl">
+<header class="sticky top-0 z-10 dark:bg-zinc-900/15 border-b shadow-xl backdrop-blur-md bg-white/10 border-t-0 dark:border-white/15 border-white/80 rounded-bl-xl rounded-br-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a class="text-xl font-bold tracking-tight"
@@ -27,16 +27,16 @@ exports[`[PAGE] 404 Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
+<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
   <div class="flex flex-col items-center">
     <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       Oops!
     </h1>
-    <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-14">
+    <h2 class="text-xl tracking-tight text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
       Page not found
     </h2>
     <div class="opacity-1 animate-fade-in-dw-3">
-      <a class="btn _glass"
+      <a class="btn"
          href="/undefined/"
       >
         <span>
@@ -54,7 +54,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
   <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-all py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-emerald-200 dark:hover:border-emerald-400 focus:border-emerald-200 dark:focus:border-emerald-400 ml-2 mr-6"
+        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -91,14 +91,14 @@ exports[`[PAGE] 404 Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn _glass"
+      <a class="btn"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn _glass mt-4"
+      <a class="btn mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -156,11 +156,11 @@ exports[`[PAGE] 404 Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-zinc-100 dark:bg-zinc-800">
-    <div class="container flex flex-col items-center px-6 pt-16 mx-auto pb-14">
-      <div class="pb-6 text-sm sm:text-base">
-        Site built from scratch with:
-      </div>
+  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+    <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+      <p class="text-sm font-bold pb-4">
+        Website Technology Stack:
+      </p>
       <div class="flex flex-wrap justify-center align-middle">
         <a href="https://www.typescriptlang.org/"
            aria-label="TypeScript (opens in a new window)"
@@ -388,25 +388,36 @@ exports[`[PAGE] 404 Page should render 1`] = `
           </svg>
         </a>
       </div>
+      <p class="text-xs pt-4">
+        The full source code is available on
+        <a href="https://github.com/paulogoncalvs/pg-web"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="underline"
+        >
+          GitHub
+        </a>
+        .
+      </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
+  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
     <p>
-      optimized for modern browsers
+      optimized for modern browsers 🙂
     </p>
-    <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2022 🙂
+    <p class="pt-2 font-bold">
+      paulogoncalves.dev © 2021 - 2022
     </p>
   </div>
 </footer>
-<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/60 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
+<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/40 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-transform"
      aria-hidden="false"
 >
 </div>
 `;
 
 exports[`[PAGE] Contact Page should render 1`] = `
-<header class="sticky top-0 z-10 dark:bg-zinc-900/20 border-b shadow-xl backdrop-blur-md bg-white/20 border-t-0 dark:border-white/20 border-white/50 rounded-bl-xl rounded-br-xl">
+<header class="sticky top-0 z-10 dark:bg-zinc-900/15 border-b shadow-xl backdrop-blur-md bg-white/10 border-t-0 dark:border-white/15 border-white/80 rounded-bl-xl rounded-br-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a class="text-xl font-bold tracking-tight"
@@ -432,18 +443,18 @@ exports[`[PAGE] Contact Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
+<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
   <div class="flex flex-col items-center">
     <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       Contact me
     </h1>
-    <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-14">
+    <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
       by e-mail
     </h2>
   </div>
-  <div class="flex flex-col items-center pb-16 opacity-1 animate-fade-in-dw-3">
+  <div class="flex flex-col items-center pb-14 opacity-1 animate-fade-in-dw-3">
     <a href="mailto:contact@paulogoncalves.dev"
-       class="btn _i _glass text-xl sm:text-2xl"
+       class="btn _i"
     >
       <svg aria-hidden="true"
            class="fill-current"
@@ -502,7 +513,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
         >
       </div>
       <button disabled
-              class="btn _glass mt-4"
+              class="btn mt-4"
       >
         Send message
       </button>
@@ -520,7 +531,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
   <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-all py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-emerald-200 dark:hover:border-emerald-400 focus:border-emerald-200 dark:focus:border-emerald-400 ml-2 mr-6"
+        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -557,14 +568,14 @@ exports[`[PAGE] Contact Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn _glass"
+      <a class="btn"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn _glass mt-4"
+      <a class="btn mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -622,11 +633,11 @@ exports[`[PAGE] Contact Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-zinc-100 dark:bg-zinc-800">
-    <div class="container flex flex-col items-center px-6 pt-16 mx-auto pb-14">
-      <div class="pb-6 text-sm sm:text-base">
-        Site built from scratch with:
-      </div>
+  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+    <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+      <p class="text-sm font-bold pb-4">
+        Website Technology Stack:
+      </p>
       <div class="flex flex-wrap justify-center align-middle">
         <a href="https://www.typescriptlang.org/"
            aria-label="TypeScript (opens in a new window)"
@@ -854,25 +865,36 @@ exports[`[PAGE] Contact Page should render 1`] = `
           </svg>
         </a>
       </div>
+      <p class="text-xs pt-4">
+        The full source code is available on
+        <a href="https://github.com/paulogoncalvs/pg-web"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="underline"
+        >
+          GitHub
+        </a>
+        .
+      </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
+  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
     <p>
-      optimized for modern browsers
+      optimized for modern browsers 🙂
     </p>
-    <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2022 🙂
+    <p class="pt-2 font-bold">
+      paulogoncalves.dev © 2021 - 2022
     </p>
   </div>
 </footer>
-<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/60 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
+<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/40 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-transform"
      aria-hidden="false"
 >
 </div>
 `;
 
 exports[`[PAGE] Home Page should render 1`] = `
-<header class="sticky top-0 z-10 dark:bg-zinc-900/20 border-b shadow-xl backdrop-blur-md bg-white/20 border-t-0 dark:border-white/20 border-white/50 rounded-bl-xl rounded-br-xl">
+<header class="sticky top-0 z-10 dark:bg-zinc-900/15 border-b shadow-xl backdrop-blur-md bg-white/10 border-t-0 dark:border-white/15 border-white/80 rounded-bl-xl rounded-br-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a class="text-xl font-bold tracking-tight"
@@ -898,37 +920,42 @@ exports[`[PAGE] Home Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
+<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
   <div class="flex flex-col items-center">
     <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       PAULO GONÇALVES
     </h1>
-    <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-14">
+    <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2">
       Front-End Engineer
     </h2>
-    <div class="flex flex-col items-center sm:pt-14 pb-14 sm:flex-row">
+    <div class="flex flex-col items-center pt-14 pb-14 sm:flex-row">
       <div class="shrink-0 opacity-1 animate-fade-in-dw-3">
-        <img width="180"
-             height="180"
-             class="bg-zinc-200 dark:bg-zinc-800 animate-pulse rounded-full"
+        <img width="200"
+             height="200"
+             fetchpriority="high"
+             class="animate-pulse rounded-full shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] bg-white/30 border border-white/20"
              alt
              src="test-file-stub"
              srcset="test-file-stub, test-file-stub 2x"
         >
       </div>
-      <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:text-base sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4">
+      <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4 sm:text-base">
         <p>
-          Born in Vila Nova de Gaia, Portugal.
+          Native of Vila Nova de Gaia, Porto district, Portugal.
         </p>
-        <p class="mux">
+        <p class>
           Currently working as a
           <strong>
             Principal Front-End Engineer
           </strong>
-          at Porto Tech Center - Jumia.
+          at
+          <strong>
+            Porto Tech Center - Jumia
+          </strong>
+          , where I architect and develop large-scale, high-performance web applications using modern front-end frameworks and tooling.
         </p>
         <p>
-          Check the
+          For more technical details and experience, please visit my
           <a href="https://pt.linkedin.com/in/paulogoncalvs"
              target="_blank"
              rel="noopener noreferrer"
@@ -936,15 +963,12 @@ exports[`[PAGE] Home Page should render 1`] = `
           >
             LinkedIn profile
           </a>
-          for more information.
+          .
         </p>
       </div>
     </div>
-    <div class="pb-8 opacity-1 sm:pt-8 animate-fade-in-dw-5 text-center">
-      <h2 class="pb-4 text-base font-bold sm:text-xl">
-        Wanna reach out?
-      </h2>
-      <a class="btn _i _glass"
+    <div class="opacity-1 animate-fade-in-dw-5 text-center">
+      <a class="btn _i"
          href="/undefined/contact/"
       >
         <svg aria-hidden="true"
@@ -970,7 +994,7 @@ exports[`[PAGE] Home Page should render 1`] = `
   <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-all py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-emerald-200 dark:hover:border-emerald-400 focus:border-emerald-200 dark:focus:border-emerald-400 ml-2 mr-6"
+        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -1007,14 +1031,14 @@ exports[`[PAGE] Home Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn _glass _act"
+      <a class="btn _act"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn _glass mt-4"
+      <a class="btn mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -1072,11 +1096,11 @@ exports[`[PAGE] Home Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-zinc-100 dark:bg-zinc-800">
-    <div class="container flex flex-col items-center px-6 pt-16 mx-auto pb-14">
-      <div class="pb-6 text-sm sm:text-base">
-        Site built from scratch with:
-      </div>
+  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+    <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+      <p class="text-sm font-bold pb-4">
+        Website Technology Stack:
+      </p>
       <div class="flex flex-wrap justify-center align-middle">
         <a href="https://www.typescriptlang.org/"
            aria-label="TypeScript (opens in a new window)"
@@ -1304,25 +1328,36 @@ exports[`[PAGE] Home Page should render 1`] = `
           </svg>
         </a>
       </div>
+      <p class="text-xs pt-4">
+        The full source code is available on
+        <a href="https://github.com/paulogoncalvs/pg-web"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="underline"
+        >
+          GitHub
+        </a>
+        .
+      </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
+  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
     <p>
-      optimized for modern browsers
+      optimized for modern browsers 🙂
     </p>
-    <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2022 🙂
+    <p class="pt-2 font-bold">
+      paulogoncalves.dev © 2021 - 2022
     </p>
   </div>
 </footer>
-<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/60 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
+<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/40 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-transform"
      aria-hidden="false"
 >
 </div>
 `;
 
 exports[`[PAGE] Offline Page should render 1`] = `
-<header class="sticky top-0 z-10 dark:bg-zinc-900/20 border-b shadow-xl backdrop-blur-md bg-white/20 border-t-0 dark:border-white/20 border-white/50 rounded-bl-xl rounded-br-xl">
+<header class="sticky top-0 z-10 dark:bg-zinc-900/15 border-b shadow-xl backdrop-blur-md bg-white/10 border-t-0 dark:border-white/15 border-white/80 rounded-bl-xl rounded-br-xl">
   <div class="container py-4 px-6 mx-auto flex items-center justify-between">
     <div class="flex items-center">
       <a class="text-xl font-bold tracking-tight"
@@ -1348,7 +1383,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-16 pb-8 mx-auto sm:pb-16">
+<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
   <div class="flex flex-col items-center">
     <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
       Oops!
@@ -1356,11 +1391,11 @@ exports[`[PAGE] Offline Page should render 1`] = `
     <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-8">
       You are currently offline
     </h2>
-    <p class="mux text-l opacity-1 animate-fade-in-dw-4 pb-14 text-center">
+    <p class="text-l opacity-1 animate-fade-in-dw-4 pb-14 text-center">
       You need an Internet connection.
     </p>
     <div class="opacity-1 animate-fade-in-dw-3">
-      <a class="btn _glass"
+      <a class="btn"
          href="/undefined/"
       >
         <span>
@@ -1378,7 +1413,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
   <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-all py-1 pr-7 text-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-emerald-200 dark:hover:border-emerald-400 focus:border-emerald-200 dark:focus:border-emerald-400 ml-2 mr-6"
+        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -1415,14 +1450,14 @@ exports[`[PAGE] Offline Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn _glass"
+      <a class="btn"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn _glass mt-4"
+      <a class="btn mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -1480,11 +1515,11 @@ exports[`[PAGE] Offline Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-zinc-100 dark:bg-zinc-800">
-    <div class="container flex flex-col items-center px-6 pt-16 mx-auto pb-14">
-      <div class="pb-6 text-sm sm:text-base">
-        Site built from scratch with:
-      </div>
+  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+    <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+      <p class="text-sm font-bold pb-4">
+        Website Technology Stack:
+      </p>
       <div class="flex flex-wrap justify-center align-middle">
         <a href="https://www.typescriptlang.org/"
            aria-label="TypeScript (opens in a new window)"
@@ -1712,18 +1747,29 @@ exports[`[PAGE] Offline Page should render 1`] = `
           </svg>
         </a>
       </div>
+      <p class="text-xs pt-4">
+        The full source code is available on
+        <a href="https://github.com/paulogoncalvs/pg-web"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="underline"
+        >
+          GitHub
+        </a>
+        .
+      </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16 text-zinc-400">
+  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
     <p>
-      optimized for modern browsers
+      optimized for modern browsers 🙂
     </p>
-    <p class="pt-2">
-      paulogoncalves.dev © 2021 - 2022 🙂
+    <p class="pt-2 font-bold">
+      paulogoncalves.dev © 2021 - 2022
     </p>
   </div>
 </footer>
-<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/60 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-all"
+<div class="fixed overflow-hidden z-10 dark:bg-zinc-900/60 bg-white/40 inset-0 transform ease-in-out duration-700 opacity-0 hidden transition-transform"
      aria-hidden="false"
 >
 </div>
