@@ -53,7 +53,7 @@ Document key variables in `.env.dist` (add descriptions there). Common variables
 
 - NODE_ENV — build environment
 - TRACK_GA_ID, TRACK_GA_MEASUREMENT_ID — analytics
-- SFTP\_\* — used by deploy workflow (set as GitHub Secrets)
+- FTP\_\* — used by deploy workflow (set as GitHub Secrets)
 
 If you use environment-specific secrets in GitHub Actions, add them under Settings → Environments → Production.
 
