@@ -25,7 +25,7 @@ jobs:
             - name: Build Project
               run: pnpm run build
             - name: Deploy to SFTP
-              uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+              uses: wlixcc/SFTP-Deploy-Action@a5ccb9c6211a94cc59404f0fdb2a9936a6dfee64 # v1.2.6
               with:
                   username: ${{ secrets.FTP_USERNAME }}
                   password: ${{ secrets.FTP_PASSWORD }}
