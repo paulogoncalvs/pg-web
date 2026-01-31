@@ -1,10 +1,12 @@
 dist
+/.pnpm-store
+pnpm-lock.yaml
+pnpm-workspace.yaml
 coverage
 node_modules
 public
 .idea
 .history
 .vscode
-.yarn
 *.svg
 *.png

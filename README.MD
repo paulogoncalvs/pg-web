@@ -10,8 +10,8 @@ Static site for Paulo Gonçalves built with Preact, TailwindCSS and a webpack to
 
 ## Prerequisites
 
-- Node.js >= 18 (LTS)
-- Yarn
+- Node.js >= 24 (LTS)
+- pnpm
 - Git
 - (Optional) GitHub CLI `gh` for automated releases
 - Recommended: VS Code + Prettier + ESLint extensions
@@ -23,20 +23,20 @@ Clone and install:
 ```bash
 git clone https://github.com/paulogoncalvs/pg-web.git
 cd pg-web
-yarn install
+pnpm install
 ```
 
 Run dev server:
 
 ```bash
-yarn start:dev
+pnpm run start:dev
 # open http://localhost:3000 (or port shown in console)
 ```
 
 Build for production:
 
 ```bash
-yarn build
+pnpm run build
 # output in dist/
 ```
 
@@ -62,37 +62,34 @@ If you use environment-specific secrets in GitHub Actions, add them under Settin
 <details>
 <summary>List</summary>
 
-| COMMAND                  | DESCRIPTION                                     |
-| :----------------------- | ----------------------------------------------- |
-| **BUILD**                |                                                 |
-| `yarn prebuild`          | Generate sitemap                                |
-| `yarn build`             | Generate dist                                   |
-| **SERVER**               |                                                 |
-| `yarn start:dev`         | Start **Development** server                    |
-| `yarn start:prod`        | Generate dist + Start **Production** server     |
-| `yarn start:prod:server` | Start Production server without dist generation |
-| **TESTS**                |                                                 |
-| `yarn tests:jest`        | Run Jest tests                                  |
-| `yarn tests:jest:update` | Update Jest tests                               |
-| `yarn tests:pw`          | Generate dist + Run Playwright tests            |
-| `yarn tests:pw:update`   | Generate dist + Update Playwright tests         |
-| `yarn tests:pw:run`      | Run Playwright tests without dist generation    |
-| `yarn tests:pw:build`    | Build Playwright docker image                   |
-| `yarn tests`             | Run all tests                                   |
-| `yarn tests:update`      | Update all tests                                |
-| **FORMAT**               |                                                 |
-| `yarn format`            | Code formatting - Check                         |
-| `yarn format:fix`        | Code formatting - Fix                           |
-| **LINT**                 |                                                 |
-| `yarn lint:ts`           | Lint TypeScript                                 |
-| `yarn lint:ts:fix`       | Lint TypeScript - Fix                           |
-| `yarn lint:css`          | Lint CSS                                        |
-| `yarn lint:css:fix`      | Lint CSS - Fix                                  |
-| `yarn lint`              | Lint All                                        |
-| `yarn lint:fix`          | Lint All - Fix                                  |
-| **PACKAGES**             |                                                 |
-| `yarn upgrade:all`       | Upgrade all the packages                        |
-| `yarn upgrade:latest`    | Upgrades packages to their latest version       |
+| COMMAND                      | DESCRIPTION                                     |
+| :--------------------------- | ----------------------------------------------- |
+| **BUILD**                    |                                                 |
+| `pnpm run prebuild`          | Generate sitemap                                |
+| `pnpm run build`             | Generate dist                                   |
+| **SERVER**                   |                                                 |
+| `pnpm run start:dev`         | Start **Development** server                    |
+| `pnpm run start:prod`        | Generate dist + Start **Production** server     |
+| `pnpm run start:prod:server` | Start Production server without dist generation |
+| **TESTS**                    |                                                 |
+| `pnpm run tests:jest`        | Run Jest tests                                  |
+| `pnpm run tests:jest:update` | Update Jest tests                               |
+| `pnpm run tests:pw`          | Generate dist + Run Playwright tests            |
+| `pnpm run tests:pw:update`   | Generate dist + Update Playwright tests         |
+| `pnpm run tests:pw:run`      | Run Playwright tests without dist generation    |
+| `pnpm run tests:pw:build`    | Build Playwright docker image                   |
+| `pnpm run tests`             | Run all tests                                   |
+| `pnpm run tests:update`      | Update all tests                                |
+| **FORMAT**                   |                                                 |
+| `pnpm run format`            | Code formatting - Check                         |
+| `pnpm run format:fix`        | Code formatting - Fix                           |
+| **LINT**                     |                                                 |
+| `pnpm run lint:ts`           | Lint TypeScript                                 |
+| `pnpm run lint:ts:fix`       | Lint TypeScript - Fix                           |
+| `pnpm run lint:css`          | Lint CSS                                        |
+| `pnpm run lint:css:fix`      | Lint CSS - Fix                                  |
+| `pnpm run lint`              | Lint All                                        |
+| `pnpm run lint:fix`          | Lint All - Fix                                  |
 
 </details>
 
