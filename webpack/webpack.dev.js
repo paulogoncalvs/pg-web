@@ -29,7 +29,7 @@ export default merge(common, {
         },
         devMiddleware: {
             // serverSideRender: false,
-            // writeToDisk: true,
+            writeToDisk: true,
             // ignored: /node_modules/,
         },
     },

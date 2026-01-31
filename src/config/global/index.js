@@ -33,7 +33,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/Poppins-Regular.woff2',
+            href: '/assets/resources/Poppins-Regular.b78525ba2b4b274fac00.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',
@@ -43,7 +43,7 @@ const links = [
     {
         path: '',
         attributes: {
-            href: '/assets/fonts/Poppins-Bold.woff2',
+            href: '/assets/resources/Poppins-Bold.9edd872ea4af8d157708.woff2',
             rel: 'preload',
             as: 'font',
             type: 'font/woff2',
@@ -87,8 +87,8 @@ const links = [
             sizes: '180x180',
         },
     },
-    // { path: '/img/paulo-goncalves.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
-    // { path: '/img/paulo-goncalves_sm.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
+    // { path: '/resources/paulo-goncalves.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
+    // { path: '/resources/paulo-goncalves_sm.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
 ];
 
 export default {

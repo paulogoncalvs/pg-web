@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+@import './fonts.css';
+@import './theme.css';
+@import './animations.css';
+@import './components.css';
+@import './utilities.css';
+@plugin "@tailwindcss/forms";
+
+@layer theme, base, components, utilities;
+
+html {
+    @apply scroll-smooth;
+}
+
+body {
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    /* text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); */
+}
+
+img,
+svg {
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.3));
+}
+
+.dark img,
+.dark svg {
+    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.3));
+}
+
+/* .dark body {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+} */
+
+a {
+    @apply md:transform-gpu md:ease-out md:duration-500 md:transition-transform;
+    @apply hover:text-slate-500 focus:text-slate-500;
+
+    -webkit-tap-highlight-color: transparent;
+}

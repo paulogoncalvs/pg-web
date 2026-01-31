@@ -28,14 +28,14 @@ const Contact: FunctionalComponent = () => {
                 <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
                     {t('contact_page_title')}
                 </h1>
-                <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-14">
+                <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
                     {t('contact_page_subtitle')}
                 </h2>
             </div>
-            <div class="flex flex-col items-center pb-16 opacity-1 animate-fade-in-dw-3">
+            <div class="flex flex-col items-center pb-14 opacity-1 animate-fade-in-dw-3">
                 <Link
                     href="mailto:contact@paulogoncalves.dev"
-                    class="btn _i _glass text-xl sm:text-2xl"
+                    class="btn _i"
                     onClick={(): void =>
                         trackEvent(
                             {
@@ -79,7 +79,7 @@ const Contact: FunctionalComponent = () => {
                         name="email"
                         id="email"
                     />
-                    <Button disabled classes="_glass mt-4">
+                    <Button disabled classes="mt-4">
                         {t('contact_page_contact_form_submit_CTA')}
                     </Button>
                 </Form>
