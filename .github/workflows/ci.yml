@@ -10,25 +10,27 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '24.x'
-          cache: 'yarn'
-      - name: Disable Yarn telemetry
-        run: yarn config set enableTelemetry false
+          cache: 'pnpm'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10.28.2'
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
       - name: Build Project
         run: |
           cp .env.tests .env.production
-          yarn build
+          pnpm run build
       - name: Run Code Analysis
         run: |
-          yarn format
-          yarn lint
+          pnpm run format
+          pnpm run lint
       - name: Run Tests - Jest
-        run: yarn tests:jest
+        run: pnpm run tests:jest
       - name: Run Tests - Playwright
         run: |
-          yarn tests:pw:build
-          yarn tests:pw:run
+          pnpm run tests:pw:build
+          pnpm run tests:pw:run
       - name: Upload results
         uses: actions/upload-artifact@v6
         if: always()

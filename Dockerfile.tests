@@ -11,21 +11,24 @@ RUN useradd --create-home --uid $UID --gid $GID --non-unique --shell /bin/bash n
 RUN mkdir -p /app
 RUN chown $UNAME:$UNAME /app
 
+# Install PNPM globally
+RUN npm i -g pnpm@10.28.2
+
 USER $UNAME
 WORKDIR /app
 
 COPY --chown=$UNAME:$UNAME . .
 COPY --chown=$UNAME:$UNAME .env.tests .env.production
 
-RUN yarn install --immutable
+RUN pnpm install --frozen-lockfile
 
 USER root
-RUN yarn playwright install --with-deps chromium
+RUN pnpm exec playwright install --with-deps chromium
 
 USER $UNAME
-RUN yarn build
+RUN pnpm run build
 
 # Expose port
 EXPOSE 4040
 
-CMD ["yarn", "playwright", "test"]
+CMD ["pnpm", "exec", "playwright", "test"]

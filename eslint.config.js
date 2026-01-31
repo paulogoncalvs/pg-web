@@ -22,7 +22,7 @@ export default [
             '**/.history',
             '**/.idea',
             '**/.vscode',
-            '**/.yarn',
+            '**/.pnpm-store',
         ],
     },
     {

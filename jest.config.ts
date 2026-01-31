@@ -1,11 +1,10 @@
 import type { Config } from 'jest';
-import { defaults } from 'jest-config';
 
 const config: Config = {
     testTimeout: 10000,
     verbose: true,
     rootDir: 'src/tests/jest/',
-    moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx', 'json'],
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     moduleNameMapper: {
         '@/assets/icons/.*\\.svg$': '<rootDir>__mocks__/iconSrcMock.ts',
         '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':

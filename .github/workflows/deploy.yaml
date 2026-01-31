@@ -15,17 +15,15 @@ jobs:
               uses: actions/setup-node@v6
               with:
                   node-version: '24.x'
-                  cache: 'yarn'
-            - name: Disable Yarn telemetry
-              run: yarn config set enableTelemetry false
+                  cache: 'pnpm'
             - name: Install Dependencies
-              run: yarn install --immutable
+              run: pnpm install --frozen-lockfile
             - name: Create .env.production file
               run: |
                   echo "TRACK_GA_ID='${{ vars.TRACK_GA_ID }}'" > .env.production
                   echo "TRACK_GA_MEASUREMENT_ID='${{ vars.TRACK_GA_MEASUREMENT_ID }}'" >> .env.production
             - name: Build Project
-              run: yarn build
+              run: pnpm run build
             - name: Deploy to SFTP
               uses: wlixcc/SFTP-Deploy-Action@v1.2.4
               with:
