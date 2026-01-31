@@ -12,6 +12,7 @@ interface ImageComponentProps {
     classes?: string;
     alt?: string;
     style?: string;
+    fetchpriority?: 'high' | 'low' | 'auto';
     otherProps?: unknown;
 }
 
@@ -52,7 +53,6 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
             ref={imgRef}
             {...otherProps}
             class={classNames(
-                'bg-zinc-200 dark:bg-zinc-800',
                 {
                     lazy: isLazy,
                     '_loaded transform opacity-1 animate-fade-in': isLoaded,

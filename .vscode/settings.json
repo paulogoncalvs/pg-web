@@ -24,7 +24,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  "tailwindCSS.experimental.configFile": "./src/styles/index.css",
   "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
   "editor.formatOnSave": true,
   "search.exclude": {
     "**/.yarn": true,

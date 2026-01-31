@@ -20,21 +20,22 @@ const HomePage: FunctionalComponent = () => {
                 <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
                     {t('home_page_title')}
                 </h1>
-                <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-14">
+                <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2">
                     {t('home_page_subtitle')}
                 </h2>
-                <div class="flex flex-col items-center sm:pt-14 pb-14 sm:flex-row">
+                <div class="flex flex-col items-center pt-14 pb-14 sm:flex-row">
                     <div class="shrink-0 opacity-1 animate-fade-in-dw-3">
                         <Image
-                            classes="rounded-full"
+                            classes="rounded-full shadow-[inset_0_1px_0px_rgba(255,255,255,0.75),0_0_9px_rgba(0,0,0,0.2),0_3px_8px_rgba(0,0,0,0.15)] bg-white/30 border border-white/20"
                             src={meImg}
                             srcset={`${meSmImg}, ${meImg} 2x`}
-                            width="180"
-                            height="180"
+                            width="200"
+                            height="200"
                             alt=""
+                            fetchpriority="high"
                         />
                     </div>
-                    <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:text-base sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4">
+                    <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4 sm:text-base">
                         <p>{t('home_page_description_1')}</p>
                         <Markup data={t('home_page_description_2')} Element="p" />
                         <p>
@@ -65,11 +66,10 @@ const HomePage: FunctionalComponent = () => {
                         </p>
                     </div>
                 </div>
-                <div class="pb-8 opacity-1 sm:pt-8 animate-fade-in-dw-5 text-center">
-                    <h2 class="pb-4 text-base font-bold sm:text-xl">{t('home_page_contact_button_title')}</h2>
+                <div class="opacity-1 animate-fade-in-dw-5 text-center">
                     <Link
                         useRouter
-                        class="btn _i _glass"
+                        class="btn _i"
                         href={`/${lang}/contact/`}
                         onClick={(): void =>
                             trackEvent(

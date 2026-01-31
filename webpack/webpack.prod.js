@@ -13,7 +13,7 @@ export default merge(common, {
         path: paths.build,
         publicPath: '/',
         filename: 'assets/js/[name].bundle.[contenthash].js',
-        assetModuleFilename: 'assets/img/[name].[contenthash][ext]',
+        assetModuleFilename: 'assets/resources/[name].[contenthash][ext]',
     },
     plugins: [
         // Extracts CSS into separate files
