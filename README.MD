@@ -102,7 +102,7 @@ If you use environment-specific secrets in GitHub Actions, add them under Settin
     - `.github/workflows/ci.yml` — build and test.
     - `.github/workflows/deploy.yml` — deploy to SFTP (uses wlixcc/SFTP-Deploy-Action).
 - Secrets needed (set in repository or environment):
-    - FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_PORT (optional)
+    - FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_REMOTE_PATH, FTP_PORT (optional)
     - TRACK_GA_ID, TRACK_GA_MEASUREMENT_ID (optional)
 - For environment secrets, ensure `environment` in workflow matches the environment name in repository settings.
 
