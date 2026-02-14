@@ -44,7 +44,7 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
             .catch((err) => {
                 setIsLoading(false);
                 setIsLoaded(false);
-                console.error(err); // eslint-disable-line no-console
+                console.error(err);
             });
     }
 

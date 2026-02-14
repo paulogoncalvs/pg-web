@@ -24,16 +24,16 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             toggleSideDrawer(false);
         }
-    }, [langParam, location]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [langParam, location]);
 
     return null;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useRouterLocation = (): any[] => (isBrowser() ? useLocation() : ['', (): null => null]); // eslint-disable-line react-hooks/rules-of-hooks
+export const useRouterLocation = (): any[] => (isBrowser() ? useLocation() : ['', (): null => null]);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useRouterRoute = (route: string): any[] => (isBrowser() ? useRoute(route) : ['', (): null => null]); // eslint-disable-line react-hooks/rules-of-hooks
+export const useRouterRoute = (route: string): any[] => (isBrowser() ? useRoute(route) : ['', (): null => null]);
 
 export const useRouter = (): {
     url: string;
