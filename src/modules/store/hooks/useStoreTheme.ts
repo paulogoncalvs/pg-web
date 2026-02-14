@@ -17,7 +17,6 @@ export const useStoreTheme = (theme: Theme, dispatch: (action: StoreContextActio
         return (): void => {
             matchMedia.removeEventListener('change', handler);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {

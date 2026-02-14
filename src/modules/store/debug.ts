@@ -12,7 +12,6 @@ const devTools = withDevTools && window.__REDUX_DEVTOOLS_EXTENSION__.connect();
 const debug = (type: string, state: unknown): void => {
     if (process.env.NODE_ENV !== 'development') return;
 
-    // eslint-disable-next-line no-console
     console.debug('STATE', state);
 
     if (withDevTools) {

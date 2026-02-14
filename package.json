@@ -1,7 +1,7 @@
 {
   "name": "@paulogoncalvs/pg-web",
   "description": "Paulo Gonçalves Website",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "keywords": [
     "preact",
     "webpack",
@@ -29,7 +29,7 @@
     "@babel/runtime": "^7.28.6",
     "@eslint/compat": "^2.0.2",
     "@eslint/eslintrc": "^3.3.3",
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.0",
     "@jest/globals": "30.2.0",
     "@jest/types": "30.2.0",
     "@playwright/test": "^1.58.1",
@@ -51,7 +51,7 @@
     "css-minimizer-webpack-plugin": "^7.0.4",
     "dotenv-webpack": "^8.1.1",
     "enzyme": "^3.11.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-babel": "^5.3.1",
@@ -121,7 +121,7 @@
     "postcss": ">= 8.5.4",
     "braces": ">= 3.0.3"
   },
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.3",
   "scripts": {
     "prebuild": "rimraf ./dist && node --import ./ts-node.register.js ./src/scripts/generateSitemap.ts",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",

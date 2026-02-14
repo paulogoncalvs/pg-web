@@ -31,6 +31,5 @@ const shouldIgnoreRoute = (route: string): boolean =>
         }),
     );
 
-    // eslint-disable-next-line no-console
     console.info('New Sitemap Generated in /public/sitemap.xml');
 })();
