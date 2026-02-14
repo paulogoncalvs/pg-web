@@ -49,19 +49,19 @@ export interface PageProps {
 }
 
 const generateMetaTags = (metas: Partial<PageMetas>[] = []): JSX.Element[] =>
-    metas.map(({ attributes }, index) => <meta {...attributes} key={`metas-${index++}`} />);
+    metas.map(({ attributes }, index) => <meta {...attributes} key={`metas-${index}`} />);
 
 const generateLinkTags = (links: Partial<PageLinks>[] = []): JSX.Element[] =>
-    links.map(({ attributes }, index) => <link {...attributes} key={`links-${index++}`} />);
+    links.map(({ attributes }, index) => <link {...attributes} key={`links-${index}`} />);
 
 const generateScriptTags = (paths: Partial<PageScripts>[] = []): JSX.Element[] =>
-    paths.map((attrs, index) => <script {...attrs} key={`js-${index++}`} />);
+    paths.map((attrs, index) => <script {...attrs} key={`js-${index}`} />);
 
 const getInlineCSS = (css = ''): JSX.Element | void =>
-    css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : undefined; // eslint-disable-line react/no-danger
+    css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : undefined;
 
 const getInlineJS = (js = ''): JSX.Element | void =>
-    js ? <script dangerouslySetInnerHTML={{ __html: js }} /> : undefined; // eslint-disable-line react/no-danger
+    js ? <script dangerouslySetInnerHTML={{ __html: js }} /> : undefined;
 
 const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Partial<PageProps>): string =>
     `<!DOCTYPE html>${render(

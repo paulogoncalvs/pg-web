@@ -25,7 +25,7 @@ interface StoreContextState extends PageStore {
 }
 
 const getInitialState = (store: PageStore): StoreContextState => ({
-    dispatch: (action: StoreContextAction): void => console.warn('INVALID DISPATCH: ', action), // eslint-disable-line no-console
+    dispatch: (action: StoreContextAction): void => console.warn('INVALID DISPATCH: ', action),
     theme: store.theme || getInitialTheme(),
     isOffline: isBrowser() && !navigator?.onLine,
     ...store,

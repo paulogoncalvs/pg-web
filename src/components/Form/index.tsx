@@ -14,7 +14,7 @@ interface FormComponentProps {
 
 export const FormContext = createContext({
     formData: {} as FormComponentData,
-    handleFormChange: (event: Event): void => console.warn(event), // eslint-disable-line no-console
+    handleFormChange: (event: Event): void => console.warn(event),
 });
 
 export const Form: FunctionalComponent<FormComponentProps> = ({
