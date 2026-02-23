@@ -121,7 +121,7 @@
     "postcss": ">= 8.5.4",
     "braces": ">= 3.0.3"
   },
-  "packageManager": "pnpm@10.29.3",
+  "packageManager": "pnpm@10.30.1",
   "scripts": {
     "prebuild": "rimraf ./dist && node --import ./ts-node.register.js ./src/scripts/generateSitemap.ts",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
