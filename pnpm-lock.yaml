@@ -228,7 +228,7 @@ importers:
         version: 5.1.0(stylelint@17.3.0(typescript@5.9.3))(webpack@5.105.2)
       svg-spritemap-webpack-plugin:
         specifier: ^5.1.0
-        version: 5.1.0(svg4everybody@2.1.9)(svgo@4.0.0)(typescript@5.9.3)(webpack@5.105.2)
+        version: 5.1.0(svg4everybody@2.1.9)(svgo@4.0.1)(typescript@5.9.3)(webpack@5.105.2)
       svg-transform-loader:
         specifier: ^2.0.13
         version: 2.0.13
@@ -237,7 +237,7 @@ importers:
         version: 2.1.9
       svgo:
         specifier: ^4.0.0
-        version: 4.0.0
+        version: 4.0.1
       svgo-loader:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1588,10 +1588,6 @@ packages:
 
   '@tailwindcss/postcss@4.2.0':
     resolution: {integrity: sha512-u6YBacGpOm/ixPfKqfgrJEjMfrYmPD7gEFRoygS/hnQaRtV0VCBdpkx5Ouw9pnaLRwwlgGCuJw8xLpaR0hOrQg==}
-
-  '@trysound/sax@0.2.0':
-    resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
-    engines: {node: '>=10.13.0'}
 
   '@tsconfig/node10@1.0.12':
     resolution: {integrity: sha512-UCYBaeFvM11aU2y3YPZ//O5Rhj+xKyzy7mvcIoAjASbigy8mHMryP5cK7dgjlz2hWxh1g5pLw084E0a/wlUSFQ==}
@@ -5553,8 +5549,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  sax@1.4.4:
-    resolution: {integrity: sha512-1n3r/tGXO6b6VXMdFT54SHzT9ytu9yr7TaELowdYpMqY/Ao7EnlQGmAQ1+RatX7Tkkdm6hONI2owqNx2aZj5Sw==}
+  sax@1.5.0:
+    resolution: {integrity: sha512-21IYA3Q5cQf089Z6tgaUTr7lDAyzoTPx5HRtbhsME8Udispad8dC/+sziTNugOEx54ilvatQ9YCzl4KQLPcRHA==}
     engines: {node: '>=11.0.0'}
 
   saxes@6.0.0:
@@ -5952,13 +5948,13 @@ packages:
   svgo-loader@4.0.0:
     resolution: {integrity: sha512-bdk2H73AHP8Vo9zgMuA8piEzi5pjFzllK4EwfebDF3hDjmHQpmmqXMoDd6abDtVFrlKTJuveepmnc2kuTdt/WA==}
 
-  svgo@3.3.2:
-    resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
+  svgo@3.3.3:
+    resolution: {integrity: sha512-+wn7I4p7YgJhHs38k2TNjy1vCfPIfLIJWR5MnCStsN8WuuTcBnRKcMHQLMM2ijxGZmDoZwNv8ipl5aTTen62ng==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  svgo@4.0.0:
-    resolution: {integrity: sha512-VvrHQ+9uniE+Mvx3+C9IEe/lWasXCU0nXMY2kZeLrHNICuRiC8uMPyM14UEaMOFA5mhyQqEkB02VoQ16n3DLaw==}
+  svgo@4.0.1:
+    resolution: {integrity: sha512-XDpWUOPC6FEibaLzjfe0ucaV0YrOjYotGJO1WpF0Zd+n6ZGEQUsSugaoLq9QkEZtAfQIxT42UChcssDVPP3+/w==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -8205,8 +8201,6 @@ snapshots:
       '@tailwindcss/oxide': 4.2.0
       postcss: 8.5.6
       tailwindcss: 4.2.0
-
-  '@trysound/sax@0.2.0': {}
 
   '@tsconfig/node10@1.0.12': {}
 
@@ -12336,7 +12330,7 @@ snapshots:
     dependencies:
       postcss: 8.5.6
       postcss-value-parser: 4.2.0
-      svgo: 4.0.0
+      svgo: 4.0.1
 
   postcss-unique-selectors@7.0.4(postcss@8.5.6):
     dependencies:
@@ -12686,7 +12680,7 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sax@1.4.4: {}
+  sax@1.5.0: {}
 
   saxes@6.0.0:
     dependencies:
@@ -13182,7 +13176,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  svg-spritemap-webpack-plugin@5.1.0(svg4everybody@2.1.9)(svgo@4.0.0)(typescript@5.9.3)(webpack@5.105.2):
+  svg-spritemap-webpack-plugin@5.1.0(svg4everybody@2.1.9)(svgo@4.0.1)(typescript@5.9.3)(webpack@5.105.2):
     dependencies:
       '@xmldom/xmldom': 0.9.8
       glob: 13.0.6
@@ -13192,7 +13186,7 @@ snapshots:
       mkdirp: 3.0.1
       svg-element-attributes: 2.1.0
       svg4everybody: 2.1.9
-      svgo: 4.0.0
+      svgo: 4.0.1
       webpack: 5.105.2(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
       webpack-sources: 3.3.4
@@ -13219,19 +13213,19 @@ snapshots:
 
   svgo-loader@4.0.0:
     dependencies:
-      svgo: 3.3.2
+      svgo: 3.3.3
 
-  svgo@3.3.2:
+  svgo@3.3.3:
     dependencies:
-      '@trysound/sax': 0.2.0
       commander: 7.2.0
       css-select: 5.2.2
       css-tree: 2.3.1
       css-what: 6.2.2
       csso: 5.0.5
       picocolors: 1.1.1
+      sax: 1.5.0
 
-  svgo@4.0.0:
+  svgo@4.0.1:
     dependencies:
       commander: 11.1.0
       css-select: 5.2.2
@@ -13239,7 +13233,7 @@ snapshots:
       css-what: 6.2.2
       csso: 5.0.5
       picocolors: 1.1.1
-      sax: 1.4.4
+      sax: 1.5.0
 
   symbol-tree@3.2.4: {}
 
