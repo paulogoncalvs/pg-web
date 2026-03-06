@@ -24,33 +24,30 @@ const Contact: FunctionalComponent = () => {
 
     return (
         <Fragment>
-            <div class="flex flex-col items-center">
-                <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+            <div class="p-6 pt-20 flex flex-col items-center">
+                <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
                     {t('contact_page_title')}
                 </h1>
-                <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
+                <h2 class="text-xl text-center lowercase op-1 sm:text-2xl animate-fade-in-up animate-delay-2 pb-14">
                     {t('contact_page_subtitle')}
                 </h2>
             </div>
-            <div class="flex flex-col items-center pb-14 opacity-1 animate-fade-in-dw-3">
+            <div class="flex flex-col items-center pb-14 op-1 animate-fade-in-down animate-delay-4">
                 <Link
                     href="mailto:contact@paulogoncalves.dev"
-                    class="btn _i"
+                    class="interactive interactive-icon interactive-lg"
                     onClick={(): void =>
-                        trackEvent(
-                            {
-                                category: 'Contact Link',
-                                label: 'E-mail Me',
-                            },
-                            'link_click',
-                        )
+                        trackEvent('link_click', {
+                            link_name: 'E-mail Me',
+                            link_location: 'Contact',
+                        })
                     }
                 >
                     <Icon src={mailIcon} ariaHidden />
                     <span>{t('contact_page_email_button_label')}</span>
                 </Link>
             </div>
-            <div class="flex flex-col items-center pb-12 opacity-1 animate-fade-in-dw-4 relative select-none pointer-events-none">
+            <div class="p-6 pb-20 flex flex-col items-center op-1 animate-fade-in-down animate-delay-7 relative select-none pointer-events-none">
                 <Form
                     classes="mt-16 opacity-20"
                     action={`${process.env.SERVER_URL}contact/`}

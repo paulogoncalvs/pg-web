@@ -1,0 +1,30 @@
+/* =========================
+   Custom Base Styles
+========================= */
+
+html {
+    @apply scroll-smooth;
+}
+
+body {
+    @apply font-sans text-base text-gray-900 dark:text-gray-100; /* Default font and text color */
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+}
+
+/* Remove tap highlight for links */
+a {
+    @apply transition-all duration-300;
+    @apply hover:text-zinc-500 focus:text-zinc-500;
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+svg {
+    @apply filter-[drop-shadow(0_1px_0_rgba(255,255,255,0.4))]
+        dark:filter-[drop-shadow(0_-1px_0_rgba(0,0,0,0.3))];
+}

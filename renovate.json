@@ -14,5 +14,13 @@
     ":preserveSemverRanges",
     ":enableVulnerabilityAlertsWithLabel(security)",
     ":assignAndReview(paulogoncalvs)"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)Dockerfile.*$"],
+      "matchStrings": ["pnpm@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "pnpm",
+      "datasourceTemplate": "npm"
+    }
   ]
 }

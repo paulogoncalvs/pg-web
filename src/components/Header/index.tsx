@@ -28,7 +28,7 @@ export const Header: FunctionalComponent = () => {
                 <div class="flex justify-end">
                     <label
                         htmlFor="sd-tog"
-                        class="ic-link cursor-pointer"
+                        class="icon-link"
                         ref={labelEl}
                         // @ts-ignore
                         aria-label={t('sidedrawer_toggle')}

@@ -22,13 +22,15 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ cl
 
     const handleOnClick = useCallback((): void => {
         setTheme(getToggleTheme(theme));
-        trackEvent({ category: 'Theme', label: getToggleTheme(theme) }, 'theme_toggle');
+        trackEvent('theme_toggle', {
+            theme_name: getToggleTheme(theme),
+        });
     }, [setTheme, theme]);
 
     return (
         <button
             onClick={handleOnClick}
-            class={classNames('ic-link -sup-novar', classes)}
+            class={classNames('icon-link sup-novar', classes)}
             aria-label={t('theme_toggle', { theme: t(`theme_${getToggleTheme(theme)}`) })}
         >
             <Icon src={getToggleIcon(theme)} ariaHidden />
