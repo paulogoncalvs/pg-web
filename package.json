@@ -1,7 +1,7 @@
 {
   "name": "@paulogoncalvs/pg-web",
   "description": "Paulo Gonçalves Website",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "keywords": [
     "preact",
     "webpack",
