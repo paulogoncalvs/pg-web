@@ -267,6 +267,21 @@ exports[`[PAGE] 404 Page should render 1`] = `
             </use>
           </svg>
         </a>
+        <a href="https://esbuild.github.io/"
+           aria-label="esbuilld (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-link translate-up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
         <a href="https://analytics.google.com/"
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
@@ -366,21 +381,6 @@ exports[`[PAGE] 404 Page should render 1`] = `
           <svg aria-hidden="true"
                class="fill-current"
                width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
-        <a href="https://babeljs.io/"
-           aria-label="Babel (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="icon-link translate-up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="60"
                height="32"
           >
             <use href="#">
@@ -744,6 +744,21 @@ exports[`[PAGE] Contact Page should render 1`] = `
             </use>
           </svg>
         </a>
+        <a href="https://esbuild.github.io/"
+           aria-label="esbuilld (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-link translate-up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
         <a href="https://analytics.google.com/"
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
@@ -843,21 +858,6 @@ exports[`[PAGE] Contact Page should render 1`] = `
           <svg aria-hidden="true"
                class="fill-current"
                width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
-        <a href="https://babeljs.io/"
-           aria-label="Babel (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="icon-link translate-up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="60"
                height="32"
           >
             <use href="#">
@@ -1319,6 +1319,21 @@ exports[`[PAGE] Home Page should render 1`] = `
             </use>
           </svg>
         </a>
+        <a href="https://esbuild.github.io/"
+           aria-label="esbuilld (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-link translate-up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
         <a href="https://analytics.google.com/"
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
@@ -1418,21 +1433,6 @@ exports[`[PAGE] Home Page should render 1`] = `
           <svg aria-hidden="true"
                class="fill-current"
                width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
-        <a href="https://babeljs.io/"
-           aria-label="Babel (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="icon-link translate-up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="60"
                height="32"
           >
             <use href="#">
@@ -1738,6 +1738,21 @@ exports[`[PAGE] Offline Page should render 1`] = `
             </use>
           </svg>
         </a>
+        <a href="https://esbuild.github.io/"
+           aria-label="esbuilld (opens in a new window)"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-link translate-up"
+        >
+          <svg aria-hidden="true"
+               class="fill-current"
+               width="32"
+               height="32"
+          >
+            <use href="#">
+            </use>
+          </svg>
+        </a>
         <a href="https://analytics.google.com/"
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
@@ -1837,21 +1852,6 @@ exports[`[PAGE] Offline Page should render 1`] = `
           <svg aria-hidden="true"
                class="fill-current"
                width="32"
-               height="32"
-          >
-            <use href="#">
-            </use>
-          </svg>
-        </a>
-        <a href="https://babeljs.io/"
-           aria-label="Babel (opens in a new window)"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="icon-link translate-up"
-        >
-          <svg aria-hidden="true"
-               class="fill-current"
-               width="60"
                height="32"
           >
             <use href="#">

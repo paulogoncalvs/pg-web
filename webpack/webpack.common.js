@@ -7,7 +7,6 @@ import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import HtmlWebpackDeployPlugin from 'html-webpack-deploy-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import paths from './paths.js';
 import config from './config.js';
 import globalConfig from '../src/config/global/index.js';
@@ -109,8 +108,6 @@ export default {
                 links: globalConfig.links,
             },
         }),
-
-        new ForkTsCheckerWebpackPlugin(),
     ],
 
     resolve: {
@@ -120,13 +117,6 @@ export default {
 
     module: {
         rules: [
-            // JavaScript / TypeScript
-            {
-                test: /\.[jt]sx?$/,
-                exclude: /node_modules/,
-                use: ['babel-loader'],
-            },
-
             // Style
             {
                 test: /\.css$/,

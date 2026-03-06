@@ -17,8 +17,6 @@ export default merge(common, {
     },
     plugins: [
         // Extracts CSS into separate files
-        // style-loader -> development
-        // MiniCssExtractPlugin -> production
         new MiniCssExtractPlugin({
             chunkFilename: 'assets/css/[id].[contenthash].css',
             filename: 'assets/css/[name].[contenthash].css',
@@ -37,7 +35,22 @@ export default merge(common, {
         }),
     ],
     module: {
-        rules: [],
+        rules: [
+            // TypeScript / JavaScript with esbuild
+            {
+                test: /\.[jt]sx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'esbuild-loader',
+                        options: {
+                            loader: 'tsx',
+                            target: 'es2020',
+                        },
+                    },
+                ],
+            },
+        ],
     },
     optimization: {
         minimize: true,

@@ -1,6 +1,6 @@
 import { h, FunctionalComponent, JSX } from 'preact';
 import { useCallback } from 'preact/hooks';
-import classNames from 'classnames';
+import { classNames } from '@/utils/classNames';
 import { Language } from '@/modules/language';
 import { useTranslate, translations } from '@/modules/i18n';
 import { useRouterLocation, useRouterRoute } from '@/modules/router';

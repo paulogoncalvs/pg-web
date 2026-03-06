@@ -6,7 +6,7 @@ import { Link } from '@/components/Link';
 import preactLogo from '@/assets/icons/logos/preact.svg';
 import webpackLogo from '@/assets/icons/logos/webpack.svg';
 import tailwindLogo from '@/assets/icons/logos/tailwind.svg';
-import babelLogo from '@/assets/icons/logos/babel.svg';
+import esbuildLogo from '@/assets/icons/logos/esbuild.svg';
 import esLintLogo from '@/assets/icons/logos/eslint.svg';
 import postCSSLogo from '@/assets/icons/logos/postcss.svg';
 import prettierLogo from '@/assets/icons/logos/prettier.svg';
@@ -121,6 +121,14 @@ export const Footer: FunctionalComponent = () => {
                             <Icon src={workboxLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link
+                            href="https://esbuild.github.io/"
+                            class="icon-link translate-up"
+                            ariaLabel="esbuilld"
+                            newWindow
+                        >
+                            <Icon src={esbuildLogo} width="32" height="32" ariaHidden />
+                        </Link>
+                        <Link
                             href="https://analytics.google.com/"
                             class="icon-link translate-up"
                             ariaLabel="Google Analytics"
@@ -160,9 +168,6 @@ export const Footer: FunctionalComponent = () => {
                             newWindow
                         >
                             <Icon src={axeLogo} width="32" height="32" ariaHidden />
-                        </Link>
-                        <Link href="https://babeljs.io/" class="icon-link translate-up" ariaLabel="Babel" newWindow>
-                            <Icon src={babelLogo} width="60" height="32" ariaHidden />
                         </Link>
                     </div>
                     <p class="text-xs pt-4">

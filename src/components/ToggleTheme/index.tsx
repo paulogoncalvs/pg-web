@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from 'preact';
 import { useCallback } from 'preact/hooks';
-import classNames from 'classnames';
+import { classNames } from '@/utils/classNames';
 import { Theme, useTheme } from '@/modules/theme';
 import { useTranslate } from '@/modules/i18n';
 import { Icon } from '@/components/Icon';

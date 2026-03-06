@@ -21,12 +21,6 @@
     "lib": ["DOM", "ES2015", "DOM.Iterable"],
     "paths": {
       "@/*": ["*"]
-    },
-    "ignoreDeprecations": "5.0" // @todo remove this line
-  },
-  // Most ts-node options can be specified here using their programmatic names.
-  "ts-node": {
-    "require": ["tsconfig-paths/register"],
-    "esm": true
+    }
   }
 }

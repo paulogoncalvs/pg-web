@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { classNames } from '@/utils/classNames';
 import { h, FunctionalComponent, ComponentChildren } from 'preact';
 
 interface ButtonComponentProps {

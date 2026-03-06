@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from 'preact';
 import { useState, useRef } from 'preact/hooks';
-import classNames from 'classnames';
+import { classNames } from '@/utils/classNames';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 interface ImageComponentProps {
     isLazy?: boolean;
