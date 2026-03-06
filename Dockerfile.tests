@@ -22,12 +22,12 @@ RUN groupadd --gid ${GID} --non-unique ${UNAME} \
 RUN npm i -g pnpm@10.30.3
 
 # -----------------------------
-# Use existing user for subsequent steps
 # Set working directory
 # -----------------------------
-USER ${UNAME}
 RUN mkdir -p /app
 RUN chown ${UNAME}:${UNAME} /app
+USER ${UNAME}
+WORKDIR /app
 
 # -----------------------------
 # Copy package files first (for caching)
