@@ -1,72 +1,34 @@
-# -----------------------------
-# Base image: Playwright + Ubuntu focal
-# -----------------------------
+# Prebuilt MS image
 FROM mcr.microsoft.com/playwright:focal@sha256:2286c685f2be91dd3ee482f1a3d382af08c9a1049406c9f7b499aec6ad691a2c
 
-# -----------------------------
-# Build arguments (optional for UID/GID mapping in docker-compose)
-# -----------------------------
 ARG UID=1000
 ARG GID=1000
 ARG UNAME=node
 
-# -----------------------------
-# Create unprivileged user
-# -----------------------------
-RUN groupadd --gid ${GID} --non-unique ${UNAME} \
-    && useradd --create-home --uid ${UID} --gid ${GID} --non-unique --shell /bin/bash ${UNAME}
+RUN groupadd --gid $GID --non-unique node
+RUN useradd --create-home --uid $UID --gid $GID --non-unique --shell /bin/bash node
 
-# -----------------------------
-# Install  PNPM
-# -----------------------------
+RUN mkdir -p /app
+RUN chown $UNAME:$UNAME /app
+
+# Install PNPM globally
 RUN npm i -g pnpm@10.30.3
 
-# -----------------------------
-# Set working directory
-# -----------------------------
-RUN mkdir -p /app
-RUN chown ${UNAME}:${UNAME} /app
-USER ${UNAME}
+USER $UNAME
 WORKDIR /app
 
-# -----------------------------
-# Copy package files first (for caching)
-# -----------------------------
-COPY --chown=${UNAME}:${UNAME} package.json pnpm-lock.yaml ./
+COPY --chown=$UNAME:$UNAME . .
+COPY --chown=$UNAME:$UNAME .env.tests .env.production
 
-# -----------------------------
-# Install dependencies
-# -----------------------------
 RUN pnpm install --frozen-lockfile
 
-# -----------------------------
-# Copy the rest of the project
-# -----------------------------
-COPY --chown=${UNAME}:${UNAME} . .
-
-# -----------------------------
-# Copy environment files
-# -----------------------------
-COPY --chown=${UNAME}:${UNAME} .env.tests .env.production
-
-# -----------------------------
-# Install Chromium for Playwright tests
-# -----------------------------
 USER root
 RUN pnpm exec playwright install --with-deps chromium
 
-# -----------------------------
-# Build the project
-# -----------------------------
-USER ${UNAME}
+USER $UNAME
 RUN pnpm run build
 
-# -----------------------------
-# Expose port if needed
-# -----------------------------
+# Expose port
 EXPOSE 4040
 
-# -----------------------------
-# Default command for CI
-# -----------------------------
 CMD ["pnpm", "exec", "playwright", "test"]
