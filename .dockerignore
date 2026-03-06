@@ -7,6 +7,4 @@ Dockerfile*
 .vscode
 .idea
 node_modules/
-playwright-results/
-playwright-report/
 dist/

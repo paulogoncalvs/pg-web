@@ -17,13 +17,10 @@ RUN groupadd --gid ${GID} --non-unique ${UNAME} \
     && useradd --create-home --uid ${UID} --gid ${GID} --non-unique --shell /bin/bash ${UNAME}
 
 # -----------------------------
-# Install Node 24 and PNPM
+# Install  PNPM
 # -----------------------------
 USER root
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
-    && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/* \
-    && npm i -g pnpm@10.30.3
+RUN npm i -g pnpm@10.30.3
 
 # -----------------------------
 # Use existing user for subsequent steps
@@ -51,12 +48,6 @@ COPY --chown=${UNAME}:${UNAME} . .
 # Copy environment files
 # -----------------------------
 COPY --chown=${UNAME}:${UNAME} .env.tests .env.production
-
-# -----------------------------
-# Pre-create Playwright output folders outside src
-# -----------------------------
-RUN mkdir -p /app/playwright-results /app/playwright-report \
-    && chown -R ${UNAME}:${UNAME} /app/playwright-results /app/playwright-report
 
 # -----------------------------
 # Install Chromium for Playwright tests

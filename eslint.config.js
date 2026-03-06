@@ -23,8 +23,6 @@ export default [
             '**/.idea',
             '**/.vscode',
             '**/.pnpm-store',
-            '**/playwright-results',
-            '**/playwright-report/',
         ],
     },
     {

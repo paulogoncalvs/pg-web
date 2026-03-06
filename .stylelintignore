@@ -1,7 +1,7 @@
 dist
 coverage
-playwright-results
-playwright-report
+src/tests/**/results
+src/tests/**/report
 node_modules
 public
 .idea

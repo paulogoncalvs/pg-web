@@ -18,6 +18,7 @@ const config: PlaywrightTestConfig = {
         timeout: 10000,
         reuseExistingServer: false,
     },
+    outputDir: './src/tests/playwright/results',
     testDir: './src/tests/playwright/',
     /* Maximum time one test can run for. */
     timeout: 10 * 1000,
@@ -30,9 +31,7 @@ const config: PlaywrightTestConfig = {
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: [['html', { open: 'never', outputFolder: './playwright-report' }]],
-    /* Output directory for test artifacts such as screenshots, videos, traces, etc. */
-    outputDir: './playwright-results',
+    reporter: [['html', { open: 'never', outputFolder: './src/tests/playwright/report' }]],
     projects: [
         {
             name: 'desktop-chromium-dark',

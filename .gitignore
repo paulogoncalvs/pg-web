@@ -1,8 +1,9 @@
 node_modules
 dist
 /.pnpm-store
-playwright-results
-playwright-report
+src/tests/**/results
+src/tests/**/report
+stats.json
 todo.md
 public/sitemap.xml
 .DS_Store
