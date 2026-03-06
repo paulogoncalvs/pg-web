@@ -9,52 +9,43 @@ import twitterIcon from '@/assets/icons/logos/twitter.svg';
 export const SocialLinks: FunctionalComponent = () => (
     <Fragment>
         <Link
-            class="ic-link"
+            class="icon-link"
             href="https://www.twitter.com/paulogoncalvs"
             ariaLabel="Twitter"
             newWindow
             onClick={(): void =>
-                trackEvent(
-                    {
-                        category: 'Social Link',
-                        label: 'Twitter',
-                    },
-                    'link_click',
-                )
+                trackEvent('link_click', {
+                    link_name: 'Twitter',
+                    link_location: 'Social',
+                })
             }
         >
             <Icon src={twitterIcon} ariaHidden />
         </Link>
         <Link
-            class="ic-link ml-4 mr-4"
+            class="icon-link ml-4 mr-4"
             href="https://www.github.com/paulogoncalvs"
             ariaLabel="GitHub"
             newWindow
             onClick={(): void =>
-                trackEvent(
-                    {
-                        category: 'Social Link',
-                        label: 'GitHub',
-                    },
-                    'link_click',
-                )
+                trackEvent('link_click', {
+                    link_name: 'GitHub',
+                    link_location: 'Social',
+                })
             }
         >
             <Icon src={githubIcon} ariaHidden />
         </Link>
         <Link
-            class="ic-link"
+            class="icon-link"
             href="https://pt.linkedin.com/in/paulogoncalvs"
             ariaLabel="LinkedIn"
             newWindow
             onClick={(): void =>
-                trackEvent(
-                    {
-                        category: 'Social Link',
-                        label: 'LinkedIn',
-                    },
-                    'link_click',
-                )
+                trackEvent('link_click', {
+                    link_name: 'LinkedIn',
+                    link_location: 'Social',
+                })
             }
         >
             <Icon src={linkedInIcon} ariaHidden />

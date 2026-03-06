@@ -1,0 +1,93 @@
+/* =========================
+   KEYFRAMES
+========================= */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   UTILITY ANIMATIONS
+========================= */
+@utility animate-fade-in {
+    animation: fade-in 0.2s ease-in-out forwards;
+}
+@utility animate-fade-out {
+    animation: fade-out 0.2s ease-in-out forwards;
+}
+@utility animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-in-out forwards;
+}
+@utility animate-fade-in-down {
+    animation: fade-in-down 0.5s ease-in-out forwards;
+}
+
+/* =========================
+   DELAYED VARIANTS
+========================= */
+/* Use Tailwind’s arbitrary values to avoid repetition */
+@utility animate-delay-0 {
+    animation-delay: 0s;
+}
+@utility animate-delay-1 {
+    animation-delay: 0.1s;
+}
+@utility animate-delay-2 {
+    animation-delay: 0.2s;
+}
+@utility animate-delay-3 {
+    animation-delay: 0.3s;
+}
+@utility animate-delay-4 {
+    animation-delay: 0.4s;
+}
+@utility animate-delay-5 {
+    animation-delay: 0.5s;
+}
+@utility animate-delay-6 {
+    animation-delay: 0.6s;
+}
+@utility animate-delay-7 {
+    animation-delay: 0.7s;
+}
+@utility animate-delay-8 {
+    animation-delay: 0.8s;
+}
+@utility animate-delay-10 {
+    animation-delay: 1s;
+}

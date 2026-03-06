@@ -12,7 +12,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
     </div>
     <div class="flex justify-end">
       <label for="sd-tog"
-             class="ic-link cursor-pointer"
+             class="icon-link"
              aria-label="Toggle side drawer"
       >
         <svg aria-hidden="true"
@@ -27,16 +27,16 @@ exports[`[PAGE] 404 Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
-  <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+<main class="mx-auto">
+  <div class="p-6 pt-20 pb-20 flex flex-col items-center">
+    <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
       Oops!
     </h1>
-    <h2 class="text-xl tracking-tight text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
+    <h2 class="text-xl tracking-tight text-center lowercase op-1 sm:text-2xl animate-fade-in-up animate-delay-2 pb-14">
       Page not found
     </h2>
-    <div class="opacity-1 animate-fade-in-dw-3">
-      <a class="btn"
+    <div class="op-1 animate-fade-in-down animate-delay-3">
+      <a class="interactive interactive-lg"
          href="/undefined/"
       >
         <span>
@@ -47,14 +47,14 @@ exports[`[PAGE] 404 Page should render 1`] = `
   </div>
 </main>
 <aside>
-  <input class="sd-tog hidden"
+  <input class="peer hidden"
          type="checkbox"
          id="sd-tog"
   >
-  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
+  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
+        <select class="py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-zinc-500  focus:border-zinc-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -65,7 +65,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
           </option>
         </select>
       </div>
-      <button class="ic-link -sup-novar p-2"
+      <button class="icon-link sup-novar p-2"
               aria-label="Toggle to dark mode"
       >
         <svg aria-hidden="true"
@@ -78,7 +78,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
         </svg>
       </button>
       <label for="sd-tog"
-             class="ic-link cursor-pointer ml-auto"
+             class="icon-link ml-auto"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -91,14 +91,14 @@ exports[`[PAGE] 404 Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn"
+      <a class="interactive interactive-md"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn mt-4"
+      <a class="interactive interactive-md mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -111,7 +111,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
          aria-label="Twitter (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -126,7 +126,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
          aria-label="GitHub (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link ml-4 mr-4"
+         class="icon-link ml-4 mr-4"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -141,7 +141,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
          aria-label="LinkedIn (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -156,7 +156,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+  <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
     <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
       <p class="text-sm font-bold pb-4">
         Website Technology Stack:
@@ -166,7 +166,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="TypeScript (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -181,7 +181,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Preact (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -196,7 +196,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Webpack (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -211,7 +211,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -226,7 +226,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="ESLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -241,7 +241,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="StyleLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -256,7 +256,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Workbox (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -271,7 +271,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -286,7 +286,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Tailwind CSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -301,7 +301,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Playwright (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -316,7 +316,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Jest (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -331,7 +331,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Prettier (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -346,7 +346,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="PostCSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -361,7 +361,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Axe (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -376,7 +376,7 @@ exports[`[PAGE] 404 Page should render 1`] = `
            aria-label="Babel (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -401,12 +401,12 @@ exports[`[PAGE] 404 Page should render 1`] = `
       </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
+  <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
     <p>
-      optimized for modern browsers 🙂
+      optimized for modern browsers
     </p>
     <p class="pt-2 font-bold">
-      paulogoncalves.dev © 2021 - 2022
+      paulogoncalves.dev © 2021 - 2026
     </p>
   </div>
 </footer>
@@ -428,7 +428,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
     </div>
     <div class="flex justify-end">
       <label for="sd-tog"
-             class="ic-link cursor-pointer"
+             class="icon-link"
              aria-label="Toggle side drawer"
       >
         <svg aria-hidden="true"
@@ -443,18 +443,18 @@ exports[`[PAGE] Contact Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
-  <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+<main class="mx-auto">
+  <div class="p-6 pt-20 flex flex-col items-center">
+    <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
       Contact me
     </h1>
-    <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
+    <h2 class="text-xl text-center lowercase op-1 sm:text-2xl animate-fade-in-up animate-delay-2 pb-14">
       by e-mail
     </h2>
   </div>
-  <div class="flex flex-col items-center pb-14 opacity-1 animate-fade-in-dw-3">
+  <div class="flex flex-col items-center pb-14 op-1 animate-fade-in-down animate-delay-4">
     <a href="mailto:contact@paulogoncalves.dev"
-       class="btn _i"
+       class="interactive interactive-icon interactive-lg"
     >
       <svg aria-hidden="true"
            class="fill-current"
@@ -469,7 +469,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
       </span>
     </a>
   </div>
-  <div class="flex flex-col items-center pb-12 opacity-1 animate-fade-in-dw-4 relative select-none pointer-events-none">
+  <div class="p-6 pb-20 flex flex-col items-center op-1 animate-fade-in-down animate-delay-7 relative select-none pointer-events-none">
     <form action="undefinedcontact/"
           class="mt-16 opacity-20"
     >
@@ -524,14 +524,14 @@ exports[`[PAGE] Contact Page should render 1`] = `
   </div>
 </main>
 <aside>
-  <input class="sd-tog hidden"
+  <input class="peer hidden"
          type="checkbox"
          id="sd-tog"
   >
-  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
+  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
+        <select class="py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-zinc-500  focus:border-zinc-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -542,7 +542,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
           </option>
         </select>
       </div>
-      <button class="ic-link -sup-novar p-2"
+      <button class="icon-link sup-novar p-2"
               aria-label="Toggle to dark mode"
       >
         <svg aria-hidden="true"
@@ -555,7 +555,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
         </svg>
       </button>
       <label for="sd-tog"
-             class="ic-link cursor-pointer ml-auto"
+             class="icon-link ml-auto"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -568,14 +568,14 @@ exports[`[PAGE] Contact Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn"
+      <a class="interactive interactive-md"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn mt-4"
+      <a class="interactive interactive-md mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -588,7 +588,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
          aria-label="Twitter (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -603,7 +603,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
          aria-label="GitHub (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link ml-4 mr-4"
+         class="icon-link ml-4 mr-4"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -618,7 +618,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
          aria-label="LinkedIn (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -633,7 +633,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+  <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
     <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
       <p class="text-sm font-bold pb-4">
         Website Technology Stack:
@@ -643,7 +643,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="TypeScript (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -658,7 +658,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Preact (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -673,7 +673,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Webpack (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -688,7 +688,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -703,7 +703,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="ESLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -718,7 +718,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="StyleLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -733,7 +733,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Workbox (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -748,7 +748,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -763,7 +763,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Tailwind CSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -778,7 +778,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Playwright (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -793,7 +793,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Jest (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -808,7 +808,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Prettier (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -823,7 +823,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="PostCSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -838,7 +838,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Axe (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -853,7 +853,7 @@ exports[`[PAGE] Contact Page should render 1`] = `
            aria-label="Babel (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -878,12 +878,12 @@ exports[`[PAGE] Contact Page should render 1`] = `
       </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
+  <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
     <p>
-      optimized for modern browsers 🙂
+      optimized for modern browsers
     </p>
     <p class="pt-2 font-bold">
-      paulogoncalves.dev © 2021 - 2022
+      paulogoncalves.dev © 2021 - 2026
     </p>
   </div>
 </footer>
@@ -905,7 +905,7 @@ exports[`[PAGE] Home Page should render 1`] = `
     </div>
     <div class="flex justify-end">
       <label for="sd-tog"
-             class="ic-link cursor-pointer"
+             class="icon-link"
              aria-label="Toggle side drawer"
       >
         <svg aria-hidden="true"
@@ -920,16 +920,16 @@ exports[`[PAGE] Home Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
-  <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+<main class="mx-auto">
+  <div class="px-6 py-20 flex flex-col items-center">
+    <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
       PAULO GONÇALVES
     </h1>
-    <h2 class="text-xl text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2">
+    <h2 class="text-xl text-center lowercase op-1 sm:text-2xl animate-fade-in-up animate-delay-2">
       Front-End Engineer
     </h2>
-    <div class="flex flex-col items-center pt-14 pb-14 sm:flex-row">
-      <div class="shrink-0 opacity-1 animate-fade-in-dw-3">
+    <div class="flex flex-col items-center sm:flex-row pt-14 space-y-8 sm:space-y-0">
+      <div class="shrink-0 op-1 animate-fade-in-down animate-delay-3">
         <img width="200"
              height="200"
              fetchpriority="high"
@@ -939,7 +939,7 @@ exports[`[PAGE] Home Page should render 1`] = `
              srcset="test-file-stub, test-file-stub 2x"
         >
       </div>
-      <div class="max-w-xs text-sm opacity-1 sm:pl-14 space-y-4 sm:max-w-md pt-14 sm:pt-0 animate-fade-in-dw-4 sm:text-base">
+      <div class="max-w-xs text-sm op-1 sm:pl-14 sm:max-w-md sm:pt-0 sm:text-base animate-fade-in-down animate-delay-4">
         <p>
           Native of Vila Nova de Gaia, Porto district, Portugal.
         </p>
@@ -954,47 +954,158 @@ exports[`[PAGE] Home Page should render 1`] = `
           </strong>
           , where I architect and develop large-scale, high-performance web applications using modern front-end frameworks and tooling.
         </p>
-        <p>
-          For more technical details and experience, please visit my
-          <a href="https://pt.linkedin.com/in/paulogoncalvs"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="underline"
-          >
-            LinkedIn profile
-          </a>
-          .
-        </p>
       </div>
     </div>
-    <div class="opacity-1 animate-fade-in-dw-5 text-center">
-      <a class="btn _i"
-         href="/undefined/contact/"
+    <a class="interactive interactive-icon sm:interactive-lg interactive-md mt-14 op-1 animate-fade-in-down animate-delay-5"
+       href="/undefined/contact/"
+    >
+      <svg aria-hidden="true"
+           class="fill-current"
+           width="24"
+           height="24"
       >
-        <svg aria-hidden="true"
-             class="fill-current"
-             width="24"
-             height="24"
+        <use href="#">
+        </use>
+      </svg>
+      <span>
+        Contact me
+      </span>
+    </a>
+  </div>
+  <div class="px-6 py-14 pb-20 flex flex-col items-center text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border-t dark:border-white/15 border-white/80 ">
+    <div class="op-1 animate-fade-in-down animate-delay-7 text-left max-w-xs sm:max-w-xl w-full">
+      <h2 class="text-xl sm:text-2xl mb-12 font-bold">
+        Professional Experience
+      </h2>
+      <div class="relative border-l-2 border-stone-300 dark:border-white/10 ml-3 space-y-8">
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-black dark:bg-white border-black/20 dark:border-white/20">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Principal Front-End Engineer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Jumia Porto Tech Center
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Oct 2022 - Present · 3 years 4 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Engineering Manager / Lead Front-End Engineer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Jumia Porto Tech Center
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Sep 2021 - Oct 2022 · 1 year 2 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Lead Front-End Engineer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Jumia Porto Tech Center
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Jun 2020 - Aug 2021 · 1 year 3 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Senior Front-End Engineer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Jumia Porto Tech Center
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Apr 2016 - Jun 2020 · 4 years 3 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Senior Front-End Developer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Rocket Internet GmbH
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Nov 2014 - Apr 2016 · 1 year 6 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Advanced Developer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Rocket Internet GmbH
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Jun 2012 - Nov 2014 · 2 years 6 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Multimedia Engineer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Myone - Comunicação Multimédia
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Oct 2008 - May 2012 · 3 years 8 months
+          </p>
+        </div>
+        <div class="relative pl-8">
+          <span class="absolute -left-2.25 top-1 w-4 h-4 rounded-full border-2 bg-stone-100 dark:bg-zinc-700 border-stone-300 dark:border-white/10">
+          </span>
+          <h3 class="font-semibold text-zinc-900 dark:text-white">
+            Web Designer | New Media Developer
+          </h3>
+          <p class="text-stone-700 dark:text-zinc-300 text-sm">
+            Medula - Design de Comunicação
+          </p>
+          <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
+            Sep 2007 - Sep 2008 · 1 year 1 month
+          </p>
+        </div>
+      </div>
+      <p class="pt-12 text-sm">
+        For more technical details and experience, please visit my
+        <a href="https://pt.linkedin.com/in/paulogoncalvs"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="underline"
         >
-          <use href="#">
-          </use>
-        </svg>
-        <span>
-          Contact me
-        </span>
-      </a>
+          LinkedIn profile
+        </a>
+        .
+      </p>
     </div>
   </div>
 </main>
 <aside>
-  <input class="sd-tog hidden"
+  <input class="peer hidden"
          type="checkbox"
          id="sd-tog"
   >
-  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
+  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
+        <select class="py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-zinc-500  focus:border-zinc-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -1005,7 +1116,7 @@ exports[`[PAGE] Home Page should render 1`] = `
           </option>
         </select>
       </div>
-      <button class="ic-link -sup-novar p-2"
+      <button class="icon-link sup-novar p-2"
               aria-label="Toggle to dark mode"
       >
         <svg aria-hidden="true"
@@ -1018,7 +1129,7 @@ exports[`[PAGE] Home Page should render 1`] = `
         </svg>
       </button>
       <label for="sd-tog"
-             class="ic-link cursor-pointer ml-auto"
+             class="icon-link ml-auto"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1031,14 +1142,15 @@ exports[`[PAGE] Home Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn _act"
+      <a aria-current="page"
+         class="interactive interactive-md"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn mt-4"
+      <a class="interactive interactive-md mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -1051,7 +1163,7 @@ exports[`[PAGE] Home Page should render 1`] = `
          aria-label="Twitter (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1066,7 +1178,7 @@ exports[`[PAGE] Home Page should render 1`] = `
          aria-label="GitHub (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link ml-4 mr-4"
+         class="icon-link ml-4 mr-4"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1081,7 +1193,7 @@ exports[`[PAGE] Home Page should render 1`] = `
          aria-label="LinkedIn (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1096,7 +1208,7 @@ exports[`[PAGE] Home Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+  <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
     <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
       <p class="text-sm font-bold pb-4">
         Website Technology Stack:
@@ -1106,7 +1218,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="TypeScript (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1121,7 +1233,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Preact (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1136,7 +1248,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Webpack (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1151,7 +1263,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1166,7 +1278,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="ESLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1181,7 +1293,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="StyleLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1196,7 +1308,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Workbox (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1211,7 +1323,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1226,7 +1338,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Tailwind CSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1241,7 +1353,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Playwright (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1256,7 +1368,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Jest (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1271,7 +1383,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Prettier (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1286,7 +1398,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="PostCSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1301,7 +1413,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Axe (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1316,7 +1428,7 @@ exports[`[PAGE] Home Page should render 1`] = `
            aria-label="Babel (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1341,12 +1453,12 @@ exports[`[PAGE] Home Page should render 1`] = `
       </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
+  <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
     <p>
-      optimized for modern browsers 🙂
+      optimized for modern browsers
     </p>
     <p class="pt-2 font-bold">
-      paulogoncalves.dev © 2021 - 2022
+      paulogoncalves.dev © 2021 - 2026
     </p>
   </div>
 </footer>
@@ -1368,7 +1480,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
     </div>
     <div class="flex justify-end">
       <label for="sd-tog"
-             class="ic-link cursor-pointer"
+             class="icon-link"
              aria-label="Toggle side drawer"
       >
         <svg aria-hidden="true"
@@ -1383,19 +1495,19 @@ exports[`[PAGE] Offline Page should render 1`] = `
     </div>
   </div>
 </header>
-<main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
-  <div class="flex flex-col items-center">
-    <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+<main class="mx-auto">
+  <div class="p-6 pt-20 pb-20 flex flex-col items-center">
+    <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
       Oops!
     </h1>
-    <h2 class="text-2xl tracking-tight text-center lowercase opacity-1 sm:text-3xl animate-fade-in-up-2 pb-8">
+    <h2 class="text-2xl tracking-tight text-center lowercase op-1 sm:text-3xl animate-fade-in-up animate-delay-2 pb-8">
       You are currently offline
     </h2>
-    <p class="text-l opacity-1 animate-fade-in-dw-4 pb-14 text-center">
+    <p class="text-l op-1 animate-fade-in-down animate-delay-4 pb-14 text-center">
       You need an Internet connection.
     </p>
-    <div class="opacity-1 animate-fade-in-dw-3">
-      <a class="btn"
+    <div class="op-1 animate-fade-in-down animate-delay-3">
+      <a class="interactive interactive-lg"
          href="/undefined/"
       >
         <span>
@@ -1406,14 +1518,14 @@ exports[`[PAGE] Offline Page should render 1`] = `
   </div>
 </main>
 <aside>
-  <input class="sd-tog hidden"
+  <input class="peer hidden"
          type="checkbox"
          id="sd-tog"
   >
-  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full">
+  <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
     <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center">
       <div>
-        <select class=" md:transform-gpu md:ease-out md:duration-500 md:transition-transform py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-slate-500  focus:border-slate-500 ml-2 mr-6"
+        <select class="py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-zinc-500  focus:border-zinc-500 ml-2 mr-6"
                 aria-label="Language selection"
         >
           <option value="en">
@@ -1424,7 +1536,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
           </option>
         </select>
       </div>
-      <button class="ic-link -sup-novar p-2"
+      <button class="icon-link sup-novar p-2"
               aria-label="Toggle to dark mode"
       >
         <svg aria-hidden="true"
@@ -1437,7 +1549,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
         </svg>
       </button>
       <label for="sd-tog"
-             class="ic-link cursor-pointer ml-auto"
+             class="icon-link ml-auto"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1450,14 +1562,14 @@ exports[`[PAGE] Offline Page should render 1`] = `
       </label>
     </div>
     <div class="flex flex-col pl-10 pr-10">
-      <a class="btn"
+      <a class="interactive interactive-md"
          href="/undefined/"
       >
         <span>
           Homepage
         </span>
       </a>
-      <a class="btn mt-4"
+      <a class="interactive interactive-md mt-4"
          href="/undefined/contact/"
       >
         <span>
@@ -1470,7 +1582,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
          aria-label="Twitter (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1485,7 +1597,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
          aria-label="GitHub (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link ml-4 mr-4"
+         class="icon-link ml-4 mr-4"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1500,7 +1612,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
          aria-label="LinkedIn (opens in a new window)"
          target="_blank"
          rel="noopener noreferrer"
-         class="ic-link"
+         class="icon-link"
       >
         <svg aria-hidden="true"
              class="fill-current"
@@ -1515,7 +1627,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
   </div>
 </aside>
 <footer>
-  <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+  <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
     <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
       <p class="text-sm font-bold pb-4">
         Website Technology Stack:
@@ -1525,7 +1637,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="TypeScript (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1540,7 +1652,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Preact (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1555,7 +1667,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Webpack (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1570,7 +1682,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="pnpm (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1585,7 +1697,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="ESLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1600,7 +1712,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="StyleLint (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1615,7 +1727,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Workbox (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1630,7 +1742,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Google Analytics (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1645,7 +1757,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Tailwind CSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1660,7 +1772,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Playwright (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1675,7 +1787,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Jest (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1690,7 +1802,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Prettier (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1705,7 +1817,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="PostCSS (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1720,7 +1832,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Axe (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1735,7 +1847,7 @@ exports[`[PAGE] Offline Page should render 1`] = `
            aria-label="Babel (opens in a new window)"
            target="_blank"
            rel="noopener noreferrer"
-           class="ic-link _up"
+           class="icon-link translate-up"
         >
           <svg aria-hidden="true"
                class="fill-current"
@@ -1760,12 +1872,12 @@ exports[`[PAGE] Offline Page should render 1`] = `
       </p>
     </div>
   </div>
-  <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
+  <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
     <p>
-      optimized for modern browsers 🙂
+      optimized for modern browsers
     </p>
     <p class="pt-2 font-bold">
-      paulogoncalves.dev © 2021 - 2022
+      paulogoncalves.dev © 2021 - 2026
     </p>
   </div>
 </footer>

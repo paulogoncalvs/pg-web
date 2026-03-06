@@ -1,4 +1,5 @@
 import { h, FunctionalComponent } from 'preact';
+import { useState, useEffect } from 'preact/hooks';
 import { useTranslate } from '@/modules/i18n';
 import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
@@ -17,46 +18,103 @@ import jestLogo from '@/assets/icons/logos/jest.svg';
 import axeLogo from '@/assets/icons/logos/axe.svg';
 import gaLogo from '@/assets/icons/logos/ga.svg';
 import playwrigthLogo from '@/assets/icons/logos/playwright.svg';
-import { trackEvent } from '@/modules/tracking/ga4';
+import { trackEvent, updateConsent } from '@/modules/tracking/ga4';
+import { getCookieConsent, setCookieConsent, CookieConsent } from '@/modules/cookieConsent';
 
 const initialYear = 2021;
 const currentYear = new Date().getFullYear();
 
 export const Footer: FunctionalComponent = () => {
     const { t } = useTranslate();
+    const [showConsent, setShowConsent] = useState(false);
+
+    useEffect(() => {
+        const consent = getCookieConsent();
+
+        if (!consent) {
+            setShowConsent(true);
+        } else if (consent === 'accepted') {
+            updateConsent('accepted');
+        }
+    }, []);
+
+    const handleAccept = () => {
+        const consent: CookieConsent = 'accepted';
+        setCookieConsent(consent);
+        updateConsent(consent);
+        setShowConsent(false);
+    };
+
+    const handleReject = () => {
+        const consent: CookieConsent = 'rejected';
+        setCookieConsent(consent);
+        updateConsent(consent);
+        setShowConsent(false);
+    };
 
     return (
         <footer>
-            <div class="text-center bg-white/20 dark:bg-zinc-900/15 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
+            {showConsent && (
+                <div class="fixed bottom-0 left-0 right-0 p-2 shadow-2xs z-50 dark:bg-zinc-900/60 border-t backdrop-blur-md bg-white/80 dark:border-white/15 border-white/80">
+                    <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+                        <p class=" text-center sm:text-left">{t('footer_cookie_consent')}</p>
+                        <div class="flex gap-2">
+                            <button
+                                onClick={handleReject}
+                                class="px-4 py-1 border border-zinc-300 dark:border-zinc-600 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                            >
+                                {t('footer_cookie_reject')}
+                            </button>
+                            <button
+                                onClick={handleAccept}
+                                class="px-4 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded hover:opacity-80 transition-opacity cursor-pointer"
+                            >
+                                {t('footer_cookie_accept')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
                 <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
                     <p class="text-sm font-bold pb-4">{t('footer_description_2')}</p>
                     <div class="flex flex-wrap justify-center align-middle">
                         <Link
                             href="https://www.typescriptlang.org/"
-                            class="ic-link _up"
+                            class="icon-link translate-up"
                             ariaLabel="TypeScript"
                             newWindow
                         >
                             <Icon src={typeScriptLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://preactjs.com/" class="ic-link _up" ariaLabel="Preact" newWindow>
+                        <Link href="https://preactjs.com/" class="icon-link translate-up" ariaLabel="Preact" newWindow>
                             <Icon src={preactLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://webpack.js.org/" class="ic-link _up" ariaLabel="Webpack" newWindow>
+                        <Link
+                            href="https://webpack.js.org/"
+                            class="icon-link translate-up"
+                            ariaLabel="Webpack"
+                            newWindow
+                        >
                             <Icon src={webpackLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://pnpm.io/" class="ic-link _up" ariaLabel="pnpm" newWindow>
+                        <Link href="https://pnpm.io/" class="icon-link translate-up" ariaLabel="pnpm" newWindow>
                             <Icon src={pnpmLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://eslint.org/" class="ic-link _up" ariaLabel="ESLint" newWindow>
+                        <Link href="https://eslint.org/" class="icon-link translate-up" ariaLabel="ESLint" newWindow>
                             <Icon src={esLintLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://stylelint.io/" class="ic-link _up" ariaLabel="StyleLint" newWindow>
+                        <Link
+                            href="https://stylelint.io/"
+                            class="icon-link translate-up"
+                            ariaLabel="StyleLint"
+                            newWindow
+                        >
                             <Icon src={styleLintLogo} width="32" height="32" ariaHidden />
                         </Link>
                         <Link
                             href="https://developers.google.com/web/tools/workbox"
-                            class="ic-link _up"
+                            class="icon-link translate-up"
                             ariaLabel="Workbox"
                             newWindow
                         >
@@ -64,31 +122,46 @@ export const Footer: FunctionalComponent = () => {
                         </Link>
                         <Link
                             href="https://analytics.google.com/"
-                            class="ic-link _up"
+                            class="icon-link translate-up"
                             ariaLabel="Google Analytics"
                             newWindow
                         >
                             <Icon src={gaLogo} width="28" height="28" ariaHidden />
                         </Link>
-                        <Link href="https://tailwindcss.com/" class="ic-link _up" ariaLabel="Tailwind CSS" newWindow>
+                        <Link
+                            href="https://tailwindcss.com/"
+                            class="icon-link translate-up"
+                            ariaLabel="Tailwind CSS"
+                            newWindow
+                        >
                             <Icon src={tailwindLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://playwright.dev/" class="ic-link _up" ariaLabel="Playwright" newWindow>
+                        <Link
+                            href="https://playwright.dev/"
+                            class="icon-link translate-up"
+                            ariaLabel="Playwright"
+                            newWindow
+                        >
                             <Icon src={playwrigthLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://jestjs.io/" class="ic-link _up" ariaLabel="Jest" newWindow>
+                        <Link href="https://jestjs.io/" class="icon-link translate-up" ariaLabel="Jest" newWindow>
                             <Icon src={jestLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://prettier.io/" class="ic-link _up" ariaLabel="Prettier" newWindow>
+                        <Link href="https://prettier.io/" class="icon-link translate-up" ariaLabel="Prettier" newWindow>
                             <Icon src={prettierLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://postcss.org/" class="ic-link _up" ariaLabel="PostCSS" newWindow>
+                        <Link href="https://postcss.org/" class="icon-link translate-up" ariaLabel="PostCSS" newWindow>
                             <Icon src={postCSSLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://www.deque.com/axe/" class="ic-link _up" ariaLabel="Axe" newWindow>
+                        <Link
+                            href="https://www.deque.com/axe/"
+                            class="icon-link translate-up"
+                            ariaLabel="Axe"
+                            newWindow
+                        >
                             <Icon src={axeLogo} width="32" height="32" ariaHidden />
                         </Link>
-                        <Link href="https://babeljs.io/" class="ic-link _up" ariaLabel="Babel" newWindow>
+                        <Link href="https://babeljs.io/" class="icon-link translate-up" ariaLabel="Babel" newWindow>
                             <Icon src={babelLogo} width="60" height="32" ariaHidden />
                         </Link>
                     </div>
@@ -102,13 +175,10 @@ export const Footer: FunctionalComponent = () => {
                                         class="underline"
                                         newWindow
                                         onClick={(): void =>
-                                            trackEvent(
-                                                {
-                                                    category: 'Footer Link',
-                                                    label: 'Github',
-                                                },
-                                                'link_click',
-                                            )
+                                            trackEvent('link_click', {
+                                                link_name: 'GitHub',
+                                                link_location: 'Footer',
+                                            })
                                         }
                                     >
                                         {t('footer_description_1_link_text')}
@@ -120,8 +190,8 @@ export const Footer: FunctionalComponent = () => {
                     </p>
                 </div>
             </div>
-            <div class="container flex flex-col items-center py-8 mx-auto text-xs text-center sm:py-16">
-                <p>{t('footer_description_3')} 🙂</p>
+            <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
+                <p>{t('footer_description_3')}</p>
                 <p class="pt-2 font-bold">
                     paulogoncalves.dev &copy; {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ''}
                 </p>

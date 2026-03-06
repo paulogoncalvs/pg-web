@@ -1,40 +1,28 @@
+/* Core Tailwind  */
 @import 'tailwindcss';
-@import './fonts.css';
-@import './theme.css';
-@import './animations.css';
-@import './components.css';
-@import './utilities.css';
-@plugin "@tailwindcss/forms";
+@tailwind utilities;
 
-@layer theme, base, components, utilities;
+/* =========================
+   Custom Base Layer
+========================= */
+@import './base/fonts.css' layer(base);
+@import './base/custom.css' layer(base);
 
-html {
-    @apply scroll-smooth;
-}
+/* =========================
+   Theme / Design Tokens
+========================= */
+@import './theme/theme.css';
 
-body {
-    font-synthesis-weight: none;
-    text-rendering: optimizeLegibility;
-    /* text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3); */
-}
+/* =========================
+   Components
+========================= */
+@import './components/button.css';
 
-img,
-svg {
-    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.3));
-}
+/* =========================
+   Utilities
+========================= */
+@import './utilities/animations.css';
+@import './utilities/custom.css';
 
-.dark img,
-.dark svg {
-    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.3));
-}
-
-/* .dark body {
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
-} */
-
-a {
-    @apply md:transform-gpu md:ease-out md:duration-500 md:transition-transform;
-    @apply hover:text-slate-500 focus:text-slate-500;
-
-    -webkit-tap-highlight-color: transparent;
-}
+/* Tailwind Plugin for Forms */
+@plugin '@tailwindcss/forms';

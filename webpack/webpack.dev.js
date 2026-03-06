@@ -8,15 +8,22 @@ import common from './webpack.common.js';
 
 export default merge(common, {
     mode: 'development',
-
+    cache: { type: 'memory' },
     devtool: 'inline-cheap-source-map',
-
+    infrastructureLogging: {
+        level: 'warn',
+    },
     devServer: {
+        hot: true,
+        liveReload: false,
         open: false,
         port: 4005,
         client: {
-            overlay: false,
-            // progress: true,
+            overlay: {
+                errors: true,
+                warnings: false,
+            },
+            reconnect: true,
         },
         compress: true,
         historyApiFallback: {
@@ -28,16 +35,23 @@ export default merge(common, {
             watch: true,
         },
         devMiddleware: {
-            // serverSideRender: false,
+            serverSideRender: false,
             writeToDisk: true,
-            // ignored: /node_modules/,
         },
     },
-
     watchOptions: {
-        ignored: ['**/dist', '**/tests', '**/node_modules', '**/.vscode'],
+        ignored: [
+            '**/dist',
+            '**/tests',
+            '**/node_modules',
+            '**/docs',
+            '**/.vscode',
+            '**/.idea',
+            '**/.git',
+            '**/.github',
+        ],
+        poll: 1000,
     },
-
     module: {
         rules: [
             // TypeScript
@@ -68,7 +82,11 @@ export default merge(common, {
     plugins: [
         new webpack.ProgressPlugin(),
 
-        new StylelintPlugin(),
+        new StylelintPlugin({
+            failOnError: false,
+            emitErrors: false,
+            syntax: 'scss',
+        }),
 
         new MiniCssExtractPlugin({
             chunkFilename: '[id].css',

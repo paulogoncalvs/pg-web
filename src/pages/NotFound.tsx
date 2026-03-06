@@ -9,15 +9,15 @@ const NotFoundPage: FunctionalComponent = () => {
 
     return (
         <Fragment>
-            <div class="flex flex-col items-center">
-                <h1 class="text-3xl tracking-tight font-bold text-center opacity-1 sm:my-2 sm:text-5xl animate-fade-in-up-1">
+            <div class="p-6 pt-20 pb-20 flex flex-col items-center">
+                <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
                     {t('not_found_page_title')}
                 </h1>
-                <h2 class="text-xl tracking-tight text-center lowercase opacity-1 sm:text-2xl animate-fade-in-up-2 pb-14">
+                <h2 class="text-xl tracking-tight text-center lowercase op-1 sm:text-2xl animate-fade-in-up animate-delay-2 pb-14">
                     {t('not_found_page_subtitle')}
                 </h2>
-                <div class="opacity-1 animate-fade-in-dw-3">
-                    <Link useRouter class="btn" href={`/${lang}/`}>
+                <div class="op-1 animate-fade-in-down animate-delay-3">
+                    <Link useRouter class="interactive interactive-lg" href={`/${lang}/`}>
                         <span>{t('not_found_page_button_label')}</span>
                     </Link>
                 </div>
