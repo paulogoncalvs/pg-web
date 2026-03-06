@@ -1,11 +1,7 @@
-# -----------------------------
 # Base image: Playwright + Ubuntu focal
-# -----------------------------
-FROM mcr.microsoft.com/playwright:focal@sha256:2286c685f2be91dd3ee482f1a3d382af08c9a1049406c9f7b499aec6ad691a2c
+FROM mcr.microsoft.com/playwright:focal
 
-# -----------------------------
-# Build arguments
-# -----------------------------
+# Build arguments (optional for UID/GID mapping in docker-compose)
 ARG UID=1000
 ARG GID=1000
 ARG UNAME=node
@@ -17,52 +13,40 @@ RUN groupadd --gid ${GID} --non-unique ${UNAME} \
     && useradd --create-home --uid ${UID} --gid ${GID} --non-unique --shell /bin/bash ${UNAME}
 
 # -----------------------------
-# Install Node 24
+# Install Node 24 and PNPM
 # -----------------------------
+USER root
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && npm i -g pnpm@10.30.3
 
 # -----------------------------
-# Install PNPM globally
+# Use existing user for subsequent steps
 # -----------------------------
-RUN npm install -g pnpm@10.30.3
-
-# -----------------------------
-# Set working directory
-# -----------------------------
+USER ${UNAME}
 WORKDIR /app
 
 # -----------------------------
-# Copy only dependency files first for Docker caching
+# Copy package files first (for caching)
 # -----------------------------
-COPY package.json pnpm-lock.yaml ./
-
-# -----------------------------
-# Make /app writable for unprivileged user
-# -----------------------------
-RUN chown -R ${UNAME}:${UNAME} /app
-
-# -----------------------------
-# Switch to unprivileged user
-# -----------------------------
-USER ${UNAME}
+COPY --chown=$UNAME:$UNAME package.json pnpm-lock.yaml ./
 
 # -----------------------------
 # Install dependencies
 # -----------------------------
-RUN pnpm install --frozen-lockfile --prefer-offline \
-    && pnpm rebuild esbuild
+RUN pnpm install --frozen-lockfile --prefer-offline
 
 # -----------------------------
 # Copy the rest of the project
 # -----------------------------
-COPY --chown=${UNAME}:${UNAME} . .
+COPY --chown=$UNAME:$UNAME  . .
+COPY --chown=$UNAME:$UNAME .env.tests .env.production
 
 # -----------------------------
-# Copy environment files
+# Pre-create Playwright output folders outside src
 # -----------------------------
-COPY --chown=${UNAME}:${UNAME} .env.tests .env.production
+RUN mkdir -p /app/playwright-results /app/playwright-report
 
 # -----------------------------
 # Install Chromium for Playwright tests
@@ -73,15 +57,15 @@ RUN pnpm exec playwright install --with-deps chromium
 # -----------------------------
 # Build the project
 # -----------------------------
-USER node
+USER ${UNAME}
 RUN pnpm run build
 
 # -----------------------------
-# Expose port (optional, if serving)
+# Expose port if needed
 # -----------------------------
 EXPOSE 4040
 
 # -----------------------------
-# Default command
+# Default command for CI
 # -----------------------------
 CMD ["pnpm", "exec", "playwright", "test"]

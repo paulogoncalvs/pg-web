@@ -1,5 +1,7 @@
 dist
 coverage
+playwright-results
+playwright-report
 node_modules
 public
 .idea

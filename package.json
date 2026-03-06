@@ -117,7 +117,7 @@
     "start:dev": "webpack serve --config webpack/webpack.dev.js",
     "tests:jest": "cross-env NODE_ENV=tests jest",
     "tests:jest:update": "pnpm tests:jest -u",
-    "tests:pw:build": "docker compose build --progress=plain --build-arg PNPM_STORE=/pnpm-store pg-tests-runner",
+    "tests:pw:build": "docker compose --progress=plain build --build-arg PNPM_STORE=/pnpm-store pg-tests-runner",
     "tests:pw:run": "docker compose run pg-tests-runner",
     "tests:pw": "pnpm build:tests && pnpm tests:pw:run",
     "tests:pw:update": "pnpm build:tests && docker compose run pg-tests-runner pnpm exec playwright test --update-snapshots",

@@ -5,6 +5,8 @@ pnpm-workspace.yaml
 coverage
 node_modules
 public
+playwright-results
+playwright-report
 .idea
 .history
 .vscode
