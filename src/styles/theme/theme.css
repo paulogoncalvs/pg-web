@@ -1,0 +1,38 @@
+/* =========================
+   THEME CONFIGURATION
+========================= */
+
+/* Custom dark variant for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens */
+@theme {
+    --font-sans: 'Poppins', 'Roboto', sans-serif;
+
+    /* Background gradients */
+    --gradient-bg-light:
+        radial-gradient(circle at 25% 30%, rgba(210, 188, 198, 0.4) 0%, rgba(230, 231, 234, 1) 40%, transparent 100%),
+        radial-gradient(circle at 75% 35%, rgba(195, 205, 224, 0.4) 0%, rgba(230, 231, 234, 1) 50%, transparent 100%),
+        radial-gradient(circle at 50% 80%, rgba(207, 207, 219, 0.4) 0%, rgba(230, 231, 234, 1) 45%, transparent 100%),
+        rgba(230, 231, 234, 1);
+
+    --gradient-bg-dark:
+        radial-gradient(circle at 25% 30%, rgba(138, 74, 104, 0.24) 0%, rgba(31, 31, 36, 1) 40%, transparent 100%),
+        radial-gradient(circle at 75% 35%, rgba(90, 79, 138, 0.22) 0%, rgba(31, 31, 36, 1) 50%, transparent 100%),
+        radial-gradient(circle at 50% 80%, rgba(58, 74, 106, 0.24) 0%, rgba(31, 31, 36, 1) 45%, transparent 100%),
+        rgba(31, 31, 36, 1);
+}
+
+/* =========================
+   Gradient Utility
+========================= */
+@utility bg-gradient {
+    @apply bg-cover;
+    background: var(--gradient-bg-light);
+    background-repeat: no-repeat;
+
+    @variant dark {
+        background: var(--gradient-bg-dark);
+        background-repeat: no-repeat;
+    }
+}

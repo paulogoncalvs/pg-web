@@ -57,6 +57,12 @@ const links = [
         },
     },
     {
+        path: '/favicon.ico',
+        attributes: {
+            rel: 'shortcut icon',
+        },
+    },
+    {
         path: '/favicon.svg',
         attributes: {
             rel: 'icon',
@@ -64,19 +70,11 @@ const links = [
         },
     },
     {
-        path: '/favicon-16x16.png',
+        path: '/favicon-96x96.png',
         attributes: {
             rel: 'icon',
             type: 'image/png',
-            sizes: '16x16',
-        },
-    },
-    {
-        path: '/favicon-32x32.png',
-        attributes: {
-            rel: 'icon',
-            type: 'image/png',
-            sizes: '32x32',
+            sizes: '96x96',
         },
     },
     {

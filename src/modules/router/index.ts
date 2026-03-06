@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'preact/hooks';
 import { useRoute, useLocation } from 'wouter-preact';
 import { StoreContext } from '@/modules/store';
 import { Language, useLanguage, isValidLanguage } from '@/modules/language';
+import { trackPageView } from '@/modules/tracking/ga4';
 import { isBrowser } from '@/utils/browser';
 import { toggleSideDrawer } from '@/components/SideDrawer';
 
@@ -23,6 +24,7 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
             setRoute(location);
             window.scrollTo({ top: 0, behavior: 'smooth' });
             toggleSideDrawer(false);
+            trackPageView();
         }
     }, [langParam, location]);
 

@@ -1,0 +1,138 @@
+/* =========================
+   DESIGN TOKENS
+========================= */
+@theme {
+    /* Button / interactive backgrounds */
+    --interactive-bg: rgba(231, 229, 228, 0.8);
+    --interactive-bg-dark: rgba(255, 255, 255, 0.05);
+
+    /* Borders */
+    --interactive-border: rgba(255, 255, 255, 0.5);
+
+    /* Shadows */
+    --interactive-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 0 9px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(0, 0, 0, 0.15);
+    --interactive-shadow-dark-hover:
+        inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 0 9px rgba(255, 255, 255, 0.2), 0 1px 8px rgba(255, 255, 255, 0.15);
+}
+
+/* =========================
+   BASE INTERACTIVE UTILITY
+========================= */
+@utility interactive {
+    @apply inline-flex items-center justify-center;
+    @apply font-bold tracking-tight antialiased select-none;
+    @apply rounded-full relative;
+    @apply transition-all duration-300;
+    @apply text-zinc-900 dark:text-white;
+    @apply border border-white/50;
+    @apply backdrop-blur-md;
+    @apply shadow-(--interactive-shadow);
+    -webkit-tap-highlight-color: transparent;
+
+    background: var(--interactive-bg);
+    @variant dark {
+        background: var(--interactive-bg-dark);
+        box-shadow: var(--interactive-shadow);
+    }
+
+    /* Pseudo-glow layers */
+    &::before,
+    &::after {
+        content: '';
+        @apply absolute inset-0 rounded-full pointer-events-none;
+    }
+
+    &::before {
+        @apply bg-linear-to-br from-white/60 via-transparent to-transparent opacity-70;
+    }
+
+    &::after {
+        @apply bg-linear-to-tl from-stone-200/30 via-transparent to-transparent opacity-50;
+    }
+
+    /* Interaction states */
+    &:is(:hover, :focus-visible, :active) {
+        @apply bg-white/80;
+    }
+
+    @variant dark {
+        &:is(:hover, :focus-visible, :active) {
+            @apply bg-white/30;
+            box-shadow: var(--interactive-shadow-dark-hover);
+        }
+    }
+
+    /* Disabled state */
+    &:disabled {
+        @apply opacity-50 pointer-events-none;
+    }
+
+    /* Active / current route state */
+    &[aria-current='page'] {
+        @apply opacity-60 pointer-events-none;
+    }
+}
+
+/* =========================
+   SIZE VARIANTS
+========================= */
+@utility interactive-sm {
+    @apply px-3 py-1.5 text-sm;
+}
+@utility interactive-md {
+    @apply px-4 py-2 text-base;
+}
+@utility interactive-lg {
+    @apply px-6 py-3 text-xl;
+}
+
+/* =========================
+   VISUAL VARIANTS
+========================= */
+/* @utility interactive-glass { } */
+
+@utility interactive-ghost {
+    @apply bg-transparent border-transparent shadow-none;
+
+    &:is(:hover, :focus-visible, :active) {
+        @apply bg-white/20;
+    }
+
+    @variant dark {
+        &:is(:hover, :focus-visible, :active) {
+            @apply bg-white/10;
+        }
+    }
+}
+
+@utility interactive-icon {
+    @apply inline-flex items-center justify-center;
+    @apply p-3 pl-8 text-zinc-900 dark:text-zinc-200;
+    @apply transition-all duration-300;
+    -webkit-tap-highlight-color: transparent;
+
+    @apply gap-2;
+
+    & > svg,
+    & > i {
+        @apply shrink-0;
+    }
+}
+
+/* =========================
+   ICON LINK VARIANTS
+========================= */
+@utility icon-link {
+    @apply inline-flex items-center justify-center;
+    @apply p-3;
+    @apply text-zinc-900 dark:text-zinc-200;
+    @apply transition-all duration-300;
+    @apply hover:text-zinc-500 focus-visible:text-zinc-500;
+    @apply cursor-pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@utility icon-link-hdr {
+    @apply ml-2 p-2 md:ml-8;
+}

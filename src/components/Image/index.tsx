@@ -55,7 +55,7 @@ export const Image: FunctionalComponent<ImageComponentProps> = ({
             class={classNames(
                 {
                     lazy: isLazy,
-                    '_loaded transform opacity-1 animate-fade-in': isLoaded,
+                    '_loaded transform op-1 animate-fade-in': isLoaded,
                     'animate-pulse': !isLoaded,
                 },
                 classes,

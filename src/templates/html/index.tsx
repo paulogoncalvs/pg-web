@@ -75,7 +75,7 @@ const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Par
                 {getInlineCSS(inlineCss)}
                 {generateLinkTags(links)}
             </head>
-            <body class="font-sans dark:selection:text-zinc-900 dark:selection:bg-slate-100 selection:text-zinc-100 selection:bg-slate-400 text-zinc-900 dark:text-zinc-200 transition-colors duration-300 bg-gradient">
+            <body class="font-sans dark:selection:text-zinc-900 dark:selection:bg-zinc-100 selection:text-zinc-100 selection:bg-zinc-400 text-zinc-900 dark:text-zinc-200 transition-colors duration-300 bg-gradient">
                 <div id="root">
                     <App store={store} />
                 </div>

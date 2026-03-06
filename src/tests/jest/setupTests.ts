@@ -1,5 +1,5 @@
 // Fixed ISO date string or timestamp
-const FIXED_DATE = new Date('2022-01-01T00:00:00Z');
+const FIXED_DATE = new Date('2026-01-01T00:00:00Z');
 
 // Override Date constructor
 const OriginalDate = Date;

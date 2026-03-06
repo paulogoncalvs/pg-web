@@ -2,19 +2,19 @@
 
 ## To-Do
 
-- [ ] Improve how tailwind is used
 - [ ] Remove toString() from contact page labels
 - [ ] Remove @ts-ignore related with aria-label
 - [ ] Improve menu
-- [ ] Improve GA4 code
 - [ ] Improve default language
-- [ ] Mock date for tests
 - [ ] Server
 - [ ] Update contact page
 - [ ] Head links with revision by page instead of global
 
 ### Completed ✓
 
+- [x] Improve how tailwind is used
+- [x] Improve GA4 code
+- [x] Mock date for tests
 - [x] Replace yarn with pnpm
 - [x] Windows friendly
 - [x] Update ESLint

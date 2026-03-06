@@ -19,7 +19,7 @@ export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element 
         <Router ssrPath={store.url}>
             <RouterOnChange />
             <Header />
-            <main class="container px-6 pt-14 pb-14 mx-auto sm:pb-14">
+            <main class="mx-auto">
                 <Route path="*">{(params): JSX.Element => RouterPage(params['*'] ? `/${params['*']}` : '/')}</Route>
             </main>
             <SideDrawer />
