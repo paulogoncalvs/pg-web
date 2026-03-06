@@ -5,6 +5,8 @@ pnpm-workspace.yaml
 coverage
 node_modules
 public
+src/tests/**/results
+src/tests/**/report
 .idea
 .history
 .vscode

@@ -1,9 +1,10 @@
 node_modules
 npm-debug.log
-dist
 Dockerfile*
 .gitignore
 .github
 .husky
 .vscode
 .idea
+node_modules/
+dist/

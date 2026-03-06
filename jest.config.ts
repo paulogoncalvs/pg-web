@@ -17,7 +17,18 @@ const config: Config = {
     testEnvironment: 'jsdom',
     transformIgnorePatterns: ['node_modules/(?!(wouter-preact|preact))/'],
     transform: {
-        '\\.[jt]sx?$': ['babel-jest', { rootMode: 'upward' }],
+        '\\.[jt]sx?$': [
+            'esbuild-jest',
+            {
+                sourcemap: true,
+                loaders: {
+                    '.ts': 'tsx',
+                    '.tsx': 'tsx',
+                },
+                jsxFactory: 'h',
+                jsxFragment: 'Fragment',
+            },
+        ],
     },
 };
 

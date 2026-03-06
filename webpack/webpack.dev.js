@@ -54,26 +54,17 @@ export default merge(common, {
     },
     module: {
         rules: [
-            // TypeScript
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            // disable type checker - we will use it in fork plugin
-                            transpileOnly: true,
-                        },
-                    },
-                ],
-            },
+            // TypeScript / JavaScript with esbuild
             {
                 test: /\.[jt]sx?$/,
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: 'esbuild-loader',
+                        options: {
+                            loader: 'tsx',
+                            target: 'es2020',
+                        },
                     },
                 ],
             },
