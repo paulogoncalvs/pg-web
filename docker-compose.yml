@@ -6,9 +6,11 @@ services:
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
+        UNAME: node
+    user: '${UID:-1000}:${GID:-1000}'
     environment:
       - NODE_ENV=tests
     volumes:
-      - ./:/app
-      - /app/node_modules
+      - ./:/app # Mount project source code
+      - /app/node_modules # Use container's node_modules
     command: 'pnpm exec playwright test'
