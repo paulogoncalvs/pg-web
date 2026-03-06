@@ -15,9 +15,10 @@
     ":enableVulnerabilityAlertsWithLabel(security)",
     ":assignAndReview(paulogoncalvs)"
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["(^|/)Dockerfile.*$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)Dockerfile.*$/"],
       "matchStrings": ["pnpm@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
       "depNameTemplate": "pnpm",
       "datasourceTemplate": "npm"
