@@ -62,34 +62,34 @@ If you use environment-specific secrets in GitHub Actions, add them under Settin
 <details>
 <summary>List</summary>
 
-| COMMAND                      | DESCRIPTION                                     |
-| :--------------------------- | ----------------------------------------------- |
-| **BUILD**                    |                                                 |
-| `pnpm run prebuild`          | Generate sitemap                                |
-| `pnpm run build`             | Generate dist                                   |
-| **SERVER**                   |                                                 |
-| `pnpm run start:dev`         | Start **Development** server                    |
-| `pnpm run start:prod`        | Generate dist + Start **Production** server     |
-| `pnpm run start:prod:server` | Start Production server without dist generation |
-| **TESTS**                    |                                                 |
-| `pnpm run tests:jest`        | Run Jest tests                                  |
-| `pnpm run tests:jest:update` | Update Jest tests                               |
-| `pnpm run tests:pw`          | Generate dist + Run Playwright tests            |
-| `pnpm run tests:pw:update`   | Generate dist + Update Playwright tests         |
-| `pnpm run tests:pw:run`      | Run Playwright tests without dist generation    |
-| `pnpm run tests:pw:build`    | Build Playwright docker image                   |
-| `pnpm run tests`             | Run all tests                                   |
-| `pnpm run tests:update`      | Update all tests                                |
-| **FORMAT**                   |                                                 |
-| `pnpm run format`            | Code formatting - Check                         |
-| `pnpm run format:fix`        | Code formatting - Fix                           |
-| **LINT**                     |                                                 |
-| `pnpm run lint:ts`           | Lint TypeScript                                 |
-| `pnpm run lint:ts:fix`       | Lint TypeScript - Fix                           |
-| `pnpm run lint:css`          | Lint CSS                                        |
-| `pnpm run lint:css:fix`      | Lint CSS - Fix                                  |
-| `pnpm run lint`              | Lint All                                        |
-| `pnpm run lint:fix`          | Lint All - Fix                                  |
+| COMMAND                      | DESCRIPTION                                       |
+| :--------------------------- | ------------------------------------------------- |
+| **BUILD**                    |                                                   |
+| `pnpm run generate:sitemap`  | Generate sitemap                                  |
+| `pnpm run build`             | Generate `dist` (runs sitemap automatically)      |
+| **SERVER**                   |                                                   |
+| `pnpm run start:dev`         | Start **Development** server                      |
+| `pnpm run start:prod`        | Generate `dist` + Start **Production** server     |
+| `pnpm run start:prod:server` | Start Production server without dist generation   |
+| **TESTS**                    |                                                   |
+| `pnpm run tests:jest`        | Run Jest tests                                    |
+| `pnpm run tests:jest:update` | Update Jest snapshots                             |
+| `pnpm run tests:pw`          | Generate test build + Run Playwright tests        |
+| `pnpm run tests:pw:update`   | Generate test build + Update Playwright snapshots |
+| `pnpm run tests:pw:run`      | Run Playwright tests without build                |
+| `pnpm run tests:pw:build`    | Build Playwright Docker image                     |
+| `pnpm run tests`             | Run all tests                                     |
+| `pnpm run tests:update`      | Update all tests                                  |
+| **FORMAT**                   |                                                   |
+| `pnpm run format`            | Check code formatting                             |
+| `pnpm run format:fix`        | Fix code formatting                               |
+| **LINT**                     |                                                   |
+| `pnpm run lint:ts`           | TypeScript type check + ESLint                    |
+| `pnpm run lint:ts:fix`       | Fix ESLint issues                                 |
+| `pnpm run lint:css`          | Lint CSS                                          |
+| `pnpm run lint:css:fix`      | Fix CSS lint issues                               |
+| `pnpm run lint`              | Run all linters                                   |
+| `pnpm run lint:fix`          | Fix all lint issues                               |
 
 </details>
 

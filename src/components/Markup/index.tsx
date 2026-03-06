@@ -1,5 +1,5 @@
 import { h, FunctionalComponent, VNode, JSX } from 'preact';
-import classNames from 'classnames';
+import { classNames } from '@/utils/classNames';
 
 interface MarkupComponentProps {
     data: string | VNode;

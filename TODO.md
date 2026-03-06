@@ -12,6 +12,7 @@
 
 ### Completed ✓
 
+- [x] Babel to esbuild
 - [x] Improve how tailwind is used
 - [x] Improve GA4 code
 - [x] Mock date for tests
