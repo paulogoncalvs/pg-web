@@ -99,7 +99,7 @@
     ]
   },
   "scripts": {
-   "generate:sitemap": "esbuild src/scripts/generateSitemap.ts --bundle --platform=node --format=esm --outfile=dist/generateSitemap.js --external:prettier && node dist/generateSitemap.js",
+    "generate:sitemap": "esbuild src/scripts/generateSitemap.ts --bundle --platform=node --format=esm --outfile=dist/generateSitemap.js --external:prettier && node dist/generateSitemap.js",
     "prebuild": "pnpm generate:sitemap",
     "webpack": "webpack --config webpack/webpack.prod.js",
     "build": "cross-env NODE_ENV=production pnpm webpack",
