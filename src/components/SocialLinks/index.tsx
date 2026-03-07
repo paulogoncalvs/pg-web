@@ -4,23 +4,23 @@ import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
 import linkedInIcon from '@/assets/icons/logos/linkedin.svg';
 import githubIcon from '@/assets/icons/logos/github.svg';
-import twitterIcon from '@/assets/icons/logos/twitter.svg';
+import xIcon from '@/assets/icons/logos/x.svg';
 
 export const SocialLinks: FunctionalComponent = () => (
     <Fragment>
         <Link
             class="icon-link"
-            href="https://www.twitter.com/paulogoncalvs"
-            ariaLabel="Twitter"
+            href="https://www.x.com/paulogoncalvs"
+            ariaLabel="X"
             newWindow
             onClick={(): void =>
                 trackEvent('link_click', {
-                    link_name: 'Twitter',
+                    link_name: 'X',
                     link_location: 'Social',
                 })
             }
         >
-            <Icon src={twitterIcon} ariaHidden />
+            <Icon src={xIcon} ariaHidden />
         </Link>
         <Link
             class="icon-link ml-4 mr-4"

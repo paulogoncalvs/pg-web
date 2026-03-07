@@ -165,24 +165,6 @@ export default {
                         maxSize: 1,
                     },
                 },
-                use: [
-                    {
-                        loader: 'svgo-loader',
-                        options: {
-                            plugins: [
-                                { name: 'removeDesc' },
-                                {
-                                    name: 'removeAttrs',
-                                    params: {
-                                        attrs: ['class', 'style'],
-                                    },
-                                },
-                                { name: 'removeStyleElement' },
-                                { name: 'removeRasterImages' },
-                            ],
-                        },
-                    },
-                ],
             },
         ],
     },
