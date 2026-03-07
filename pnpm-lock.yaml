@@ -78,6 +78,9 @@ importers:
       dotenv-webpack:
         specifier: ^8.1.1
         version: 8.1.1(webpack@5.105.4)
+      esbuild:
+        specifier: ^0.27.3
+        version: 0.27.3
       esbuild-jest:
         specifier: ^0.5.0
         version: 0.5.0(esbuild@0.27.3)
