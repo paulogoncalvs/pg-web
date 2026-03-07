@@ -1,10 +1,11 @@
+import path from 'path';
 import { merge } from 'webpack-merge';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin';
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import paths from './paths.js';
 import common from './webpack.common.js';
+import { SpritePlugin } from './plugins/spritePlugin.js';
 
 export default merge(common, {
     mode: 'production',
@@ -22,10 +23,9 @@ export default merge(common, {
             filename: 'assets/css/[name].[contenthash].css',
         }),
 
-        new SVGSpritemapPlugin(`${paths.src}/assets/icons/**/*.svg`, {
-            output: {
-                filename: 'assets/img/sprite.[contenthash].svg',
-            },
+        new SpritePlugin({
+            icons: path.join(paths.src, 'assets', 'icons'),
+            output: 'assets/img/sprite.[contenthash].svg',
         }),
 
         new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
