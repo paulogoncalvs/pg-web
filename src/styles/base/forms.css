@@ -1,0 +1,51 @@
+/* Inputs, textarea, select */
+input,
+textarea,
+select {
+    @apply w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm shadow-sm;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+    @apply text-zinc-400;
+}
+
+/* Focus state */
+input:focus,
+textarea:focus,
+select:focus {
+    @apply outline-none ring-2;
+}
+
+/* Disabled */
+input:disabled,
+textarea:disabled,
+select:disabled {
+    @apply bg-zinc-100 cursor-not-allowed opacity-70;
+}
+
+/* Checkbox & radio */
+input[type='checkbox'],
+input[type='radio'] {
+    @apply h-4 w-4 border-zinc-300 text-blue-600;
+}
+
+/* File input */
+input[type='file'] {
+    @apply text-sm text-zinc-600;
+}
+
+input[type='file']::file-selector-button {
+    @apply mr-4 rounded-md border border-zinc-300 bg-zinc-50 px-3 py-1 text-sm font-medium text-zinc-700 hover:bg-zinc-100;
+}
+
+/* Labels */
+label {
+    @apply mb-1 block text-sm font-medium text-zinc-700;
+}
+
+/* Select */
+select {
+    @apply p-1;
+}

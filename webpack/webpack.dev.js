@@ -1,10 +1,11 @@
+import path from 'path';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import StylelintPlugin from 'stylelint-webpack-plugin';
-import SVGSpritemapPlugin from 'svg-spritemap-webpack-plugin';
 import paths from './paths.js';
 import common from './webpack.common.js';
+import { SpritePlugin } from './plugins/spritePlugin.js';
 
 export default merge(common, {
     mode: 'development',
@@ -84,10 +85,9 @@ export default merge(common, {
             filename: 'assets/css/[name].css',
         }),
 
-        new SVGSpritemapPlugin(`${paths.src}/assets/icons/**/*.svg`, {
-            output: {
-                filename: 'assets/img/sprite.svg',
-            },
+        new SpritePlugin({
+            icons: path.join(paths.src, 'assets', 'icons'),
+            output: 'assets/img/sprite.svg',
         }),
     ],
 });

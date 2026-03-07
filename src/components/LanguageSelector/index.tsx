@@ -35,12 +35,9 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ c
     return (
         <select
             key={`lang-${lang}`}
-            class={classNames(
-                'py-1 pr-7 text-sm rounded-sm text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 border-zinc-800 dark:border-zinc-200 border-2 font-sans hover:border-zinc-500  focus:border-zinc-500',
-                classes,
-            )}
+            class={classNames('text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800', classes)}
+            id="language-selector"
             onChange={onLanguageSelect}
-            // @ts-ignore
             aria-label={t('language_selection')}
         >
             {(Object.keys(translations) as Array<Language>).map((lang: Language) => renderOption(lang))}

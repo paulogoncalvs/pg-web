@@ -10,7 +10,7 @@ declare interface Head {
 
 declare interface PageStore {
     filenames?: {
-        sprite?: 'string';
+        sprite?: string;
     };
     theme?: Theme;
     lang?: Language;
