@@ -115,7 +115,7 @@ export class SpritePlugin {
 
                     const spriteContent = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${symbols.join('\n')}</svg>`;
 
-                    const hash = crypto.createHash('md5').update(spriteContent).digest('hex').slice(0, 8);
+                    const hash = crypto.createHash('md5').update(spriteContent).digest('hex').slice(0, 20);
 
                     const filename = this.outputTemplate.replace('[contenthash]', hash);
 

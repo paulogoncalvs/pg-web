@@ -62,7 +62,6 @@ export const SideDrawer: FunctionalComponent = () => {
                             htmlFor="sd-tog"
                             class="icon-link ml-auto"
                             tabIndex={0}
-                            role="button"
                             aria-label={t('sidedrawer_toggle')}
                         >
                             <Icon src={closeIcon} ariaHidden />
