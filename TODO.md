@@ -2,8 +2,6 @@
 
 ## To-Do
 
-- [ ] Remove toString() from contact page labels
-- [ ] Remove @ts-ignore related with aria-label
 - [ ] Improve menu
 - [ ] Improve default language
 - [ ] Server

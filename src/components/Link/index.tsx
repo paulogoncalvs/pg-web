@@ -13,7 +13,7 @@ interface LinkComponentProps {
 }
 
 export const Link: FunctionalComponent<LinkComponentProps> = ({
-    href,
+    href = '',
     newWindow,
     ariaLabel,
     children,
@@ -24,14 +24,13 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
     const Comp = useRouter ? WLink : 'a';
 
     return (
-        // @ts-ignore
         <Comp
             href={href}
             aria-label={
                 ariaLabel ? (newWindow ? t('accessibility_new_window', { text: ariaLabel }) : ariaLabel) : undefined
             }
             {...(newWindow ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            {...otherProps}
+            {...(otherProps as Record<string, unknown>)}
         >
             {children}
         </Comp>

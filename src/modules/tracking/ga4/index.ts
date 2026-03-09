@@ -62,9 +62,8 @@ export const initGA4 = (): void => {
 
     // Setup dataLayer + gtag BEFORE loading script
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag(): void {
-        // eslint-disable-next-line prefer-rest-params
-        window.dataLayer.push(arguments);
+    window.gtag = function gtag(...args: unknown[]): void {
+        window.dataLayer.push(args);
     };
 
     // Set default consent BEFORE GA loads

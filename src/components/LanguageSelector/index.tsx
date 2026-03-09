@@ -12,7 +12,7 @@ interface LanguageSelectorProps {
 export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ classes }) => {
     const [, setLocation] = useRouterLocation();
     const { t, lang } = useTranslate();
-    const [, params] = useRouterRoute('/:lang/*');
+    const [, , params] = useRouterRoute('/:lang/*');
 
     const onLanguageSelect = useCallback(
         (event: Event): void => {

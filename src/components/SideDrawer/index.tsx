@@ -9,7 +9,7 @@ import { Link } from '@/components/Link';
 import { toggleOverlay } from '@/components/Overlay';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { ToggleTheme } from '@/components/ToggleTheme';
-import { SocialLinks } from '@/components/SocialLinks/index';
+import { SocialLinks } from '@/components/SocialLinks';
 import closeIcon from '@/assets/icons/close.svg';
 
 let sideDrawerInputEl: RefObject<HTMLInputElement> | null;
@@ -55,18 +55,13 @@ export const SideDrawer: FunctionalComponent = () => {
             />
             <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
                 <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center justify-between">
-                    <LanguageSelector classes="w-[50px]" />
-                    <div>
+                    <div class="flex items-center gap-4">
+                        <LanguageSelector classes="w-[50px]" />
                         <ToggleTheme classes="p-2" />
-                        <label
-                            htmlFor="sd-tog"
-                            class="icon-link ml-auto"
-                            tabIndex={0}
-                            aria-label={t('sidedrawer_toggle')}
-                        >
-                            <Icon src={closeIcon} ariaHidden />
-                        </label>
                     </div>
+                    <label htmlFor="sd-tog" class="icon-link ml-auto" tabIndex={0} aria-label={t('sidedrawer_toggle')}>
+                        <Icon src={closeIcon} ariaHidden />
+                    </label>
                 </div>
                 <div class="flex flex-col pl-10 pr-10">
                     <Link

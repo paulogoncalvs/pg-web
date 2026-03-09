@@ -1,24 +1,31 @@
-const withDevTools = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__;
+interface ReduxDevTools {
+    connect(): ReduxDevTools;
+    send(action: string, state: unknown): void;
+    init(state: unknown): void;
+    subscribe(listener: (message: unknown) => void): () => void;
+    unsubscribe(): void;
+}
 
 declare global {
     interface Window {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        __REDUX_DEVTOOLS_EXTENSION__: any;
+        __REDUX_DEVTOOLS_EXTENSION__?: () => ReduxDevTools;
     }
 }
 
-const devTools = withDevTools && window.__REDUX_DEVTOOLS_EXTENSION__.connect();
+const withDevTools = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__;
+
+const devTools = withDevTools ? window.__REDUX_DEVTOOLS_EXTENSION__!()!.connect() : null;
 
 const debug = (type: string, state: unknown): void => {
-    if (process.env.NODE_ENV !== 'development') return;
+    if (process.env.NODE_ENV !== 'development') {
+        return;
+    }
 
     console.debug('STATE', state);
 
-    if (withDevTools) {
+    if (devTools) {
         devTools.send(type, state);
-
-        return;
     }
 };
 
-export { debug };
+export { debug as default };

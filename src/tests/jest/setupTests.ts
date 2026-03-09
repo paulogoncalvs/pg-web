@@ -9,8 +9,7 @@ global.Date = class extends Date {
         if (args.length === 0) {
             return new OriginalDate(FIXED_DATE);
         }
-        // @ts-ignore
-        return new OriginalDate(...args);
+        return new OriginalDate(args[0] as string | number | Date);
     }
 
     static now() {

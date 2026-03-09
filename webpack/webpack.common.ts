@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import Dotenv from 'dotenv-webpack';
 import WorkboxPlugin from 'workbox-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -7,13 +7,15 @@ import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin';
 import HtmlWebpackDeployPlugin from 'html-webpack-deploy-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import type { Configuration } from 'webpack';
 import paths from './paths.js';
 import config from './config.js';
-import globalConfig from '../src/config/global/index.js';
+import globalConfig from '../src/config/global';
+
 const env = process.env.NODE_ENV || 'development';
 const isProd = env === 'production' || env === 'tests';
 
-export default {
+const webpackConfig: Configuration = {
     entry: [`${paths.src}/index.tsx`],
     output: {
         path: paths.build,
@@ -29,33 +31,13 @@ export default {
             path: `.env.${env}`,
         }),
 
-        // @todo SW - WIP
-        // new WorkboxPlugin.InjectManifest({
-        //     swSrc: `${paths.src}/sw/index.ts`,
-        //     swDest: `service-worker.js`,
-        //     injectionPoint: 'self.__WB_MANIFEST',
-        // }),
-
         isProd
             ? new WorkboxPlugin.GenerateSW({
-                  // these options encourage the ServiceWorkers to get in there fast
-                  // and not allow any straggling "old" SWs to hang around
                   mode: env,
                   clientsClaim: true,
                   skipWaiting: true,
                   exclude: ['.DS_Store'],
                   offlineGoogleAnalytics: isProd,
-                  // runtimeCaching: [
-                  //         {
-                  //         urlPattern: ({ request }) => request.mode === 'navigate',
-                  //         handler: 'NetworkFirst',
-                  //         options: {
-                  //             cacheName: 'pages',
-                  //             networkTimeoutSeconds: 3,
-                  //         },
-                  //         },
-                  //     ],
-                  // navigateFallback: '/offline/index.html',
               })
             : null,
 
@@ -64,7 +46,10 @@ export default {
                 {
                     from: paths.public,
                     to: ({ absoluteFilename }) => {
-                        if (config.filesWithoutHashes.some((el) => absoluteFilename.includes(el))) {
+                        if (
+                            !absoluteFilename ||
+                            config.filesWithoutHashes.some((el) => absoluteFilename.includes(el))
+                        ) {
                             return '[path][name][ext]';
                         }
 
@@ -83,7 +68,7 @@ export default {
                     favicon: `${paths.public}/assets/favicon.ico`,
                     template: `${paths.src}/templates/html/index.tsx`,
                     minify: {
-                        removeRedundantAttributes: false, // eg. do not remove type="text"
+                        removeRedundantAttributes: false,
                         collapseWhitespace: true,
                         minifyJS: isProd,
                         minifyCSS: isProd,
@@ -94,18 +79,18 @@ export default {
 
         new HtmlWebpackTagsPlugin({
             append: true,
-            metas: globalConfig.metas,
+            metas: globalConfig.metas as unknown as Array<Record<string, string>>,
             assetsPath: '/assets/',
-            hash: isProd ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
+            hash: isProd ? (assetName: string, hash: string) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
             publicPath: false,
         }),
 
         new HtmlWebpackDeployPlugin({
             assetsPath: '/assets/',
-            hash: isProd ? (assetName, hash) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
+            hash: isProd ? (assetName: string, hash: string) => assetName.replace(/(\.[^.]*)?$/, `.${hash}$1`) : false,
             publicPath: false,
             assets: {
-                links: globalConfig.links,
+                links: globalConfig.links as unknown as Array<{ rel: string; type?: string; href: string }>,
             },
         }),
     ],
@@ -117,19 +102,16 @@ export default {
 
     module: {
         rules: [
-            // Style
             {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
             },
 
-            // Images: Copy images to build folder
             {
                 test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/i,
                 type: 'asset/resource',
             },
 
-            // Fonts: Copy fonts to build folder
             {
                 test: /fonts\/.*\.(woff(2)?|eot|ttf|otf)$/,
                 type: 'asset/resource',
@@ -138,25 +120,21 @@ export default {
                 },
             },
 
-            // SVG Icons: Content to use with preact component
             {
-                // test: /\.svg$/i,
                 test: /[\\/]icons[\\/].*\.svg$/,
                 type: 'asset/inline',
                 generator: {
-                    dataUrl: (content, data) => {
+                    dataUrl: (content: Buffer, data: { filename: string }) => {
                         const contentString = content.toString();
 
                         return [
                             `#sprite-${path.parse(data.filename).name}`,
                             (contentString.match(/viewBox="([^"]+)"/) || [])[1] || '',
-                            // content: contentString.match(/<svg[^>]*>([\s\S]*?)<\/svg>/)[1] || ''
                         ];
                     },
                 },
             },
 
-            // SVG Images
             {
                 test: /[\\/]img[\\/].*\.svg$/,
                 type: 'asset',
@@ -169,3 +147,5 @@ export default {
         ],
     },
 };
+
+export default webpackConfig;

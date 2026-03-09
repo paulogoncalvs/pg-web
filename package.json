@@ -1,7 +1,7 @@
 {
   "name": "@paulogoncalvs/pg-web",
   "description": "Paulo Gonçalves Website",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "keywords": [
     "preact",
     "webpack",
@@ -33,10 +33,11 @@
     "cross-env": "^10.1.0",
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
-    "dotenv-webpack": "^8.1.1",
+    "dotenv-webpack": "^9.0.0",
     "esbuild": "^0.27.3",
     "esbuild-jest": "^0.5.0",
     "esbuild-loader": "^4.4.2",
+    "esbuild-register": "^3.6.0",
     "eslint": "^10.0.3",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
@@ -65,6 +66,7 @@
     "stylelint-config-tailwindcss": "^1.0.1",
     "stylelint-webpack-plugin": "^5.1.0",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
     "webpack": "^5.105.4",
@@ -85,7 +87,7 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@10.31.0",
   "pnpm": {
     "overrides": {
       "braces": "^3.0.3",
@@ -101,16 +103,16 @@
   "scripts": {
     "generate:sitemap": "esbuild src/scripts/generateSitemap.ts --bundle --platform=node --format=esm --outfile=dist/generateSitemap.js --external:prettier && node dist/generateSitemap.js",
     "prebuild": "pnpm generate:sitemap",
-    "webpack": "webpack --config webpack/webpack.prod.js",
-    "build": "cross-env NODE_ENV=production pnpm webpack",
-    "build:tests": "cross-env NODE_ENV=tests pnpm webpack",
+    "webpack": "tsx ./node_modules/webpack/bin/webpack.js --config webpack/webpack.prod.ts",
+    "build": "cross-env NODE_ENV=production tsx ./node_modules/webpack/bin/webpack.js --config webpack/webpack.prod.ts",
+    "build:tests": "cross-env NODE_ENV=tests tsx ./node_modules/webpack/bin/webpack.js --config webpack/webpack.prod.ts",
     "start:prod:server": "http-server dist -p 4040",
     "start:prod": "pnpm build && pnpm start:prod:server",
-    "start:dev": "webpack serve --config webpack/webpack.dev.js",
+    "start:dev": "tsx ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack/webpack.dev.ts",
     "tests:jest": "cross-env NODE_ENV=tests jest",
     "tests:jest:update": "pnpm tests:jest -u",
-    "tests:pw:build": "node ./scripts/run-with-uid-gid.js docker compose --progress=plain build pg-tests-runner",
-    "tests:pw:run": "node ./scripts/run-with-uid-gid.js docker compose run pg-tests-runner",
+    "tests:pw:build": "tsx ./scripts/run-with-uid-gid.ts docker compose --progress=plain build pg-tests-runner",
+    "tests:pw:run": "tsx ./scripts/run-with-uid-gid.ts docker compose run pg-tests-runner",
     "tests:pw": "pnpm build:tests && pnpm tests:pw:run",
     "tests:pw:update": "pnpm build:tests && docker compose run pg-tests-runner pnpm exec playwright test --update-snapshots",
     "tests": "pnpm tests:jest && pnpm tests:pw",
