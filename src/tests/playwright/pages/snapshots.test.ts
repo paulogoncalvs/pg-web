@@ -1,6 +1,6 @@
 import { type Page, expect, test } from '@playwright/test';
-import routesConfig from '@/config/routes/index.js';
-import { stripEmojis, stripHashes } from '@/tests/playwright/utils/index';
+import routesConfig from '@/config/routes';
+import { stripEmojis, stripHashes } from '@/tests/playwright/utils';
 
 class BasePage {
     private readonly page: Page;

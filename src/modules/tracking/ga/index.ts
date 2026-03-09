@@ -1,19 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getEventData, EventTrackingData } from './event';
 import { getPageViewData, PageViewTrackingData } from './pageView';
 
 declare global {
     interface Window {
-        ga: any;
-        ga_debug: any;
+        ga: GA;
+        ga_debug?: { trace?: boolean };
     }
+}
+
+interface GA {
+    (command: string, ...args: unknown[]): void;
+    q: unknown[][];
+    l: number;
 }
 
 const hasGa = (): boolean => !!window.ga;
 
-export const gaNewElem: any = {};
+export const gaNewElem: Record<string, unknown> = {};
 
-export const gaElems: any = {};
+export const gaElems: Record<string, unknown> = {};
 
 export const trackPageView = (data?: PageViewTrackingData): void => {
     if (hasGa()) {
@@ -32,34 +37,21 @@ export const initGA = (): void => {
         return;
     }
 
-    (function (i, s, o, g, r, a, m): void {
-        // @ts-ignore
-        i['GoogleAnalyticsObject'] = r;
-        // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        ((i[r] =
-            // @ts-ignore
-            i[r] ||
-            function (): void {
-                // @ts-ignore
-                (i[r].q = i[r].q || []).push(arguments); // eslint-disable-line prefer-rest-params
-            }),
-            // @ts-ignore
-            (i[r].l = 1 * (new Date() as any)));
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
-        a.async = 1;
-        a.src = g;
+    const win = window as typeof window & Record<string, unknown>;
+    win['GoogleAnalyticsObject'] = 'ga';
+    win['ga'] =
+        win['ga'] ||
+        function (...args: unknown[]): void {
+            (win['ga'].q = win['ga'].q || []).push(args);
+        };
+    (win['ga'] as { l?: number }).l = 1 * Number(new Date());
+    const a = document.createElement('script');
+    const m = document.getElementsByTagName('script')[0];
+    if (m && m.parentNode) {
+        a.async = true;
+        a.src = `//www.google-analytics.com/analytics${process.env.NODE_ENV === 'development' ? '_debug' : ''}.js`;
         m.parentNode.insertBefore(a, m);
-    })(
-        window,
-        document,
-        'script',
-        `//www.google-analytics.com/analytics${process.env.NODE_ENV === 'development' ? '_debug' : ''}.js`,
-        'ga',
-        gaNewElem,
-        gaElems,
-    );
+    }
 
     if (process.env.NODE_ENV === 'development') {
         window.ga_debug = { trace: true };

@@ -1,8 +1,22 @@
-import routes from '../routes/index.js';
+import routes from '../routes';
 
 const baseUrl = 'https://www.paulogoncalves.dev/';
 
-const metas = [
+interface Meta {
+    attributes?: Record<string, string>;
+    path?: string;
+    property?: string;
+    content?: string;
+    name?: string;
+    [key: string]: unknown;
+}
+
+interface Link {
+    path: string;
+    attributes: Record<string, string>;
+}
+
+const metas: Meta[] = [
     { attributes: { name: 'viewport', content: 'width=device-width,initial-scale=1' } },
     {
         attributes: {
@@ -29,7 +43,7 @@ const metas = [
     { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'og:image' } },
 ];
 
-const links = [
+const links: Link[] = [
     {
         path: '',
         attributes: {
@@ -85,15 +99,28 @@ const links = [
             sizes: '180x180',
         },
     },
-    // { path: '/resources/paulo-goncalves.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
-    // { path: '/resources/paulo-goncalves_sm.webp', attributes: { rel: 'preload', fetchpriority: 'high', type: 'image/webp', as: 'image', } },
 ];
 
-export default {
+type Routes = typeof routes;
+
+interface GlobalConfig {
+    title: string;
+    description: string;
+    metas: Meta[];
+    links: Link[];
+    routes: Routes;
+    baseUrl: string;
+    scripts: unknown[];
+}
+
+const config: GlobalConfig = {
     title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
     description: 'Personal Website',
     metas,
     links,
     routes,
     baseUrl,
+    scripts: [],
 };
+
+export default config;

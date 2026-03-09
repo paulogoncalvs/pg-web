@@ -5,7 +5,7 @@ import { Theme, getInitialTheme, THEME_DEFAULT } from '@/modules/theme';
 import { Language, LANGUAGE_DEFAULT } from '@/modules/language';
 import { useStoreLanguage } from './hooks/useStoreLanguage';
 import { useStoreTheme } from './hooks/useStoreTheme';
-import { debug } from './debug';
+import debug from './debug';
 import { isBrowser } from '@/utils/browser';
 
 export interface StorePayload {

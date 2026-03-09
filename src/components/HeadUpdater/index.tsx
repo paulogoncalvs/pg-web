@@ -1,4 +1,4 @@
-import routesConfig from '@/config/routes/index.js';
+import routesConfig from '@/config/routes';
 import { useRouter } from '@/modules/router';
 import { isBrowser } from '@/utils/browser';
 

@@ -1,11 +1,17 @@
-import path from 'path';
+import path from 'node:path';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import StylelintPlugin from 'stylelint-webpack-plugin';
+// import StylelintPlugin from 'stylelint-webpack-plugin';
 import paths from './paths.js';
 import common from './webpack.common.js';
 import { SpritePlugin } from './plugins/spritePlugin.js';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import type { Configuration } from 'webpack';
+
+type WebpackConfig = Configuration & {
+    devServer?: DevServerConfiguration;
+};
 
 export default merge(common, {
     mode: 'development',
@@ -19,6 +25,7 @@ export default merge(common, {
         liveReload: false,
         open: false,
         port: 4005,
+        host: '0.0.0.0',
         client: {
             overlay: {
                 errors: true,
@@ -39,6 +46,9 @@ export default merge(common, {
             serverSideRender: false,
             writeToDisk: true,
         },
+        onListening(): void {
+            console.log('\n🚀 Dev server running at http://localhost:4005\n');
+        },
     },
     watchOptions: {
         ignored: [
@@ -55,7 +65,6 @@ export default merge(common, {
     },
     module: {
         rules: [
-            // TypeScript / JavaScript with esbuild
             {
                 test: /\.[jt]sx?$/,
                 exclude: /node_modules/,
@@ -74,11 +83,12 @@ export default merge(common, {
     plugins: [
         new webpack.ProgressPlugin(),
 
-        new StylelintPlugin({
-            failOnError: false,
-            emitErrors: false,
-            syntax: 'scss',
-        }),
+        // new StylelintPlugin({
+        //     files: '**/*.{css,scss}',
+        //     failOnError: false,
+        //     emitErrors: false,
+        //     syntax: 'scss',
+        // }),
 
         new MiniCssExtractPlugin({
             chunkFilename: '[id].css',
@@ -90,4 +100,4 @@ export default merge(common, {
             output: 'assets/img/sprite.svg',
         }),
     ],
-});
+} as WebpackConfig);

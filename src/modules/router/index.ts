@@ -31,11 +31,18 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
     return null;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useRouterLocation = (): any[] => (isBrowser() ? useLocation() : ['', (): null => null]);
+type RouteParams = { [key: string]: string | undefined };
+type RouteResult = [boolean, (to: string) => void, RouteParams | null];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useRouterRoute = (route: string): any[] => (isBrowser() ? useRoute(route) : ['', (): null => null]);
+export const useRouterLocation = (): [string, (to: string) => void] => {
+    const [match, setLocation] = isBrowser() ? useLocation() : ['', () => {}];
+    return [match as string, setLocation];
+};
+
+export const useRouterRoute = (route: string): RouteResult => {
+    const [match, params] = isBrowser() ? useRoute(route) : [false, null];
+    return [match, () => {}, params as RouteParams];
+};
 
 export const useRouter = (): {
     url: string;

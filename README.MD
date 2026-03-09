@@ -4,7 +4,7 @@
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.paulogoncalves.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Static site for Paulo Gonçalves built with Preact, TailwindCSS and a webpack toolchain.
+Static site for Paulo Gonçalves built with Preact, TailwindCSS and a webpack toolchain. TypeScript is used for webpack configuration and scripts.
 
 **STATUS: 👷 occasional experiments and updates**
 
@@ -30,7 +30,7 @@ Run dev server:
 
 ```bash
 pnpm run start:dev
-# open http://localhost:3000 (or port shown in console)
+# open http://localhost:4005 (or port shown in console)
 ```
 
 Build for production:
@@ -105,9 +105,9 @@ If you use environment-specific secrets in GitHub Actions, add them under Settin
 
 ## Release process
 
-A local helper script exists at `scripts/release.js`:
+A local helper script exists at `scripts/release.ts`:
 
-- Usage: `node scripts/release.js <new-version>`
+- Usage: `tsx scripts/release.ts <new-version>`
 - What it does:
     - Bumps package.json on `development` and commits/pushes.
     - Merges `development` → `master`, bumps `master` package.json, tags and pushes.

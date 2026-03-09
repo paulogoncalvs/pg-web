@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { render } from 'preact-render-to-string';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import routesConfig from '@/config/routes/index.js';
+import routesConfig from '@/config/routes';
 import { App } from '@/App';
 
 expect.extend(toHaveNoViolations);
@@ -43,12 +43,13 @@ const pageTests = ({ name, route, storeData }: PageTestsOptions): void => {
 // Run
 for (const pageKey of Object.keys(routesConfig)) {
     const name = routesConfig[pageKey].tests?.name;
+    const storeData = routesConfig[pageKey].tests || {};
 
     if (name) {
         pageTests({
             name,
             route: pageKey,
-            storeData: routesConfig[pageKey].tests,
+            storeData,
         });
     }
 }
