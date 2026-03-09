@@ -1,7 +1,7 @@
 import { h, JSX } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
-import globalConfig from '@/config/global/index.js';
+import globalConfig from '@/config/global';
 import { strScript } from './scripts';
 
 interface PageLinks {
@@ -29,12 +29,15 @@ interface PageScripts {
     async: boolean;
 }
 
-/* @TODO SCRIPTS TAGS - ANALYTICS */
+interface WebpackPlugin {
+    filenames?: { spritemap?: string };
+}
+
 interface HtmlTemplateProps {
     lang: string;
     url: string;
     head: Head;
-    webpackConfig: { plugins: Array<any> }; // eslint-disable-line @typescript-eslint/no-explicit-any
+    webpackConfig: { plugins: WebpackPlugin[] };
 }
 
 export interface PageProps {
@@ -84,17 +87,18 @@ const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Par
     )}`;
 
 export default ({ lang, url, head, webpackConfig }: HtmlTemplateProps): string => {
-    const sprite = webpackConfig.plugins.find((plugin) => plugin?.filenames?.spritemap).filenames?.spritemap;
+    const plugin = webpackConfig.plugins.find((p) => p?.filenames?.spritemap);
+    const sprite = plugin?.filenames?.spritemap;
 
     return Page({
         strScript,
-        scripts: globalConfig.scripts,
-        title: head.title || globalConfig.title,
-        metas: head.metas || globalConfig.metas,
-        links: head.links || globalConfig.links,
+        scripts: globalConfig.scripts as Partial<PageScripts>[],
+        title: head.title || (globalConfig.title as string),
+        metas: head.metas || (globalConfig.metas as Partial<PageMetas>[]),
+        links: head.links || (globalConfig.links as Partial<PageLinks>[]),
         store: {
             filenames: {
-                sprite: sprite && `/${sprite}`,
+                sprite: sprite ? `/${sprite}` : undefined,
             },
             lang,
             url,

@@ -9,7 +9,9 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
-export default [
+type ESLintConfig = unknown[];
+
+const config: ESLintConfig = [
     {
         ignores: [
             'src/tests/**/results',
@@ -70,17 +72,9 @@ export default [
 
         rules: {
             ...eslint.configs.recommended.rules,
-            // Re-enabled ESLint v10 rule after fixing code
             'no-useless-assignment': 2,
-            // Disabled jsx-a11y rules for ESLint v10 compatibility
-            // ...jsxA11y.flatConfigs.recommended.rules,
             ...importPlugin.flatConfigs.recommended.rules,
-            // ...reactHooks.rules.recommended,
 
-            /**
-             * Preact - Disabled for ESLint v10 compatibility
-             * eslint-plugin-react not yet compatible with ESLint v10
-             */
             'react/no-deprecated': 0,
             'react/react-in-jsx-scope': 0,
             'react/display-name': 0,
@@ -106,18 +100,8 @@ export default [
             'react-hooks/rules-of-hooks': 0,
             'react-hooks/exhaustive-deps': 0,
 
-            /**
-             * General JavaScript error avoidance
-             * (rules from eslint:recommended are active via spread)
-             */
-
-            /**
-             * Other
-             */
             'jsx-a11y/no-onchange': 0,
             'import/no-unresolved': 0,
-
-            // Disabled due to ESLint v9/v10 incompatibilities
             'import/no-named-as-default': 0,
             'import/no-named-as-default-member': 0,
             'import/namespace': 0,
@@ -147,3 +131,5 @@ export default [
         },
     },
 ];
+
+export default config;

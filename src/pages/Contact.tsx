@@ -57,21 +57,21 @@ const Contact: FunctionalComponent = () => {
                     <h2 class="text-xl sm:text-3xl mb-4">{t('contact_page_contact_form_title')}</h2>
                     <FormInput
                         disabled
-                        label={t('contact_page_contact_form_first_name_label').toString()}
+                        label={t('contact_page_contact_form_first_name_label')}
                         type="text"
                         name="firstName"
                         id="firstName"
                     />
                     <FormInput
                         disabled
-                        label={t('contact_page_contact_form_last_name_label').toString()}
+                        label={t('contact_page_contact_form_last_name_label')}
                         type="text"
                         name="lastName"
                         id="lastName"
                     />
                     <FormInput
                         disabled
-                        label={t('contact_page_contact_form_email_label').toString()}
+                        label={t('contact_page_contact_form_email_label')}
                         type="email"
                         name="email"
                         id="email"
@@ -84,7 +84,7 @@ const Contact: FunctionalComponent = () => {
                     <p class="mt-12">
                         {t(messageKey, {
                             name: `${initialValues.firstName} ${initialValues.lastName}`,
-                        }).toString()}
+                        })}
                     </p>
                 )}
                 <p class="text-xl tracking-tight font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

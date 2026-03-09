@@ -1,6 +1,23 @@
 const baseUrl = 'https://www.paulogoncalves.dev/';
 
-export default {
+interface RouteConfig {
+    filename: string;
+    templateParameters: {
+        lang: string;
+        url: string;
+        View: string;
+        head: {
+            title: string;
+            links: Array<{ path: string; attributes: Record<string, string> }>;
+            metas: Array<{ attributes: Record<string, string> }>;
+        };
+    };
+    tests?: {
+        name: string;
+    };
+}
+
+const routes: Record<string, RouteConfig> = {
     '/': {
         filename: 'index.html',
         templateParameters: {
@@ -170,3 +187,5 @@ export default {
         },
     },
 };
+
+export default routes;

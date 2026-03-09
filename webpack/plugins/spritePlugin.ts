@@ -1,15 +1,24 @@
 import fs from 'fs';
-import path from 'path';
+import path from 'node:path';
 import crypto from 'crypto';
+import type { Compiler, WebpackPluginInstance } from 'webpack';
 
-export class SpritePlugin {
-    constructor(options = {}) {
+interface SpritePluginOptions {
+    icons: string;
+    output?: string;
+}
+
+export class SpritePlugin implements WebpackPluginInstance {
+    private iconsDir: string;
+    private outputTemplate: string;
+    private filenames: { spritemap?: string } = {};
+
+    constructor(options: SpritePluginOptions) {
         this.iconsDir = options.icons;
         this.outputTemplate = options.output || 'assets/img/sprite.[contenthash].svg';
-        this.filenames = {};
     }
 
-    getSvgFiles(dir) {
+    private getSvgFiles(dir: string): string[] {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
 
         return entries.flatMap((entry) => {
@@ -27,7 +36,7 @@ export class SpritePlugin {
         });
     }
 
-    extractViewBox(content) {
+    private extractViewBox(content: string): string {
         const viewBoxMatch = content.match(/viewBox="([^"]+)"/i);
 
         if (viewBoxMatch) {
@@ -44,24 +53,22 @@ export class SpritePlugin {
         return '0 0 24 24';
     }
 
-    removeSvgWrapper(content) {
+    private removeSvgWrapper(content: string): string {
         return content
             .replace(/^[\s\S]*?<svg[^>]*>/i, '')
             .replace(/<\/svg>[\s\S]*$/i, '')
             .trim();
     }
 
-    prefixIds(content, prefix) {
-        const idMap = new Map();
+    private prefixIds(content: string, prefix: string): string {
+        const idMap = new Map<string, string>();
 
-        // prefix all ids
         content = content.replace(/\bid="([^"]+)"/g, (match, id) => {
             const newId = `${prefix}-${id}`;
             idMap.set(id, newId);
             return `id="${newId}"`;
         });
 
-        // update references
         for (const [oldId, newId] of idMap.entries()) {
             const patterns = [
                 new RegExp(`url\\(#${oldId}\\)`, 'g'),
@@ -79,7 +86,7 @@ export class SpritePlugin {
         return content;
     }
 
-    apply(compiler) {
+    apply(compiler: Compiler): void {
         const pluginName = 'SpritePlugin';
         const { webpack } = compiler;
 
@@ -91,14 +98,13 @@ export class SpritePlugin {
                 },
                 () => {
                     const files = this.getSvgFiles(this.iconsDir).sort();
-                    const symbols = [];
+                    const symbols: string[] = [];
 
                     for (const file of files) {
                         const name = path.basename(file, '.svg');
 
                         let content = fs.readFileSync(file, 'utf8');
 
-                        // prefix ids to avoid collisions
                         content = this.prefixIds(content, `sprite-${name}`);
 
                         const viewBox = this.extractViewBox(content);

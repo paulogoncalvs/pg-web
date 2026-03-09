@@ -1,6 +1,6 @@
 import { h, FunctionalComponent } from 'preact';
 import { useContext } from 'preact/hooks';
-import { FormContext } from './index';
+import { FormContext } from './';
 
 interface FormInputComponentProps {
     label: string;

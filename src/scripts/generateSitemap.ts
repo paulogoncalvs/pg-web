@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 import prettier from 'prettier';
-import globalConfig from '../config/global/index.js';
+import globalConfig from '../config/global';
 
 const shouldIgnoreRoute = (route: string): boolean =>
     !!['offline', '404', '/en'].some((element) => route.includes(element));
