@@ -1,4 +1,4 @@
-import { CookieConsent } from '@/modules/cookieConsent';
+import { CookieConsent, getCookieConsent } from '@/modules/cookieConsent';
 
 declare global {
     interface Window {
@@ -40,10 +40,11 @@ export const trackEvent = (name: string, params?: Record<string, unknown>): void
 export const updateConsent = (consent: CookieConsent): void => {
     if (!hasGtag()) return;
 
-    const granted = consent === 'accepted';
+    const granted = consent === 'granted';
 
     window.gtag('consent', 'update', {
         analytics_storage: granted ? 'granted' : 'denied',
+        ad_storage: granted ? 'granted' : 'denied',
     });
 
     // Fire pageview immediately after consent granted
@@ -62,14 +63,15 @@ export const initGA4 = (): void => {
 
     // Setup dataLayer + gtag BEFORE loading script
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag(...args: unknown[]): void {
-        window.dataLayer.push(args);
+    window.gtag = function gtag(): void {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments);
     };
 
     // Set default consent BEFORE GA loads
     window.gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
+        analytics_storage: getCookieConsent() || 'denied',
+        ad_storage: getCookieConsent() || 'denied',
         wait_for_update: 500,
     });
 

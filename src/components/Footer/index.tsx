@@ -1,5 +1,4 @@
 import { h, FunctionalComponent } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
 import { useTranslate } from '@/modules/i18n';
 import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
@@ -18,63 +17,16 @@ import jestLogo from '@/assets/icons/logos/jest.svg';
 import axeLogo from '@/assets/icons/logos/axe.svg';
 import gaLogo from '@/assets/icons/logos/ga.svg';
 import playwrigthLogo from '@/assets/icons/logos/playwright.svg';
-import { trackEvent, updateConsent } from '@/modules/tracking/ga4';
-import { getCookieConsent, setCookieConsent, CookieConsent } from '@/modules/cookieConsent';
+import { trackEvent } from '@/modules/tracking/ga4';
 
 const initialYear = 2021;
 const currentYear = new Date().getFullYear();
 
 export const Footer: FunctionalComponent = () => {
     const { t } = useTranslate();
-    const [showConsent, setShowConsent] = useState(false);
-
-    useEffect(() => {
-        const consent = getCookieConsent();
-
-        if (!consent) {
-            setShowConsent(true);
-        } else if (consent === 'accepted') {
-            updateConsent('accepted');
-        }
-    }, []);
-
-    const handleAccept = () => {
-        const consent: CookieConsent = 'accepted';
-        setCookieConsent(consent);
-        updateConsent(consent);
-        setShowConsent(false);
-    };
-
-    const handleReject = () => {
-        const consent: CookieConsent = 'rejected';
-        setCookieConsent(consent);
-        updateConsent(consent);
-        setShowConsent(false);
-    };
 
     return (
         <footer>
-            {showConsent && (
-                <div class="fixed bottom-0 left-0 right-0 p-2 shadow-2xs z-50 dark:bg-zinc-900/60 border-t backdrop-blur-md bg-white/80 dark:border-white/15 border-white/80">
-                    <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-                        <p class=" text-center sm:text-left">{t('footer_cookie_consent')}</p>
-                        <div class="flex gap-2">
-                            <button
-                                onClick={handleReject}
-                                class="px-4 py-1 border border-zinc-300 dark:border-zinc-600 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-                            >
-                                {t('footer_cookie_reject')}
-                            </button>
-                            <button
-                                onClick={handleAccept}
-                                class="px-4 py-1 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded hover:opacity-80 transition-opacity cursor-pointer"
-                            >
-                                {t('footer_cookie_accept')}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
             <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
                 <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
                     <p class="text-sm font-bold pb-4">{t('footer_description_2')}</p>

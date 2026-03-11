@@ -8,6 +8,8 @@ import { Header } from '@/components/Header';
 import { SideDrawer } from '@/components/SideDrawer';
 import { Footer } from '@/components/Footer';
 import { Overlay } from '@/components/Overlay';
+import { CookieConsentBar } from '@/components/CookieConsentBar';
+import { GA4Provider } from '@/components/GA4Provider';
 
 interface AppProps {
     store?: PageStore;
@@ -25,6 +27,8 @@ export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element 
             <SideDrawer />
         </Router>
         <Footer />
+        <CookieConsentBar />
+        <GA4Provider />
         <Overlay />
     </StoreContextProvider>
 );
