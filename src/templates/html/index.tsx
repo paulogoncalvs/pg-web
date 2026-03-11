@@ -1,7 +1,7 @@
 import { h, JSX } from 'preact';
 import render from 'preact-render-to-string';
 import App from '@/App';
-import globalConfig from '@/config/global';
+import globalConfig, { structuredData } from '@/config/global';
 import { strScript } from './scripts';
 
 interface PageLinks {
@@ -66,6 +66,10 @@ const getInlineCSS = (css = ''): JSX.Element | void =>
 const getInlineJS = (js = ''): JSX.Element | void =>
     js ? <script dangerouslySetInnerHTML={{ __html: js }} /> : undefined;
 
+const getStructuredData = (): JSX.Element => (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+);
+
 const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Partial<PageProps>): string =>
     `<!DOCTYPE html>${render(
         <html lang="en">
@@ -73,6 +77,7 @@ const Page = ({ title, metas, inlineCss, links, store, strScript, scripts }: Par
                 <meta charSet="utf-8" />
                 <title>{title}</title>
                 {strScript && getInlineJS(strScript(store))}
+                {getStructuredData()}
                 {generateMetaTags(metas)}
                 {generateScriptTags(scripts)}
                 {getInlineCSS(inlineCss)}

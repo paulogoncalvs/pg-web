@@ -1,3 +1,6 @@
 # .husky/pre-commit
 
+# Prevent committing .env files
+node .husky/check-env-files.js
+
 pnpm lint-staged

@@ -8,7 +8,6 @@ if (process.env.NODE_ENV === 'development') {
 import '@/styles/index.css';
 import { h, hydrate } from 'preact';
 import App from '@/App';
-import { initGA4 } from '@/modules/tracking/ga4';
 import { reportWebVitalsToGA } from '@/modules/webVitals';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
@@ -28,5 +27,4 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 // Tracking
-initGA4(); // Google Analytics 4
 reportWebVitalsToGA(); // Web Vitals
