@@ -2,6 +2,34 @@ import routes from '../routes';
 
 const baseUrl = 'https://www.paulogoncalves.dev/';
 
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'Person',
+            name: 'Paulo Gonçalves',
+            url: baseUrl,
+            jobTitle: 'Front-End Engineer',
+            nationality: {
+                '@type': 'Country',
+                name: 'Portugal',
+            },
+            sameAs: [
+                'https://github.com/paulogoncalvs',
+                'https://www.linkedin.com/in/paulogoncalvs',
+                'https://x.com/paulogoncalvs',
+            ],
+        },
+        {
+            '@type': 'WebSite',
+            name: 'Paulo Gonçalves - Front-End Engineer',
+            url: baseUrl,
+        },
+    ],
+};
+
+export { structuredData };
+
 interface Meta {
     attributes?: Record<string, string>;
     path?: string;
@@ -111,6 +139,7 @@ interface GlobalConfig {
     routes: Routes;
     baseUrl: string;
     scripts: unknown[];
+    structuredData: Record<string, unknown>;
 }
 
 const config: GlobalConfig = {
@@ -121,6 +150,7 @@ const config: GlobalConfig = {
     routes,
     baseUrl,
     scripts: [],
+    structuredData,
 };
 
 export default config;
