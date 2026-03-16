@@ -1,7 +1,7 @@
 import { FunctionalComponent } from 'preact';
 
 import { useTranslate } from '@/modules/i18n';
-import { useLanguage } from '@/modules/language';
+import { LANGUAGE_DEFAULT, useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
 
 import { Fade } from '@/components/Fade';
@@ -40,7 +40,7 @@ const formatDateRange = (
     start: string,
     end: string | undefined,
     duration: string,
-    language: string,
+    language: string = LANGUAGE_DEFAULT,
     t: (key: string) => string,
 ) => {
     const startDate = new Date(start);

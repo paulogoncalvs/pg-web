@@ -1360,7 +1360,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Jumia Porto Tech Center
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              10/2022 – Present · 3 years 4 months
+              Oct 2022 – Present · 3 years 4 months
             </p>
           </div>
         </div>
@@ -1377,7 +1377,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Jumia Porto Tech Center
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              04/2021 – 09/2022 · 1 year 6 months
+              Apr 2021 – Sep 2022 · 1 year 6 months
             </p>
           </div>
         </div>
@@ -1394,7 +1394,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Jumia Porto Tech Center
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              10/2019 – 03/2021 · 1 year 6 months
+              Oct 2019 – Mar 2021 · 1 year 6 months
             </p>
           </div>
         </div>
@@ -1411,7 +1411,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Jumia Porto Tech Center
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              04/2018 – 09/2019 · 1 year 6 months
+              Apr 2018 – Sep 2019 · 1 year 6 months
             </p>
           </div>
         </div>
@@ -1428,7 +1428,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Rocket Internet GmbH
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              01/2017 – 03/2018 · 1 year 3 months
+              Jan 2017 – Mar 2018 · 1 year 3 months
             </p>
           </div>
         </div>
@@ -1445,7 +1445,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Rocket Internet GmbH
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              03/2016 – 12/2016 · 10 months
+              Mar 2016 – Dec 2016 · 10 months
             </p>
           </div>
         </div>
@@ -1462,7 +1462,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Myone - Comunicação Multimédia
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              01/2015 – 02/2016 · 1 year 2 months
+              Jan 2015 – Feb 2016 · 1 year 2 months
             </p>
           </div>
         </div>
@@ -1479,7 +1479,7 @@ exports[`[PAGE] Home Page should render 1`] = `
               Medula - Design de Comunicação
             </p>
             <p class="text-stone-500 dark:text-zinc-400 text-xs mt-1">
-              03/2014 – 12/2014 · 10 months
+              Mar 2014 – Dec 2014 · 10 months
             </p>
           </div>
         </div>
