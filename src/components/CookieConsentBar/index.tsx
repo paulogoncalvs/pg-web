@@ -1,8 +1,8 @@
-import { h, FunctionalComponent } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
+import { CookieConsent, getCookieConsent, setCookieConsent } from '@/modules/cookieConsent';
 import { useTranslate } from '@/modules/i18n';
 import { updateConsent } from '@/modules/tracking/ga4';
-import { getCookieConsent, setCookieConsent, CookieConsent } from '@/modules/cookieConsent';
+import { FunctionalComponent } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 const GA_MEASUREMENT_ID = process.env.TRACK_GA_MEASUREMENT_ID;
 
@@ -36,7 +36,7 @@ export const CookieConsentBar: FunctionalComponent = () => {
 
     return (
         <div class="fixed bottom-0 left-0 right-0 p-2 shadow-2xs z-50 dark:bg-zinc-900/60 border-t backdrop-blur-md bg-white/80 dark:border-white/15 border-white/80">
-            <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
                 <p class="text-center sm:text-left">{t('footer_cookie_consent')}</p>
                 <div class="flex gap-2">
                     <button

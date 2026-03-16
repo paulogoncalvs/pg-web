@@ -1,5 +1,6 @@
 import { writeFileSync } from 'fs';
 import prettier from 'prettier';
+
 import globalConfig from '../config/global';
 
 const shouldIgnoreRoute = (route: string): boolean =>
@@ -23,13 +24,7 @@ const shouldIgnoreRoute = (route: string): boolean =>
             .join('')}
     </urlset>`;
 
-    writeFileSync(
-        'public/sitemap.xml',
-        await prettier.format(sitemap, {
-            ...prettierConfig,
-            parser: 'html',
-        }),
-    );
+    writeFileSync('public/sitemap.xml', await prettier.format(sitemap, { ...prettierConfig, parser: 'html' }));
 
     console.info('New Sitemap Generated in /public/sitemap.xml');
 })();

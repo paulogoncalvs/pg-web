@@ -28,6 +28,7 @@
     @apply border border-white/50;
     @apply backdrop-blur-md;
     @apply shadow-(--interactive-shadow);
+    @apply cursor-pointer text-center;
     -webkit-tap-highlight-color: transparent;
 
     background: var(--interactive-bg);

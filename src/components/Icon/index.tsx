@@ -1,6 +1,6 @@
-import { h, FunctionalComponent } from 'preact';
-import { useContext } from 'preact/hooks';
 import { StoreContext } from '@/modules/store';
+import { FunctionalComponent } from 'preact';
+import { useContext } from 'preact/hooks';
 
 interface IconComponentProps {
     src: IconSrc;

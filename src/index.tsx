@@ -5,10 +5,10 @@ if (process.env.NODE_ENV === 'development') {
     require('preact/debug');
 }
 
-import '@/styles/index.css';
-import { h, hydrate } from 'preact';
 import App from '@/App';
 import { reportWebVitalsToGA } from '@/modules/webVitals';
+import '@/styles/index.css';
+import { hydrate } from 'preact';
 
 hydrate(<App store={__STORE__} />, document.getElementById('root') as Element);
 

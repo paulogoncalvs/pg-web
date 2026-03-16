@@ -1,5 +1,7 @@
-import { h, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
 import { useContext } from 'preact/hooks';
+
+import { classNames } from '@/utils/classNames';
 import { FormContext } from './';
 
 interface FormInputComponentProps {
@@ -8,6 +10,8 @@ interface FormInputComponentProps {
     name: string;
     disabled?: boolean;
     id: string;
+    autoComplete?: string;
+    classes?: string;
 }
 
 export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
@@ -16,21 +20,30 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
     name,
     id,
     disabled,
+    autoComplete,
+    classes,
 }) => {
-    const { formData, handleFormChange } = useContext(FormContext);
+    const context = useContext(FormContext);
+    if (!context) return null;
+
+    const { formData, errors, errorMessages, handleFormChange } = context;
 
     return (
-        <div class="mt-2">
-            <label for={id}>{label}</label>
+        <div class={classNames('form-field mt-3', classes)}>
+            <label class="form-label" for={id}>
+                {label}
+            </label>
             <input
-                class="dark:bg-zinc-800 dark:border-zinc-600 w-full rounded-md"
+                class={`form-input ${errors[name] ? 'error' : ''}`}
                 id={id}
                 type={type}
                 name={name}
                 value={formData[name]}
-                onChange={handleFormChange}
+                onInput={handleFormChange}
                 disabled={disabled}
+                autoComplete={autoComplete}
             />
+            {errors[name] && <p class="form-error-message">{errorMessages[errors[name]] || errors[name]}</p>}
         </div>
     );
 };

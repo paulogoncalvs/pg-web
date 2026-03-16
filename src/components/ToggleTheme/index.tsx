@@ -1,12 +1,12 @@
-import { h, FunctionalComponent } from 'preact';
-import { useCallback } from 'preact/hooks';
-import { classNames } from '@/utils/classNames';
-import { Theme, useTheme } from '@/modules/theme';
-import { useTranslate } from '@/modules/i18n';
-import { Icon } from '@/components/Icon';
-import { trackEvent } from '@/modules/tracking/ga4';
-import lightModeIcon from '@/assets/icons/light_mode.svg';
 import darkModeIcon from '@/assets/icons/dark_mode.svg';
+import lightModeIcon from '@/assets/icons/light_mode.svg';
+import { Icon } from '@/components/Icon';
+import { useTranslate } from '@/modules/i18n';
+import { Theme, useTheme } from '@/modules/theme';
+import { trackEvent } from '@/modules/tracking/ga4';
+import { classNames } from '@/utils/classNames';
+import { FunctionalComponent } from 'preact';
+import { useCallback } from 'preact/hooks';
 
 interface ToggleThemeComponentProps {
     classes?: string;

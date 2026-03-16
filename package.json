@@ -1,7 +1,7 @@
 {
   "name": "@paulogoncalvs/pg-web",
   "description": "Paulo Gonçalves Website",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "keywords": [
     "preact",
     "webpack",
@@ -124,6 +124,7 @@
     "lint:css": "stylelint ./src/**/*.css",
     "lint:css:fix": "stylelint ./src/**/*.css --fix",
     "lint": "pnpm lint:ts && pnpm lint:css",
-    "lint:fix": "pnpm lint:ts:fix && pnpm lint:css:fix"
+    "lint:fix": "pnpm lint:ts:fix && pnpm lint:css:fix",
+    "release": "tsx scripts/release.ts"
   }
 }
