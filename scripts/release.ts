@@ -128,7 +128,7 @@ function commitVersion(version: string) {
 
 function mergeBranches() {
     run('git checkout master');
-    run('git merge --ff-only development');
+    run('git merge development');
 }
 
 function createTag(version: string) {
