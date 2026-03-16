@@ -1,6 +1,7 @@
 import { FunctionalComponent } from 'preact';
 
 import { useTranslate } from '@/modules/i18n';
+import { useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
 
 import { Fade } from '@/components/Fade';
@@ -35,18 +36,20 @@ const calculateDuration = (startDate: string, endDate: string | undefined, t: (k
     }`;
 };
 
-const formatDateRange = (start: string, end: string | undefined, duration: string) => {
+const formatDateRange = (
+    start: string,
+    end: string | undefined,
+    duration: string,
+    language: string,
+    t: (key: string) => string,
+) => {
     const startDate = new Date(start);
     const endDate = end ? new Date(end) : null;
 
-    const format = (date: Date) =>
-        date.toLocaleDateString(undefined, {
-            month: 'short',
-            year: 'numeric',
-        });
+    const format = (date: Date) => date.toLocaleDateString(language, { month: 'short', year: 'numeric' });
 
     const startLabel = format(startDate);
-    const endLabel = endDate ? format(endDate) : 'Present';
+    const endLabel = endDate ? format(endDate) : t('home_page_experience_present');
 
     return `${startLabel} – ${endLabel} · ${duration}`;
 };
@@ -103,9 +106,10 @@ const experiences: Experience[] = [
 
 const ExperienceItem: FunctionalComponent<Experience> = ({ titleKey, company, start, end }) => {
     const { t } = useTranslate();
+    const { lang } = useLanguage();
 
     const duration = calculateDuration(start, end, t);
-    const dateRange = formatDateRange(start, end, duration);
+    const dateRange = formatDateRange(start, end, duration, lang, t);
 
     const isCurrent = !end;
 
