@@ -14,7 +14,7 @@ const dryRun = process.argv.includes('--dry-run');
 if (!arg) {
     console.error(`
 Usage:
-  tsx scripts/release.ts <version|patch|minor|major|prerelease>
+  pnpm tsx scripts/release.ts <version|patch|minor|major>
 
 Options:
   --dry-run   Print commands without executing
@@ -31,7 +31,6 @@ function run(cmd: string) {
 function output(cmd: string): string {
     console.log(`\n$ ${cmd}`);
     if (dryRun) {
-        // Dry-run outputs
         if (cmd.startsWith('git rev-parse v')) return ''; // pretend tag does not exist
         if (cmd.startsWith('git rev-parse')) return 'development';
         if (cmd.startsWith('git describe')) return 'v0.0.0';
@@ -127,8 +126,9 @@ function commitVersion(version: string) {
 }
 
 function mergeBranches() {
+    // Safe merge, works even if branches have diverged
     run('git checkout master');
-    run('git merge development');
+    run('git merge --no-ff development');
 }
 
 function createTag(version: string) {
@@ -164,13 +164,9 @@ async function main() {
         updatePackageVersion(version);
         commitVersion(version);
 
-        mergeBranches();
-        run('git checkout master');
-
-        run('git cherry-pick development');
+        mergeBranches(); // no ff-only
 
         createTag(version);
-
         generateChangelog(version);
 
         pushAll();
