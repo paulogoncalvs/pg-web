@@ -1,62 +1,199 @@
 import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
-import { resolve, dirname } from 'node:path';
+import { dirname, resolve } from 'path';
+import readline from 'readline';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const newVersion = process.argv[2];
-if (!newVersion) {
-    console.error('Usage: tsx scripts/release.ts <new-version>');
+const pkgPath = resolve(__dirname, '../package.json');
+
+const arg = process.argv[2];
+const dryRun = process.argv.includes('--dry-run');
+
+if (!arg) {
+    console.error(`
+Usage:
+  tsx scripts/release.ts <version|patch|minor|major|prerelease>
+
+Options:
+  --dry-run   Print commands without executing
+`);
     process.exit(1);
 }
 
-const pkgPath = resolve(__dirname, '../package.json');
-
-async function bumpVersion(branch: string): Promise<void> {
-    execSync(`git checkout ${branch}`, { stdio: 'inherit' });
-    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-    if (pkg.version === newVersion) {
-        console.log(`package.json already at version ${newVersion} on ${branch}, skipping commit.`);
-        return;
-    }
-    pkg.version = newVersion;
-    writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
-    execSync('git add package.json', { stdio: 'inherit' });
-    execSync(`git commit -m "chore(${branch}): bump version to ${newVersion}"`, { stdio: 'inherit' });
-    execSync(`git push origin ${branch}`, { stdio: 'inherit' });
-    console.log(`Updated package.json and pushed to ${branch}`);
+function run(cmd: string) {
+    console.log(`\n$ ${cmd}`);
+    if (!dryRun) execSync(cmd, { stdio: 'inherit' });
 }
 
-async function main(): Promise<void> {
-    await bumpVersion('development');
+function output(cmd: string): string {
+    return execSync(cmd, { encoding: 'utf8' }).trim();
+}
 
-    try {
-        execSync('git checkout master', { stdio: 'inherit' });
-        execSync('git merge development', { stdio: 'inherit' });
-        console.log('Merged development into master');
-    } catch (err) {
-        console.error('Error merging development into master:', err);
-        console.error('Abort release process. Resolve merge conflicts and try again.');
+function ensureCleanGit() {
+    const status = output('git status --porcelain');
+
+    if (status) {
+        console.error('❌ Git working directory not clean');
+        console.error(status);
         process.exit(1);
     }
+}
 
-    await bumpVersion('master');
+function getCurrentBranch(): string {
+    return output('git rev-parse --abbrev-ref HEAD');
+}
 
-    execSync(`git tag v${newVersion}`, { stdio: 'inherit' });
-    execSync('git push origin master', { stdio: 'inherit' });
-    execSync('git push origin --tags', { stdio: 'inherit' });
-    console.log(`Created and pushed tag v${newVersion}`);
+function ensureTagDoesNotExist(tag: string) {
+    try {
+        output(`git rev-parse ${tag}`);
+        console.error(`❌ Tag ${tag} already exists`);
+        process.exit(1);
+    } catch (err) {
+        console.error('\n❌', err);
+    }
+}
+
+function bumpVersion(current: string, type: string): string {
+    const parts = current.split('.').map(Number);
+
+    if (type === 'patch') parts[2]++;
+    else if (type === 'minor') {
+        parts[1]++;
+        parts[2] = 0;
+    } else if (type === 'major') {
+        parts[0]++;
+        parts[1] = 0;
+        parts[2] = 0;
+    }
+
+    return parts.join('.');
+}
+
+function resolveVersion(arg: string): string {
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+
+    if (['patch', 'minor', 'major'].includes(arg)) {
+        return bumpVersion(pkg.version, arg);
+    }
+
+    return arg;
+}
+
+function updatePackageVersion(version: string) {
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+    pkg.version = version;
+
+    writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+}
+
+function generateChangelog(version: string) {
+    const log = output(`git log --pretty=format:"- %s (%h)" $(git describe --tags --abbrev=0)..HEAD`);
+
+    const content = `# ${version}
+
+${log}
+`;
+
+    writeFileSync('CHANGELOG_RELEASE.md', content);
+
+    return content;
+}
+
+async function confirm(version: string) {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    const question = (q: string) => new Promise<string>((resolve) => rl.question(q, resolve));
+
+    const answer = await question(`Release version ${version}? (y/N) `);
+
+    rl.close();
+
+    if (answer.toLowerCase() !== 'y') {
+        console.log('Cancelled.');
+        process.exit(0);
+    }
+}
+
+function commitVersion(version: string) {
+    run('git add package.json');
+    run(`git commit -m "chore(release): v${version}"`);
+}
+
+function mergeBranches() {
+    run('git checkout master');
+    run('git merge --ff-only development');
+}
+
+function createTag(version: string) {
+    const tag = `v${version}`;
+
+    ensureTagDoesNotExist(tag);
+
+    run(`git tag ${tag}`);
+}
+
+function pushAll() {
+    run('git push origin development');
+    run('git push origin master');
+    run('git push origin --tags');
+}
+
+function createGithubRelease(version: string) {
+    try {
+        run(`gh release create v${version} --title "Release v${version}" --notes-file CHANGELOG_RELEASE.md`);
+    } catch {
+        console.warn('⚠️ GitHub release failed');
+    }
+}
+
+async function main() {
+    ensureCleanGit();
+
+    const originalBranch = getCurrentBranch();
+
+    const version = resolveVersion(arg);
+
+    console.log(`\n📦 Preparing release ${version}`);
+    if (dryRun) console.log('⚠️ DRY RUN MODE');
+
+    await confirm(version);
 
     try {
-        execSync(`gh release create v${newVersion} --title "Release v${newVersion}" --generate-notes`, {
-            stdio: 'inherit',
-        });
-        console.log('GitHub release created with autogenerated notes');
+        run('git checkout development');
+
+        updatePackageVersion(version);
+
+        commitVersion(version);
+
+        mergeBranches();
+
+        run('git checkout master');
+
+        run('git cherry-pick development');
+
+        createTag(version);
+
+        generateChangelog(version);
+
+        pushAll();
+
+        createGithubRelease(version);
+
+        run(`git checkout ${originalBranch}`);
+
+        console.log(`\n✅ Release ${version} complete`);
     } catch (err) {
-        console.warn('GitHub CLI not found or release failed. Please create the release manually.');
-        console.warn('Error details:', err);
+        console.error('\n❌ Release failed', err);
+
+        run(`git checkout ${originalBranch}`);
+
+        process.exit(1);
     }
 }
 

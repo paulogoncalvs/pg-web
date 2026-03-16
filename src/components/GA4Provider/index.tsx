@@ -1,6 +1,6 @@
-import { h, FunctionalComponent, Fragment } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
 import { getCookieConsent } from '@/modules/cookieConsent';
+import { Fragment, FunctionalComponent } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 const GA_MEASUREMENT_ID = process.env.TRACK_GA_MEASUREMENT_ID;
 

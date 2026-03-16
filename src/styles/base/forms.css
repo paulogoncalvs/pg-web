@@ -2,7 +2,9 @@
 input,
 textarea,
 select {
-    @apply w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm shadow-sm;
+    @apply w-full rounded-md border px-3 py-2 text-sm shadow-sm;
+    @apply bg-stone-100/80 dark:bg-zinc-800/30 border-stone-300 dark:border-zinc-300/30 dark:text-zinc-300;
+    @apply transition-colors duration-200;
 }
 
 /* Placeholder */
@@ -15,7 +17,7 @@ textarea::placeholder {
 input:focus,
 textarea:focus,
 select:focus {
-    @apply outline-none ring-2;
+    @apply outline-none ring-2 bg-stone-50 dark:bg-zinc-800;
 }
 
 /* Disabled */
@@ -42,7 +44,7 @@ input[type='file']::file-selector-button {
 
 /* Labels */
 label {
-    @apply mb-1 block text-sm font-medium text-zinc-700;
+    @apply mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-200;
 }
 
 /* Select */

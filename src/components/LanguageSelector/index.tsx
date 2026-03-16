@@ -1,9 +1,8 @@
-import { h, FunctionalComponent, JSX } from 'preact';
-import { useCallback } from 'preact/hooks';
-import { classNames } from '@/utils/classNames';
+import { translations, useTranslate } from '@/modules/i18n';
 import { Language } from '@/modules/language';
-import { useTranslate, translations } from '@/modules/i18n';
 import { useRouterLocation, useRouterRoute } from '@/modules/router';
+import { FunctionalComponent, JSX } from 'preact';
+import { useCallback } from 'preact/hooks';
 
 interface LanguageSelectorProps {
     classes?: string;
@@ -35,7 +34,7 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ c
     return (
         <select
             key={`lang-${lang}`}
-            class={classNames('text-zinc-900 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800', classes)}
+            class={classes}
             id="language-selector"
             onChange={onLanguageSelect}
             aria-label={t('language_selection')}

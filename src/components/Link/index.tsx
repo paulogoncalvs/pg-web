@@ -1,5 +1,5 @@
-import { h, FunctionalComponent, ComponentChildren } from 'preact';
 import { useTranslate } from '@/modules/i18n';
+import { ComponentChildren, FunctionalComponent } from 'preact';
 import { Link as WLink } from 'wouter-preact';
 
 interface LinkComponentProps {

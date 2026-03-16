@@ -1,6 +1,9 @@
-import { h, Fragment, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
+
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
+
+import { Fade } from '@/components/Fade';
 import { Link } from '@/components/Link';
 
 const NotFoundPage: FunctionalComponent = () => {
@@ -8,21 +11,21 @@ const NotFoundPage: FunctionalComponent = () => {
     const { lang } = useLanguage();
 
     return (
-        <Fragment>
-            <div class="p-6 pt-20 pb-20 flex flex-col items-center">
-                <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
+        <div class="p-6 pt-20 pb-20 flex flex-col items-center text-center">
+            <div class="p-6 flex flex-col items-center">
+                <Fade delay={1} Element="h1" classes="text-3xl tracking-tight font-bold sm:my-2 sm:text-5xl">
                     {t('not_found_page_title')}
-                </h1>
-                <h2 class="text-xl tracking-tight text-center lowercase op-1 sm:text-2xl animate-fade-in-up animate-delay-2 pb-14">
+                </Fade>
+                <Fade delay={2} Element="h1" classes="text-xl lowercase sm:text-2xl pb-14">
                     {t('not_found_page_subtitle')}
-                </h2>
-                <div class="op-1 animate-fade-in-down animate-delay-3">
-                    <Link useRouter class="interactive interactive-lg" href={`/${lang}/`}>
-                        <span>{t('not_found_page_button_label')}</span>
-                    </Link>
-                </div>
+                </Fade>
             </div>
-        </Fragment>
+            <Fade delay={4} direction="up" classes="flex flex-col items-center pb-14">
+                <Link useRouter class="interactive interactive-lg" href={`/${lang}/`}>
+                    <span>{t('not_found_page_button_label')}</span>
+                </Link>
+            </Fade>
+        </div>
     );
 };
 

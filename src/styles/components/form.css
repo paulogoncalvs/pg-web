@@ -1,0 +1,23 @@
+/* Form component classes */
+.form-input.error,
+.form-textarea.error {
+    @apply border-rose-400;
+}
+
+.form-error-message {
+    @apply text-rose-400;
+    @apply text-xs;
+    @apply mt-2;
+}
+
+textarea + .form-error-message {
+    @apply mt-0;
+}
+
+.grecaptcha-badge {
+    visibility: hidden;
+}
+
+body.show-recaptcha .grecaptcha-badge {
+    visibility: visible;
+}

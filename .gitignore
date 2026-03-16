@@ -12,3 +12,4 @@ public/sitemap.xml
 .env
 .env.development
 .env.production
+server

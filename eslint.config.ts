@@ -25,6 +25,7 @@ const config: ESLintConfig = [
             '**/.idea',
             '**/.vscode',
             '**/.pnpm-store',
+            'server/**',
         ],
     },
     {

@@ -1,23 +1,23 @@
-import { h, FunctionalComponent } from 'preact';
-import { useTranslate } from '@/modules/i18n';
-import { Icon } from '@/components/Icon';
-import { Link } from '@/components/Link';
-import preactLogo from '@/assets/icons/logos/preact.svg';
-import webpackLogo from '@/assets/icons/logos/webpack.svg';
-import tailwindLogo from '@/assets/icons/logos/tailwind.svg';
+import axeLogo from '@/assets/icons/logos/axe.svg';
 import esbuildLogo from '@/assets/icons/logos/esbuild.svg';
 import esLintLogo from '@/assets/icons/logos/eslint.svg';
+import gaLogo from '@/assets/icons/logos/ga.svg';
+import jestLogo from '@/assets/icons/logos/jest.svg';
+import playwrigthLogo from '@/assets/icons/logos/playwright.svg';
+import pnpmLogo from '@/assets/icons/logos/pnpm.svg';
 import postCSSLogo from '@/assets/icons/logos/postcss.svg';
+import preactLogo from '@/assets/icons/logos/preact.svg';
 import prettierLogo from '@/assets/icons/logos/prettier.svg';
 import styleLintLogo from '@/assets/icons/logos/stylelint.svg';
+import tailwindLogo from '@/assets/icons/logos/tailwind.svg';
 import typeScriptLogo from '@/assets/icons/logos/typescript.svg';
-import pnpmLogo from '@/assets/icons/logos/pnpm.svg';
+import webpackLogo from '@/assets/icons/logos/webpack.svg';
 import workboxLogo from '@/assets/icons/logos/workbox.svg';
-import jestLogo from '@/assets/icons/logos/jest.svg';
-import axeLogo from '@/assets/icons/logos/axe.svg';
-import gaLogo from '@/assets/icons/logos/ga.svg';
-import playwrigthLogo from '@/assets/icons/logos/playwright.svg';
+import { Icon } from '@/components/Icon';
+import { Link } from '@/components/Link';
+import { useTranslate } from '@/modules/i18n';
 import { trackEvent } from '@/modules/tracking/ga4';
+import { FunctionalComponent } from 'preact';
 
 const initialYear = 2021;
 const currentYear = new Date().getFullYear();
@@ -28,7 +28,7 @@ export const Footer: FunctionalComponent = () => {
     return (
         <footer>
             <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
-                <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+                <div class="flex flex-col items-center pt-10 pb-8">
                     <p class="text-sm font-bold pb-4">{t('footer_description_2')}</p>
                     <div class="flex flex-wrap justify-center align-middle">
                         <Link
@@ -147,8 +147,35 @@ export const Footer: FunctionalComponent = () => {
                     </p>
                 </div>
             </div>
-            <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
-                <p>{t('footer_description_3')}</p>
+            <div class="p-6 flex flex-col items-center py-20 text-xs text-center">
+                <p class="mb-2">
+                    {t(
+                        'footer_description_3',
+                        {
+                            privacy: (
+                                <a
+                                    class="underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://policies.google.com/privacy"
+                                >
+                                    {t('footer_recaptcha_privacy_link_text')}
+                                </a>
+                            ),
+                            terms: (
+                                <a
+                                    class="underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://policies.google.com/terms"
+                                >
+                                    {t('footer_recaptcha_terms_link_text')}
+                                </a>
+                            ),
+                        },
+                        false,
+                    )}
+                </p>
                 <p class="pt-2 font-bold">
                     paulogoncalves.dev &copy; {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ''}
                 </p>

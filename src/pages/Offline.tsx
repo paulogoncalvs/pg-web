@@ -1,6 +1,9 @@
-import { h, Fragment, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
+
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
+
+import { Fade } from '@/components/Fade';
 import { Link } from '@/components/Link';
 import { Markup } from '@/components/Markup';
 
@@ -9,26 +12,24 @@ const OfflinePage: FunctionalComponent = () => {
     const { lang } = useLanguage();
 
     return (
-        <Fragment>
-            <div class="p-6 pt-20 pb-20 flex flex-col items-center">
-                <h1 class="text-3xl tracking-tight font-bold text-center op-1 sm:my-2 sm:text-5xl animate-fade-in-up animate-delay-1">
+        <div class="p-6 pt-20 pb-20 flex flex-col items-center text-center">
+            <div class="p-6 flex flex-col items-center">
+                <Fade delay={1} Element="h1" classes="text-3xl tracking-tight font-bold sm:my-2 sm:text-5xl">
                     {t('offline_page_title')}
-                </h1>
-                <h2 class="text-2xl tracking-tight text-center lowercase op-1 sm:text-3xl animate-fade-in-up animate-delay-2 pb-8">
+                </Fade>
+                <Fade delay={2} Element="h1" classes="text-xl lowercase sm:text-2xl pb-14">
                     {t('offline_page_subtitle')}
-                </h2>
-                <Markup
-                    data={t('offline_page_description')}
-                    Element="p"
-                    classes="text-l op-1 animate-fade-in-down animate-delay-4 pb-14 text-center"
-                />
-                <div class="op-1 animate-fade-in-down animate-delay-3">
-                    <Link useRouter class="interactive interactive-lg" href={`/${lang}/`}>
-                        <span>{t('offline_page_button_label')}</span>
-                    </Link>
-                </div>
+                </Fade>
             </div>
-        </Fragment>
+            <Fade delay={4}>
+                <Markup data={t('offline_page_description')} Element="p" classes="text-l pb-20" />
+            </Fade>
+            <Fade delay={6} direction="up" classes="flex flex-col items-center pb-14">
+                <Link useRouter class="interactive interactive-lg" href={`/${lang}/`}>
+                    <span>{t('offline_page_button_label')}</span>
+                </Link>
+            </Fade>
+        </div>
     );
 };
 
