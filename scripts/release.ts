@@ -24,17 +24,15 @@ Options:
 
 function run(cmd: string) {
     console.log(`\n$ ${cmd}`);
-    if (!dryRun) {
-        execSync(cmd, { stdio: 'inherit' });
-    } else {
-        console.log('⚠️ DRY RUN: command skipped');
-    }
+    if (!dryRun) execSync(cmd, { stdio: 'inherit' });
+    else console.log('⚠️ DRY RUN: command skipped');
 }
 
 function output(cmd: string): string {
     console.log(`\n$ ${cmd}`);
     if (dryRun) {
-        // Provide mock outputs for common git commands in dry-run
+        // Dry-run outputs
+        if (cmd.startsWith('git rev-parse v')) return ''; // pretend tag does not exist
         if (cmd.startsWith('git rev-parse')) return 'development';
         if (cmd.startsWith('git describe')) return 'v0.0.0';
         if (cmd.startsWith('git log')) return '- feat: example commit (abc123)';
@@ -57,6 +55,10 @@ function getCurrentBranch(): string {
 }
 
 function ensureTagDoesNotExist(tag: string) {
+    if (dryRun) {
+        console.log(`⚠️ DRY RUN: skipping tag existence check for ${tag}`);
+        return;
+    }
     try {
         output(`git rev-parse ${tag}`);
         console.error(`❌ Tag ${tag} already exists`);
@@ -106,17 +108,13 @@ async function confirm(version: string) {
         console.log(`⚠️ DRY RUN: automatically confirmed release ${version}`);
         return;
     }
-
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
     });
-
     const question = (q: string) => new Promise<string>((resolve) => rl.question(q, resolve));
     const answer = await question(`Release version ${version}? (y/N) `);
-
     rl.close();
-
     if (answer.toLowerCase() !== 'y') {
         console.log('Cancelled.');
         process.exit(0);
@@ -147,9 +145,7 @@ function pushAll() {
 
 function createGithubRelease(version: string) {
     run(`gh release create v${version} --title "Release v${version}" --notes-file CHANGELOG_RELEASE.md`);
-    if (dryRun) {
-        console.log('⚠️ DRY RUN: GitHub release simulated');
-    }
+    if (dryRun) console.log('⚠️ DRY RUN: GitHub release simulated');
 }
 
 async function main() {
