@@ -1,16 +1,16 @@
-import { h, FunctionalComponent, RefObject } from 'preact';
-import { useRef } from 'preact/hooks';
-import { useLocation } from 'wouter-preact';
+import closeIcon from '@/assets/icons/close.svg';
+import { Icon } from '@/components/Icon';
+import { LanguageSelector } from '@/components/LanguageSelector';
+import { Link } from '@/components/Link';
+import { toggleOverlay } from '@/components/Overlay';
+import { SocialLinks } from '@/components/SocialLinks';
+import { ToggleTheme } from '@/components/ToggleTheme';
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
-import { Icon } from '@/components/Icon';
-import { Link } from '@/components/Link';
-import { toggleOverlay } from '@/components/Overlay';
-import { LanguageSelector } from '@/components/LanguageSelector';
-import { ToggleTheme } from '@/components/ToggleTheme';
-import { SocialLinks } from '@/components/SocialLinks';
-import closeIcon from '@/assets/icons/close.svg';
+import { FunctionalComponent, RefObject } from 'preact';
+import { useRef } from 'preact/hooks';
+import { useLocation } from 'wouter-preact';
 
 let sideDrawerInputEl: RefObject<HTMLInputElement> | null;
 

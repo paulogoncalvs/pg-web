@@ -1,12 +1,12 @@
-import { h, createContext, FunctionalComponent } from 'preact';
-import { useContext, useReducer } from 'preact/hooks';
 import { useIsFirstRender } from '@/hooks/useIsFirstRender';
-import { Theme, getInitialTheme, THEME_DEFAULT } from '@/modules/theme';
 import { Language, LANGUAGE_DEFAULT } from '@/modules/language';
+import { getInitialTheme, Theme, THEME_DEFAULT } from '@/modules/theme';
+import { isBrowser } from '@/utils/browser';
+import { createContext, FunctionalComponent } from 'preact';
+import { useContext, useReducer } from 'preact/hooks';
+import debug from './debug';
 import { useStoreLanguage } from './hooks/useStoreLanguage';
 import { useStoreTheme } from './hooks/useStoreTheme';
-import debug from './debug';
-import { isBrowser } from '@/utils/browser';
 
 export interface StorePayload {
     theme?: Theme;

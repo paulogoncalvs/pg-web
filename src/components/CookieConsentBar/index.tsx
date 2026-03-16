@@ -1,8 +1,8 @@
-import { h, FunctionalComponent } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
+import { CookieConsent, getCookieConsent, setCookieConsent } from '@/modules/cookieConsent';
 import { useTranslate } from '@/modules/i18n';
 import { updateConsent } from '@/modules/tracking/ga4';
-import { getCookieConsent, setCookieConsent, CookieConsent } from '@/modules/cookieConsent';
+import { FunctionalComponent } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 const GA_MEASUREMENT_ID = process.env.TRACK_GA_MEASUREMENT_ID;
 

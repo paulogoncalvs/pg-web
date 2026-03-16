@@ -1,5 +1,5 @@
 import { classNames } from '@/utils/classNames';
-import { h, FunctionalComponent, ComponentChildren } from 'preact';
+import { ComponentChildren, FunctionalComponent } from 'preact';
 
 interface ButtonComponentProps {
     mainClasses?: string;

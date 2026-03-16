@@ -1,12 +1,12 @@
-import { h, FunctionalComponent } from 'preact';
-import { useRef, useContext } from 'preact/hooks';
-import routesConfig from '@/config/routes';
-import { useTranslate } from '@/modules/i18n';
-import { StoreContext } from '@/modules/store';
+import burgerIcon from '@/assets/icons/burger.svg';
 import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
 import { SocialLinks } from '@/components/SocialLinks';
-import burgerIcon from '@/assets/icons/burger.svg';
+import routesConfig from '@/config/routes';
+import { useTranslate } from '@/modules/i18n';
+import { StoreContext } from '@/modules/store';
+import { FunctionalComponent } from 'preact';
+import { useContext, useRef } from 'preact/hooks';
 
 export const Header: FunctionalComponent = () => {
     const labelEl = useRef<HTMLLabelElement | null>(null);

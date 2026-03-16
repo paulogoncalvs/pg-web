@@ -1,7 +1,7 @@
-import { h, JSX } from 'preact';
-import render from 'preact-render-to-string';
 import App from '@/App';
 import globalConfig, { structuredData } from '@/config/global';
+import { JSX } from 'preact';
+import render from 'preact-render-to-string';
 import { strScript } from './scripts';
 
 interface PageLinks {

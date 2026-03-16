@@ -1,4 +1,4 @@
-import { h, FunctionalComponent, ComponentChildren, JSX } from 'preact';
+import { ComponentChildren, FunctionalComponent, JSX } from 'preact';
 
 type Direction = 'up' | 'down';
 

@@ -1,16 +1,16 @@
-import { h, FunctionalComponent, Fragment } from 'preact';
+import { Fragment, FunctionalComponent } from 'preact';
 import { useEffect } from 'preact/hooks';
 
 import { useTranslate } from '@/modules/i18n';
 import { trackEvent } from '@/modules/tracking/ga4';
 
-import { Link } from '@/components/Link';
+import { Button } from '@/components/Button';
+import { Fade } from '@/components/Fade';
 import { Form } from '@/components/Form';
 import { FormInput } from '@/components/Form/Input';
 import { FormTextarea } from '@/components/Form/Textarea';
-import { Button } from '@/components/Button';
-import { Fade } from '@/components/Fade';
 import { Icon } from '@/components/Icon';
+import { Link } from '@/components/Link';
 import { Spinner } from '@/components/Spinner';
 
 import mailIcon from '@/assets/icons/mail.svg';

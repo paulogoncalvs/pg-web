@@ -1,8 +1,8 @@
-import { h, FunctionalComponent, JSX } from 'preact';
-import { useCallback } from 'preact/hooks';
+import { translations, useTranslate } from '@/modules/i18n';
 import { Language } from '@/modules/language';
-import { useTranslate, translations } from '@/modules/i18n';
 import { useRouterLocation, useRouterRoute } from '@/modules/router';
+import { FunctionalComponent, JSX } from 'preact';
+import { useCallback } from 'preact/hooks';
 
 interface LanguageSelectorProps {
     classes?: string;

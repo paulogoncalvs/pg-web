@@ -1,10 +1,10 @@
-import { h, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
 
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 
-import { Link } from '@/components/Link';
 import { Fade } from '@/components/Fade';
+import { Link } from '@/components/Link';
 
 const NotFoundPage: FunctionalComponent = () => {
     const { t } = useTranslate();

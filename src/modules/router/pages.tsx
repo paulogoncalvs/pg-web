@@ -1,9 +1,9 @@
-import { h, JSX, FunctionalComponent } from 'preact';
 import routesConfig from '@/config/routes';
-import Home from '@/pages/Home';
 import Contact from '@/pages/Contact';
+import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
 import Offline from '@/pages/Offline';
+import { FunctionalComponent, JSX } from 'preact';
 
 interface Pages {
     [key: string]: FunctionalComponent;

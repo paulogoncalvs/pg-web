@@ -1,15 +1,15 @@
-import { h, FunctionalComponent, JSX } from 'preact';
-import { Route, Router } from 'wouter-preact';
-import { StoreContextProvider } from '@/modules/store';
-import { RouterOnChange } from '@/modules/router';
-import { RouterPage } from '@/modules/router/pages';
+import { CookieConsentBar } from '@/components/CookieConsentBar';
+import { Footer } from '@/components/Footer';
+import { GA4Provider } from '@/components/GA4Provider';
 import { HeadUpdater } from '@/components/HeadUpdater';
 import { Header } from '@/components/Header';
-import { SideDrawer } from '@/components/SideDrawer';
-import { Footer } from '@/components/Footer';
 import { Overlay } from '@/components/Overlay';
-import { CookieConsentBar } from '@/components/CookieConsentBar';
-import { GA4Provider } from '@/components/GA4Provider';
+import { SideDrawer } from '@/components/SideDrawer';
+import { RouterOnChange } from '@/modules/router';
+import { RouterPage } from '@/modules/router/pages';
+import { StoreContextProvider } from '@/modules/store';
+import { FunctionalComponent, JSX } from 'preact';
+import { Route, Router } from 'wouter-preact';
 
 interface AppProps {
     store?: PageStore;

@@ -1,10 +1,10 @@
-import { h, Fragment, FunctionalComponent } from 'preact';
-import { trackEvent } from '@/modules/tracking/ga4';
+import githubIcon from '@/assets/icons/logos/github.svg';
+import linkedInIcon from '@/assets/icons/logos/linkedin.svg';
+import xIcon from '@/assets/icons/logos/x.svg';
 import { Icon } from '@/components/Icon';
 import { Link } from '@/components/Link';
-import linkedInIcon from '@/assets/icons/logos/linkedin.svg';
-import githubIcon from '@/assets/icons/logos/github.svg';
-import xIcon from '@/assets/icons/logos/x.svg';
+import { trackEvent } from '@/modules/tracking/ga4';
+import { Fragment, FunctionalComponent } from 'preact';
 
 export const SocialLinks: FunctionalComponent = () => (
     <Fragment>

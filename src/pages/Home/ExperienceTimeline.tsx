@@ -1,10 +1,10 @@
-import { h, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
 
 import { useTranslate } from '@/modules/i18n';
 import { trackEvent } from '@/modules/tracking/ga4';
 
-import { Link } from '@/components/Link';
 import { Fade } from '@/components/Fade';
+import { Link } from '@/components/Link';
 
 interface Experience {
     titleKey: string;

@@ -1,17 +1,17 @@
-import { h, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
 
 import { useTranslate } from '@/modules/i18n';
 import { useLanguage } from '@/modules/language';
 import { trackEvent } from '@/modules/tracking/ga4';
 
+import { Fade } from '@/components/Fade';
 import { Icon } from '@/components/Icon';
 import { Image } from '@/components/Image';
-import { Markup } from '@/components/Markup';
 import { Link } from '@/components/Link';
-import { Fade } from '@/components/Fade';
+import { Markup } from '@/components/Markup';
 
-import meImg from '@/assets/img/paulo-goncalves.webp';
 import mailIcon from '@/assets/icons/mail.svg';
+import meImg from '@/assets/img/paulo-goncalves.webp';
 
 export const HeroSection: FunctionalComponent = () => {
     const { t } = useTranslate();

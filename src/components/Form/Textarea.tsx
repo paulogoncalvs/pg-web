@@ -1,4 +1,4 @@
-import { h, FunctionalComponent } from 'preact';
+import { FunctionalComponent } from 'preact';
 import { useContext } from 'preact/hooks';
 
 import { FormContext } from './';
