@@ -14,7 +14,7 @@ const dryRun = process.argv.includes('--dry-run');
 if (!arg) {
     console.error(`
 Usage:
-  pnpm tsx scripts/release.ts <version|patch|minor|major>
+  pnpm tsx scripts/release.ts <version|patch|minor|major|prerelease>
 
 Options:
   --dry-run   Print commands without executing
@@ -96,7 +96,18 @@ function updatePackageVersion(version: string) {
 }
 
 function generateChangelog(version: string) {
-    const log = output(`git log --pretty=format:"- %s (%h)" $(git describe --tags --abbrev=0)..HEAD`);
+    // Get previous tag safely
+    let previousTag: string;
+
+    try {
+        previousTag = output('git describe --tags --abbrev=0');
+    } catch {
+        previousTag = ''; // fallback if no previous tags exist
+    }
+
+    const range = previousTag ? `${previousTag}..HEAD` : 'HEAD';
+    const log = output(`git log --pretty=format:"- %s (%h)" ${range}`);
+
     const content = `# ${version}\n\n${log}\n`;
     writeFileSync('CHANGELOG_RELEASE.md', content);
     return content;
@@ -144,8 +155,11 @@ function pushAll() {
 }
 
 function createGithubRelease(version: string) {
-    run(`gh release create v${version} --title "Release v${version}" --notes-file CHANGELOG_RELEASE.md`);
-    if (dryRun) console.log('⚠️ DRY RUN: GitHub release simulated');
+    try {
+        run(`gh release create v${version} --title "Release v${version}" --notes-file CHANGELOG_RELEASE.md`);
+    } catch {
+        console.warn('⚠️ GitHub release failed. You may need to create it manually.');
+    }
 }
 
 async function main() {
@@ -164,7 +178,7 @@ async function main() {
         updatePackageVersion(version);
         commitVersion(version);
 
-        mergeBranches(); // no ff-only
+        mergeBranches();
 
         createTag(version);
         generateChangelog(version);
