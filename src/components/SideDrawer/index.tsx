@@ -47,23 +47,24 @@ export const SideDrawer: FunctionalComponent = () => {
     return (
         <aside>
             <input
-                class="peer hidden"
+                class="peer sr-only"
                 type="checkbox"
                 id="sd-tog"
                 onChange={sideDrawerOnChange}
                 ref={sideDrawerInputEl}
+                aria-label={t('sidedrawer_toggle')}
             />
-            <div class="sd dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
-                <div class="flex pt-4 pb-5 mb-5 pl-8 pr-8 sm:pl-10 sm:pr-10 items-center justify-between">
+            <div class="dark:bg-zinc-900/30 border-b rounded-tl-xl rounded-bl-xl shadow-xl backdrop-blur-md bg-white/30 border-l dark:border-white/10 border-white/50 top-0 right-0 w-[65vw] sm:w-[55vw] md:w-[45vw] lg:w-[35vw] fixed h-full z-40 ease-in-out duration-300 flex flex-col overflow-y-auto translate-x-full peer-checked:translate-x-0 transition-transform">
+                <div class="flex p-4 sm:px-8 items-center justify-between">
                     <div class="flex items-center gap-4">
                         <LanguageSelector classes="w-[50px]" />
                         <ToggleTheme classes="p-2" />
                     </div>
-                    <label htmlFor="sd-tog" class="icon-link ml-auto" tabIndex={0} aria-label={t('sidedrawer_toggle')}>
+                    <label htmlFor="sd-tog" class="icon-link ml-auto" aria-label={t('sidedrawer_toggle')}>
                         <Icon src={closeIcon} ariaHidden />
                     </label>
                 </div>
-                <div class="flex flex-col pl-10 pr-10">
+                <div class="flex flex-col p-4 sm:p-8">
                     <Link
                         useRouter
                         aria-current={location === `/${lang}/` || location === `/` ? 'page' : undefined}
@@ -93,7 +94,7 @@ export const SideDrawer: FunctionalComponent = () => {
                         <span>{t('sidedrawer_menu_link_contact')}</span>
                     </Link>
                 </div>
-                <div class="flex pt-10 pb-4 pl-8 pr-8 sm:pl-10 sm:pr-10 mx-auto mt-auto">
+                <div class="flex px-4 sm:px-8 pb-4 mx-auto mt-auto">
                     <SocialLinks />
                 </div>
             </div>

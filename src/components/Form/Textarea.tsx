@@ -2,26 +2,23 @@ import { h, FunctionalComponent } from 'preact';
 import { useContext } from 'preact/hooks';
 
 import { FormContext } from './';
-import { classNames } from '@/utils/classNames';
 
-interface FormInputComponentProps {
+interface FormTextareaProps {
     label: string;
-    type?: string;
     name: string;
     disabled?: boolean;
     id: string;
+    rows?: number;
     autoComplete?: string;
-    classes?: string;
 }
 
-export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
+export const FormTextarea: FunctionalComponent<FormTextareaProps> = ({
     label,
-    type = 'text',
     name,
     id,
     disabled,
+    rows = 4,
     autoComplete,
-    classes,
 }) => {
     const context = useContext(FormContext);
     if (!context) return null;
@@ -29,15 +26,15 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
     const { formData, errors, errorMessages, handleFormChange } = context;
 
     return (
-        <div class={classNames('form-field mt-3', classes)}>
+        <div class="form-field mt-3">
             <label class="form-label" for={id}>
                 {label}
             </label>
-            <input
+            <textarea
                 class={`form-input ${errors[name] ? 'error' : ''}`}
                 id={id}
-                type={type}
                 name={name}
+                rows={rows}
                 value={formData[name]}
                 onInput={handleFormChange}
                 disabled={disabled}

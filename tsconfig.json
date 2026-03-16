@@ -6,6 +6,7 @@
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
+    "jsxImportSource": "preact",
     "outDir": "dist",
     "baseUrl": "src",
     "sourceMap": false,

@@ -5,11 +5,11 @@
 - [ ] Improve menu
 - [ ] Improve default language
 - [ ] Server
-- [ ] Update contact page
 - [ ] Head links with revision by page instead of global
 
 ### Completed ✓
 
+- [x] Update contact page
 - [x] Babel to esbuild
 - [x] Improve how tailwind is used
 - [x] Improve GA4 code

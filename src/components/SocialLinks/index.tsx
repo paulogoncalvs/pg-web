@@ -23,7 +23,7 @@ export const SocialLinks: FunctionalComponent = () => (
             <Icon src={xIcon} ariaHidden />
         </Link>
         <Link
-            class="icon-link ml-4 mr-4"
+            class="icon-link mx-2 sm:mx-4"
             href="https://www.github.com/paulogoncalvs"
             ariaLabel="GitHub"
             newWindow

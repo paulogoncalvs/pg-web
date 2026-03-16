@@ -16,7 +16,7 @@ export const Header: FunctionalComponent = () => {
 
     return (
         <header class="sticky top-0 z-10 dark:bg-zinc-900/15 border-b shadow-xl backdrop-blur-md bg-white/10 border-t-0 dark:border-white/15 border-white/80 rounded-bl-xl rounded-br-xl">
-            <div class="container py-4 px-6 mx-auto flex items-center justify-between">
+            <div class="py-4 px-6 flex items-center justify-between">
                 <div class="flex items-center">
                     {!isHome && (
                         <Link useRouter href="/" class="text-xl font-bold tracking-tight">

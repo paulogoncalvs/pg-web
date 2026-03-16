@@ -28,7 +28,7 @@ export const Footer: FunctionalComponent = () => {
     return (
         <footer>
             <div class="text-center bg-white/20 dark:bg-zinc-900/35 shadow-xs shadow-black/5 border dark:border-white/15 border-white/80 border-l-0 border-r-0 p-6">
-                <div class="container flex flex-col items-center px-6 pt-10 mx-auto pb-8">
+                <div class="flex flex-col items-center pt-10 pb-8">
                     <p class="text-sm font-bold pb-4">{t('footer_description_2')}</p>
                     <div class="flex flex-wrap justify-center align-middle">
                         <Link
@@ -147,8 +147,35 @@ export const Footer: FunctionalComponent = () => {
                     </p>
                 </div>
             </div>
-            <div class="container flex flex-col items-center py-20 mx-auto text-xs text-center">
-                <p>{t('footer_description_3')}</p>
+            <div class="p-6 flex flex-col items-center py-20 text-xs text-center">
+                <p class="mb-2">
+                    {t(
+                        'footer_description_3',
+                        {
+                            privacy: (
+                                <a
+                                    class="underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://policies.google.com/privacy"
+                                >
+                                    {t('footer_recaptcha_privacy_link_text')}
+                                </a>
+                            ),
+                            terms: (
+                                <a
+                                    class="underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://policies.google.com/terms"
+                                >
+                                    {t('footer_recaptcha_terms_link_text')}
+                                </a>
+                            ),
+                        },
+                        false,
+                    )}
+                </p>
                 <p class="pt-2 font-bold">
                     paulogoncalves.dev &copy; {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ''}
                 </p>

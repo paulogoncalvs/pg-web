@@ -120,3 +120,13 @@ declare module '*.otf' {
     const url: string;
     export default url;
 }
+
+interface Window {
+    grecaptcha?: {
+        ready: (callback: () => void) => void;
+        execute: (siteKey: string, options: { action: string }) => Promise<string>;
+        render: (element: string, options: { sitekey: string; callback: (token: string) => void }) => string;
+        reset: (widgetId?: string) => void;
+    };
+    onRecaptchaLoad?: () => void;
+}

@@ -124,6 +124,7 @@
     "lint:css": "stylelint ./src/**/*.css",
     "lint:css:fix": "stylelint ./src/**/*.css --fix",
     "lint": "pnpm lint:ts && pnpm lint:css",
-    "lint:fix": "pnpm lint:ts:fix && pnpm lint:css:fix"
+    "lint:fix": "pnpm lint:ts:fix && pnpm lint:css:fix",
+    "release": "tsx scripts/release.ts"
   }
 }

@@ -21,10 +21,10 @@ export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element 
         <Router ssrPath={store.url}>
             <RouterOnChange />
             <Header />
-            <main class="mx-auto">
+            <SideDrawer />
+            <main>
                 <Route path="*">{(params): JSX.Element => RouterPage(params['*'] ? `/${params['*']}` : '/')}</Route>
             </main>
-            <SideDrawer />
         </Router>
         <Footer />
         <CookieConsentBar />
