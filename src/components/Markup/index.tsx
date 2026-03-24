@@ -1,14 +1,16 @@
-import { classNames } from '@/utils/classNames';
-import { FunctionalComponent, JSX, VNode } from 'preact';
+import type { FunctionalComponent, JSX, VNode } from "preact";
+import { classNames } from "@/utils/classNames";
 
 interface MarkupComponentProps {
-    data: string | VNode;
-    classes?: string;
-    Element?: JSX.ElementType;
+  data: string | VNode;
+  classes?: string;
+  Element?: JSX.ElementType;
 }
 
 export const Markup: FunctionalComponent<MarkupComponentProps> = ({
-    data = '',
-    classes,
-    Element = 'div',
-}): JSX.Element => <Element class={classNames(classes)} dangerouslySetInnerHTML={{ __html: data }} />;
+  data = "",
+  classes,
+  Element = "div",
+}): JSX.Element => (
+  <Element class={classNames(classes)} dangerouslySetInnerHTML={{ __html: data }} />
+);

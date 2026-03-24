@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`[COMPONENT] Link Component > should render default 1`] = `"<a href="/test/"></a>"`;
+
+exports[`[COMPONENT] Link Component > should render to open on a new window 1`] = `"<a href="/test/" rel="noopener noreferrer" target="_blank"></a>"`;

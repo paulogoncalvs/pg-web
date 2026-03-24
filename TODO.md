@@ -1,14 +1,9 @@
 # Paulo Gonçalves Website
 
-## To-Do
-
-- [ ] Improve menu
-- [ ] Improve default language
-- [ ] Server
-- [ ] Head links with revision by page instead of global
-
 ### Completed ✓
 
+- [x] Head links with revision by page instead of global
+- [x] Server
 - [x] Update contact page
 - [x] Babel to esbuild
 - [x] Improve how tailwind is used

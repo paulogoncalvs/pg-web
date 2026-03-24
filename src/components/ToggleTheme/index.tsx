@@ -1,39 +1,41 @@
-import darkModeIcon from '@/assets/icons/dark_mode.svg';
-import lightModeIcon from '@/assets/icons/light_mode.svg';
-import { Icon } from '@/components/Icon';
-import { useTranslate } from '@/modules/i18n';
-import { Theme, useTheme } from '@/modules/theme';
-import { trackEvent } from '@/modules/tracking/ga4';
-import { classNames } from '@/utils/classNames';
-import { FunctionalComponent } from 'preact';
-import { useCallback } from 'preact/hooks';
+import type { FunctionalComponent } from "preact";
+import { useCallback } from "preact/hooks";
+import darkModeIcon from "@/assets/icons/dark_mode.svg";
+import lightModeIcon from "@/assets/icons/light_mode.svg";
+import { Icon } from "@/components/Icon";
+import { useTranslate } from "@/modules/i18n";
+import { Theme, useTheme } from "@/modules/theme";
+import { trackEvent } from "@/modules/tracking/ga4";
+import { classNames } from "@/utils/classNames";
 
 interface ToggleThemeComponentProps {
-    classes?: string;
+  classes?: string;
 }
 
-const getToggleIcon = (theme: Theme): IconSrc => (theme === Theme.Dark ? lightModeIcon : darkModeIcon);
+const getToggleIcon = (theme: Theme): IconSrc =>
+  theme === Theme.Dark ? lightModeIcon : darkModeIcon;
 
 const getToggleTheme = (theme: Theme): Theme => (theme === Theme.Dark ? Theme.Light : Theme.Dark);
 
 export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({ classes }) => {
-    const { theme, setTheme } = useTheme();
-    const { t } = useTranslate();
+  const { theme, setTheme } = useTheme();
+  const { t } = useTranslate();
 
-    const handleOnClick = useCallback((): void => {
-        setTheme(getToggleTheme(theme));
-        trackEvent('theme_toggle', {
-            theme_name: getToggleTheme(theme),
-        });
-    }, [setTheme, theme]);
+  const handleOnClick = useCallback((): void => {
+    setTheme(getToggleTheme(theme));
+    trackEvent("theme_toggle", {
+      theme_name: getToggleTheme(theme),
+    });
+  }, [setTheme, theme]);
 
-    return (
-        <button
-            onClick={handleOnClick}
-            class={classNames('icon-link sup-novar', classes)}
-            aria-label={t('theme_toggle', { theme: t(`theme_${getToggleTheme(theme)}`) })}
-        >
-            <Icon src={getToggleIcon(theme)} ariaHidden />
-        </button>
-    );
+  return (
+    <button
+      type="button"
+      onClick={handleOnClick}
+      class={classNames("icon-link sup-novar", classes)}
+      aria-label={t("theme_toggle", { theme: t(`theme_${getToggleTheme(theme)}`) })}
+    >
+      <Icon src={getToggleIcon(theme)} ariaHidden />
+    </button>
+  );
 };

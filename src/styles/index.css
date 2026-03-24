@@ -1,27 +1,24 @@
-/* Core Tailwind  */
-@import 'tailwindcss';
-@tailwind utilities;
+@import "tailwindcss";
 
 /* =========================
    Custom Base Layer
 ========================= */
-@import './base/fonts.css' layer(base);
-@import './base/custom.css' layer(base);
-@import './base/forms.css' layer(base);
+@import "./base/fonts.css" layer(base);
+@import "./base/custom.css" layer(base);
 
 /* =========================
    Theme / Design Tokens
 ========================= */
-@import './theme/theme.css';
+@import "./theme/theme.css";
 
 /* =========================
    Components
 ========================= */
-@import './components/button.css';
-@import './components/form.css';
+@import "./components/button.css";
+@import "./components/form.css";
 
 /* =========================
    Utilities
 ========================= */
-@import './utilities/animations.css';
-@import './utilities/custom.css';
+@import "./utilities/animations.css";
+@import "./utilities/custom.css";

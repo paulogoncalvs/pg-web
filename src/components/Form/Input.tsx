@@ -1,49 +1,53 @@
-import { FunctionalComponent } from 'preact';
-import { useContext } from 'preact/hooks';
+import type { FunctionalComponent } from "preact";
+import { useContext } from "preact/hooks";
 
-import { classNames } from '@/utils/classNames';
-import { FormContext } from './';
+import { classNames } from "@/utils/classNames";
+import { FormContext } from "./";
 
 interface FormInputComponentProps {
-    label: string;
-    type?: string;
-    name: string;
-    disabled?: boolean;
-    id: string;
-    autoComplete?: string;
-    classes?: string;
+  label: string;
+  type?: string;
+  name: string;
+  disabled?: boolean;
+  id: string;
+  autoComplete?: string;
+  classes?: string;
 }
 
 export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
-    label,
-    type = 'text',
-    name,
-    id,
-    disabled,
-    autoComplete,
-    classes,
+  label,
+  type = "text",
+  name,
+  id,
+  disabled,
+  autoComplete,
+  classes,
 }) => {
-    const context = useContext(FormContext);
-    if (!context) return null;
+  const context = useContext(FormContext);
+  if (!context) {
+    return null;
+  }
 
-    const { formData, errors, errorMessages, handleFormChange } = context;
+  const { formData, errors, errorMessages, handleFormChange } = context;
 
-    return (
-        <div class={classNames('form-field mt-3', classes)}>
-            <label class="form-label" for={id}>
-                {label}
-            </label>
-            <input
-                class={`form-input ${errors[name] ? 'error' : ''}`}
-                id={id}
-                type={type}
-                name={name}
-                value={formData[name]}
-                onInput={handleFormChange}
-                disabled={disabled}
-                autoComplete={autoComplete}
-            />
-            {errors[name] && <p class="form-error-message">{errorMessages[errors[name]] || errors[name]}</p>}
-        </div>
-    );
+  return (
+    <div class={classNames("form-field mt-3", classes)}>
+      <label class="form-label" for={id}>
+        {label}
+      </label>
+      <input
+        class={`form-input ${errors[name] ? "error" : ""}`}
+        id={id}
+        type={type}
+        name={name}
+        value={formData[name]}
+        onInput={handleFormChange}
+        disabled={disabled}
+        autoComplete={autoComplete}
+      />
+      {errors[name] && (
+        <p class="form-error-message">{errorMessages[errors[name]] || errors[name]}</p>
+      )}
+    </div>
+  );
 };

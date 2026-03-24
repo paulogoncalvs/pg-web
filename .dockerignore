@@ -8,3 +8,6 @@ Dockerfile*
 .idea
 node_modules/
 dist/
+src/tests/**/results
+src/tests/**/report
+server

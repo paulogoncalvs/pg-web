@@ -1,147 +1,141 @@
 # Paulo Gonçalves Website
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/paulogoncalvs/pg-web)
-[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.paulogoncalves.dev/)
+[![Node](https://img.shields.io/badge/node-%3E%3D24-brightgreen.svg)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-10.32.1-orange.svg)](https://pnpm.js.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Website up](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.paulogoncalves.dev/)
 
-Static site for Paulo Gonçalves built with Preact, TailwindCSS and a webpack toolchain. TypeScript is used for webpack configuration and scripts.
+## Tech Stack
 
-**STATUS: 👷 occasional experiments and updates**
+- **Preact** — Fast, lightweight React alternative
+- **Vite 8** — Modern build tool with SSG support
+- **Tailwind CSS 4** — Utility-first styling framework
+- **TypeScript** — Strongly typed JavaScript
+- **Vitest** — Fast unit testing framework
+- **Playwright** — End-to-end and visual regression testing
+- **Oxlint + Oxfmt** — Linting and code formatting
+- **Workbox** — Service worker for PWA support
+
+## Features
+
+- **Static Site Generation (SSG)** — Pre-rendered HTML for performance
+- **Progressive Web App (PWA)** — Offline support and caching
+- **SVG Sprite Icons** — Efficient icon management
+- **SEO Optimized** — Sitemap generation and meta tags
+- **Unit Testing** — Powered by Vitest
+- **Accessibility Testing** — Automated checks with axe
+- **Visual Regression Testing** — Catch UI changes with Playwright
 
 ## Prerequisites
 
-- Node.js >= 24 (LTS)
-- pnpm
-- Git
-- (Optional) GitHub CLI `gh` for automated releases
-- Recommended: VS Code + Prettier + ESLint extensions
+- **Node.js >= 24 (LTS)**
+- **pnpm** — Fast package manager
+- **Git** — Version control
+- **Optional:** GitHub CLI (`gh`) for automated releases
 
 ## Quickstart
-
-Clone and install:
 
 ```bash
 git clone https://github.com/paulogoncalvs/pg-web.git
 cd pg-web
+cp .env.example .env.development
+cp .env.example .env.production
 pnpm install
+pnpm dev
+# open http://localhost:4005
 ```
 
-Run dev server:
+## CLI Commands
 
-```bash
-pnpm run start:dev
-# open http://localhost:4005 (or port shown in console)
-```
+### Build & Development
 
-Build for production:
+| Command         | Description                                     |
+| --------------- | ----------------------------------------------- |
+| `pnpm sitemap`  | Generate `sitemap.xml`                          |
+| `pnpm ssg`      | Generate static site (`dist/`) using SSG        |
+| `pnpm prebuild` | Run `sitemap` before building                   |
+| `pnpm build`    | Build production site + run SSG                 |
+| `pnpm preview`  | Preview production build locally                |
+| `pnpm prod`     | Run typecheck, lint, format, build, and preview |
+| `pnpm dev`      | Start Vite dev server on port 4005              |
 
-```bash
-pnpm run build
-# output in dist/
-```
+### Unit Tests (Vitest)
 
-## Server (API)
+| Command            | Description                  |
+| ------------------ | ---------------------------- |
+| `pnpm test`        | Run Vitest unit tests        |
+| `pnpm test:update` | Update Vitest snapshot tests |
 
-The contact form uses a separate Node.js/Express server for sending emails.
+### End-to-End Tests (Playwright + Docker)
+
+| Command                 | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `pnpm test:e2e:install` | Build Docker image, install Playwright browsers and Build |
+| `pnpm test:e2e`         | Run E2E tests                                             |
+| `pnpm test:e2e:update`  | Update Playwright snapshots                               |
+
+### All Tests
+
+| Command                | Description                       |
+| ---------------------- | --------------------------------- |
+| `pnpm test:all`        | Run all unit and E2E tests        |
+| `pnpm test:all:update` | Update all snapshots (unit + E2E) |
+
+### Linting & Formatting
+
+| Command           | Description                            |
+| ----------------- | -------------------------------------- |
+| `pnpm typecheck`  | TypeScript type check (`tsc --noEmit`) |
+| `pnpm lint`       | Run Oxlint to detect code issues       |
+| `pnpm lint:fix`   | Fix Oxlint issues                      |
+| `pnpm format`     | Check code formatting with Oxfmt       |
+| `pnpm format:fix` | Format code automatically with Oxfmt   |
+| `pnpm check`      | Run typecheck + lint + format check    |
+
+### Release
+
+| Command        | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| `pnpm release` | Run checks and execute release script (`scripts/release.ts`) |
 
 ## Environment
 
 Copy and edit environment templates:
 
 ```bash
-cp .env.dist .env.development
-cp .env.dist .env.production
+cp .env.example .env.development
+cp .env.example .env.production
 ```
 
-Document key variables in `.env.dist` (add descriptions there). Common variables:
+Document key variables in `.env.example`. Common variables:
 
-- NODE_ENV — build environment
-- TRACK_GA_ID, TRACK_GA_MEASUREMENT_ID — analytics
-- RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY — reCAPTCHA v3 (optional)
-- FTP\_\* — used by deploy workflow (set as GitHub Secrets)
+- `NODE_ENV` — build environment
+- `TRACK_GA_ID`, `TRACK_GA_MEASUREMENT_ID` — analytics
+- `RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY` — reCAPTCHA v3 (optional)
+- `FTP_*` — used by deploy workflow (set as GitHub Secrets)
 
-If you use environment-specific secrets in GitHub Actions, add them under Settings → Environments → Production.
-
-## Commands
-
-<details>
-<summary>List</summary>
-
-| COMMAND                            | DESCRIPTION                                                |
-| :--------------------------------- | ---------------------------------------------------------- |
-| **BUILD**                          |                                                            |
-| `pnpm run generate:sitemap`        | Generate sitemap                                           |
-| `pnpm run build`                   | Generate `dist` (runs sitemap automatically)               |
-| **SERVER**                         |                                                            |
-| `pnpm run start:dev`               | Start **Development** server                               |
-| `pnpm run start:prod`              | Generate `dist` + Start **Production** server              |
-| `pnpm run start:prod:server`       | Start Production server without dist generation            |
-| **TESTS**                          |                                                            |
-| `pnpm run tests:jest`              | Run Jest tests                                             |
-| `pnpm run tests:jest:update`       | Update Jest snapshots                                      |
-| `pnpm run tests:pw`                | Generate test build + Run Playwright tests                 |
-| `pnpm run tests:pw:update`         | Generate test build + Update Playwright snapshots          |
-| `pnpm run tests:pw:run`            | Run Playwright tests without build                         |
-| `pnpm run tests:pw:build`          | Build Playwright Docker image                              |
-| `pnpm run tests`                   | Run all tests                                              |
-| `pnpm run tests:update`            | Update all tests                                           |
-| **FORMAT**                         |                                                            |
-| `pnpm run format`                  | Check code formatting                                      |
-| `pnpm run format:fix`              | Fix code formatting                                        |
-| **LINT**                           |                                                            |
-| `pnpm run lint:ts`                 | TypeScript type check + ESLint                             |
-| `pnpm run lint:ts:fix`             | Fix ESLint issues                                          |
-| `pnpm run lint:css`                | Lint CSS                                                   |
-| `pnpm run lint:css:fix`            | Fix CSS lint issues                                        |
-| `pnpm run lint`                    | Run all linters                                            |
-| `pnpm run lint:fix`                | Fix all lint issues                                        |
-| **RELEASE**                        |                                                            |
-| `pnpm release patch`               | Create a **patch release** (e.g. `1.4.2 → 1.4.3`)          |
-| `pnpm release minor`               | Create a **minor release** (e.g. `1.4.2 → 1.5.0`)          |
-| `pnpm release major`               | Create a **major release** (e.g. `1.4.2 → 2.0.0`)          |
-| `pnpm release <version>`           | Release a **specific version** (e.g. `pnpm release 2.3.0`) |
-| `pnpm release patch --dry-run`     | Preview a **patch release** without executing              |
-| `pnpm release minor --dry-run`     | Preview a **minor release** without executing              |
-| `pnpm release major --dry-run`     | Preview a **major release** without executing              |
-| `pnpm release <version> --dry-run` | Preview a **specific version release**                     |
-
-</details>
+For environment secrets in GitHub Actions, add them under Settings → Environments → Production.
 
 ## CI / Deployment
 
-- GitHub Actions:
-    - `.github/workflows/ci.yml` — build and test.
-    - `.github/workflows/deploy.yml` — deploy to SFTP (uses wlixcc/SFTP-Deploy-Action).
-- Secrets needed (set in repository or environment):
-    - FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_REMOTE_PATH, FTP_PORT (optional)
-    - TRACK_GA_ID, TRACK_GA_MEASUREMENT_ID (optional)
-    - RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY (optional)
-- For environment secrets, ensure `environment` in workflow matches the environment name in repository settings.
+- **GitHub Actions**
+  - `ci.yml` — build and test
+  - `deploy.yml` — deploy to SFTP
+- **Secrets** (set in repository or environment settings)
+  - FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_REMOTE_PATH
+  - TRACK_GA_ID, TRACK_GA_MEASUREMENT_ID (optional)
+  - RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY (optional)
 
 ## Release Process
 
-This project includes a release script that automates:
-
-- version bumping
-- git commits
-- branch merging
-- git tagging
-- GitHub releases
-
-The script follows a `development → master` release flow and ensures the repository is in a clean state before performing a release.
-
-### Usage
-
-Run the release script with:
+Automates version bumping, commits, branch merging, tagging, and GitHub releases.
 
 ```bash
-pnpm release <version|patch|minor|major>
-```
-
-Dry run (preview release without executing):
-
-```bash
-pnpm release <version|patch|minor|major> --dry-run
+pnpm release patch    # e.g. 1.4.2 → 1.4.3
+pnpm release minor    # e.g. 1.4.2 → 1.5.0
+pnpm release major    # e.g. 1.4.2 → 2.0.0
+pnpm release 2.0.0    # specific version
+pnpm release --dry-run # preview without executing
 ```
 
 ---

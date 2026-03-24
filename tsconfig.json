@@ -6,20 +6,23 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "outDir": "dist",
-    "baseUrl": "src",
     "sourceMap": false,
     "noImplicitAny": true,
     "module": "ESNext",
-    "target": "ES2015",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+    "target": "ES2020",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "lib": ["DOM", "ES2015", "DOM.Iterable"],
+    "isolatedModules": true,
+    "lib": ["DOM", "ES2020", "DOM.Iterable"],
+    "types": ["vite/client", "vitest/globals"],
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src/**/*", "src/vite.config.ts", "src/vitest.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
