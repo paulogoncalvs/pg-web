@@ -68,13 +68,12 @@ pnpm dev
 
 ### End-to-End Tests (Playwright + Docker)
 
-| Command                 | Description                                                 |
-| ----------------------- | ----------------------------------------------------------- |
-| `pnpm test:e2e:install` | Build Docker image and install Playwright browsers          |
-| `pnpm test:e2e:build`   | Build site for E2E testing (`vite build --mode=test` + SSG) |
-| `pnpm test:e2e:run`     | Run E2E tests without rebuilding                            |
-| `pnpm test:e2e`         | Build + run Playwright E2E tests                            |
-| `pnpm test:e2e:update`  | Build + update Playwright snapshots                         |
+| Command                 | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `pnpm test:e2e:install` | Build Docker image and install Playwright browsers |
+| `pnpm test:e2e:run`     | Run E2E tests without rebuilding                   |
+| `pnpm test:e2e`         | Build + run Playwright E2E tests                   |
+| `pnpm test:e2e:update`  | Build + update Playwright snapshots                |
 
 ### All Tests
 
