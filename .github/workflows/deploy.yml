@@ -27,8 +27,11 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Create .env.production file
         run: |
-          echo "TRACK_GA_ID='${{ vars.TRACK_GA_ID }}'" > .env.production
-          echo "TRACK_GA_MEASUREMENT_ID='${{ vars.TRACK_GA_MEASUREMENT_ID }}'" >> .env.production
+          echo "VITE_TRACK_GA_ID='${{ vars.VITE_TRACK_GA_ID }}'" > .env.production
+          echo "VITE_TRACK_GA_MEASUREMENT_ID='${{ vars.VITE_TRACK_GA_MEASUREMENT_ID }}'" >> .env.production
+          echo "VITE_SERVER_URL='${{ vars.VITE_SERVER_URL }}'" >> .env.production
+          echo "VITE_RECAPTCHA_SITE_KEY='${{ vars.VITE_RECAPTCHA_SITE_KEY }}'" >> .env.production
+          echo "VITE_RECAPTCHA_SECRET_KEY='${{ vars.VITE_RECAPTCHA_SECRET_KEY }}'" >> .env.production
       - name: Build Project
         run: pnpm run build
       - name: Deploy to SFTP
