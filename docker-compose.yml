@@ -9,6 +9,8 @@ services:
         UNAME: node
     user: "${UID:-1000}:${GID:-1000}"
     volumes:
-      - ./:/app # Mount project source code
-      - /app/node_modules # Use container's node_modules
+      - ./:/app
+      - /app/node_modules
+      - /app/dist
+      - ./src/tests/playwright/:/app/src/tests/playwright:rw
     command: "pnpm exec playwright test"
