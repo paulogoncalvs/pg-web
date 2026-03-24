@@ -4,12 +4,11 @@ dist
 src/tests/**/results
 src/tests/**/report
 stats.json
-todo.md
+TODO.md
 public/sitemap.xml
 .DS_Store
 .idea
 .history
-.env
 .env.development
 .env.production
 server

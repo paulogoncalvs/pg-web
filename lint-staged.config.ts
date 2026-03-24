@@ -1,7 +1,8 @@
 const config = {
-    '*': ['pnpm run format'],
-    '*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}': ['pnpm run lint:ts'],
-    '*.{css}': ['pnpm run lint:css'],
+  "*.{css,scss,less}": ["oxfmt"],
+  "*.{html,md}": ["oxfmt"],
+  "*.{js,jsx,ts,tsx}": ["oxfmt", "oxlint . --fix"],
+  "*.{json,yml,yaml}": ["oxfmt"],
 };
 
 export default config;

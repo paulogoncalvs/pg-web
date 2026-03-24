@@ -1,0 +1,192 @@
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { createElement } from "preact";
+import { renderToStaticMarkup } from "preact-render-to-string";
+import { createServer } from "vite";
+
+import { renderLinks, renderMetas } from "./utils/meta";
+import { resolveDistDir } from "./utils/shared";
+import type { RouteConfig } from "@/config/routes";
+
+/* ---------------------------------- */
+/* paths                              */
+/* ---------------------------------- */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, "../..");
+const distDir = resolveDistDir();
+
+const getOutputPath = (route: string) =>
+  route === "/" ? path.join(distDir, "index.html") : path.join(distDir, route, "index.html");
+
+/* ---------------------------------- */
+/* manifest & hashed assets           */
+/* ---------------------------------- */
+interface ManifestEntry {
+  file: string;
+  src?: string;
+  css?: string[];
+}
+
+const manifest: Record<string, ManifestEntry> = JSON.parse(
+  fs.readFileSync(path.join(distDir, ".vite", "manifest.json"), "utf-8"),
+);
+
+const srcToHashed: Record<string, string> = {};
+let css = "";
+let sprite = "";
+
+for (const entry of Object.values(manifest)) {
+  if (entry.src) {
+    srcToHashed[`/${entry.src}`] = `/${entry.file}`;
+  }
+  if (entry.css?.[0]) {
+    css = `/${entry.css[0]}`;
+  }
+  if (entry.file.startsWith("assets/img/sprite") && entry.file.endsWith(".svg")) {
+    sprite = `/${entry.file}`;
+  }
+}
+
+const srcEntries = Object.entries(srcToHashed);
+
+/* ---------------------------------- */
+/* config                             */
+/* ---------------------------------- */
+const globalConfig = (
+  await import(pathToFileURL(path.join(rootDir, "src/config/global/index")).href)
+).default as {
+  baseUrl: string;
+  title: string;
+  metas: Array<{ path?: string; attributes?: Record<string, string> }>;
+  links: Array<{ attributes?: Record<string, string>; path?: string }>;
+};
+
+const routesConfig = (
+  await import(pathToFileURL(path.join(rootDir, "src/config/routes/index")).href)
+).default as Record<string, RouteConfig>;
+
+const entry = srcToHashed["/index.html"] ?? "";
+
+/* ---------------------------------- */
+/* vite server for SSR                */
+/* ---------------------------------- */
+const vite = await createServer({
+  root: rootDir,
+  base: "/",
+  server: { middlewareMode: true },
+  appType: "custom",
+});
+
+const { default: HtmlTemplate } = await import(
+  pathToFileURL(path.join(rootDir, "src/vite/templates/html/index.tsx")).href
+);
+
+const { default: App } = await vite.ssrLoadModule("/src/App.tsx");
+
+/* ---------------------------------- */
+/* asset resolvers                     */
+/* ---------------------------------- */
+const ASSET_PREFIXES = ["/assets/", "assets/", "/src/", "src/"];
+
+const resolvePath = (p?: string): string | undefined => {
+  if (!p) {
+    return p;
+  }
+  if (!ASSET_PREFIXES.some((prefix) => p.startsWith(prefix))) {
+    return p;
+  }
+
+  const normalized = p.startsWith("/") ? p : `/${p}`;
+  const basename = normalized.split("/").pop()?.split(".")[0];
+
+  return srcEntries.find(([key]) => key.includes(basename ?? ""))?.[1] ?? p;
+};
+
+const resolveItem = (item: {
+  path?: string;
+  property?: string;
+  attributes?: Record<string, string>;
+}) => {
+  const attrs: Record<string, string> = {};
+  for (const [k, v] of Object.entries(item.attributes ?? {})) {
+    if (v !== null) {
+      attrs[k] = k === "href" || k === "src" ? (resolvePath(v) ?? v) : v;
+    }
+  }
+
+  const resolvedPath = item.path && resolvePath(item.path);
+  if (resolvedPath && (item.property || attrs.property)) {
+    attrs.content = resolvedPath;
+  }
+
+  return { ...item, attributes: Object.keys(attrs).length ? attrs : undefined };
+};
+
+/* ---------------------------------- */
+/* render page                         */
+/* ---------------------------------- */
+function renderPage(appHtml: string, route: string, lang: string, title: string) {
+  const canonicalUrl = `${globalConfig.baseUrl}${route === "/" ? "" : route}`;
+
+  const metas = renderMetas(globalConfig.metas.map(resolveItem));
+  const links = renderLinks(globalConfig.links.map(resolveItem));
+
+  const cssLink = css ? `<link rel="stylesheet" href="${css}">` : "";
+  const jsScript = entry ? `<script type="module" src="${entry}"></script>` : "";
+
+  let html = HtmlTemplate({
+    lang,
+    url: route,
+    title,
+    sprite,
+    canonicalUrl,
+    store: { url: route, lang, filenames: { sprite } },
+    metas,
+    links: [cssLink, links].filter(Boolean).join(""),
+    appHtml,
+  });
+
+  // replace only /src/ imports for hashed JS modules
+  for (const [src, hashed] of srcEntries) {
+    if (!src.startsWith("/src/")) {
+      continue;
+    }
+    html = html.replace(new RegExp(src.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"), hashed);
+  }
+
+  return html.replace("</body>", `${jsScript}</body>`);
+}
+
+/* ---------------------------------- */
+/* build SSG                           */
+/* ---------------------------------- */
+async function build() {
+  console.info("[SSG] Starting pre-rendering...");
+
+  for (const [route, config] of Object.entries(routesConfig)) {
+    console.info(`[SSG] Rendering ${route}...`);
+
+    const store = { url: route, lang: config.templateParameters.lang, filenames: { sprite } };
+    const appHtml = renderToStaticMarkup(createElement(App, { store }));
+
+    const html = renderPage(
+      appHtml,
+      route,
+      config.templateParameters.lang,
+      config.templateParameters.head.title,
+    );
+
+    const filePath = getOutputPath(route);
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, html);
+
+    console.info(`[SSG] Generated: ${filePath}`);
+  }
+
+  await vite.close();
+  console.info("[SSG] Pre-rendering complete!");
+}
+
+build();

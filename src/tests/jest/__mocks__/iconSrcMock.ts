@@ -1,2 +1,0 @@
-// [hash, viewBox]
-export default ['#', ''];

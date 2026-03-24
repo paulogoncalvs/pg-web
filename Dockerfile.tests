@@ -17,6 +17,13 @@ RUN groupadd --gid ${GID} --non-unique ${UNAME} \
     && useradd --create-home --uid ${UID} --gid ${GID} --non-unique --shell /bin/bash ${UNAME}
 
 # -----------------------------
+# Install Node.js 24
+# -----------------------------
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# -----------------------------
 # Install  PNPM
 # -----------------------------
 RUN npm i -g pnpm@10.32.1
@@ -46,7 +53,7 @@ COPY --chown=${UNAME}:${UNAME} . .
 # -----------------------------
 # Copy environment files
 # -----------------------------
-COPY --chown=${UNAME}:${UNAME} .env.tests .env.production
+COPY --chown=${UNAME}:${UNAME} .env.test .env.production
 
 # -----------------------------
 # Install Chromium for Playwright tests

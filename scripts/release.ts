@@ -1,199 +1,214 @@
-import { execSync } from 'child_process';
-import { readFileSync, writeFileSync } from 'fs';
-import { dirname, resolve } from 'path';
-import readline from 'readline';
-import { fileURLToPath } from 'url';
+import { execSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import readline from "node:readline";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const pkgPath = resolve(__dirname, '../package.json');
+const pkgPath = resolve(__dirname, "../package.json");
 
 const arg = process.argv[2];
-const dryRun = process.argv.includes('--dry-run');
+const dryRun = process.argv.includes("--dry-run");
 
 if (!arg) {
-    console.error(`
+  console.error(`
 Usage:
   pnpm tsx scripts/release.ts <version|patch|minor|major|prerelease>
 
 Options:
   --dry-run   Print commands without executing
 `);
-    process.exit(1);
+  process.exit(1);
 }
 
 function run(cmd: string) {
-    console.log(`\n$ ${cmd}`);
-    if (!dryRun) execSync(cmd, { stdio: 'inherit' });
-    else console.log('⚠️ DRY RUN: command skipped');
+  console.info(`\n$ ${cmd}`);
+  if (!dryRun) {
+    execSync(cmd, { stdio: "inherit" });
+  } else {
+    console.info("⚠️ DRY RUN: command skipped");
+  }
 }
 
 function output(cmd: string): string {
-    console.log(`\n$ ${cmd}`);
-    if (dryRun) {
-        if (cmd.startsWith('git rev-parse v')) return ''; // pretend tag does not exist
-        if (cmd.startsWith('git rev-parse')) return 'development';
-        if (cmd.startsWith('git describe')) return 'v0.0.0';
-        if (cmd.startsWith('git log')) return '- feat: example commit (abc123)';
-        return '';
+  console.info(`\n$ ${cmd}`);
+  if (dryRun) {
+    if (cmd.startsWith("git rev-parse v")) {
+      return "";
+    } // Pretend tag does not exist
+    if (cmd.startsWith("git rev-parse")) {
+      return "development";
     }
-    return execSync(cmd, { encoding: 'utf8' }).trim();
+    if (cmd.startsWith("git describe")) {
+      return "v0.0.0";
+    }
+    if (cmd.startsWith("git log")) {
+      return "- feat: example commit (abc123)";
+    }
+    return "";
+  }
+  return execSync(cmd, { encoding: "utf8" }).trim();
 }
 
 function ensureCleanGit() {
-    const status = output('git status --porcelain');
-    if (status) {
-        console.error('❌ Git working directory not clean');
-        console.error(status);
-        process.exit(1);
-    }
+  const status = output("git status --porcelain");
+  if (status) {
+    console.error("❌ Git working directory not clean");
+    console.error(status);
+    process.exit(1);
+  }
 }
 
 function getCurrentBranch(): string {
-    return output('git rev-parse --abbrev-ref HEAD');
+  return output("git rev-parse --abbrev-ref HEAD");
 }
 
 function ensureTagDoesNotExist(tag: string) {
-    if (dryRun) {
-        console.log(`⚠️ DRY RUN: skipping tag existence check for ${tag}`);
-        return;
-    }
-    try {
-        output(`git rev-parse ${tag}`);
-        console.error(`❌ Tag ${tag} already exists`);
-        process.exit(1);
-    } catch {
-        // Tag does not exist → OK
-    }
+  if (dryRun) {
+    console.info(`⚠️ DRY RUN: skipping tag existence check for ${tag}`);
+    return;
+  }
+  try {
+    output(`git rev-parse ${tag}`);
+    console.error(`❌ Tag ${tag} already exists`);
+    process.exit(1);
+  } catch {
+    // Tag does not exist → OK
+  }
 }
 
 function bumpVersion(current: string, type: string): string {
-    const parts = current.split('.').map(Number);
-    if (type === 'patch') parts[2]++;
-    else if (type === 'minor') {
-        parts[1]++;
-        parts[2] = 0;
-    } else if (type === 'major') {
-        parts[0]++;
-        parts[1] = 0;
-        parts[2] = 0;
-    }
-    return parts.join('.');
+  const parts = current.split(".").map(Number);
+  if (type === "patch") {
+    parts[2]++;
+  } else if (type === "minor") {
+    parts[1]++;
+    parts[2] = 0;
+  } else if (type === "major") {
+    parts[0]++;
+    parts[1] = 0;
+    parts[2] = 0;
+  }
+  return parts.join(".");
 }
 
 function resolveVersion(arg: string): string {
-    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-    if (['patch', 'minor', 'major'].includes(arg)) {
-        return bumpVersion(pkg.version, arg);
-    }
-    return arg;
+  const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
+  if (["patch", "minor", "major"].includes(arg)) {
+    return bumpVersion(pkg.version, arg);
+  }
+  return arg;
 }
 
 function updatePackageVersion(version: string) {
-    const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-    pkg.version = version;
-    writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+  const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
+  pkg.version = version;
+  writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
 }
 
 function generateChangelog(version: string) {
-    // Get previous tag safely
-    let previousTag: string;
-
+  // Get previous tag safely
+  const previousTag = (() => {
     try {
-        previousTag = output('git describe --tags --abbrev=0');
+      return output("git describe --tags --abbrev=0");
     } catch {
-        previousTag = ''; // fallback if no previous tags exist
+      return "";
     }
+  })();
 
-    const range = previousTag ? `${previousTag}..HEAD` : 'HEAD';
-    const log = output(`git log --pretty=format:"- %s (%h)" ${range}`);
+  const range = previousTag ? `${previousTag}..HEAD` : "HEAD";
+  const log = output(`git log --pretty=format:"- %s (%h)" ${range}`);
 
-    const content = `# ${version}\n\n${log}\n`;
-    writeFileSync('CHANGELOG_RELEASE.md', content);
-    return content;
+  const content = `# ${version}\n\n${log}\n`;
+  writeFileSync("CHANGELOG_RELEASE.md", content);
+  return content;
 }
 
 async function confirm(version: string) {
-    if (dryRun) {
-        console.log(`⚠️ DRY RUN: automatically confirmed release ${version}`);
-        return;
-    }
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
-    const question = (q: string) => new Promise<string>((resolve) => rl.question(q, resolve));
-    const answer = await question(`Release version ${version}? (y/N) `);
-    rl.close();
-    if (answer.toLowerCase() !== 'y') {
-        console.log('Cancelled.');
-        process.exit(0);
-    }
+  if (dryRun) {
+    console.info(`⚠️ DRY RUN: automatically confirmed release ${version}`);
+    return;
+  }
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  const question = (q: string) => new Promise<string>((resolve) => rl.question(q, resolve));
+  const answer = await question(`Release version ${version}? (y/N) `);
+  rl.close();
+  if (answer.toLowerCase() !== "y") {
+    console.info("Cancelled.");
+    process.exit(0);
+  }
 }
 
 function commitVersion(version: string) {
-    run('git add package.json');
-    run(`git commit -m "chore(release): v${version}"`);
+  run("git add package.json");
+  run(`git commit -m "chore(release): v${version}"`);
 }
 
 function mergeBranches() {
-    // Safe merge, works even if branches have diverged
-    run('git checkout master');
-    run('git merge --no-ff development');
+  // Safe merge, works even if branches have diverged
+  run("git checkout master");
+  run("git merge --no-ff development");
 }
 
 function createTag(version: string) {
-    const tag = `v${version}`;
-    ensureTagDoesNotExist(tag);
-    run(`git tag ${tag}`);
+  const tag = `v${version}`;
+  ensureTagDoesNotExist(tag);
+  run(`git tag ${tag}`);
 }
 
 function pushAll() {
-    run('git push origin development');
-    run('git push origin master');
-    run('git push origin --tags');
+  run("git push origin development");
+  run("git push origin master");
+  run("git push origin --tags");
 }
 
 function createGithubRelease(version: string) {
-    try {
-        run(`gh release create v${version} --title "Release v${version}" --notes-file CHANGELOG_RELEASE.md`);
-    } catch {
-        console.warn('⚠️ GitHub release failed. You may need to create it manually.');
-    }
+  try {
+    // Autogenerated "What's Changed" notes on GitHub
+    run(`gh release create v${version} --title "Release v${version}" --generate-notes`);
+  } catch {
+    console.warn("⚠️ GitHub release failed. You may need to create it manually.");
+  }
 }
 
 async function main() {
-    ensureCleanGit();
-    const originalBranch = getCurrentBranch();
-    const version = resolveVersion(arg);
+  ensureCleanGit();
+  const originalBranch = getCurrentBranch();
+  const version = resolveVersion(arg);
 
-    console.log(`\n📦 Preparing release ${version}`);
-    if (dryRun) console.log('⚠️ DRY RUN MODE');
+  console.info(`\n📦 Preparing release ${version}`);
+  if (dryRun) {
+    console.info("⚠️ DRY RUN MODE");
+  }
 
-    await confirm(version);
+  await confirm(version);
 
-    try {
-        run('git checkout development');
+  try {
+    run("git checkout development");
 
-        updatePackageVersion(version);
-        commitVersion(version);
+    updatePackageVersion(version);
+    commitVersion(version);
 
-        mergeBranches();
+    mergeBranches();
 
-        createTag(version);
-        generateChangelog(version);
+    createTag(version);
+    generateChangelog(version);
 
-        pushAll();
-        createGithubRelease(version);
+    pushAll();
+    createGithubRelease(version);
 
-        run(`git checkout ${originalBranch}`);
+    run(`git checkout ${originalBranch}`);
 
-        console.log(`\n✅ Release ${version} complete`);
-    } catch (err) {
-        console.error('\n❌ Release failed', err);
-        run(`git checkout ${originalBranch}`);
-        process.exit(1);
-    }
+    console.info(`\n✅ Release ${version} complete`);
+  } catch (error) {
+    console.error("\n❌ Release failed", error);
+    run(`git checkout ${originalBranch}`);
+    process.exit(1);
+  }
 }
 
 main();

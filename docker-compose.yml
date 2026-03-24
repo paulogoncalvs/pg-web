@@ -7,10 +7,8 @@ services:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
         UNAME: node
-    user: '${UID:-1000}:${GID:-1000}'
-    environment:
-      - NODE_ENV=tests
+    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       - ./:/app # Mount project source code
       - /app/node_modules # Use container's node_modules
-    command: 'pnpm exec playwright test'
+    command: "pnpm exec playwright test"
