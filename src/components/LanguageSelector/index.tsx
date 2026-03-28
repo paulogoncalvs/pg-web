@@ -1,5 +1,6 @@
 import type { FunctionalComponent, JSX } from "preact";
 import { useCallback } from "preact/hooks";
+
 import { translations, useTranslate } from "@/modules/i18n";
 import type { Language } from "@/modules/language";
 import { useRouterLocation, useRouterRoute } from "@/modules/router";

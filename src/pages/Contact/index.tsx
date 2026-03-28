@@ -1,5 +1,6 @@
 import { type FunctionalComponent } from "preact";
 import { useEffect } from "preact/hooks";
+
 import mailIcon from "@/assets/icons/mail.svg";
 import { Button } from "@/components/Button";
 import { Fade } from "@/components/Fade";

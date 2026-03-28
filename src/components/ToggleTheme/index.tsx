@@ -1,5 +1,6 @@
 import type { FunctionalComponent } from "preact";
 import { useCallback } from "preact/hooks";
+
 import darkModeIcon from "@/assets/icons/dark_mode.svg";
 import lightModeIcon from "@/assets/icons/light_mode.svg";
 import { Icon } from "@/components/Icon";

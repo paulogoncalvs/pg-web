@@ -1,5 +1,6 @@
 import type { FunctionalComponent, JSX, RefObject } from "preact";
 import { useRef } from "preact/hooks";
+
 import { toggleSideDrawer } from "@/components/SideDrawer";
 
 let overlayEl: RefObject<HTMLDivElement> | null;

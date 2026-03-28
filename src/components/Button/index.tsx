@@ -1,4 +1,5 @@
 import type { ComponentChildren, FunctionalComponent } from "preact";
+
 import { classNames } from "@/utils/classNames";
 
 interface ButtonComponentProps {

@@ -1,4 +1,5 @@
 import type { FunctionalComponent } from "preact";
+
 import mailIcon from "@/assets/icons/mail.svg";
 import meImg from "@/assets/img/paulo-goncalves.webp";
 import { Fade } from "@/components/Fade";

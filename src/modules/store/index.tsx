@@ -1,5 +1,6 @@
 import { type FunctionalComponent, createContext } from "preact";
 import { useContext, useReducer } from "preact/hooks";
+
 import { useIsFirstRender } from "@/hooks/useIsFirstRender";
 import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
 import { THEME_DEFAULT, type Theme, getInitialTheme } from "@/modules/theme";

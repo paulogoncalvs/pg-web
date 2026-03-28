@@ -1,4 +1,5 @@
 import type { FunctionalComponent, JSX } from "preact";
+
 import routesConfig from "@/config/routes";
 import Contact from "@/pages/Contact";
 import Home from "@/pages/Home";

@@ -1,4 +1,5 @@
 import { useEffect } from "preact/hooks";
+
 import routesConfig from "@/config/routes";
 import { useRouterLocation, useRouter } from "@/modules/router";
 import { isBrowser } from "@/utils/browser";

@@ -1,6 +1,7 @@
 import type { FunctionalComponent, JSX } from "preact";
 import { useContext, useEffect } from "preact/hooks";
 import { useLocation, useRoute } from "wouter-preact";
+
 import { toggleSideDrawer } from "@/components/SideDrawer";
 import { type Language, isValidLanguage, useLanguage } from "@/modules/language";
 import { StoreContext } from "@/modules/store";

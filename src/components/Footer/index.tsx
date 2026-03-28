@@ -1,3 +1,5 @@
+import type { FunctionalComponent } from "preact";
+
 import axeLogo from "@/assets/icons/logos/axe.svg";
 import oxcLogo from "@/assets/icons/logos/oxc.svg";
 import gaLogo from "@/assets/icons/logos/ga.svg";
@@ -9,11 +11,13 @@ import typeScriptLogo from "@/assets/icons/logos/typescript.svg";
 import viteLogo from "@/assets/icons/logos/vite.svg";
 import vitestLogo from "@/assets/icons/logos/vitest.svg";
 import workboxLogo from "@/assets/icons/logos/workbox.svg";
+import dockerLogo from "@/assets/icons/logos/docker.svg";
+import nodejsLogo from "@/assets/icons/logos/nodejs.svg";
+import expressLogo from "@/assets/icons/logos/express.svg";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
 import { useTranslate } from "@/modules/i18n";
 import { trackEvent } from "@/modules/tracking/ga4";
-import type { FunctionalComponent } from "preact";
 
 const initialYear = 2021;
 const currentYear = new Date().getFullYear();
@@ -23,6 +27,8 @@ const logos = [
   { href: "https://preactjs.com/", label: "Preact", src: preactLogo },
   { href: "https://vite.dev/", label: "Vite", src: viteLogo },
   { href: "https://pnpm.io/", label: "pnpm", src: pnpmLogo },
+  { href: "https://www.docker.com", label: "Docker", src: dockerLogo },
+  { href: "https://nodejs.org/", label: "Node.js", src: nodejsLogo },
   { href: "https://developers.google.com/web/tools/workbox", label: "Workbox", src: workboxLogo },
   { href: "https://oxc.rs/", label: "OXC", src: oxcLogo },
   { href: "https://analytics.google.com/", label: "Google Analytics", src: gaLogo },
@@ -30,6 +36,7 @@ const logos = [
   { href: "https://playwright.dev/", label: "Playwright", src: playwrigthLogo },
   { href: "https://vitest.dev/", label: "Vitest", src: vitestLogo },
   { href: "https://www.deque.com/axe/", label: "Axe", src: axeLogo },
+  { href: "https://expressjs.com/", label: "Express", src: expressLogo },
 ] as const;
 
 export const Footer: FunctionalComponent = () => {

@@ -1,4 +1,5 @@
 import type { MetricType } from "web-vitals";
+
 import { hasGtag, trackEvent } from "@/modules/tracking/ga4";
 
 export const sendToGoogleAnalytics = ({

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path, { resolve } from "node:path";
+
 import { ICONS_DIR } from "../utils/shared";
 
 export function generateSprite(folder: string = ICONS_DIR): string {
