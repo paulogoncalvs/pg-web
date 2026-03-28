@@ -1,4 +1,5 @@
 import { useContext } from "preact/hooks";
+
 import { StoreContext } from "@/modules/store";
 import { isBrowser } from "@/utils/browser";
 

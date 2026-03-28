@@ -136,20 +136,25 @@ const links: Link[] = [
     attributes: { rel: "manifest", href: "/manifest.webmanifest" },
   },
   {
-    attributes: { rel: "shortcut icon", href: "/favicon.ico" },
+    attributes: { rel: "shortcut icon", href: "/assets/favicon.ico" },
   },
   {
-    attributes: { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+    attributes: { rel: "icon", type: "image/svg+xml", href: "/assets/favicon.svg" },
   },
   {
-    attributes: { rel: "icon", sizes: "96x96", type: "image/png", href: "/favicon-96x96.png" },
+    attributes: {
+      rel: "icon",
+      sizes: "96x96",
+      type: "image/png",
+      href: "/assets/favicon-96x96.png",
+    },
   },
   {
     attributes: {
       rel: "apple-touch-icon",
       sizes: "180x180",
       type: "image/png",
-      href: "/apple-touch-icon.png",
+      href: "/assets/apple-touch-icon.png",
     },
   },
 ];

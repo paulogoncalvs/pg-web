@@ -1,6 +1,7 @@
-import { getCookieConsent } from "@/modules/cookieConsent";
 import type { FunctionalComponent } from "preact";
 import { useEffect, useState } from "preact/hooks";
+
+import { getCookieConsent } from "@/modules/cookieConsent";
 
 const GA_MEASUREMENT_ID = import.meta.env.VITE_TRACK_GA_MEASUREMENT_ID;
 

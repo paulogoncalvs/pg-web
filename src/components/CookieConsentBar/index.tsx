@@ -1,5 +1,6 @@
 import type { FunctionalComponent } from "preact";
 import { useEffect, useState } from "preact/hooks";
+
 import { type CookieConsent, getCookieConsent, setCookieConsent } from "@/modules/cookieConsent";
 import { useTranslate } from "@/modules/i18n";
 import { updateConsent } from "@/modules/tracking/ga4";

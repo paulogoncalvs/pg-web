@@ -19,9 +19,7 @@
   },
   "type": "module",
   "scripts": {
-    "sitemap": "tsx src/scripts/generateSitemap.ts",
     "ssg": "cross-env NODE_ENV=production tsx src/vite/ssg.ts",
-    "prebuild": "pnpm sitemap",
     "build": "vite build && pnpm ssg",
     "preview": "vite preview",
     "prod": "pnpm check && pnpm build && pnpm preview",
@@ -43,8 +41,8 @@
   },
   "dependencies": {
     "preact": "^10.29.0",
-    "preact-render-to-string": "^6.6.6",
-    "web-vitals": "^5.1.0",
+    "preact-render-to-string": "^6.6.7",
+    "web-vitals": "^5.2.0",
     "workbox-precaching": "^7.4.0",
     "workbox-routing": "^7.4.0",
     "workbox-strategies": "^7.4.0",
@@ -66,10 +64,10 @@
     "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
-    "vite": "^8.0.2",
+    "vite": "^8.0.3",
     "vite-node": "^6.0.0",
     "vite-plugin-pwa": "1.2.0",
-    "vitest": "^4.1.1"
+    "vitest": "^4.1.2"
   },
   "overrides": {
     "vite-plugin-pwa": {

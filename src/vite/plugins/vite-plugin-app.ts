@@ -69,6 +69,25 @@ export function appPlugin(mode: string): Plugin {
       });
     },
 
+    handleHotUpdate({ file }) {
+      if (prod) {
+        return;
+      }
+
+      const exts = [".ts", ".tsx", ".css", ".svg"];
+      if (!exts.some((ext) => file.endsWith(ext))) {
+        return;
+      }
+
+      // Clear SSR cache on file changes - triggers fresh SSR on next request
+      ssrCache.clear();
+
+      // Regenerate sprite if icons changed
+      if (file.includes("/assets/icons/")) {
+        devSpriteCache = generateSprite(resolveIconsDir());
+      }
+    },
+
     async transformIndexHtml(html, ctx) {
       if (!ctx.server) {
         return;
@@ -97,7 +116,12 @@ export function appPlugin(mode: string): Plugin {
       }
 
       const metas = [...globalConfig.metas, ...(template?.head?.metas ?? [])];
-      const links = [...globalConfig.links, ...(template?.head?.links ?? [])];
+      let links = [...globalConfig.links, ...(template?.head?.links ?? [])];
+
+      if (!prod) {
+        links = links.filter((link) => link.attributes?.rel !== "preload");
+      }
+
       const store = createStore(url, lang, spriteUrl);
 
       const tags: HtmlTagDescriptor[] = [

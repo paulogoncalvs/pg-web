@@ -1,4 +1,5 @@
 import type { FunctionalComponent, JSX, VNode } from "preact";
+
 import { classNames } from "@/utils/classNames";
 
 interface MarkupComponentProps {

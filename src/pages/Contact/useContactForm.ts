@@ -1,9 +1,10 @@
 import { useMemo, useState } from "preact/hooks";
+
 import type { FormComponentData } from "@/components/Form";
 import { getRecaptchaToken } from "@/components/Form/recaptchaService";
 import { useTranslate } from "@/modules/i18n";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || "";
+const apiUrl = import.meta.env.VITE_API_URL || "/api/";
 const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
 
 export const useContactForm = () => {
@@ -67,7 +68,7 @@ export const useContactForm = () => {
     }
 
     try {
-      const url = `${SERVER_URL.replace(/\/$/, "")}/send/`;
+      const url = `${apiUrl.replace(/\/$/, "")}/send/`;
 
       const response = await fetch(url, {
         body: JSON.stringify(payload),

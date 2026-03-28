@@ -1,4 +1,5 @@
 import type { FunctionalComponent } from "preact";
+
 import { Fade } from "@/components/Fade";
 import { Link } from "@/components/Link";
 import { Markup } from "@/components/Markup";

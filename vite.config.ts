@@ -2,6 +2,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { appPlugin } from "./src/vite/plugins/vite-plugin-app";
+import { sitemapPlugin } from "./src/vite/plugins/sitemap";
 import { pwa } from "./src/config/global";
 
 const rules: Array<{ test: RegExp; dir: string; ext?: string }> = [
@@ -17,10 +18,25 @@ export default defineConfig(({ mode }) => {
     mode: isProd ? "production" : "development",
     plugins: [
       appPlugin(mode),
+      sitemapPlugin(),
       tailwindcss(),
       VitePWA({
         registerType: "autoUpdate",
-        workbox: { globPatterns: ["**/*.{js,css,html,svg,webp,woff2}"] },
+        devOptions: {
+          enabled: true,
+        },
+        workbox: {
+          globPatterns: ["**/*.{js,css,html,svg,webp,woff2}"],
+          navigateFallback: "/index.html",
+          navigateFallbackDenylist: [/^\/api\//, /^\/server\//],
+          ignoreURLParametersMatching: [/^utm_/, /^fbclid$/],
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/.*\.(server|api)\/.*/i,
+              handler: "NetworkOnly",
+            },
+          ],
+        },
         manifest: {
           name: pwa.name,
           short_name: pwa.shortName,

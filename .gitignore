@@ -1,14 +1,12 @@
 node_modules
-dist
 /.pnpm-store
+dist
+dev-dist
 src/tests/**/results
 src/tests/**/report
-stats.json
-TODO.md
-public/sitemap.xml
 .DS_Store
 .idea
 .history
 .env.development
 .env.production
-server
+api

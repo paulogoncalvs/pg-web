@@ -1,6 +1,7 @@
 import type { FunctionalComponent, RefObject } from "preact";
 import { useRef } from "preact/hooks";
 import { useLocation } from "wouter-preact";
+
 import closeIcon from "@/assets/icons/close.svg";
 import { Icon } from "@/components/Icon";
 import { LanguageSelector } from "@/components/LanguageSelector";
@@ -55,9 +56,9 @@ export const SideDrawer: FunctionalComponent = () => {
         aria-label={t("sidedrawer_toggle")}
       />
       <div class="fixed top-0 right-0 z-40 flex h-full w-[65vw] translate-x-full flex-col overflow-y-auto rounded-tl-xl rounded-bl-xl border-white/50 border-b border-l bg-white/30 shadow-xl backdrop-blur-md transition-transform duration-300 ease-in-out peer-checked:translate-x-0 sm:w-[55vw] md:w-[45vw] lg:w-[35vw] dark:border-white/10 dark:bg-zinc-900/30">
-        <div class="flex items-center justify-between p-4 sm:px-8">
+        <div class="flex items-center justify-between py-4 pl-4 pr-2 sm:pl-8 sm:pr-6">
           <div class="flex items-center gap-4">
-            <LanguageSelector classes="w-[50px]" />
+            <LanguageSelector classes="w-[50px] min-w-[50px]" />
             <ToggleTheme classes="p-2" />
           </div>
           <label htmlFor="sd-tog" class="icon-link ml-auto" aria-label={t("sidedrawer_toggle")}>
@@ -94,7 +95,7 @@ export const SideDrawer: FunctionalComponent = () => {
             {t("sidedrawer_menu_link_contact")}
           </Link>
         </div>
-        <div class="mx-auto mt-auto flex px-4 pb-4 sm:px-8">
+        <div class="mx-auto mt-auto flex px-4 pb-4 gap-2 sm:gap-4">
           <SocialLinks />
         </div>
       </div>

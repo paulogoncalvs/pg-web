@@ -1,5 +1,6 @@
 import type { FunctionalComponent, JSX } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
+
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { classNames } from "@/utils/classNames";
 

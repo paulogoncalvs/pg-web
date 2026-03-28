@@ -1,5 +1,6 @@
 import type { VNode } from "preact";
 import { useContext } from "preact/hooks";
+
 import { translations } from "@/config/translations";
 import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
 import { StoreContext } from "@/modules/store";

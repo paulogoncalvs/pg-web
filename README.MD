@@ -1,7 +1,15 @@
 # Paulo Gonçalves Website
 
-[![Node](https://img.shields.io/badge/node-%3E%3D24-brightgreen.svg)](https://nodejs.org/)
-[![pnpm](https://img.shields.io/badge/pnpm-10.32.1-orange.svg)](https://pnpm.js.org/)
+[![Preact](https://img.shields.io/badge/Preact-10-673ab8?logo=preact)](https://preactjs.com/)
+[![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript)](https://www.typescriptlang.org/)
+[![Tests](https://img.shields.io/badge/tests-Vitest%20%2B%20Playwright-6e9f18)]()
+[![Linting](https://img.shields.io/badge/linting-Oxlint%20%2B%20Oxfmt-000000)]()
+[![PWA](https://img.shields.io/badge/PWA-enabled-5a0fc8?logo=pwa)](https://web.dev/progressive-web-apps/)
+
+[![Node](https://img.shields.io/badge/node-%3E%3D%20LTS-brightgreen)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-required-orange)](https://pnpm.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Website up](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.paulogoncalves.dev/)
 
@@ -15,6 +23,8 @@
 - **Playwright** — End-to-end and visual regression testing
 - **Oxlint + Oxfmt** — Linting and code formatting
 - **Workbox** — Service worker for PWA support
+- **Docker** — Isolated environment for E2E testing
+- **Express** — For server API (not included)
 
 ## Features
 
@@ -26,12 +36,19 @@
 - **Accessibility Testing** — Automated checks with axe
 - **Visual Regression Testing** — Catch UI changes with Playwright
 
+## Integrations
+
+- **Google Analytics 4** — Tracks pageviews and user behavior
+- **Google reCAPTCHA v3** — Protects contact form from spam
+- **Web Vitals** — Monitors Core Web Vitals performance metrics
+
 ## Prerequisites
 
 - **Node.js >= 24 (LTS)**
 - **pnpm** — Fast package manager
 - **Git** — Version control
-- **Optional:** GitHub CLI (`gh`) for automated releases
+- **GitHub CLI** — `gh` for automated releases (optional)
+- **Docker** — For E2E tests
 
 ## Quickstart
 
@@ -39,7 +56,6 @@
 git clone https://github.com/paulogoncalvs/pg-web.git
 cd pg-web
 cp .env.example .env.development
-cp .env.example .env.production
 pnpm install
 pnpm dev
 # open http://localhost:4005
@@ -49,15 +65,13 @@ pnpm dev
 
 ### Build & Development
 
-| Command         | Description                                     |
-| --------------- | ----------------------------------------------- |
-| `pnpm sitemap`  | Generate `sitemap.xml`                          |
-| `pnpm ssg`      | Generate static site (`dist/`) using SSG        |
-| `pnpm prebuild` | Run `sitemap` before building                   |
-| `pnpm build`    | Build production site + run SSG                 |
-| `pnpm preview`  | Preview production build locally                |
-| `pnpm prod`     | Run typecheck, lint, format, build, and preview |
-| `pnpm dev`      | Start Vite dev server on port 4005              |
+| Command        | Description                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| `pnpm build`   | Build production site + SSG (copies .env.test → .env.production) |
+| `pnpm ssg`     | Generate static site from dist using SSG                         |
+| `pnpm preview` | Preview production build locally                                 |
+| `pnpm prod`    | Run typecheck, lint, format, build, and preview                  |
+| `pnpm dev`     | Start Vite dev server on port 4005                               |
 
 ### Unit Tests (Vitest)
 
@@ -68,11 +82,12 @@ pnpm dev
 
 ### End-to-End Tests (Playwright + Docker)
 
-| Command                 | Description                                               |
-| ----------------------- | --------------------------------------------------------- |
-| `pnpm test:e2e:install` | Build Docker image, install Playwright browsers and Build |
-| `pnpm test:e2e`         | Run E2E tests                                             |
-| `pnpm test:e2e:update`  | Update Playwright snapshots                               |
+| Command                      | Description                                         |
+| ---------------------------- | --------------------------------------------------- |
+| `pnpm test:e2e:install`      | Build Docker image with Playwright browsers         |
+| `pnpm test:e2e`              | Run E2E tests in Docker (uses CI-built dist)        |
+| `pnpm test:e2e:update`       | Update Playwright snapshots in Docker               |
+| `pnpm test:e2e:update:local` | Build locally and update snapshots (for committing) |
 
 ### All Tests
 
@@ -107,24 +122,48 @@ cp .env.example .env.development
 cp .env.example .env.production
 ```
 
-Document key variables in `.env.example`. Common variables:
+The build process automatically copies `.env.test` to `.env.production` to ensure consistent asset hashes between local and CI builds.
 
-- `NODE_ENV` — build environment
-- `TRACK_GA_ID`, `TRACK_GA_MEASUREMENT_ID` — analytics
-- `RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY` — reCAPTCHA v3 (optional)
-- `FTP_*` — used by deploy workflow (set as GitHub Secrets)
+Key variables in `.env.example`:
 
-For environment secrets in GitHub Actions, add them under Settings → Environments → Production.
+- `VITE_API_URL` — Backend server endpoint for contact form submissions (form validation)
+- `VITE_TRACK_GA_MEASUREMENT_ID` — Google Analytics 4 measurement ID for pageview tracking
+- `VITE_RECAPTCHA_SITE_KEY` — Google reCAPTCHA v3 site key
+- `VITE_RECAPTCHA_SECRET_KEY` — Google reCAPTCHA v3 secret key
 
 ## CI / Deployment
 
 - **GitHub Actions**
-  - `ci.yml` — build and test
-  - `deploy.yml` — deploy to SFTP
-- **Secrets** (set in repository or environment settings)
+  - `ci.yml` — Build, test, and upload artifacts
+  - `deploy.yml` — Deploy to SFTP
+- **Docker** — E2E tests run in Docker container with pre-built dist
+- **Environment Secrets** (set in repository or environment settings)
   - FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_REMOTE_PATH
-  - TRACK_GA_ID, TRACK_GA_MEASUREMENT_ID (optional)
-  - RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY (optional)
+  - VITE_RECAPTCHA_SITE_KEY, VITE_RECAPTCHA_SECRET_KEY
+- **Environment variables** (set in repository or environment settings)
+  - VITE_TRACK_GA_MEASUREMENT_ID, VITE_API_URL
+
+## Project Structure
+
+```
+src/
+├── components/        # Preact UI components
+├── config/            # Global config, routes, translations
+├── hooks/             # Custom Preact hooks
+├── modules/           # Feature modules (router, store, i18n, etc.)
+├── pages/             # Page components
+├── styles/            # CSS with Tailwind
+├── tests/
+│   ├── vitest/        # Unit tests
+│   └── playwright/    # E2E visual regression tests
+├── vite/              # Vite plugins and SSG
+│   ├── plugins/       # vite-plugin-app, sitemap, sprite
+│   ├── templates/     # HTML template for SSG
+│   ├── utils/         # Meta, path utilities
+│   └── ssg.ts         # Static site generation
+├── App.tsx            # Root component
+└── index.tsx          # Client hydration entry
+```
 
 ## Release Process
 
