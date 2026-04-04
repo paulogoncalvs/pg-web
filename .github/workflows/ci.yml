@@ -38,7 +38,7 @@ jobs:
           pnpm run build
 
       - name: Upload dist artifact
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Download dist artifact
-        uses: actions/download-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/download-artifact@v7
         with:
           name: dist
           path: dist
@@ -63,14 +63,14 @@ jobs:
         run: pnpm run test:e2e:install
 
       - name: Upload results
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: pw-results
           path: src/tests/playwright/results
 
       - name: Upload reports
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/upload-artifact@v7
         with:
           name: pw-report
           path: src/tests/playwright/report
