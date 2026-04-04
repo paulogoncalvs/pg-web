@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+
+  "plugins": ["typescript", "oxc"],
+
+  "rules": {
+    "no-unused-vars": "off",
+    "no-undef": "error",
+    "no-unreachable": "error",
+    "typescript/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+
+    "no-debugger": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+
+    "no-var": "error",
+    "prefer-const": "warn",
+
+    "eqeqeq": "error",
+    "curly": "error"
+  },
+
+  "settings": {
+    "vitest": {
+      "typecheck": false
+    }
+  },
+
+  "env": {
+    "builtin": true,
+    "browser": true,
+    "node": true
+  },
+
+  "globals": {
+    "__STORE__": "readonly",
+    "describe": "readonly",
+    "it": "readonly",
+    "test": "readonly",
+    "expect": "readonly",
+    "vi": "readonly",
+    "beforeEach": "readonly",
+    "afterEach": "readonly",
+    "beforeAll": "readonly",
+    "afterAll": "readonly"
+  },
+
+  "ignorePatterns": ["dist/**", "dev-dist/**", "node_modules/**"]
+}

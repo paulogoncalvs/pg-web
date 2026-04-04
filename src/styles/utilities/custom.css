@@ -1,20 +1,26 @@
 /* =========================
    CUSTOM UTILITIES
-========================= */
+ ========================= */
 
 /* Ultra-low opacity */
 @utility op-low {
-    opacity: 0.001;
+  opacity: 0.001;
+}
+
+/* Show when no JS */
+html:not(.js) .op-low,
+html:not(.js) .opacity-60 {
+  @apply opacity-100;
 }
 
 /* Move Up Slightly on Hover / Focus at md breakpoint */
 @utility translate-up {
-    @apply md:hover:-translate-y-0.5 md:focus:-translate-y-0.5;
+  @apply md:hover:-translate-y-0.5 md:focus:-translate-y-0.5;
 }
 
 /* Superscript fallback for unsupported CSS variables */
 @utility sup-novar {
-    @supports not (color: var(--primary)) {
-        display: none;
-    }
+  @supports not (color: var(--primary)) {
+    display: none;
+  }
 }

@@ -1,25 +1,24 @@
-import routesConfig from '@/config/routes';
-import Contact from '@/pages/Contact';
-import Home from '@/pages/Home';
-import NotFound from '@/pages/NotFound';
-import Offline from '@/pages/Offline';
-import { FunctionalComponent, JSX } from 'preact';
+import type { FunctionalComponent, JSX } from "preact";
 
-interface Pages {
-    [key: string]: FunctionalComponent;
-}
+import routesConfig from "@/config/routes";
+import Contact from "@/pages/Contact";
+import Home from "@/pages/Home";
+import NotFound from "@/pages/NotFound";
+import Offline from "@/pages/Offline";
+
+type Pages = Record<string, FunctionalComponent>;
 
 const pages: Pages = {
-    Home,
-    Contact,
-    NotFound,
-    Offline,
+  Contact,
+  Home,
+  NotFound,
+  Offline,
 };
 
 export const RouterPage = (url: string): JSX.Element => {
-    const route = routesConfig[url.replace('index.html', '')];
-    const view = route?.templateParameters?.View;
-    const Page = pages[view] || NotFound;
+  const route = routesConfig[url.replace("index.html", "")];
+  const view = route?.templateParameters?.View;
+  const Page = pages[view] || NotFound;
 
-    return <Page />;
+  return <Page />;
 };

@@ -1,72 +1,52 @@
 # -----------------------------
-# Base image: Playwright + Ubuntu focal
+# Base image: Node.js
 # -----------------------------
-FROM mcr.microsoft.com/playwright:focal@sha256:2286c685f2be91dd3ee482f1a3d382af08c9a1049406c9f7b499aec6ad691a2c
+FROM node:24-slim
 
 # -----------------------------
-# Build arguments (optional for UID/GID mapping in docker-compose)
+# Install PNPM
 # -----------------------------
-ARG UID=1000
-ARG GID=1000
-ARG UNAME=node
+ENV PNPM_HOME=/root/.local/share/pnpm
+ENV PATH=$PATH:$PNPM_HOME
+RUN npm i -g pnpm@10.33.0
 
 # -----------------------------
-# Create unprivileged user
+# Working directory
 # -----------------------------
-RUN groupadd --gid ${GID} --non-unique ${UNAME} \
-    && useradd --create-home --uid ${UID} --gid ${GID} --non-unique --shell /bin/bash ${UNAME}
-
-# -----------------------------
-# Install  PNPM
-# -----------------------------
-RUN npm i -g pnpm@10.32.1
-
-# -----------------------------
-# Use existing user for subsequent steps
-# Set working directory
-# -----------------------------
-USER ${UNAME}
 WORKDIR /app
 
 # -----------------------------
-# Copy package files first (for caching)
+# Copy and install dependencies
 # -----------------------------
-COPY --chown=${UNAME}:${UNAME} package.json pnpm-lock.yaml ./
-
-# -----------------------------
-# Install dependencies
-# -----------------------------
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prefer-offline
 
 # -----------------------------
-# Copy the rest of the project
+# Copy all source files
 # -----------------------------
-COPY --chown=${UNAME}:${UNAME} . .
+COPY . .
 
 # -----------------------------
 # Copy environment files
 # -----------------------------
-COPY --chown=${UNAME}:${UNAME} .env.tests .env.production
+COPY .env.test .env.production
 
 # -----------------------------
-# Install Chromium for Playwright tests
+# Install Playwright browsers
 # -----------------------------
-USER root
-RUN pnpm exec playwright install --with-deps chromium
+RUN pnpm add -D @playwright/test && pnpm exec playwright install --with-deps chromium
 
 # -----------------------------
 # Build the project
 # -----------------------------
-USER ${UNAME}
 RUN pnpm run build
 
 # -----------------------------
-# Expose port if needed
+# Expose port
 # -----------------------------
 EXPOSE 4040
 
 # -----------------------------
-# Default command for CI
+# Run tests
 # -----------------------------
-CMD ["pnpm", "exec", "playwright", "test"]
-
+CMD ["pnpm", "exec", "playwright", "test", "--reporter=line"]

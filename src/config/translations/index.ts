@@ -1,15 +1,11 @@
-import en from './en';
-import pt from './pt';
+import en from "./en";
+import pt from "./pt";
 
-export interface Translation {
-    [key: string]: string;
-}
+export type Translation = Record<string, string>;
 
-export interface Translations {
-    [key: string]: Translation;
-}
+export type Translations = Record<string, Translation>;
 
 export const translations: Translations = {
-    en,
-    pt,
+  en,
+  pt,
 };

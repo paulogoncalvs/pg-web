@@ -1,42 +1,54 @@
 {
+  // Package manager
   "npm.packageManager": "pnpm",
 
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
+  // Tailwind CSS
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "typescript",
+    "typescriptreact": "typescript"
   },
 
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Oxlint - run via CLI: pnpm lint, pnpm format
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
 
-  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  // Code actions via CLI: pnpm lint:fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
 
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  // Disable other formatters but keep CSS for Tailwind
+  "prettier.enable": false,
+  "eslint.enable": false,
+  "css.validate": true,
+  "scss.validate": true,
+  "less.validate": true,
 
-  "prettier.requireConfig": true,
-  "prettier.prettierPath": "./node_modules/prettier",
-  "prettier.ignorePath": "./.prettierignore",
-  "prettier.configPath": "./prettier.config.js",
+  // Language-specific formatter overrides
+  "[javascript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[javascriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
+  "[json]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
 
-  "css.validate": false,
-  "scss.validate": false,
-  "less.validate": false,
-
-  "tailwindCSS.experimental.configFile": "./tailwind.config.js",
-
-  "search.exclude": { "**/.pnp.*": true },
-
+  // Editor behavior and UX
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
   "editor.inlineSuggest.enabled": true,
   "editor.suggestSelection": "first",
-  "editor.tabSize": 2,
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true
+
+  // Exclude irrelevant files from search
+  "search.exclude": {
+    "**/.pnp.*": true,
+    "node_modules": true,
+    "dist": true,
+    "coverage": true
+  }
 }

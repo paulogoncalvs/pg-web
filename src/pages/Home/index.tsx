@@ -1,13 +1,13 @@
-import { h, Fragment, FunctionalComponent } from 'preact';
+import { type FunctionalComponent } from "preact";
 
-import { HeroSection } from './HeroSection';
-import { ExperienceTimeline } from './ExperienceTimeline';
+import { ExperienceTimeline } from "./ExperienceTimeline";
+import { HeroSection } from "./HeroSection";
 
 const HomePage: FunctionalComponent = () => (
-    <Fragment>
-        <HeroSection />
-        <ExperienceTimeline />
-    </Fragment>
+  <>
+    <HeroSection />
+    <ExperienceTimeline />
+  </>
 );
 
 export default HomePage;

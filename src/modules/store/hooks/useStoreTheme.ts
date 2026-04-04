@@ -1,25 +1,29 @@
-import { useEffect } from 'preact/hooks';
-import { StoreContextAction } from '@/modules/store';
-import { rawSetTheme, Theme, getPrefersScheme, COLOR_SCHEME_QUERY } from '@/modules/theme';
+import { useEffect } from "preact/hooks";
 
-export const useStoreTheme = (theme: Theme, dispatch: (action: StoreContextAction) => void): void => {
-    useEffect(() => {
-        const handler = (): void => {
-            dispatch({
-                type: 'SET_THEME',
-                payload: { theme: getPrefersScheme() },
-            });
-        };
-        const matchMedia = window.matchMedia(COLOR_SCHEME_QUERY);
+import type { StoreContextAction } from "@/modules/store";
+import { COLOR_SCHEME_QUERY, type Theme, getPrefersScheme, rawSetTheme } from "@/modules/theme";
 
-        matchMedia.addEventListener('change', handler);
+export const useStoreTheme = (
+  theme: Theme,
+  dispatch: (action: StoreContextAction) => void,
+): void => {
+  useEffect(() => {
+    const handler = (): void => {
+      dispatch({
+        payload: { theme: getPrefersScheme() },
+        type: "SET_THEME",
+      });
+    };
+    const matchMedia = window.matchMedia(COLOR_SCHEME_QUERY);
 
-        return (): void => {
-            matchMedia.removeEventListener('change', handler);
-        };
-    }, []);
+    matchMedia.addEventListener("change", handler);
 
-    useEffect(() => {
-        rawSetTheme(theme);
-    }, [theme]);
+    return (): void => {
+      matchMedia.removeEventListener("change", handler);
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    rawSetTheme(theme);
+  }, [theme]);
 };

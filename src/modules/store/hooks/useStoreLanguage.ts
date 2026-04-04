@@ -1,8 +1,9 @@
-import { useEffect } from 'preact/hooks';
-import { rawSetLanguage, Language } from '@/modules/language';
+import { useEffect } from "preact/hooks";
+
+import { type Language, rawSetLanguage } from "@/modules/language";
 
 export const useStoreLanguage = (lang: Language): void => {
-    useEffect(() => {
-        rawSetLanguage(lang);
-    }, [lang]);
+  useEffect(() => {
+    rawSetLanguage(lang);
+  }, [lang]);
 };

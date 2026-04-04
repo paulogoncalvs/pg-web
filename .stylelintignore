@@ -1,9 +1,0 @@
-dist
-coverage
-src/tests/**/results
-src/tests/**/report
-node_modules
-public
-.idea
-.history
-.vscode

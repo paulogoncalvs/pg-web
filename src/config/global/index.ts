@@ -1,156 +1,186 @@
-import routes from '../routes';
+import routes from "../routes";
 
-const baseUrl = 'https://www.paulogoncalves.dev/';
+const baseUrl = "https://www.paulogoncalves.dev/";
 
-const structuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'Person',
-            name: 'Paulo Gonçalves',
-            url: baseUrl,
-            jobTitle: 'Front-End Engineer',
-            nationality: {
-                '@type': 'Country',
-                name: 'Portugal',
-            },
-            sameAs: [
-                'https://github.com/paulogoncalvs',
-                'https://www.linkedin.com/in/paulogoncalvs',
-                'https://x.com/paulogoncalvs',
-            ],
-        },
-        {
-            '@type': 'WebSite',
-            name: 'Paulo Gonçalves - Front-End Engineer',
-            url: baseUrl,
-        },
-    ],
+type StructuredData = {
+  "@context": string;
+  "@graph": Array<Record<string, unknown>>;
 };
 
-export { structuredData };
+const structuredData: StructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      jobTitle: "Front-End Engineer",
+      name: "Paulo Gonçalves",
+      nationality: {
+        "@type": "Country",
+        name: "Portugal",
+      },
+      sameAs: [
+        "https://github.com/paulogoncalvs",
+        "https://www.linkedin.com/in/paulogoncalvs",
+        "https://x.com/paulogoncalvs",
+      ],
+      url: baseUrl,
+    },
+    {
+      "@type": "WebSite",
+      name: "Paulo Gonçalves - Front-End Engineer",
+      url: baseUrl,
+    },
+  ],
+};
+
+interface Pwa {
+  name: string;
+  shortName: string;
+  description: string;
+  backgroundColor: string;
+  themeColor: string;
+  lang: string;
+  icons: Array<{ src: string; sizes: string; type: string; purpose?: string }>;
+}
+
+const pwa: Pwa = {
+  name: "Paulo Gonçalves - Front-End Engineer",
+  shortName: "PauloGoncalves",
+  description: "Personal Website",
+  backgroundColor: "#ffffff",
+  themeColor: "#42b883",
+  lang: "en",
+  icons: [
+    { src: "/assets/manifest/pwa-192x192.png", sizes: "192x192", type: "image/png" },
+    { src: "/assets/manifest/pwa-512x512.png", sizes: "512x512", type: "image/png" },
+    {
+      src: "/assets/manifest/pwa-512x512.png",
+      sizes: "512x512",
+      type: "image/png",
+      purpose: "any maskable",
+    },
+  ],
+};
 
 interface Meta {
-    attributes?: Record<string, string>;
-    path?: string;
-    property?: string;
-    content?: string;
-    name?: string;
-    [key: string]: unknown;
+  attributes?: Record<string, string>;
+  path?: string;
+  property?: string;
+  content?: string;
+  name?: string;
+  [key: string]: unknown;
 }
 
 interface Link {
-    path: string;
-    attributes: Record<string, string>;
+  path?: string;
+  attributes: Record<string, string>;
 }
 
 const metas: Meta[] = [
-    { attributes: { name: 'viewport', content: 'width=device-width,initial-scale=1' } },
-    {
-        attributes: {
-            name: 'keywords',
-            content:
-                'HTML, CSS, JavaScript, TypeScript, Preact, Webpack, Tailwind, Front-End, Frontend, Paulo Gonçalves',
-        },
+  { attributes: { content: "width=device-width,initial-scale=1", name: "viewport" } },
+  {
+    attributes: {
+      content:
+        "HTML, CSS, JavaScript, TypeScript, Preact, Vite, Tailwind, Front-End, Frontend, Paulo Gonçalves",
+      name: "keywords",
     },
-    { attributes: { name: 'author', content: 'Paulo Gonçalves | contact@paulogoncalves.dev' } },
-    { attributes: { name: 'google-site-verification', content: 'rSCoSktIV5-y8An9prxi5Rtn1NfAI2JZuDghowaml2Q' } },
-    { attributes: { name: 'mobile-web-app-capable', content: 'yes' } },
-    { attributes: { name: 'application-name', content: 'paulogoncalves.dev' } },
-    { attributes: { name: 'theme-color', content: '#ffffff' } },
-    { attributes: { name: 'apple-mobile-web-app-status-bar-style', content: 'black' } },
-    { attributes: { content: 'summary_large_image', property: 'twitter:card' } },
-    { attributes: { content: '@paulogoncalvs', property: 'twitter:site' } },
-    { attributes: { content: '@paulogoncalvs', property: 'twitter:creator' } },
-    { attributes: { content: 'paulogoncalves.dev', property: 'twitter:domain' } },
-    { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'twitter:image' } },
-    { attributes: { content: 'Paulo Gonçalves - Front-End Engineer from Portugal', property: 'og:title' } },
-    { attributes: { content: 'Personal Website', property: 'og:description' } },
-    { attributes: { content: baseUrl, property: 'og:url' } },
-    { attributes: { content: 'website', property: 'og:type' } },
-    { path: '/assets/img/paulo-goncalves.webp', attributes: { property: 'og:image' } },
+  },
+  { attributes: { content: "Paulo Gonçalves | contact@paulogoncalves.dev", name: "author" } },
+  {
+    attributes: {
+      content: "rSCoSktIV5-y8An9prxi5Rtn1NfAI2JZuDghowaml2Q",
+      name: "google-site-verification",
+    },
+  },
+  { attributes: { content: "yes", name: "mobile-web-app-capable" } },
+  { attributes: { content: "paulogoncalves.dev", name: "application-name" } },
+  { attributes: { content: "#ffffff", name: "theme-color" } },
+  { attributes: { content: "black", name: "apple-mobile-web-app-status-bar-style" } },
+  { attributes: { content: "summary_large_image", property: "twitter:card" } },
+  { attributes: { content: "@paulogoncalvs", property: "twitter:site" } },
+  { attributes: { content: "@paulogoncalvs", property: "twitter:creator" } },
+  { attributes: { content: "paulogoncalves.dev", property: "twitter:domain" } },
+  { attributes: { property: "twitter:image" }, path: "/assets/img/paulo-goncalves-400.jpeg" },
+  {
+    attributes: {
+      content: "Paulo Gonçalves - Front-End Engineer from Portugal",
+      property: "og:title",
+    },
+  },
+  { attributes: { content: "Personal Website", property: "og:description" } },
+  { attributes: { content: baseUrl, property: "og:url" } },
+  { attributes: { content: "website", property: "og:type" } },
+  { attributes: { property: "og:image" }, path: "/assets/img/paulo-goncalves-400.jpeg" },
 ];
 
 const links: Link[] = [
-    {
-        path: '',
-        attributes: {
-            href: '/assets/resources/Poppins-Regular.b78525ba2b4b274fac00.woff2',
-            rel: 'preload',
-            as: 'font',
-            type: 'font/woff2',
-            crossorigin: 'anonymous',
-        },
+  {
+    attributes: {
+      as: "font",
+      crossorigin: "anonymous",
+      rel: "preload",
+      type: "font/woff2",
+      href: "/assets/fonts/Poppins-Regular.woff2",
     },
-    {
-        path: '',
-        attributes: {
-            href: '/assets/resources/Poppins-Bold.9edd872ea4af8d157708.woff2',
-            rel: 'preload',
-            as: 'font',
-            type: 'font/woff2',
-            crossorigin: 'anonymous',
-        },
+  },
+  {
+    attributes: {
+      as: "font",
+      crossorigin: "anonymous",
+      rel: "preload",
+      type: "font/woff2",
+      href: "/assets/fonts/Poppins-Bold.woff2",
     },
-    {
-        path: '/manifest.webmanifest',
-        attributes: {
-            rel: 'manifest',
-        },
+  },
+  {
+    attributes: { rel: "shortcut icon", href: "/assets/favicon.ico" },
+  },
+  {
+    attributes: { rel: "icon", type: "image/svg+xml", href: "/assets/favicon.svg" },
+  },
+  {
+    attributes: {
+      rel: "icon",
+      sizes: "96x96",
+      type: "image/png",
+      href: "/assets/favicon-96x96.png",
     },
-    {
-        path: '/favicon.ico',
-        attributes: {
-            rel: 'shortcut icon',
-        },
+  },
+  {
+    attributes: {
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      type: "image/png",
+      href: "/assets/apple-touch-icon.png",
     },
-    {
-        path: '/favicon.svg',
-        attributes: {
-            rel: 'icon',
-            type: 'image/svg+xml',
-        },
-    },
-    {
-        path: '/favicon-96x96.png',
-        attributes: {
-            rel: 'icon',
-            type: 'image/png',
-            sizes: '96x96',
-        },
-    },
-    {
-        path: '/apple-touch-icon.png',
-        attributes: {
-            rel: 'apple-touch-icon',
-            type: 'image/png',
-            sizes: '180x180',
-        },
-    },
+  },
 ];
 
 type Routes = typeof routes;
 
 interface GlobalConfig {
-    title: string;
-    description: string;
-    metas: Meta[];
-    links: Link[];
-    routes: Routes;
-    baseUrl: string;
-    scripts: unknown[];
-    structuredData: Record<string, unknown>;
+  title: string;
+  description: string;
+  metas: Meta[];
+  links: Link[];
+  routes: Routes;
+  baseUrl: string;
+  scripts: unknown[];
+  structuredData: StructuredData;
+  pwa: Pwa;
 }
 
 const config: GlobalConfig = {
-    title: 'Paulo Gonçalves - Front-End Engineer from Portugal',
-    description: 'Personal Website',
-    metas,
-    links,
-    routes,
-    baseUrl,
-    scripts: [],
-    structuredData,
+  title: "Paulo Gonçalves - Front-End Engineer from Portugal",
+  description: "Personal Website",
+  metas,
+  links,
+  routes,
+  baseUrl,
+  scripts: [],
+  structuredData,
+  pwa,
 };
 
+export { structuredData, pwa };
 export default config;
