@@ -51,6 +51,7 @@ export default {
   home_page_professional_experience: "Professional Experience",
   home_page_subtitle: "Front-End Engineer",
   home_page_title: "PAULO GONÇALVES",
+  home_page_portrait_alt: "portrait of Paulo Gonçalves",
   language_en: "EN",
   language_pt: "PT",
   language_selection: "Language selection",

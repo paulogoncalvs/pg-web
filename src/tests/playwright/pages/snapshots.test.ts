@@ -45,6 +45,7 @@ class BasePage {
     );
 
     await this.page.setViewportSize({ height, width: viewport.width });
+    await this.page.waitForTimeout(1000);
   }
 
   public async takeSnapshot(): Promise<void> {

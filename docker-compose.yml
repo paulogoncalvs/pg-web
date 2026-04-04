@@ -3,11 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.tests
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
-        UNAME: node
-    user: "${UID:-1000}:${GID:-1000}"
+    user: root
     volumes:
       - ./:/app
       - /app/node_modules

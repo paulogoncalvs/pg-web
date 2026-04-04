@@ -89,16 +89,20 @@ const { default: App } = await vite.ssrLoadModule("/src/App.tsx");
 /* asset resolvers                     */
 /* ---------------------------------- */
 const ASSET_PREFIXES = ["/assets/", "assets/", "/src/", "src/"];
+const EXCLUDED_PATHS = ["/manifest.webmanifest", "manifest.webmanifest"];
 
 const resolvePath = (p?: string): string | undefined => {
   if (!p) {
+    return p;
+  }
+  const normalized = p.startsWith("/") ? p : `/${p}`;
+  if (EXCLUDED_PATHS.some((excluded) => normalized === excluded || normalized.endsWith(excluded))) {
     return p;
   }
   if (!ASSET_PREFIXES.some((prefix) => p.startsWith(prefix))) {
     return p;
   }
 
-  const normalized = p.startsWith("/") ? p : `/${p}`;
   const basename = normalized.split("/").pop()?.split(".")[0];
 
   return srcEntries.find(([key]) => key.includes(basename ?? ""))?.[1] ?? p;
@@ -135,6 +139,10 @@ function renderPage(appHtml: string, route: string, lang: string, title: string)
 
   const cssLink = css ? `<link rel="stylesheet" href="${css}">` : "";
   const jsScript = entry ? `<script type="module" src="${entry}"></script>` : "";
+  const cssPreload = css ? `<link rel="preload" href="${css}" as="style">` : "";
+  const jsPreload = entry ? `<link rel="modulepreload" href="${entry}">` : "";
+  const preconnect = `<link rel="preconnect" href="${globalConfig.baseUrl}">`;
+  const manifest = `<link rel="manifest" href="/manifest.webmanifest">`;
 
   let html = HtmlTemplate({
     lang,
@@ -144,7 +152,7 @@ function renderPage(appHtml: string, route: string, lang: string, title: string)
     canonicalUrl,
     store: { url: route, lang, filenames: { sprite } },
     metas,
-    links: [cssLink, links].filter(Boolean).join(""),
+    links: [preconnect, cssPreload, jsPreload, cssLink, links, manifest].filter(Boolean).join(""),
     appHtml,
   });
 
