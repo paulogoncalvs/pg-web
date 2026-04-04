@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
 
-  "ignorePatterns": ["dist/**", "node_modules/**"],
+  "ignorePatterns": ["dist/**", "dev-dist/**", "node_modules/**"],
 
   "format": {
     "indent": { "style": "space", "width": 4 },

@@ -26,9 +26,9 @@
     "dev": "vite --port 4005 --host",
     "test": "cross-env NODE_ENV=production vitest run",
     "test:update": "cross-env NODE_ENV=production vitest run -u",
-    "test:e2e:install": "tsx ./scripts/run-with-uid-gid.ts docker compose --progress=plain build pg-tests-runner",
-    "test:e2e": "tsx ./scripts/run-with-uid-gid.ts docker compose run pg-tests-runner",
-    "test:e2e:update": "docker compose run pg-tests-runner pnpm exec playwright test --update-snapshots",
+    "test:e2e:install": "docker compose --progress=plain build pg-tests-runner",
+    "test:e2e": "docker compose run --remove-orphans pg-tests-runner",
+    "test:e2e:update": "docker compose run --remove-orphans pg-tests-runner pnpm exec playwright test --update-snapshots",
     "test:all": "pnpm test && pnpm test:e2e",
     "test:all:update": "pnpm test:update && pnpm test:e2e:update",
     "typecheck": "tsc --noEmit",
@@ -40,7 +40,7 @@
     "release": "pnpm check && tsx scripts/release.ts"
   },
   "dependencies": {
-    "preact": "^10.29.0",
+    "preact": "^10.29.1",
     "preact-render-to-string": "^6.6.7",
     "web-vitals": "^5.2.0",
     "workbox-precaching": "^7.4.0",
@@ -49,18 +49,19 @@
     "wouter-preact": "^3.9.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/vite": "^4.2.2",
     "@types/jsdom": "^28.0.1",
-    "@types/node": "^25.5.0",
-    "axe-core": "^4.11.1",
+    "@types/node": "^25.5.2",
+    "axe-core": "^4.11.2",
     "cross-env": "^10.1.0",
     "husky": "^9.1.7",
     "jsdom": "^29.0.1",
     "lint-staged": "^16.4.0",
-    "oxfmt": "^0.42.0",
-    "oxlint": "^1.57.0",
-    "playwright": "^1.58.2",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
+    "playwright": "^1.59.1",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
@@ -87,6 +88,9 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "unrs-resolver"
+    ],
+    "ignoredBuiltDependencies": [
+      "sharp"
     ]
   }
 }

@@ -1,11 +1,13 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
 
-  "plugins": ["react", "typescript", "oxc"],
+  "plugins": ["typescript", "oxc"],
 
   "rules": {
     "no-unused-vars": "off",
-    "typescript/no-unused-vars": "warn",
+    "no-undef": "error",
+    "no-unreachable": "error",
+    "typescript/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
 
     "no-debugger": "warn",
     "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
@@ -14,10 +16,7 @@
     "prefer-const": "warn",
 
     "eqeqeq": "error",
-    "curly": "error",
-
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "curly": "error"
   },
 
   "settings": {
@@ -27,8 +26,23 @@
   },
 
   "env": {
-    "builtin": true
+    "builtin": true,
+    "browser": true,
+    "node": true
   },
 
-  "ignorePatterns": ["dist/**", "node_modules/**"]
+  "globals": {
+    "__STORE__": "readonly",
+    "describe": "readonly",
+    "it": "readonly",
+    "test": "readonly",
+    "expect": "readonly",
+    "vi": "readonly",
+    "beforeEach": "readonly",
+    "afterEach": "readonly",
+    "beforeAll": "readonly",
+    "afterAll": "readonly"
+  },
+
+  "ignorePatterns": ["dist/**", "dev-dist/**", "node_modules/**"]
 }

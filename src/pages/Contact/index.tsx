@@ -3,19 +3,19 @@ import { useEffect } from "preact/hooks";
 
 import mailIcon from "@/assets/icons/mail.svg";
 import { Button } from "@/components/Button";
-import { Fade } from "@/components/Fade";
 import { Form } from "@/components/Form";
 import { FormInput } from "@/components/Form/Input";
 import { FormTextarea } from "@/components/Form/Textarea";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { Spinner } from "@/components/Spinner";
 import { useTranslate } from "@/modules/i18n";
 import { trackEvent } from "@/modules/tracking/ga4";
 
 import { useContactForm } from "./useContactForm";
 
-const baseDelay = 3;
+const baseDelay = 2;
 const delayStep = 0.2;
 
 const ContactPage: FunctionalComponent = () => {
@@ -41,17 +41,17 @@ const ContactPage: FunctionalComponent = () => {
   return (
     <>
       <div class="flex flex-col items-center p-6 pt-20 text-center">
-        <Fade
+        <ScrollReveal
           delay={1}
           Element="h1"
           classes="text-3xl tracking-tight font-bold sm:my-2 sm:text-5xl"
         >
           {t("contact_page_title")}
-        </Fade>
+        </ScrollReveal>
 
-        <Fade delay={2} Element="h1" classes="text-xl lowercase op-1 sm:text-2xl pb-8">
+        <ScrollReveal delay={2} Element="h1" classes="text-xl lowercase op-1 sm:text-2xl pb-8">
           {t("contact_page_subtitle")}
-        </Fade>
+        </ScrollReveal>
       </div>
 
       <div class="flex flex-col items-center p-6 pb-20">
@@ -63,11 +63,16 @@ const ContactPage: FunctionalComponent = () => {
           errorMessages={errorMessages}
           resetTrigger={resetTrigger}
         >
-          <Fade delay={baseDelay} Element="h2" classes="font-bold text-xl sm:text-2xl pb-8">
+          <ScrollReveal
+            delay={baseDelay}
+            Element="h2"
+            classes="font-bold text-xl sm:text-2xl pb-8"
+            direction="up"
+          >
             {t("contact_page_contact_form_title")}
-          </Fade>
+          </ScrollReveal>
 
-          <Fade delay={baseDelay + Number(delayStep)}>
+          <ScrollReveal delay={baseDelay + Number(delayStep)}>
             <FormInput
               label={t("contact_page_contact_form_first_name_label")}
               type="text"
@@ -75,9 +80,9 @@ const ContactPage: FunctionalComponent = () => {
               id="firstName"
               autoComplete="given-name"
             />
-          </Fade>
+          </ScrollReveal>
 
-          <Fade delay={baseDelay + delayStep * 2}>
+          <ScrollReveal delay={baseDelay + delayStep * 2}>
             <FormInput
               label={t("contact_page_contact_form_last_name_label")}
               type="text"
@@ -85,9 +90,9 @@ const ContactPage: FunctionalComponent = () => {
               id="lastName"
               autoComplete="family-name"
             />
-          </Fade>
+          </ScrollReveal>
 
-          <Fade delay={baseDelay + delayStep * 3}>
+          <ScrollReveal delay={baseDelay + delayStep * 3}>
             <FormInput
               label={t("contact_page_contact_form_email_label")}
               type="email"
@@ -95,16 +100,16 @@ const ContactPage: FunctionalComponent = () => {
               id="email"
               autoComplete="email"
             />
-          </Fade>
+          </ScrollReveal>
 
-          <Fade delay={baseDelay + delayStep * 4}>
+          <ScrollReveal delay={baseDelay + delayStep * 4}>
             <FormTextarea
               label={t("contact_page_contact_form_message_label")}
               name="message"
               id="message"
               autoComplete="off"
             />
-          </Fade>
+          </ScrollReveal>
 
           <FormInput
             label={t("contact_page_contact_form_message_label")}
@@ -127,7 +132,7 @@ const ContactPage: FunctionalComponent = () => {
             </p>
           )}
 
-          <Fade delay={baseDelay + delayStep * 5}>
+          <ScrollReveal delay={baseDelay + delayStep * 5}>
             <Button
               classes="interactive interactive-icon interactive-md mt-4"
               disabled={isSubmitting}
@@ -138,7 +143,7 @@ const ContactPage: FunctionalComponent = () => {
                 ? t("contact_page_contact_form_submitting")
                 : t("contact_page_contact_form_submit_CTA")}
             </Button>
-          </Fade>
+          </ScrollReveal>
         </Form>
 
         {submittedName && (
@@ -151,25 +156,32 @@ const ContactPage: FunctionalComponent = () => {
       </div>
 
       <div class="flex flex-col items-center p-6 pb-20">
-        <Fade delay={6} direction="up" classes="w-full max-w-[400px]">
-          <Fade delay={5} Element="h2" classes="font-bold text-xl op-1 sm:text-2xl pb-8">
-            {t("contact_page_contact_email_title")}
-          </Fade>
-
-          <Link
-            href="mailto:contact@paulogoncalves.dev"
-            class="interactive interactive-icon interactive-md"
-            onClick={() =>
-              trackEvent("link_click", {
-                link_location: "Contact",
-                link_name: "E-mail Me",
-              })
-            }
+        <div class="w-full max-w-100">
+          <ScrollReveal
+            delay={1}
+            Element="h2"
+            classes="font-bold text-xl sm:text-2xl pb-8"
+            direction="up"
           >
-            <Icon src={mailIcon} ariaHidden />
-            {t("contact_page_email_button_label")}
-          </Link>
-        </Fade>
+            {t("contact_page_contact_email_title")}
+          </ScrollReveal>
+
+          <ScrollReveal delay={2}>
+            <Link
+              href="mailto:contact@paulogoncalves.dev"
+              class="interactive interactive-icon interactive-md"
+              onClick={() =>
+                trackEvent("link_click", {
+                  link_location: "Contact",
+                  link_name: "E-mail Me",
+                })
+              }
+            >
+              <Icon src={mailIcon} ariaHidden />
+              {t("contact_page_email_button_label")}
+            </Link>
+          </ScrollReveal>
+        </div>
       </div>
     </>
   );

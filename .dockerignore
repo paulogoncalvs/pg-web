@@ -10,3 +10,5 @@ dev-dist/
 src/tests/**/results
 src/tests/**/report
 api
+.env.development
+.env.production

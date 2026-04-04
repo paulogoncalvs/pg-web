@@ -1,7 +1,7 @@
 import type { FunctionalComponent } from "preact";
 
-import { Fade } from "@/components/Fade";
 import { Link } from "@/components/Link";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { useTranslate } from "@/modules/i18n";
 import { LANGUAGE_DEFAULT, useLanguage } from "@/modules/language";
 import { trackEvent } from "@/modules/tracking/ga4";
@@ -143,23 +143,28 @@ export const ExperienceTimeline: FunctionalComponent = () => {
   return (
     <section class="flex flex-col items-center border-white/80 border-t bg-white/20 px-6 py-14 pb-20 text-center shadow-black/5 shadow-xs dark:border-white/15 dark:bg-zinc-900/15">
       <div class="w-full max-w-xs text-left sm:max-w-xl">
-        <Fade delay={9} Element="h2" classes="text-xl sm:text-2xl mb-12 font-bold">
+        <ScrollReveal
+          delay={2}
+          Element="h2"
+          classes="text-xl sm:text-2xl mb-12 font-bold"
+          direction="up"
+        >
           {t("home_page_professional_experience")}
-        </Fade>
+        </ScrollReveal>
 
-        <Fade
-          delay={9}
+        <ScrollReveal
+          delay={2}
           Element="div"
           classes="relative border-l-2 border-stone-300 dark:border-white/10 ml-3 space-y-8"
         >
           {experiences.map((exp, index) => (
-            <Fade key={exp.titleKey} delay={10 + 0.7 * index} direction="up">
+            <ScrollReveal key={exp.titleKey} delay={0.2 * index}>
               <ExperienceItem key={exp.titleKey} {...exp} />
-            </Fade>
+            </ScrollReveal>
           ))}
-        </Fade>
+        </ScrollReveal>
 
-        <Fade delay={11} Element="p" classes="pt-12 text-sm">
+        <ScrollReveal Element="p" classes="pt-12 text-sm" delay={1}>
           {t(
             "home_page_description_3",
             {
@@ -181,7 +186,7 @@ export const ExperienceTimeline: FunctionalComponent = () => {
             },
             false,
           )}
-        </Fade>
+        </ScrollReveal>
       </div>
     </section>
   );

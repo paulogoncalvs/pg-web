@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
     trace: "on-first-retry",
   },
   webServer: {
-    command: "pnpm vite preview --port 4040",
+    command: "pnpm vite preview --port 4040 --no-open",
     port: 4040,
     reuseExistingServer: true,
     timeout: 10_000,

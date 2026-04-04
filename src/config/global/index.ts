@@ -100,7 +100,7 @@ const metas: Meta[] = [
   { attributes: { content: "@paulogoncalvs", property: "twitter:site" } },
   { attributes: { content: "@paulogoncalvs", property: "twitter:creator" } },
   { attributes: { content: "paulogoncalves.dev", property: "twitter:domain" } },
-  { attributes: { property: "twitter:image" }, path: "/assets/img/paulo-goncalves.webp" },
+  { attributes: { property: "twitter:image" }, path: "/assets/img/paulo-goncalves-400.jpeg" },
   {
     attributes: {
       content: "Paulo Gonçalves - Front-End Engineer from Portugal",
@@ -110,7 +110,7 @@ const metas: Meta[] = [
   { attributes: { content: "Personal Website", property: "og:description" } },
   { attributes: { content: baseUrl, property: "og:url" } },
   { attributes: { content: "website", property: "og:type" } },
-  { attributes: { property: "og:image" }, path: "/assets/img/paulo-goncalves.webp" },
+  { attributes: { property: "og:image" }, path: "/assets/img/paulo-goncalves-400.jpeg" },
 ];
 
 const links: Link[] = [
@@ -131,9 +131,6 @@ const links: Link[] = [
       type: "font/woff2",
       href: "/assets/fonts/Poppins-Bold.woff2",
     },
-  },
-  {
-    attributes: { rel: "manifest", href: "/manifest.webmanifest" },
   },
   {
     attributes: { rel: "shortcut icon", href: "/assets/favicon.ico" },

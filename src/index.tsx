@@ -17,11 +17,13 @@ console.info(
   "font-size:16px;font-weight:bold;",
 );
 
-// PWA - Register service worker
+// PWA - Register service worker after page loads
 if (import.meta.env.PROD) {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js");
+      setTimeout(() => {
+        navigator.serviceWorker.register("/sw.js");
+      }, 1000);
     });
   }
 }

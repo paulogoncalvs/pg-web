@@ -170,10 +170,10 @@ src/
 Automates version bumping, commits, branch merging, tagging, and GitHub releases.
 
 ```bash
-pnpm release patch    # e.g. 1.4.2 → 1.4.3
-pnpm release minor    # e.g. 1.4.2 → 1.5.0
-pnpm release major    # e.g. 1.4.2 → 2.0.0
-pnpm release 2.0.0    # specific version
+pnpm release patch     # e.g. 1.4.2 → 1.4.3
+pnpm release minor     # e.g. 1.4.2 → 1.5.0
+pnpm release major     # e.g. 1.4.2 → 2.0.0
+pnpm release 2.0.0     # specific version
 pnpm release --dry-run # preview without executing
 ```
 

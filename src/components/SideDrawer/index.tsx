@@ -61,7 +61,7 @@ export const SideDrawer: FunctionalComponent = () => {
             <LanguageSelector classes="w-[50px] min-w-[50px]" />
             <ToggleTheme classes="p-2" />
           </div>
-          <label htmlFor="sd-tog" class="icon-link ml-auto" aria-label={t("sidedrawer_toggle")}>
+          <label class="icon-link ml-auto" onClick={() => sideDrawerInputEl?.current?.click()}>
             <Icon src={closeIcon} ariaHidden />
           </label>
         </div>

@@ -46,14 +46,17 @@ const pageTests = ({ name, route, storeData }: PageTestsOptions): void => {
 
 // Run
 for (const pageKey of Object.keys(routesConfig)) {
-  const name = routesConfig[pageKey].tests?.name;
-  const storeData = routesConfig[pageKey].tests || {};
+  const routeConfig = routesConfig[pageKey];
+  const name = routeConfig.tests?.name;
 
   if (name) {
     pageTests({
       name,
       route: pageKey,
-      storeData,
+      storeData: {
+        lang: routeConfig.templateParameters.lang,
+        url: routeConfig.templateParameters.url,
+      },
     });
   }
 }

@@ -1,5 +1,5 @@
 import type { FunctionalComponent } from "preact";
-import { useContext, useRef } from "preact/hooks";
+import { useContext } from "preact/hooks";
 
 import burgerIcon from "@/assets/icons/burger.svg";
 import { Icon } from "@/components/Icon";
@@ -10,8 +10,7 @@ import { useTranslate } from "@/modules/i18n";
 import { StoreContext } from "@/modules/store";
 
 export const Header: FunctionalComponent = () => {
-  const labelEl = useRef<HTMLLabelElement | null>(null);
-  const { url } = useContext(StoreContext);
+  const { url, lang } = useContext(StoreContext);
   const { t } = useTranslate();
   const isHome = routesConfig[url || "/"]?.templateParameters?.View === "Home";
 
@@ -20,19 +19,14 @@ export const Header: FunctionalComponent = () => {
       <div class="flex items-center justify-between p-4">
         <div class="flex items-center gap-2 sm:gap-4 flex-wrap">
           {!isHome && (
-            <Link useRouter href="/" class="font-bold text-xl tracking-tight py-2 px-4">
+            <Link useRouter href={`/${lang}/`} class="font-bold text-xl tracking-tight py-2 px-4">
               {t("home_page_title")}
             </Link>
           )}
           {isHome && <SocialLinks />}
         </div>
         <div class="flex justify-end">
-          <label
-            htmlFor="sd-tog"
-            class="icon-link"
-            ref={labelEl}
-            aria-label={t("sidedrawer_toggle")}
-          >
+          <label htmlFor="sd-tog" class="icon-link">
             <Icon src={burgerIcon} ariaHidden />
           </label>
         </div>

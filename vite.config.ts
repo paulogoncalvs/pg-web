@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       VitePWA({
         registerType: "autoUpdate",
+        manifestFilename: "manifest.webmanifest",
         devOptions: {
           enabled: true,
         },
