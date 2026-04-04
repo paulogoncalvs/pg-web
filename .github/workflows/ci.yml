@@ -57,6 +57,18 @@ jobs:
       - name: Install pnpm
         run: npm i -g pnpm@10.33.0
 
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "STORE_DIR=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_DIR }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Download dist artifact
         uses: actions/download-artifact@v7
         with:
@@ -64,7 +76,7 @@ jobs:
           path: dist
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Install Playwright
         run: pnpm add -D @playwright/test && pnpm exec playwright install --with-deps chromium

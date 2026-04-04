@@ -4,13 +4,11 @@
 FROM node:24-slim
 
 # -----------------------------
-# Install PNPM and Playwright
+# Install PNPM
 # -----------------------------
 ENV PNPM_HOME=/root/.local/share/pnpm
 ENV PATH=$PATH:$PNPM_HOME
 RUN npm i -g pnpm@10.33.0
-RUN cd /tmp && pnpm add -g @playwright/test \
-    && npx playwright install --with-deps chromium
 
 # -----------------------------
 # Working directory
@@ -27,6 +25,16 @@ RUN pnpm install --frozen-lockfile --prefer-offline
 # Copy all source files
 # -----------------------------
 COPY . .
+
+# -----------------------------
+# Copy environment files
+# -----------------------------
+COPY .env.test .env.production
+
+# -----------------------------
+# Install Playwright browsers
+# -----------------------------
+RUN pnpm add -D @playwright/test && pnpm exec playwright install --with-deps chromium
 
 # -----------------------------
 # Build the project
