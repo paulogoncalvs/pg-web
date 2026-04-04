@@ -144,6 +144,18 @@ async function confirm(version: string) {
 }
 
 function commitVersion(version: string) {
+  try {
+    execSync("git diff --cached --quiet", { stdio: "ignore" });
+    execSync("git diff --quiet", { stdio: "ignore" });
+    const status = execSync("git status --porcelain", { encoding: "utf8" }).trim();
+    if (!status) {
+      console.info("⚠️ No changes to commit, skipping commit step");
+      return;
+    }
+  } catch {
+    // Errors mean there are changes - continue to commit
+  }
+
   run("git add package.json");
   run(`git commit -m "chore(release): v${version}"`);
 }
