@@ -82,7 +82,7 @@ jobs:
         run: pnpm add -D @playwright/test && pnpm exec playwright install --with-deps chromium
 
       - name: Run E2E Tests
-        run: pnpm exec playwright test
+        run: pnpm exec playwright test --reporter=line
 
       - name: Upload results
         uses: actions/upload-artifact@v7

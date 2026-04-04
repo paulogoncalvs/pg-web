@@ -9,4 +9,4 @@ services:
       - /app/node_modules
       - /app/dist
       - ./src/tests/playwright/:/app/src/tests/playwright:rw
-    command: "pnpm exec playwright test"
+    command: "pnpm exec playwright test --reporter=line"

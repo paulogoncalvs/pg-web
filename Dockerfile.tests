@@ -49,4 +49,4 @@ EXPOSE 4040
 # -----------------------------
 # Run tests
 # -----------------------------
-CMD ["pnpm", "exec", "playwright", "test"]
+CMD ["pnpm", "exec", "playwright", "test", "--reporter=line"]
