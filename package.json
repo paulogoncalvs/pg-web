@@ -57,7 +57,7 @@
     "cross-env": "^10.1.0",
     "husky": "^9.1.7",
     "jsdom": "^29.0.1",
-    "lint-staged": "^16.4.0",
+    "lint-staged": "^17.0.0",
     "oxfmt": "^0.48.0",
     "oxlint": "^1.58.0",
     "playwright": "^1.59.1",
