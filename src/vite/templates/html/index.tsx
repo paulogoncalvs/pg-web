@@ -20,6 +20,7 @@ export interface PageProps {
   title: string;
   sprite?: string;
   store?: PageStore;
+  canonicalUrl: string;
   head?: {
     title?: string;
     metas?: Partial<PageMetas>[];
@@ -30,7 +31,7 @@ export interface PageProps {
   appHtml?: string;
 }
 
-export default ({
+export const HtmlTemplate = ({
   title,
   metas,
   links,
@@ -63,3 +64,5 @@ export default ({
 
   return `<!DOCTYPE html><html lang="${lang}"><head>${headParts.join("")}</head><body class="bg-gradient font-sans text-zinc-900 transition-colors duration-300 selection:bg-zinc-400 selection:text-zinc-100 dark:text-zinc-200 dark:selection:bg-zinc-100 dark:selection:text-zinc-900">${bodyContent}</body></html>`;
 };
+
+export default HtmlTemplate;

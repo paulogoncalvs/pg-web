@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowImportingTsExtensions": true,
     "lib": ["DOM", "ES2020", "DOM.Iterable"],
     "types": ["vite/client", "vitest/globals", "node"],
     "paths": {

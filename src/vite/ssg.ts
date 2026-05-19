@@ -5,9 +5,11 @@ import { createElement } from "preact";
 import { renderToStaticMarkup } from "preact-render-to-string";
 import { createServer } from "vite";
 
+import type { RouteConfig } from "@/config/routes";
+
 import { renderLinks, renderMetas } from "./utils/meta";
 import { resolveDistDir } from "./utils/shared";
-import type { RouteConfig } from "@/config/routes";
+import { HtmlTemplate } from "./templates/html/index.tsx";
 
 /* ---------------------------------- */
 /* paths                              */
@@ -78,10 +80,6 @@ const vite = await createServer({
   server: { middlewareMode: true },
   appType: "custom",
 });
-
-const { default: HtmlTemplate } = await import(
-  pathToFileURL(path.join(rootDir, "src/vite/templates/html/index.tsx")).href
-);
 
 const { default: App } = await vite.ssrLoadModule("/src/App.tsx");
 
