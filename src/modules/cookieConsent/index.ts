@@ -1,18 +1,18 @@
-import { isBrowser } from "@/utils/browser";
+import { isClient } from "@/utils/client";
 
-const COOKIE_CONSENT_KEY = "cookie_consent";
+const COOKIE_CONSENT_KEY = "cookie-consent";
 
 export type CookieConsent = "granted" | "denied" | null;
 
 export const getCookieConsent = (): CookieConsent => {
-  if (!isBrowser()) {
+  if (!isClient()) {
     return null;
   }
   return localStorage.getItem(COOKIE_CONSENT_KEY) as CookieConsent;
 };
 
 export const setCookieConsent = (consent: "granted" | "denied"): void => {
-  if (!isBrowser()) {
+  if (!isClient()) {
     return;
   }
   localStorage.setItem(COOKIE_CONSENT_KEY, consent);

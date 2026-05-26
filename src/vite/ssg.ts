@@ -5,16 +5,16 @@ import { createElement } from "preact";
 import { renderToStaticMarkup } from "preact-render-to-string";
 import { createServer } from "vite";
 
+import type { RouteConfig } from "@/config/routes";
+
+import { HtmlTemplate } from "./templates/html/index.tsx";
 import { renderLinks, renderMetas } from "./utils/meta";
 import { resolveDistDir } from "./utils/shared";
-import type { RouteConfig } from "@/config/routes";
 
 /* ---------------------------------- */
 /* paths                              */
 /* ---------------------------------- */
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, "../..");
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const distDir = resolveDistDir();
 
 const getOutputPath = (route: string) =>
@@ -63,15 +63,6 @@ const globalConfig = (
   links: Array<{ attributes?: Record<string, string>; path?: string }>;
 };
 
-const routesConfig = (
-  await import(pathToFileURL(path.join(rootDir, "src/config/routes/index")).href)
-).default as Record<string, RouteConfig>;
-
-const entry = srcToHashed["/index.html"] ?? "";
-
-/* ---------------------------------- */
-/* vite server for SSR                */
-/* ---------------------------------- */
 const vite = await createServer({
   root: rootDir,
   base: "/",
@@ -79,11 +70,15 @@ const vite = await createServer({
   appType: "custom",
 });
 
-const { default: HtmlTemplate } = await import(
-  pathToFileURL(path.join(rootDir, "src/vite/templates/html/index.tsx")).href
-);
-
 const { default: App } = await vite.ssrLoadModule("/src/App.tsx");
+
+const routesConfig = (
+  await import(pathToFileURL(path.join(rootDir, "src/config/routes/index")).href)
+).default as Record<string, RouteConfig>;
+
+console.info("SSG routes:", Object.keys(routesConfig));
+
+const entry = srcToHashed["/index.html"] ?? "";
 
 /* ---------------------------------- */
 /* asset resolvers                     */
@@ -116,7 +111,7 @@ const resolveItem = (item: {
   const attrs: Record<string, string> = {};
   for (const [k, v] of Object.entries(item.attributes ?? {})) {
     if (v !== null) {
-      attrs[k] = k === "href" || k === "src" ? (resolvePath(v) ?? v) : v;
+      attrs[k] = k === "href" || k === "src" || k === "content" ? (resolvePath(v) ?? v) : v;
     }
   }
 
@@ -131,18 +126,31 @@ const resolveItem = (item: {
 /* ---------------------------------- */
 /* render page                         */
 /* ---------------------------------- */
-function renderPage(appHtml: string, route: string, lang: string, title: string) {
+function renderPage(
+  appHtml: string,
+  route: string,
+  lang: string,
+  title: string,
+  pageMetas?: Array<{ attributes?: Record<string, string> }>,
+) {
   const canonicalUrl = `${globalConfig.baseUrl}${route === "/" ? "" : route}`;
 
-  const metas = renderMetas(globalConfig.metas.map(resolveItem));
+  const globalMetaKeys = new Set(
+    globalConfig.metas.map((m) => m.attributes?.name ?? m.attributes?.property).filter(Boolean),
+  );
+  const filteredGlobalMetas = globalConfig.metas.filter(
+    (m) => !globalMetaKeys.has(m.attributes?.name) && !globalMetaKeys.has(m.attributes?.property),
+  );
+  const allMetas = [...filteredGlobalMetas, ...(pageMetas ?? [])];
+  const metas = renderMetas(allMetas.map(resolveItem));
   const links = renderLinks(globalConfig.links.map(resolveItem));
 
-  const cssLink = css ? `<link rel="stylesheet" href="${css}">` : "";
   const jsScript = entry ? `<script type="module" src="${entry}"></script>` : "";
-  const cssPreload = css ? `<link rel="preload" href="${css}" as="style">` : "";
-  const jsPreload = entry ? `<link rel="modulepreload" href="${entry}">` : "";
-  const preconnect = `<link rel="preconnect" href="${globalConfig.baseUrl}">`;
-  const manifest = `<link rel="manifest" href="/manifest.webmanifest">`;
+  const cssLink = css ? `<link rel="stylesheet" href="${css}">` : "";
+  const cssPreloadLink = css ? `<link rel="preload" href="${css}" as="style">` : "";
+  const jsPreloadLink = entry ? `<link rel="modulepreload" href="${entry}">` : "";
+  const preconnectLink = `<link rel="preconnect" href="${globalConfig.baseUrl}">`;
+  const manifestLink = `<link rel="manifest" href="/manifest.webmanifest">`;
 
   let html = HtmlTemplate({
     lang,
@@ -152,7 +160,9 @@ function renderPage(appHtml: string, route: string, lang: string, title: string)
     canonicalUrl,
     store: { url: route, lang, filenames: { sprite } },
     metas,
-    links: [preconnect, cssPreload, jsPreload, cssLink, links, manifest].filter(Boolean).join(""),
+    links: [preconnectLink, cssPreloadLink, jsPreloadLink, cssLink, links, manifestLink]
+      .filter(Boolean)
+      .join(""),
     appHtml,
   });
 
@@ -184,6 +194,7 @@ async function build() {
       route,
       config.templateParameters.lang,
       config.templateParameters.head.title,
+      config.templateParameters.head.metas,
     );
 
     const filePath = getOutputPath(route);

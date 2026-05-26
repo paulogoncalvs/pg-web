@@ -1,6 +1,7 @@
 import { useMemo, useState } from "preact/hooks";
 
 import type { FormComponentData } from "@/components/Form";
+
 import { getRecaptchaToken } from "@/components/Form/recaptchaService";
 import { useTranslate } from "@/modules/i18n";
 

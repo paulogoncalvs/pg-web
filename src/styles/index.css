@@ -22,3 +22,9 @@
 ========================= */
 @import "./utilities/animations.css";
 @import "./utilities/custom.css";
+
+/* =========================
+   Prose - MDX Content
+========================= */
+@import "./prose/prose.css";
+@import "./prose/tldr.css";

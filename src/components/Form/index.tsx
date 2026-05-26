@@ -27,6 +27,8 @@ interface FormContextValue {
 
 export const FormContext = createContext<FormContextValue | null>(null);
 
+const DEFAULT_VALIDATION_RULES: ValidationRules = {};
+const DEFAULT_ERROR_MESSAGES: Record<string, string> = {};
 const initialErrorState: FormErrors = {};
 
 interface FormComponentProps {
@@ -35,7 +37,7 @@ interface FormComponentProps {
   validationRules?: ValidationRules;
   errorMessages?: Record<string, string>;
   onSubmit(formData: FormComponentData): void;
-  classes?: string;
+  class?: string;
   children: ComponentChildren;
   resetTrigger?: number;
 }
@@ -48,10 +50,10 @@ const validateEmail = (email: string): boolean => {
 export const Form: FunctionalComponent<FormComponentProps> = ({
   action,
   initialValues,
-  validationRules = {},
-  errorMessages = {},
+  validationRules = DEFAULT_VALIDATION_RULES,
+  errorMessages = DEFAULT_ERROR_MESSAGES,
   onSubmit,
-  classes,
+  class: classes = "",
   children,
   resetTrigger,
 }) => {

@@ -1,0 +1,19 @@
+/* =========================
+   PROSE - TL;DR / Callouts
+   ========================= */
+
+@layer components {
+  .prose {
+    .tldr {
+      @apply my-8 rounded-xl border border-amber-200 bg-amber-50/60 p-5 dark:border-amber-900 dark:bg-amber-950/30;
+    }
+
+    .tldr-title {
+      @apply mb-2 text-sm font-bold tracking-wide text-amber-800 dark:text-amber-200;
+    }
+
+    .tldr-content {
+      @apply text-sm leading-6 text-amber-900 dark:text-amber-100;
+    }
+  }
+}

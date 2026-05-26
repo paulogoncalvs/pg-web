@@ -1,17 +1,22 @@
-import type { FunctionalComponent, JSX, VNode } from "preact";
+import type { FunctionalComponent, JSX } from "preact";
 
-import { classNames } from "@/utils/classNames";
-
-interface MarkupComponentProps {
-  data: string | VNode;
-  classes?: string;
-  Element?: JSX.ElementType;
+interface MarkupProps extends JSX.HTMLAttributes<HTMLElement> {
+  html: string;
+  as?: JSX.ElementType;
+  sanitize?: (html: string) => string;
 }
 
-export const Markup: FunctionalComponent<MarkupComponentProps> = ({
-  data = "",
-  classes,
-  Element = "div",
-}): JSX.Element => (
-  <Element class={classNames(classes)} dangerouslySetInnerHTML={{ __html: data }} />
-);
+export const Markup: FunctionalComponent<MarkupProps> = ({
+  html,
+  as: Component = "div",
+  sanitize,
+  ...props
+}) => {
+  if (!html) {
+    return null;
+  }
+
+  const content = sanitize ? sanitize(html) : html;
+
+  return <Component {...props} dangerouslySetInnerHTML={{ __html: content }} />;
+};

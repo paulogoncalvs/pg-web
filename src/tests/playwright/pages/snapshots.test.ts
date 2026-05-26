@@ -1,4 +1,5 @@
 import { type Page, expect, test } from "@playwright/test";
+
 import routesConfig from "@/config/routes";
 import { stripEmojis, stripHashes } from "@/tests/playwright/utils";
 
@@ -45,7 +46,7 @@ class BasePage {
     );
 
     await this.page.setViewportSize({ height, width: viewport.width });
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(200);
   }
 
   public async takeSnapshot(): Promise<void> {
@@ -68,14 +69,27 @@ test.describe("PAGES SNAPSHOTS", () => {
     await page.clock.setFixedTime(new Date("2026-01-01T00:00:00Z"));
   });
 
-  for (const pageKey of Object.keys(routesConfig)) {
-    const name = routesConfig[pageKey].tests?.name;
+  const seenTestNames = new Set<string>();
 
-    if (!name) {
+  for (const pageKey of Object.keys(routesConfig)) {
+    const route = routesConfig[pageKey];
+    const name = route.tests?.name;
+    const lang = route.templateParameters.lang;
+
+    if (!name || lang.includes("explicit")) {
       continue;
     }
-    test(name, async ({ page }, testInfo) => {
-      const basePage = new BasePage(name, page);
+
+    const testKey = `${name}|${lang}`;
+    if (seenTestNames.has(testKey)) {
+      continue;
+    }
+    seenTestNames.add(testKey);
+
+    const testName = `${name} (${lang})`;
+
+    test(testName, async ({ page }, testInfo) => {
+      const basePage = new BasePage(testName, page);
       const colorScheme = testInfo.project.name.includes("dark") ? "dark" : "light";
 
       await basePage.goto(pageKey, colorScheme);

@@ -1,4 +1,5 @@
 import { render } from "preact-render-to-string";
+
 import { Link } from "@/components/Link";
 
 describe("[COMPONENT] Link Component", () => {

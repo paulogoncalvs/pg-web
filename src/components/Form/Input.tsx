@@ -1,7 +1,9 @@
 import type { FunctionalComponent } from "preact";
+
 import { useContext } from "preact/hooks";
 
 import { classNames } from "@/utils/classNames";
+
 import { FormContext } from "./";
 
 interface FormInputComponentProps {
@@ -11,7 +13,7 @@ interface FormInputComponentProps {
   disabled?: boolean;
   id: string;
   autoComplete?: string;
-  classes?: string;
+  class?: string;
 }
 
 export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
@@ -21,7 +23,7 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
   id,
   disabled,
   autoComplete,
-  classes,
+  class: classes = "",
 }) => {
   const context = useContext(FormContext);
   if (!context) {
@@ -35,6 +37,7 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
       <label class="form-label" for={id}>
         {label}
       </label>
+      {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label */}
       <input
         class={`form-input ${errors[name] ? "error" : ""}`}
         id={id}

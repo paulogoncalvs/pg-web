@@ -17,12 +17,13 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowImportingTsExtensions": true,
     "lib": ["DOM", "ES2020", "DOM.Iterable"],
     "types": ["vite/client", "vitest/globals", "node"],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "src/vite.config.ts", "src/vitest.config.ts", "scripts/**/*"],
+  "include": ["src", "scripts", "*.ts"],
   "exclude": ["node_modules", "dist"]
 }

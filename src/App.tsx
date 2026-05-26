@@ -1,4 +1,5 @@
 import type { FunctionalComponent, JSX } from "preact";
+
 import { Route, Router } from "wouter-preact";
 
 import { CookieConsentBar } from "@/components/CookieConsentBar";
@@ -7,29 +8,35 @@ import { GA4Provider } from "@/components/GA4Provider";
 import { Header } from "@/components/Header";
 import { HeadUpdater } from "@/components/HeadUpdater";
 import { Overlay } from "@/components/Overlay";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { SideDrawer } from "@/components/SideDrawer";
 import { RouterOnChange } from "@/modules/router";
 import { RouterPage } from "@/modules/router/pages";
 import { StoreContextProvider } from "@/modules/store";
 
+const DEFAULT_STORE: PageStore = {};
+
 interface AppProps {
   store?: PageStore;
 }
 
-export const App: FunctionalComponent<AppProps> = ({ store = {} }): JSX.Element => (
+export const App: FunctionalComponent<AppProps> = ({ store = DEFAULT_STORE }): JSX.Element => (
   <StoreContextProvider store={store}>
     <HeadUpdater />
     <Router ssrPath={store.url}>
       <RouterOnChange />
-      <Header />
-      <SideDrawer />
-      <main>
-        <Route path="*">
-          {(params): JSX.Element => RouterPage(params["*"] ? `/${params["*"]}` : "/")}
-        </Route>
-      </main>
+      <div class="flex min-h-screen flex-col">
+        <Header />
+        <SideDrawer />
+        <main class="flex flex-1 flex-col space-y-16 text-center">
+          <Route path="*">
+            {(params): JSX.Element => RouterPage(params["*"] ? `/${params["*"]}` : "/")}
+          </Route>
+        </main>
+        <Footer />
+      </div>
     </Router>
-    <Footer />
+    <ScrollToTop />
     <CookieConsentBar />
     <GA4Provider />
     <Overlay />

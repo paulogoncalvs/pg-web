@@ -4,9 +4,7 @@ import { dirname, resolve } from "node:path";
 import readline from "node:readline";
 import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const pkgPath = resolve(__dirname, "../package.json");
+const pkgPath = resolve(dirname(fileURLToPath(import.meta.url)), "../package.json");
 
 const arg = process.argv[2];
 const dryRun = process.argv.includes("--dry-run");
@@ -93,12 +91,12 @@ function bumpVersion(current: string, type: string): string {
   return parts.join(".");
 }
 
-function resolveVersion(arg: string): string {
+function resolveVersion(argument: string): string {
   const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-  if (["patch", "minor", "major"].includes(arg)) {
-    return bumpVersion(pkg.version, arg);
+  if (["patch", "minor", "major"].includes(argument)) {
+    return bumpVersion(pkg.version, argument);
   }
-  return arg;
+  return argument;
 }
 
 function updatePackageVersion(version: string) {
@@ -134,7 +132,7 @@ async function confirm(version: string) {
     input: process.stdin,
     output: process.stdout,
   });
-  const question = (q: string) => new Promise<string>((resolve) => rl.question(q, resolve));
+  const question = (q: string) => new Promise<string>((res) => rl.question(q, res));
   const answer = await question(`Release version ${version}? (y/N) `);
   rl.close();
   if (answer.toLowerCase() !== "y") {
