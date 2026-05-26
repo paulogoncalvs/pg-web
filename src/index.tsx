@@ -5,17 +5,16 @@ if (import.meta.env.DEV) {
   await import("preact/debug");
 }
 
-import App from "@/App";
-import { reportWebVitalsToGA } from "@/modules/webVitals";
-import "@/styles/index.css";
 import { hydrate } from "preact";
 
-hydrate(<App store={__STORE__} />, document.getElementById("root") as Element);
+import App from "@/App";
+import "@/styles/index.css";
+import { githubRepoUrl } from "@/config/global/socialLinks";
+import { reportWebVitalsToGA } from "@/modules/webVitals";
 
-console.info(
-  "%c🌀 Check https://github.com/paulogoncalvs/pg-web/ to view the code.",
-  "font-size:16px;font-weight:bold;",
-);
+hydrate(<App store={STORE} />, document.getElementById("root") as Element);
+
+console.info(`%c🌀 Check ${githubRepoUrl} to view the code.`, "font-size:16px;font-weight:bold;");
 
 // PWA - Register service worker after page loads
 if (import.meta.env.PROD) {

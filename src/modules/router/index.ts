@@ -1,24 +1,29 @@
 import type { FunctionalComponent, JSX } from "preact";
+
 import { useContext, useEffect } from "preact/hooks";
 import { useLocation, useRoute } from "wouter-preact";
 
 import { toggleSideDrawer } from "@/components/SideDrawer";
-import { type Language, isValidLanguage, useLanguage } from "@/modules/language";
+import { LANGUAGE_DEFAULT, type Language, isValidLanguage, useLanguage } from "@/modules/language";
 import { StoreContext } from "@/modules/store";
 import { trackPageView } from "@/modules/tracking/ga4";
-import { isBrowser } from "@/utils/browser";
+import { isClient } from "@/utils/client";
 
 export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
   const { url, setRoute } = useRouter();
   const { lang, setLanguage } = useLanguage();
   const [location] = useLocation();
-  const [, params] = useRoute("/:lang/*");
+  const [, , params] = useRouterRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
 
-  const langParam = (isValidLanguage(params?.lang as Language) ? params?.lang : lang) as Language;
+  const langParam = (
+    isValidLanguage(params?.lParam as Language) ? params?.lParam : lang
+  ) as Language;
 
   useEffect(() => {
     if (langParam !== lang) {
       setLanguage(langParam);
+    } else if (!params?.lParam && lang !== LANGUAGE_DEFAULT) {
+      setLanguage(LANGUAGE_DEFAULT);
     }
 
     if (location !== url) {
@@ -27,7 +32,7 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
       toggleSideDrawer(false);
       trackPageView();
     }
-  }, [langParam, location, lang, setLanguage, setRoute, url]);
+  }, [langParam, location, lang, setLanguage, setRoute, url, params?.lParam]);
 
   return null;
 };
@@ -36,12 +41,14 @@ type RouteParams = Record<string, string | undefined>;
 type RouteResult = [boolean, (to: string) => void, RouteParams | null];
 
 export const useRouterLocation = (): [string, (to: string) => void] => {
-  const [match, setLocation] = isBrowser() ? useLocation() : ["", () => {}];
+  /* oxlint-disable-next-line react-hooks/rules-of-hooks because of ssg */
+  const [match, setLocation] = isClient() ? useLocation() : ["", () => {}];
   return [match as string, setLocation];
 };
 
-export const useRouterRoute = (route: string): RouteResult => {
-  const [match, params] = isBrowser() ? useRoute(route) : [false, null];
+export const useRouterRoute = (route: string | RegExp): RouteResult => {
+  /* oxlint-disable-next-line react-hooks/rules-of-hooks because of ssg */
+  const [match, params] = isClient() ? useRoute(route) : [false, null];
   return [match, () => {}, params as RouteParams];
 };
 
@@ -49,15 +56,15 @@ export const useRouter = (): {
   url: string;
   setRoute(url: string): void;
 } => {
-  const { url = "", dispatch } = useContext(StoreContext);
+  const { url, dispatch } = useContext(StoreContext);
 
   return {
-    setRoute: (url): void => {
+    setRoute: (newUrl): void => {
       dispatch({
-        payload: { url },
+        payload: { url: newUrl },
         type: "SET_ROUTE",
       });
     },
-    url,
+    url: url || "",
   };
 };

@@ -1,0 +1,116 @@
+import { InteractiveButton } from "./InteractiveButton";
+import { IconLogos } from "./IconLogos";
+import { TLDR } from "@/components/TLDR";
+
+# Building My Blog with Preact and MDX
+
+<TLDR>
+  This blog uses MDX to blend Markdown writing with interactive Preact components. Each post is an
+  MDX file with metadata in routes config. The result: fast, content-focused, and fully interactive.
+</TLDR>
+
+I've been wanting to start writing for a while, and this feels like the perfect place to begin - not
+just with content, but with the tools behind it. 🎉
+
+<IconLogos />
+
+This blog is powered by **MDX** (Markdown + JSX), which means I can write content like a normal
+Markdown file while still having access to real components and interactivity. Instead of choosing
+between static content and dynamic UI, I get both - cleanly and in the same place.
+
+And on top of that, I'm using **Preact** for a lightweight, fast experience without sacrificing the
+component model.
+
+In this post, I'll show how this blog works, why I chose MDX, and how interactive elements fit
+naturally into the writing experience.
+
+## Why MDX?
+
+MDX solves a problem that shows up quickly when building content-driven sites:  
+Markdown is simple and great for writing - but limited. Components are powerful - but heavier to
+work with for pure content.
+
+MDX bridges that gap.
+
+It lets me:
+
+- Write most of the content in **Markdown**
+- Drop in **components** exactly where needed
+- Reuse UI elements across posts
+- Keep everything in a single, readable file
+
+That combination makes it ideal for blogs, documentation, and developer-focused content.
+
+## How It Works
+
+Each post in this blog is just an MDX file that renders as a component. The metadata (title,
+description, date) is defined in the routes configuration.
+
+```tsx
+import { blogPostComponents } from "./posts";
+
+// MDX files are mapped by slug
+const MDXComponent = blogPostComponents["mdx-preact-blog"];
+
+// Render it like any other component
+<MDXComponent />;
+```
+
+The metadata (title, description, date) is defined in the routes configuration, while the rest of
+the file is the actual content - Markdown enhanced with JSX.
+
+This setup keeps things simple while still being flexible enough to scale.
+
+## Interactive Example
+
+This is where MDX really becomes interesting.
+
+Because MDX supports JSX, I can embed fully interactive components directly inside a blog post - not
+as embeds or iframes, but as real UI.
+
+```tsx
+import { useState } from "preact/hooks";
+import { Button } from "@/components/Button";
+
+function InteractiveButton() {
+  const [clicked, setClicked] = useState(false);
+
+  return <Button onClick={() => setClicked(true)}>{clicked ? "Clicked! 🎉" : "Click Me!"}</Button>;
+}
+
+export default InteractiveButton;
+```
+
+<InteractiveButton />
+
+Go ahead - **click it**!
+
+That's not a demo snippet or a fake preview. It's a real component running inside the post, updating
+state and re-rendering instantly.
+
+This opens up a lot of possibilities: interactive examples, live demos, dynamic content, and more -
+all without leaving the page.
+
+## A Quick Note on the Stack
+
+This blog keeps things intentionally simple and fast:
+
+- **Preact** for a lightweight component system
+- **Vite** for fast builds and development
+- **MDX** for content + interactivity
+- **Tailwind CSS** for styling
+- **SSG (Static Site Generation)** for performance
+
+The goal is to keep the experience minimal, but powerful.
+
+## Conclusion
+
+MDX has fundamentally changed how I think about writing on the web.
+
+Instead of separating content and functionality, I can treat them as one cohesive thing. Write when
+I want to write, and enhance when I need more.
+
+No friction, no context switching - just a better workflow.
+
+This is just the starting point. In future posts, I'll dive deeper into how this setup works under
+the hood and some of the decisions behind it.

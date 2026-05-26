@@ -1,59 +1,57 @@
-import { classNames } from "@/utils/classNames";
 import type { ComponentChildren, FunctionalComponent, JSX } from "preact";
+
 import { useEffect, useRef, useState } from "preact/hooks";
-import { observeElement } from "@/hooks/sharedIntersectionObserver";
+
+import { useOnIntersect } from "@/hooks/useOnIntersect";
+import { classNames } from "@/utils/classNames";
 
 type Direction = "up" | "down";
 
 interface ScrollRevealProps {
   delay?: number;
   direction?: Direction;
-  classes?: string;
-  Element?: JSX.ElementType;
+  class?: string;
+  as?: JSX.ElementType;
   children: ComponentChildren;
   forceVisible?: boolean;
 }
 
+const animations: Record<Direction, string> = {
+  up: "animate-fade-in-up",
+  down: "animate-fade-in-down",
+};
+
 export const ScrollReveal: FunctionalComponent<ScrollRevealProps> = ({
   delay = 0,
   direction = "down",
-  classes = "",
-  Element = "div",
+  class: classes,
+  as: Component = "div",
   children,
   forceVisible = false,
 }) => {
   const ref = useRef<HTMLElement>(null);
+
   const [isVisible, setIsVisible] = useState(forceVisible);
+
+  useOnIntersect(ref, () => {
+    setIsVisible(true);
+  });
 
   useEffect(() => {
     if (forceVisible) {
       setIsVisible(true);
-      return;
     }
-
-    const element = ref.current;
-    if (!element) {
-      return;
-    }
-
-    const unobserve = observeElement(element, () => {
-      setIsVisible(true);
-    });
-
-    return unobserve;
   }, [forceVisible]);
 
-  const animation = direction === "up" ? "animate-fade-in-up" : "animate-fade-in-down";
-  const visibleClass = isVisible ? animation : "";
-  const initialClass = "op-low";
-
   return (
-    <Element
+    <Component
       ref={ref}
-      class={classNames(initialClass, visibleClass, classes)}
-      style={{ "--delay": `${delay * 0.1}s` }}
+      class={classNames("animate-base op-low", isVisible && animations[direction], classes)}
+      style={{
+        "--delay": `${delay * 100}ms`,
+      }}
     >
       {children}
-    </Element>
+    </Component>
   );
 };

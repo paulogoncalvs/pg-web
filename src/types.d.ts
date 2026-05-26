@@ -18,9 +18,13 @@ declare interface PageStore {
   lang?: Language;
   url?: string;
   isOffline?: boolean;
+  preloadedMDX?: {
+    slug: string;
+    Component: unknown;
+  };
 }
 
-declare let __STORE__: PageStore;
+declare let STORE: PageStore;
 
 declare module "wouter-preact/static-location";
 
@@ -121,6 +125,15 @@ declare module "*.ttf" {
 declare module "*.otf" {
   const url: string;
   export default url;
+}
+
+declare module "*.mdx" {
+  import type { ComponentType } from "preact";
+  const Component: ComponentType;
+  export default Component;
+}
+declare module "*.mdx" {
+  export const meta: { title: string; description: string; date: string };
 }
 
 interface Window {

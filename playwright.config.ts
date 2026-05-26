@@ -1,55 +1,85 @@
-import { type PlaywrightTestConfig, devices } from "@playwright/test";
+import { devices, defineConfig } from "@playwright/test";
 
-const config: PlaywrightTestConfig = {
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "http://localhost:4040",
-    browserName: "chromium",
-    headless: true,
-    ignoreHTTPSErrors: true,
-    /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: 0,
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
-  },
+const baseUse = {
+  baseURL: "http://localhost:4040",
+  browserName: "chromium" as const,
+  headless: true,
+  ignoreHTTPSErrors: true,
+  actionTimeout: 0,
+  trace: "on-first-retry" as const,
+  reducedMotion: "reduce" as const,
+};
+
+export default defineConfig({
+  use: baseUse,
+
   webServer: {
     command: "pnpm vite preview --port 4040 --no-open",
     port: 4040,
     reuseExistingServer: true,
     timeout: 10_000,
   },
+
   outputDir: "./src/tests/playwright/results",
   testDir: "./src/tests/playwright/",
-  /* Maximum time one test can run for. */
   timeout: 10_000,
-  /* Run tests in files in parallel */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: Boolean(process.env.CI),
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  forbidOnly: Boolean(true),
+  retries: 2,
+  workers: 4,
+
   reporter: [["html", { open: "never", outputFolder: "./src/tests/playwright/report" }]],
+
   projects: [
     {
       name: "desktop-chromium-dark",
-      use: { ...devices["Desktop Chrome"], colorScheme: "dark" },
+      use: {
+        ...baseUse,
+        ...{
+          viewport: devices["Desktop Chrome"].viewport,
+          userAgent: devices["Desktop Chrome"].userAgent,
+        },
+        colorScheme: "dark",
+      },
     },
     {
       name: "desktop-chromium-light",
-      use: { ...devices["Desktop Chrome"], colorScheme: "light" },
+      use: {
+        ...baseUse,
+        ...{
+          viewport: devices["Desktop Chrome"].viewport,
+          userAgent: devices["Desktop Chrome"].userAgent,
+        },
+        colorScheme: "light",
+      },
     },
     {
       name: "mobile-pixel5-dark",
-      use: { ...devices["Pixel 5"], colorScheme: "dark" },
+      use: {
+        ...baseUse,
+        ...{
+          viewport: devices["Pixel 5"].viewport,
+          userAgent: devices["Pixel 5"].userAgent,
+          deviceScaleFactor: devices["Pixel 5"].deviceScaleFactor,
+          isMobile: devices["Pixel 5"].isMobile,
+          hasTouch: devices["Pixel 5"].hasTouch,
+        },
+        colorScheme: "dark",
+      },
     },
     {
       name: "mobile-pixel5-light",
-      use: { ...devices["Pixel 5"], colorScheme: "light" },
+      use: {
+        ...baseUse,
+        ...{
+          viewport: devices["Pixel 5"].viewport,
+          userAgent: devices["Pixel 5"].userAgent,
+          deviceScaleFactor: devices["Pixel 5"].deviceScaleFactor,
+          isMobile: devices["Pixel 5"].isMobile,
+          hasTouch: devices["Pixel 5"].hasTouch,
+        },
+        colorScheme: "light",
+      },
     },
   ],
-};
-
-export default config;
+});

@@ -1,41 +1,50 @@
 import type { FunctionalComponent, JSX } from "preact";
+
 import { useCallback } from "preact/hooks";
 
 import { translations, useTranslate } from "@/modules/i18n";
-import type { Language } from "@/modules/language";
+import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
 import { useRouterLocation, useRouterRoute } from "@/modules/router";
+import { classNames } from "@/utils/classNames";
 
 interface LanguageSelectorProps {
-  classes?: string;
+  class?: string;
 }
 
-export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({ classes }) => {
+export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({
+  class: classes,
+}) => {
   const [, setLocation] = useRouterLocation();
-  const { t, lang } = useTranslate();
-  const [, , params] = useRouterRoute("/:lang/*");
+  const { t, l } = useTranslate();
+  const [, , params] = useRouterRoute(/^\/(?<langParam>[a-zA-Z]{2})(\/.*)?$/);
 
   const onLanguageSelect = useCallback(
     (event: Event): void => {
-      const value = (event.target as HTMLInputElement).value as Language;
+      const value = (event.target as HTMLInputElement).value as Language | "";
+      const base = value === LANGUAGE_DEFAULT ? "" : `/${value}`;
 
-      setLocation(`/${value}/${params?.["*"] ? `${params["*"]}` : ""}`);
+      if (!params) {
+        setLocation(`${base}${window.location.pathname}`);
+        return;
+      }
+      setLocation(`${base}${params?.["1"] ? `${params["1"]}` : ""}`);
     },
     [setLocation, params],
   );
 
   const renderOption = useCallback(
     (code: Language): JSX.Element => (
-      <option value={code} selected={code === lang}>
+      <option value={code} selected={code === l}>
         {t(`language_${code}`)}
       </option>
     ),
-    [lang, t],
+    [l, t],
   );
 
   return (
     <select
-      key={`lang-${lang}`}
-      class={classes}
+      key={`lang-${l}`}
+      class={classNames(classes, "overflow-hidden text-ellipsis")}
       id="language-selector"
       onChange={onLanguageSelect}
       aria-label={t("language_selection")}

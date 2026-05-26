@@ -1,8 +1,12 @@
 import type { FunctionalComponent } from "preact";
 
 import axeLogo from "@/assets/icons/logos/axe.svg";
-import oxcLogo from "@/assets/icons/logos/oxc.svg";
+import dockerLogo from "@/assets/icons/logos/docker.svg";
+import expressLogo from "@/assets/icons/logos/express.svg";
 import gaLogo from "@/assets/icons/logos/ga.svg";
+import mdxLogo from "@/assets/icons/logos/mdx.svg";
+import nodejsLogo from "@/assets/icons/logos/nodejs.svg";
+import oxcLogo from "@/assets/icons/logos/oxc.svg";
 import playwrigthLogo from "@/assets/icons/logos/playwright.svg";
 import pnpmLogo from "@/assets/icons/logos/pnpm.svg";
 import preactLogo from "@/assets/icons/logos/preact.svg";
@@ -11,11 +15,10 @@ import typeScriptLogo from "@/assets/icons/logos/typescript.svg";
 import viteLogo from "@/assets/icons/logos/vite.svg";
 import vitestLogo from "@/assets/icons/logos/vitest.svg";
 import workboxLogo from "@/assets/icons/logos/workbox.svg";
-import dockerLogo from "@/assets/icons/logos/docker.svg";
-import nodejsLogo from "@/assets/icons/logos/nodejs.svg";
-import expressLogo from "@/assets/icons/logos/express.svg";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { Tooltip } from "@/components/Tooltip";
+import { githubRepoUrl } from "@/config/global/socialLinks";
 import { useTranslate } from "@/modules/i18n";
 import { trackEvent } from "@/modules/tracking/ga4";
 
@@ -36,6 +39,7 @@ const logos = [
   { href: "https://playwright.dev/", label: "Playwright", src: playwrigthLogo },
   { href: "https://vitest.dev/", label: "Vitest", src: vitestLogo },
   { href: "https://www.deque.com/axe/", label: "Axe", src: axeLogo },
+  { href: "https://mdxjs.com/", label: "mdx", src: mdxLogo },
   { href: "https://expressjs.com/", label: "Express", src: expressLogo },
 ] as const;
 
@@ -44,29 +48,29 @@ export const Footer: FunctionalComponent = () => {
 
   return (
     <footer>
-      <div class="border border-white/80 border-r-0 border-l-0 bg-white/20 p-6 text-center shadow-black/5 shadow-xs dark:border-white/15 dark:bg-zinc-900/35">
-        <div class="flex flex-col items-center pt-10 pb-8">
-          <p class="pb-4 font-bold text-sm">{t("footer_description_2")}</p>
+      <div class="border border-r-0 border-l-0 border-white/90 bg-white/20 px-6 py-16 text-center shadow-xs shadow-black/7 dark:border-white/15 dark:bg-zinc-900/35 dark:shadow-black/20">
+        <div class="flex flex-col items-center">
           <div class="flex flex-wrap justify-center align-middle">
             {logos.map((logo) => (
-              <Link
-                key={logo.label}
-                href={logo.href}
-                class="icon-link translate-up"
-                ariaLabel={logo.label}
-                newWindow
-              >
-                <Icon src={logo.src} width="32" height="32" ariaHidden />
-              </Link>
+              <Tooltip key={logo.label} content={logo.label}>
+                <Link
+                  href={logo.href}
+                  class="icon-link translate-up"
+                  ariaLabel={logo.label}
+                  newWindow
+                >
+                  <Icon src={logo.src} width="32" height="32" ariaHidden />
+                </Link>
+              </Tooltip>
             ))}
           </div>
-          <p class="pt-4 text-xs">
+          <p class="pt-8 text-xs">
             {t(
               "footer_description_1",
               {
                 link: (
                   <Link
-                    href="https://github.com/paulogoncalvs/pg-web"
+                    href={githubRepoUrl}
                     class="underline"
                     newWindow
                     onClick={(): void =>
@@ -85,10 +89,10 @@ export const Footer: FunctionalComponent = () => {
           </p>
         </div>
       </div>
-      <div class="flex flex-col items-center p-6 py-20 text-center text-xs">
+      <div class="flex flex-col items-center px-6 py-16 text-center text-xs">
         <p class="mb-2">
           {t(
-            "footer_description_3",
+            "footer_description_2",
             {
               privacy: (
                 <a
@@ -115,8 +119,8 @@ export const Footer: FunctionalComponent = () => {
           )}
         </p>
         <p class="pt-2 font-bold">
-          paulogoncalves.dev &copy; {initialYear}{" "}
-          {currentYear > initialYear ? `- ${currentYear}` : ""}
+          paulogoncalves.dev ©️ {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ""}{" "}
+          🤘🏻
         </p>
       </div>
     </footer>

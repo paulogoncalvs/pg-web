@@ -2,15 +2,24 @@ import type { FunctionalComponent } from "preact";
 
 import { Link } from "@/components/Link";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { socialLinks } from "@/config/global/socialLinks";
 import { useTranslate } from "@/modules/i18n";
 import { LANGUAGE_DEFAULT, useLanguage } from "@/modules/language";
 import { trackEvent } from "@/modules/tracking/ga4";
 
 interface Experience {
   titleKey: string;
-  company: string;
+  company?: string;
   start: string;
   end?: string;
+}
+
+const linkedInLink = socialLinks.find((l) => l.platform === "linkedin");
+
+interface CompanyGroup {
+  name: string;
+  duration: string;
+  experiences: Experience[];
 }
 
 const calculateDuration = (
@@ -40,6 +49,23 @@ const calculateDuration = (
   }`;
 };
 
+const calculateCompanyDuration = (
+  experiences: Experience[],
+  t: (key: string) => string,
+): string => {
+  if (experiences.length === 0) {
+    return "";
+  }
+
+  const sorted = [...experiences].sort(
+    (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
+  );
+  const first = sorted[0];
+  const last = sorted[sorted.length - 1];
+
+  return calculateDuration(first.start, last.end, t);
+};
+
 const formatDateRange = (
   start: string,
   end: string | undefined,
@@ -59,57 +85,86 @@ const formatDateRange = (
   return `${startLabel} – ${endLabel} · ${duration}`;
 };
 
-const experiences: Experience[] = [
+const myExperience: Experience[] = [
   {
     company: "Jumia Porto Tech Center",
-    start: "2022-10-01",
-    titleKey: "home_page_experience_jumia_title",
+    start: "2022-10-02",
+    titleKey: "home_page_experience_jumia_principal_title",
   },
   {
     company: "Jumia Porto Tech Center",
-    end: "2022-09-30",
-    start: "2021-04-01",
+    end: "2022-10-01",
+    start: "2021-09-01",
     titleKey: "home_page_experience_jumia_manager_title",
   },
   {
     company: "Jumia Porto Tech Center",
-    end: "2021-03-31",
-    start: "2019-10-01",
+    end: "2021-08-31",
+    start: "2020-06-30",
     titleKey: "home_page_experience_jumia_lead_title",
   },
   {
     company: "Jumia Porto Tech Center",
-    end: "2019-09-30",
-    start: "2018-04-01",
-    titleKey: "home_page_experience_jumia_senior_title",
+    end: "2020-06-30",
+    start: "2016-04-30",
+    titleKey: "home_page_experience_jumia_senior_web_title",
+  },
+  {
+    company: "Jumia Porto Tech Center",
+    end: "2016-04-30",
+    start: "2014-11-01",
+    titleKey: "home_page_experience_jumia_senior_dev_title",
   },
   {
     company: "Rocket Internet GmbH",
-    end: "2018-03-31",
-    start: "2017-01-01",
-    titleKey: "home_page_experience_jumia_rocket_title",
-  },
-  {
-    company: "Rocket Internet GmbH",
-    end: "2016-12-31",
-    start: "2016-03-01",
+    end: "2014-11-30",
+    start: "2012-06-01",
     titleKey: "home_page_experience_rocket_title",
   },
   {
     company: "Myone - Comunicação Multimédia",
-    end: "2016-02-28",
-    start: "2015-01-01",
+    end: "2012-05-30",
+    start: "2008-10-01",
     titleKey: "home_page_experience_myone_title",
   },
   {
     company: "Medula - Design de Comunicação",
-    end: "2014-12-31",
-    start: "2014-03-01",
+    end: "2008-09-30",
+    start: "2007-09-01",
     titleKey: "home_page_experience_medula_title",
+  },
+  {
+    end: "2007-08-30",
+    start: "2004-01-01",
+    titleKey: "home_page_experience_freelancer_title",
   },
 ];
 
-const ExperienceItem: FunctionalComponent<Experience> = ({ titleKey, company, start, end }) => {
+const groupByCompany = (exps: Experience[], t: (key: string) => string): CompanyGroup[] => {
+  const groups: CompanyGroup[] = [];
+  let currentGroup: CompanyGroup | null = null;
+
+  for (const exp of exps) {
+    const company = exp.company ?? "Freelance";
+    if (!currentGroup || currentGroup.name !== company) {
+      currentGroup = { name: company, duration: "", experiences: [] };
+      groups.push(currentGroup);
+    }
+    currentGroup.experiences.push(exp);
+  }
+
+  for (const group of groups) {
+    group.duration = calculateCompanyDuration(group.experiences, t);
+  }
+
+  return groups;
+};
+
+const ExperienceItem: FunctionalComponent<{
+  titleKey: string;
+  start: string;
+  end?: string;
+}> = ({ titleKey, start, end }) => {
   const { t } = useTranslate();
   const { lang } = useLanguage();
 
@@ -119,58 +174,65 @@ const ExperienceItem: FunctionalComponent<Experience> = ({ titleKey, company, st
   const isCurrent = !end;
 
   return (
-    <div class="relative pl-8">
+    <div class="relative pl-6">
       <span
-        class={`absolute top-1 -left-2.25 h-4 w-4 rounded-full border-2 ${
+        class={`absolute top-1 -left-2.25 h-4 w-4 rounded-full border-3 border-stone-400 ${
           isCurrent
-            ? "border-black/20 bg-black dark:border-white/20 dark:bg-white"
-            : "border-stone-300 bg-stone-100 dark:border-white/10 dark:bg-zinc-700"
+            ? "bg-black dark:border-zinc-500 dark:bg-white"
+            : "bg-stone-100 dark:border-white/10 dark:bg-zinc-700"
         }`}
       />
+      <h4 class="font-semibold text-zinc-900 dark:text-white">{t(titleKey)}</h4>
+      <p class="text-xs text-stone-500 dark:text-zinc-400">{dateRange}</p>
+    </div>
+  );
+};
 
-      <h3 class="font-semibold text-zinc-900 dark:text-white">{t(titleKey)}</h3>
-
-      <p class="text-sm text-stone-700 dark:text-zinc-300">{company}</p>
-
-      <p class="mt-1 text-stone-500 text-xs dark:text-zinc-400">{dateRange}</p>
+const CompanySection: FunctionalComponent<CompanyGroup> = ({ name, duration, experiences }) => {
+  return (
+    <div class="my-11 last:mb-0">
+      <h3 class="text-lg font-semibold text-zinc-800 dark:text-zinc-200">{name}</h3>
+      <p class="mb-3 text-sm text-stone-500 dark:text-zinc-400">{duration}</p>
+      <div class="relative ml-3">
+        <span class="absolute top-3 bottom-0 -left-0.5 w-2 -translate-x-1/3 rounded bg-stone-300/60 dark:bg-white/5" />
+        <div class="space-y-4">
+          {experiences.map((exp, index) => (
+            <ScrollReveal key={exp.titleKey} delay={0.15 * index}>
+              <ExperienceItem {...exp} />
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
 export const ExperienceTimeline: FunctionalComponent = () => {
   const { t } = useTranslate();
+  const companyGroups = groupByCompany(myExperience, t);
 
   return (
-    <section class="flex flex-col items-center border-white/80 border-t bg-white/20 px-6 py-14 pb-20 text-center shadow-black/5 shadow-xs dark:border-white/15 dark:bg-zinc-900/15">
-      <div class="w-full max-w-xs text-left sm:max-w-xl">
-        <ScrollReveal
-          delay={2}
-          Element="h2"
-          classes="text-xl sm:text-2xl mb-12 font-bold"
-          direction="up"
-        >
+    <section class="flex flex-col items-center border-t border-white/80 bg-white/5 px-6 py-16 text-center dark:border-white/15 dark:bg-zinc-900/15">
+      <div class="w-full max-w-sm text-left sm:max-w-xl">
+        <ScrollReveal delay={2} as="h2" class="mb-12">
           {t("home_page_professional_experience")}
         </ScrollReveal>
 
-        <ScrollReveal
-          delay={2}
-          Element="div"
-          classes="relative border-l-2 border-stone-300 dark:border-white/10 ml-3 space-y-8"
-        >
-          {experiences.map((exp, index) => (
-            <ScrollReveal key={exp.titleKey} delay={0.2 * index}>
-              <ExperienceItem key={exp.titleKey} {...exp} />
+        <ScrollReveal delay={2} as="div">
+          {companyGroups.map((group, index) => (
+            <ScrollReveal key={group.name} delay={0.2 * index}>
+              <CompanySection {...group} />
             </ScrollReveal>
           ))}
         </ScrollReveal>
 
-        <ScrollReveal Element="p" classes="pt-12 text-sm" delay={1}>
+        <ScrollReveal as="p" class="pt-12 text-sm italic" delay={1}>
           {t(
-            "home_page_description_3",
+            "home_page_description_2",
             {
               link: (
                 <Link
-                  href="https://pt.linkedin.com/in/paulogoncalvs"
+                  href={linkedInLink?.url}
                   class="underline"
                   newWindow
                   onClick={() =>
@@ -180,7 +242,7 @@ export const ExperienceTimeline: FunctionalComponent = () => {
                     })
                   }
                 >
-                  {t("home_page_description_3_link_text")}
+                  {t("home_page_description_2_link_text")}
                 </Link>
               ),
             },

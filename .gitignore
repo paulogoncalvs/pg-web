@@ -9,4 +9,5 @@ src/tests/**/report
 .history
 .env.development
 .env.production
+.opencode
 api

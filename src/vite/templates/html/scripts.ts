@@ -12,4 +12,4 @@ const iifeScript = (): void => {
 };
 
 export const strScript = (store: PageStore = {}): string =>
-  `window.__STORE__=${JSON.stringify(store)};(${iifeScript})()`;
+  `window.STORE=${JSON.stringify(store)};(${iifeScript})()`;

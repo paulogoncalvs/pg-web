@@ -40,23 +40,18 @@ const ContactPage: FunctionalComponent = () => {
 
   return (
     <>
-      <div class="flex flex-col items-center p-6 pt-20 text-center">
-        <ScrollReveal
-          delay={1}
-          Element="h1"
-          classes="text-3xl tracking-tight font-bold sm:my-2 sm:text-5xl"
-        >
+      <h1 class="px-6 pt-16">
+        <ScrollReveal delay={1} as="span">
           {t("contact_page_title")}
         </ScrollReveal>
-
-        <ScrollReveal delay={2} Element="h1" classes="text-xl lowercase op-1 sm:text-2xl pb-8">
+        <ScrollReveal delay={2} as="span">
           {t("contact_page_subtitle")}
         </ScrollReveal>
-      </div>
+      </h1>
 
-      <div class="flex flex-col items-center p-6 pb-20">
+      <div class="flex flex-col items-center px-6 text-left">
         <Form
-          classes="w-full max-w-[400px]"
+          class="w-full max-w-md space-y-4"
           onSubmit={submit}
           initialValues={initialValues}
           validationRules={validationRules}
@@ -65,8 +60,8 @@ const ContactPage: FunctionalComponent = () => {
         >
           <ScrollReveal
             delay={baseDelay}
-            Element="h2"
-            classes="font-bold text-xl sm:text-2xl pb-8"
+            as="h2"
+            class="mb-8 text-xl font-bold sm:text-2xl"
             direction="up"
           >
             {t("contact_page_contact_form_title")}
@@ -117,26 +112,23 @@ const ContactPage: FunctionalComponent = () => {
             name="company"
             id="company"
             autoComplete="off"
-            classes="hidden"
+            class="hidden"
           />
 
           {recaptchaError && (
-            <p class="form-error-message mt-2" role="alert">
+            <p class="form-error-message" role="alert">
               {recaptchaError}
             </p>
           )}
 
           {submitError && (
-            <p class="form-error-message mt-2" role="alert">
+            <p class="form-error-message" role="alert">
               {submitError}
             </p>
           )}
 
           <ScrollReveal delay={baseDelay + delayStep * 5}>
-            <Button
-              classes="interactive interactive-icon interactive-md mt-4"
-              disabled={isSubmitting}
-            >
+            <Button class="interactive interactive-icon interactive-md" disabled={isSubmitting}>
               {isSubmitting ? <Spinner /> : <Icon src={mailIcon} ariaHidden />}
 
               {isSubmitting
@@ -144,25 +136,18 @@ const ContactPage: FunctionalComponent = () => {
                 : t("contact_page_contact_form_submit_CTA")}
             </Button>
           </ScrollReveal>
+          {submittedName && (
+            <p class="pt-8">
+              {t("contact_page_contact_form_success_msg", {
+                name: submittedName,
+              })}
+            </p>
+          )}
         </Form>
-
-        {submittedName && (
-          <p class="mt-12">
-            {t("contact_page_contact_form_success_msg", {
-              name: submittedName,
-            })}
-          </p>
-        )}
       </div>
-
-      <div class="flex flex-col items-center p-6 pb-20">
-        <div class="w-full max-w-100">
-          <ScrollReveal
-            delay={1}
-            Element="h2"
-            classes="font-bold text-xl sm:text-2xl pb-8"
-            direction="up"
-          >
+      <div class="flex flex-col items-center px-6 pb-16 text-left">
+        <div class="w-full max-w-md space-y-8">
+          <ScrollReveal delay={1} as="h2" direction="up">
             {t("contact_page_contact_email_title")}
           </ScrollReveal>
 

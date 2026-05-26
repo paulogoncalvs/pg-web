@@ -1,0 +1,166 @@
+/* =========================
+   PROSE (MDX CONTENT)
+   ========================= */
+
+@layer components {
+  .prose {
+    @apply text-sm text-zinc-700 sm:text-base dark:text-zinc-300;
+
+    /* -------------------------
+       Headings
+    ------------------------- */
+
+    h1 {
+      @apply mt-10 mb-6;
+      @apply hidden; /* Rendered separately */
+    }
+
+    h2 {
+      @apply mt-12 mb-4 scroll-mt-24;
+    }
+
+    h3 {
+      @apply mt-10 mb-3 scroll-mt-20;
+    }
+
+    h4 {
+      @apply mt-8 mb-2;
+    }
+
+    /* -------------------------
+       Text
+    ------------------------- */
+
+    p {
+      @apply my-2;
+    }
+
+    hr {
+      @apply my-10 border-white/50 dark:border-zinc-600/50;
+    }
+
+    /* -------------------------
+       Lists
+    ------------------------- */
+
+    ul,
+    ol {
+      @apply my-4 pl-6;
+    }
+
+    ul {
+      @apply list-disc;
+    }
+
+    ol {
+      @apply list-decimal;
+    }
+
+    li::marker {
+      @apply text-zinc-400;
+    }
+
+    /* -------------------------
+       Blockquotes
+    ------------------------- */
+
+    blockquote {
+      @apply my-6 rounded-r-lg border-l-4 border-zinc-300 bg-zinc-50 px-5 py-3 text-zinc-600 italic dark:border-zinc-700 dark:bg-zinc-900/40 dark:text-zinc-400;
+    }
+
+    /* -------------------------
+       Inline code
+    ------------------------- */
+
+    :not(pre) > code {
+      @apply rounded-md bg-zinc-100 px-1.5 py-0.5 font-mono text-sm text-zinc-800 dark:bg-zinc-800 dark:text-zinc-100;
+    }
+
+    /* -------------------------
+       Code blocks
+    ------------------------- */
+
+    pre {
+      @apply my-6 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-5 text-sm text-zinc-100 shadow-sm;
+    }
+
+    pre code {
+      @apply bg-transparent p-0 text-inherit;
+    }
+
+    /* -------------------------
+       Syntax highlighting
+    ------------------------- */
+
+    .hljs {
+      @apply text-zinc-200;
+    }
+
+    .hljs-comment {
+      @apply text-zinc-500 italic;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-built_in {
+      @apply text-pink-400;
+    }
+
+    .hljs-string,
+    .hljs-attr {
+      @apply text-emerald-400;
+    }
+
+    .hljs-number,
+    .hljs-literal {
+      @apply text-amber-400;
+    }
+
+    .hljs-function,
+    .hljs-title {
+      @apply text-violet-400;
+    }
+
+    .hljs-variable,
+    .hljs-template-variable {
+      @apply text-sky-400;
+    }
+
+    .hljs-type,
+    .hljs-params {
+      @apply text-amber-300;
+    }
+
+    /* -------------------------
+       Media
+    ------------------------- */
+
+    img {
+      @apply my-8 rounded-xl border border-zinc-200 shadow-sm dark:border-zinc-800;
+    }
+
+    /* -------------------------
+       Tables
+    ------------------------- */
+
+    table {
+      @apply my-8 w-full border-collapse text-sm;
+    }
+
+    thead {
+      @apply bg-zinc-100 dark:bg-zinc-800;
+    }
+
+    th {
+      @apply border border-zinc-200 px-4 py-2 text-left font-semibold text-zinc-900 dark:border-zinc-700 dark:text-zinc-100;
+    }
+
+    td {
+      @apply border border-zinc-200 px-4 py-2 dark:border-zinc-700;
+    }
+
+    tbody tr:nth-child(even) {
+      @apply bg-zinc-50 dark:bg-zinc-900/40;
+    }
+  }
+}

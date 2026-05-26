@@ -1,4 +1,5 @@
 import type { FunctionalComponent } from "preact";
+
 import { useEffect, useState } from "preact/hooks";
 
 import { getCookieConsent } from "@/modules/cookieConsent";
@@ -22,7 +23,6 @@ export const GA4Provider: FunctionalComponent = () => {
 
     const onConsentGranted = (): void => loadGA();
 
-    // Load immediately if consent already granted
     if (getCookieConsent() === "granted") {
       loadGA();
     }
@@ -56,23 +56,26 @@ export const GA4Provider: FunctionalComponent = () => {
     return cleanup;
   }, [shouldLoad]);
 
-  if (!shouldLoad || !GA_MEASUREMENT_ID) {
-    return null;
-  }
+  useEffect(() => {
+    if (!shouldLoad || !GA_MEASUREMENT_ID || typeof document === "undefined") {
+      return;
+    }
 
-  return (
-    <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
-                    `,
-        }}
-      />
-    </>
-  );
+    const script1 = document.createElement("script");
+    script1.async = true;
+    script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+
+    const script2 = document.createElement("script");
+    script2.textContent = `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });`;
+
+    document.body.appendChild(script1);
+    document.body.appendChild(script2);
+
+    return () => {
+      script1.remove();
+      script2.remove();
+    };
+  }, [shouldLoad]);
+
+  return null;
 };

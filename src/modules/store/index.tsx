@@ -1,10 +1,11 @@
 import { type FunctionalComponent, createContext } from "preact";
-import { useContext, useReducer } from "preact/hooks";
+import { useContext, useReducer, useMemo } from "preact/hooks";
 
 import { useIsFirstRender } from "@/hooks/useIsFirstRender";
 import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
 import { THEME_DEFAULT, type Theme, getInitialTheme } from "@/modules/theme";
-import { isBrowser } from "@/utils/browser";
+import { isClient } from "@/utils/client";
+
 import debug from "./debug";
 import { useStoreLanguage } from "./hooks/useStoreLanguage";
 import { useStoreTheme } from "./hooks/useStoreTheme";
@@ -27,7 +28,7 @@ interface StoreContextState extends PageStore {
 
 const getInitialState = (store: PageStore): StoreContextState => ({
   dispatch: (action: StoreContextAction): void => console.warn("INVALID DISPATCH:", action),
-  isOffline: isBrowser() && !navigator?.onLine,
+  isOffline: isClient() && !navigator?.onLine,
   theme: store.theme || getInitialTheme(),
   ...store,
 });
@@ -89,5 +90,7 @@ export const StoreContextProvider: FunctionalComponent<{ store: PageStore }> = (
     debug("@@INIT", state);
   }
 
-  return <StoreContext.Provider value={{ ...state, dispatch }}>{children}</StoreContext.Provider>;
+  const value = useMemo(() => ({ ...state, dispatch }), [state, dispatch]);
+
+  return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 };

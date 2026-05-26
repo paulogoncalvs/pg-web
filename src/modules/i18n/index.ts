@@ -1,7 +1,8 @@
 import type { VNode } from "preact";
+
 import { useContext } from "preact/hooks";
 
-import { translations } from "@/config/translations";
+import { translations } from "@/config/i18n";
 import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
 import { StoreContext } from "@/modules/store";
 
@@ -32,7 +33,7 @@ export const useTranslate = () => {
   const { lang } = useContext(StoreContext);
 
   return {
-    lang,
+    l: lang,
     t: (key: string, params?: TranslationParams, convertToString = true) =>
       getTranslation(lang, key, params, convertToString) as string,
   };

@@ -1,0 +1,294 @@
+import { TLDR } from "@/components/TLDR";
+import headerImage from "./header.svg";
+
+# Migrating from Webpack to Vite (and Everything Else That Came With It)
+
+<TLDR>
+  I migrated this website from Webpack, Jest, ESLint, and Prettier to a modern stack built on Vite,
+  Vitest, Oxlint, and Oxfmt. The result wasn’t just faster builds - it was the removal of entire
+  layers of tooling complexity and a noticeably smoother development experience.
+</TLDR>
+
+<img src={headerImage} class="w-full h-auto text-black dark:text-white" alt="" />
+
+For years, this website ran on a fairly traditional frontend setup: Webpack for bundling, Babel for
+transpilation, Jest for testing, and ESLint + Prettier for code quality.
+
+It worked. But over time, it started to feel increasingly heavy:
+
+- slow rebuilds
+- sluggish test runs
+- linting that broke flow instead of supporting it
+- too many interconnected tooling layers
+
+None of it was broken - it just wasn’t fast anymore.
+
+So I decided to simplify everything.
+
+---
+
+## The Core Shift: Removing Entire Tooling Layers
+
+The biggest change in this migration wasn’t Vite itself - it was everything that became unnecessary
+because of it.
+
+Webpack was not just replaced; it took its entire ecosystem with it:
+
+- Babel transpilation pipeline
+- Webpack loaders and dev server tooling
+- Jest transformation layers tied to Babel
+- ESLint + Prettier plugin chains
+- Stylelint and CSS tooling
+
+Modern browsers, native ESM support, and Vite’s architecture removed an entire generation of
+frontend tooling.
+
+What remained is significantly simpler, closer to the platform itself.
+
+---
+
+## Faster Development by Design
+
+Webpack had gradually become the bottleneck in day-to-day development. Even small changes required
+noticeable rebuild time, and HMR was no longer instant.
+
+Vite changed that model completely.
+
+Instead of bundling everything upfront, it transforms only what’s needed, when it’s needed.
+
+```bash id="vite-hmr"
+# Webpack
+change → rebuild → refresh
+~3–5 seconds
+
+# Vite
+change → instant HMR
+<50ms
+```
+
+The difference isn’t just speed - it’s feedback rhythm.
+
+You stop thinking about rebuilds entirely and stay in flow.
+
+Production builds also became simpler thanks to Rollup-based bundling with sensible defaults for
+code splitting and tree-shaking.
+
+---
+
+## Testing and Linting as a Single Feedback Loop
+
+### Vitest
+
+Vitest replaced Jest almost directly, but the impact wasn’t just performance - it was feedback
+latency.
+
+Since it integrates directly with the Vite pipeline, tests feel like part of the same system instead
+of a separate tool.
+
+Even larger test suites now run fast enough to stay active during development instead of being
+occasional checks.
+
+```bash id="vitest"
+~5s → ~300ms
+```
+
+### Oxlint + Oxfmt
+
+Replacing ESLint and Prettier was initially the most uncertain part of the migration.
+
+But Oxlint and Oxfmt changed how linting fits into the workflow entirely.
+
+Instead of being a separate step, linting becomes continuous feedback.
+
+```bash id="oxlint"
+~8s → ~200ms
+```
+
+The key change isn’t the number - it’s that linting is no longer something you “run”.
+
+It’s something that’s always on.
+
+---
+
+## Rebuilding the Rendering Model (SSG + PWA)
+
+This site already supported static generation before, but it was deeply tied to Webpack plugins and
+implicit behavior.
+
+Vite forced a more explicit approach - but the result is cleaner.
+
+The site now:
+
+- pre-renders pages to static HTML
+- works fully without JavaScript
+- integrates offline support via PWA
+- separates rendering logic from bundling concerns
+
+What used to be spread across plugin behavior is now a clearly defined pipeline.
+
+This made debugging significantly easier, even if the initial migration required more work.
+
+---
+
+## Custom Vite Tooling
+
+Instead of relying on a large Webpack plugin ecosystem, I replaced most functionality with small,
+purpose-built Vite plugins.
+
+### SVG Sprite System
+
+A custom build-time SVG pipeline that:
+
+- generates sprites automatically
+- watches icon changes in dev
+- clears SSR caches when assets update
+
+### SSR/SSG App Plugin
+
+Handles:
+
+- route generation
+- prerendering
+- build-time rendering orchestration
+
+### Sitemap Generator
+
+Automatically generates sitemap data directly from routes, including:
+
+- lastmod
+- changefreq
+- priority
+
+The biggest improvement here wasn’t functionality - it was removing manual maintenance entirely.
+
+---
+
+## Production Performance Improvements
+
+Beyond tooling, the migration was an opportunity to clean up runtime performance.
+
+Key improvements include:
+
+- resource hints (`preconnect`, `preload`) for critical assets
+- responsive image strategy for different viewport sizes
+- delayed service worker registration to improve startup performance
+- shared `IntersectionObserver` instances to reduce scroll overhead
+- better code splitting and tree-shaking via Vite/Rollup
+
+Individually small, but collectively they improved perceived performance noticeably.
+
+---
+
+## Infrastructure and CI/CD
+
+The infrastructure layer also became simpler.
+
+The Docker-based test setup is now lighter, and CI was significantly optimized by reusing build
+artifacts instead of rebuilding across multiple stages.
+
+This removed redundant work and cut total CI time roughly in half.
+
+---
+
+## Migration Tradeoffs
+
+Not everything was frictionless.
+
+### ESM transition
+
+Moving fully to ESM exposed compatibility issues with older packages that still assumed CommonJS
+behavior. This required cleanup across imports and dependencies.
+
+### SSR edge cases
+
+A few areas still required careful handling:
+
+- dynamic imports
+- browser-only APIs during prerendering
+- cache invalidation
+- asset resolution in SSR contexts
+
+These were solved mostly through custom Vite plugins.
+
+### Oxlint maturity
+
+Oxlint is extremely fast, but the ecosystem is still evolving. Some ESLint rules and plugins don’t
+yet have direct equivalents, which required minor compromises.
+
+---
+
+## Real-World Impact
+
+The improvements became noticeable immediately in day-to-day development.
+
+| Metric           | Before | After  |
+| ---------------- | ------ | ------ |
+| Dev server start | ~3s    | ~1s    |
+| HMR updates      | ~500ms | < 50ms |
+| Test suite       | ~5s    | ~300ms |
+| Lint + format    | ~8s    | ~200ms |
+| CI pipeline      | ~2min  | ~1min  |
+
+But the most important change wasn’t performance - it was consistency.
+
+Everything now responds at roughly the same speed, which makes the system feel predictable.
+
+---
+
+## Why Preact Stayed
+
+One deliberate decision during the migration was not changing the UI framework.
+
+Preact was already doing its job well: small bundle size, familiar React-like API, and minimal
+overhead.
+
+With Vite handling the build system, the combination feels lightweight and stable without adding
+extra abstraction layers.
+
+For a personal project, that balance matters more than ecosystem expansion.
+
+---
+
+## What Changed Architecturally
+
+This migration wasn’t just a tooling swap - it removed entire architectural layers:
+
+- Webpack bundling pipeline
+- Babel compilation layer
+- Jest transformation system
+- ESLint + Prettier plugin ecosystem
+
+What replaced them is a much thinner stack that sits closer to native browser behavior.
+
+Less abstraction. Less configuration. Less indirection.
+
+---
+
+## Future Improvements
+
+There are still areas to improve:
+
+- bundle analysis visualization
+- more granular performance monitoring
+- partial hydration experiments
+- continued reduction of client-side JavaScript
+
+But the foundation is now simple enough that these changes feel incremental instead of structural.
+
+---
+
+## Final Thoughts
+
+The biggest outcome of this migration wasn’t speed.
+
+It was clarity.
+
+Fast tooling changes how often you think about tooling at all. When everything responds instantly,
+it disappears into the background.
+
+More importantly, the stack now aligns with where frontend development is heading: native ESM,
+simpler pipelines, and fewer abstraction layers between code and execution.
+
+The surprising part wasn’t the performance improvement.
+
+It was realizing how much mental overhead had been removed.
