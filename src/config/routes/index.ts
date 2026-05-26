@@ -1,4 +1,4 @@
-const baseUrl = "https://www.paulogoncalves.dev/";
+import { baseUrl } from "../global/constants";
 
 export interface RouteConfig {
   filename: string;
@@ -8,184 +8,257 @@ export interface RouteConfig {
     View: string;
     head: {
       title: string;
+      translatedTitleKey?: string;
       links: { path: string; attributes: Record<string, string> }[];
       metas: { attributes: Record<string, string> }[];
+      translatedDescriptionKey?: string;
     };
+    date?: string;
+    readingTime?: number;
+  };
+  menu?: {
+    labelKey: string;
   };
   tests?: {
     name: string;
   };
 }
 
-const routes: Record<string, RouteConfig> = {
-  "/": {
-    filename: "index.html",
+type LangContent = {
+  title: string;
+  description: string;
+};
+
+type PageContent = {
+  en: LangContent;
+  pt: LangContent;
+};
+
+const LANG_CFG = {
+  en: { prefix: "", dir: "", base: baseUrl },
+  "en-explicit": { prefix: "/en", dir: "", base: baseUrl },
+  pt: { prefix: "/pt", dir: "pt/", base: `${baseUrl}pt/` },
+} as const;
+
+const createRoute = (
+  path: string,
+  lang: keyof typeof LANG_CFG,
+  params: {
+    View: string;
+    content: LangContent;
+    date?: string;
+    readingTime?: number;
+    menu?: { labelKey: string };
+    tests?: { name: string };
+    og?: boolean;
+  },
+): RouteConfig => {
+  const cfg = LANG_CFG[lang];
+  const prefix = cfg.prefix.replace(/^\//, "");
+  const cleanPath = path.replace(/^\/|\/$/g, "");
+  const url = `${cfg.prefix}${path}`;
+
+  const metas: { attributes: Record<string, string> }[] = [
+    { attributes: { name: "description", content: params.content.description } },
+  ];
+
+  if (params.og) {
+    metas.push(
+      { attributes: { property: "og:title", content: params.content.title } },
+      { attributes: { property: "og:description", content: params.content.description } },
+      { attributes: { property: "og:url", content: `${cfg.base}${cleanPath}` } },
+    );
+  }
+
+  return {
+    filename: `${prefix}${prefix ? "/" : ""}${cleanPath}/index.html`,
     templateParameters: {
-      View: "Home",
+      lang: lang === "en-explicit" ? "en" : lang,
+      url,
+      View: params.View,
       head: {
-        title: "Paulo Gonçalves - Front-End Engineer from Portugal",
-        links: [{ path: "", attributes: { href: baseUrl, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Personal Website" } }],
+        title: params.content.title,
+        links: [{ path: "", attributes: { href: `${cfg.base}${cleanPath}`, rel: "canonical" } }],
+        metas,
       },
-      lang: "en",
-      url: "/",
+      ...(params.date && { date: params.date }),
+      ...(params.readingTime && { readingTime: params.readingTime }),
     },
-    tests: {
-      name: "Home",
+    ...(params.menu && { menu: params.menu }),
+    ...(params.tests && { tests: params.tests }),
+  };
+};
+
+// ---- Menu ----
+
+const menuItems: Record<string, { labelKey: string }> = {
+  "/": { labelKey: "sidedrawer_menu_link_home" },
+  "/blog/": { labelKey: "sidedrawer_menu_link_blog" },
+  "/contact/": { labelKey: "sidedrawer_menu_link_contact" },
+};
+
+const menuConfigs: Record<string, { labelKey: string }> = {};
+
+// ---- Static pages ----
+
+interface PageDef {
+  View: string;
+  content: PageContent;
+  menuKey?: string;
+  tests?: string;
+}
+
+const pages: Record<string, PageDef> = {
+  "/": {
+    View: "Home",
+    menuKey: "sidedrawer_menu_link_home",
+    tests: "Home",
+    content: {
+      en: {
+        title: "Paulo Gonçalves - Front-End Engineer from Portugal",
+        description: "Personal Website",
+      },
+      pt: {
+        title: "Paulo Gonçalves - Front-End Engineer de Portugal [PT]",
+        description: "Website pessoal",
+      },
     },
   },
   "/404/": {
-    filename: "404/index.html",
-    templateParameters: {
-      View: "NotFound",
-      head: {
-        title: "404",
-        links: [{ path: "", attributes: { href: `${baseUrl}404/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Page not found" } }],
-      },
-      lang: "en",
-      url: "/404/",
+    View: "NotFound",
+    tests: "404",
+    content: {
+      en: { title: "404", description: "Page not found" },
+      pt: { title: "404 [PT]", description: "Página não encontrada" },
     },
-    tests: {
-      name: "404",
+  },
+  "/blog/": {
+    View: "Blog",
+    menuKey: "sidedrawer_menu_link_blog",
+    tests: "Blog",
+    content: {
+      en: { title: "Blog", description: "Guides and Insights" },
+      pt: { title: "Blog [PT]", description: "Guias e Perspectivas" },
     },
   },
   "/contact/": {
-    filename: "contact/index.html",
-    templateParameters: {
-      View: "Contact",
-      head: {
-        title: "Contacts",
-        links: [{ path: "", attributes: { href: `${baseUrl}contact/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Send me a message" } }],
-      },
-      lang: "en",
-      url: "/contact/",
-    },
-    tests: {
-      name: "Contact",
-    },
-  },
-  "/en/": {
-    filename: "en/index.html",
-    templateParameters: {
-      View: "Home",
-      head: {
-        title: "Paulo Gonçalves - Front-End Engineer from Portugal",
-        links: [{ path: "", attributes: { href: `${baseUrl}en/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Personal Website" } }],
-      },
-      lang: "en",
-      url: "/en/",
-    },
-  },
-  "/en/404/": {
-    filename: "en/404/index.html",
-    templateParameters: {
-      View: "NotFound",
-      head: {
-        title: "404",
-        links: [{ path: "", attributes: { href: `${baseUrl}en/404/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Page not found" } }],
-      },
-      lang: "en",
-      url: "/en/404/",
-    },
-  },
-  "/en/contact/": {
-    filename: "en/contact/index.html",
-    templateParameters: {
-      View: "Contact",
-      head: {
-        title: "Contact",
-        links: [{ path: "", attributes: { href: `${baseUrl}en/contact/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Send me a message" } }],
-      },
-      lang: "en",
-      url: "/en/contact/",
-    },
-  },
-  "/en/offline/": {
-    filename: "en/offline/index.html",
-    templateParameters: {
-      View: "Offline",
-      head: {
-        title: "Offline",
-        links: [{ path: "", attributes: { href: `${baseUrl}en/offline/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Offline" } }],
-      },
-      lang: "en",
-      url: "/en/offline/",
+    View: "Contact",
+    menuKey: "sidedrawer_menu_link_contact",
+    tests: "Contact",
+    content: {
+      en: { title: "Contact", description: "Send me a message" },
+      pt: { title: "Contactar [PT]", description: "Envie-me uma mensagem" },
     },
   },
   "/offline/": {
-    filename: "offline/index.html",
-    templateParameters: {
-      View: "Offline",
-      head: {
-        title: "Offline",
-        links: [{ path: "", attributes: { href: `${baseUrl}offline/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Offline" } }],
-      },
-      lang: "en",
-      url: "/offline/",
-    },
-    tests: {
-      name: "Offline",
-    },
-  },
-  "/pt/": {
-    filename: "pt/index.html",
-    templateParameters: {
-      View: "Home",
-      head: {
-        title: "Paulo Gonçalves - Front-End Engineer de Portugal [PT]",
-        links: [{ path: "", attributes: { href: `${baseUrl}pt/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Website pessoal" } }],
-      },
-      lang: "pt",
-      url: "/pt/",
-    },
-  },
-  "/pt/404/": {
-    filename: "pt/404/index.html",
-    templateParameters: {
-      View: "NotFound",
-      head: {
-        title: "404 [PT]",
-        links: [{ path: "", attributes: { href: `${baseUrl}pt/404/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Página não encontrada" } }],
-      },
-      lang: "pt",
-      url: "/pt/404/",
-    },
-  },
-  "/pt/contact/": {
-    filename: "pt/contact/index.html",
-    templateParameters: {
-      View: "Contact",
-      head: {
-        title: "Contactar [PT]",
-        links: [{ path: "", attributes: { href: `${baseUrl}pt/contact/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Contactar Paulo Gonçalves" } }],
-      },
-      lang: "pt",
-      url: "/pt/contact/",
-    },
-  },
-  "/pt/offline/": {
-    filename: "pt/offline/index.html",
-    templateParameters: {
-      View: "Offline",
-      head: {
-        title: "Offline [PT]",
-        links: [{ path: "", attributes: { href: `${baseUrl}pt/offline/`, rel: "canonical" } }],
-        metas: [{ attributes: { name: "description", content: "Offline" } }],
-      },
-      lang: "pt",
-      url: "/pt/offline/",
+    View: "Offline",
+    tests: "Offline",
+    content: {
+      en: { title: "Offline", description: "Offline" },
+      pt: { title: "Offline", description: "Offline" },
     },
   },
 };
 
+// ---- Blog posts ----
+
+interface BlogPostDef {
+  slug: string;
+  date: string;
+  readingTime: number;
+  content: PageContent;
+}
+
+const blogPosts: BlogPostDef[] = [
+  {
+    slug: "mdx-preact-blog",
+    date: "2026-04-04",
+    readingTime: 5,
+    content: {
+      en: {
+        title: "Building My Blog with Preact and MDX",
+        description: "Sharing my journey into the world of MDX",
+      },
+      pt: {
+        title: "A construir o meu blog com Preact e MDX",
+        description: "A minha jornada no mundo do MDX",
+      },
+    },
+  },
+  {
+    slug: "website-tech-stack",
+    date: "2026-05-05",
+    readingTime: 7,
+    content: {
+      en: {
+        title: "My Website Tech Stack",
+        description: "A deep dive into the technologies powering this website",
+      },
+      pt: {
+        title: "Stack de tecnologias do meu website",
+        description: "Análise das tecnologias que constituem este website",
+      },
+    },
+  },
+  {
+    slug: "migration-vite",
+    date: "2026-05-18",
+    readingTime: 7,
+    content: {
+      en: {
+        title: "Migrating from Webpack to Vite",
+        description:
+          "How migrating from Webpack, Jest, ESLint and Prettier to Vite, Vitest, Oxlint, and Oxfmt improved performance by 10x",
+      },
+      pt: {
+        title: "Migração de Webpack para Vite",
+        description:
+          "Como a migração de Webpack, Jest, ESLint e Prettier para Vite, Vitest, Oxlint e Oxfmt melhorou o desempenho em 10x",
+      },
+    },
+  },
+];
+
+// ---- Build routes ----
+
+const routes: Record<string, RouteConfig> = {};
+
+for (const [path, def] of Object.entries(pages)) {
+  const tests = def.tests ? { name: def.tests } : undefined;
+  const menu = def.menuKey ? { labelKey: def.menuKey } : undefined;
+
+  if (menu) {
+    menuConfigs[path] = menu;
+  }
+
+  for (const lang of ["en", "en-explicit"] as const) {
+    routes[`${LANG_CFG[lang].prefix}${path}`] = createRoute(path, lang, {
+      View: def.View,
+      content: def.content.en,
+      menu,
+      tests,
+    });
+  }
+
+  routes[`/pt${path}`] = createRoute(path, "pt", {
+    View: def.View,
+    content: def.content.pt,
+    tests,
+  });
+}
+
+for (const post of blogPosts) {
+  for (const lang of ["en", "pt"] as const) {
+    const blogPath = `/blog/${post.slug}/`;
+    routes[`${LANG_CFG[lang].prefix}${blogPath}`] = createRoute(blogPath, lang, {
+      View: "BlogPost",
+      content: post.content[lang],
+      date: post.date,
+      readingTime: post.readingTime,
+      og: true,
+    });
+  }
+}
+
+export { menuItems, menuConfigs };
 export default routes;

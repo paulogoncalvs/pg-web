@@ -1,0 +1,318 @@
+import { TechLogos } from "./TechLogos";
+import { TLDR } from "@/components/TLDR";
+
+# A deliberately simple web stack
+
+<TLDR>
+  This site uses Preact + Vite + TypeScript + Tailwind CSS. No heavy frameworks, no unnecessary
+  complexity. Every tool earns its place by reducing friction, not adding it.
+</TLDR>
+
+After 20+ years building for the web, I've stopped caring about trends.
+
+Most modern stacks optimize for novelty. I optimize for something different: **systems that stay
+predictable after years of changes**.
+
+That means fewer moving parts, fewer abstractions, and fewer ways for things to break silently.
+
+This site is built with that constraint in mind.
+
+Everything here exists for a reason - or it wouldn't exist at all.
+
+---
+
+<TechLogos />
+
+---
+
+## Core
+
+A frontend stack chosen for speed, simplicity, and long-term stability - not ecosystem popularity.
+
+### Preact
+
+I use Preact instead of React because I don’t need a large ecosystem around the view layer — I just
+need a lightweight renderer.
+
+React is powerful, but most of that power is unnecessary for a content-driven site. Preact gives me
+the same mental model with a smaller runtime and fewer side effects.
+
+Less abstraction. Fewer surprises.
+
+### Vite
+
+Vite is one of the few tools that actually improved the frontend development loop.
+
+No bundling delays. No waiting on feedback. Just instant iteration.
+
+If a tool slows down feedback, it doesn't belong in the core stack.
+
+### TypeScript
+
+TypeScript is non-negotiable.
+
+Not because I like types, but because I don't like runtime ambiguity.
+
+It removes entire classes of errors before they exist and makes refactoring safe instead of risky.
+
+### Node.js + Express (API layer)
+
+I deliberately avoid full backend frameworks.
+
+Node.js + Express is enough for what I need: small, explicit endpoints like the contact form.
+
+No ORM layer. No service architecture. No unnecessary abstraction between request and response.
+
+Simple code is easier to trust.
+
+---
+
+## UI & Styling
+
+### Tailwind CSS v4
+
+I don’t find CSS architecture necessary for small-to-medium systems like this one.
+
+Tailwind removes the need for it entirely.
+
+Instead of inventing class hierarchies, I compose UI directly in markup. That keeps styling local,
+predictable, and easy to refactor.
+
+If I need a naming system, the system is already too complex.
+
+---
+
+## Infrastructure
+
+This is where most projects over-engineer. I went the opposite direction.
+
+### pnpm
+
+I use pnpm because dependency management should not be slow or ambiguous.
+
+Strict resolution and efficient storage make the entire ecosystem more predictable.
+
+### Docker
+
+Docker is only used where isolation matters - CI and E2E tests.
+
+Not for development simulation. Not for "consistency theater." Just for reproducible environments
+where it actually matters.
+
+---
+
+## Content System
+
+### MDX
+
+MDX is the boundary where content becomes code.
+
+It lets me embed components without introducing a separate CMS or rendering system.
+
+Simple rule: if content needs logic, it belongs in the app - not outside it.
+
+### Static Site Generation
+
+Everything is pre-rendered.
+
+No runtime rendering means:
+
+- faster load times
+- fewer runtime failure points
+- simpler deployment model
+
+This is not optional - it's a core constraint.
+
+---
+
+## Performance & Delivery
+
+### PWA (vite-plugin-pwa)
+
+I only use PWA features where they improve real user experience, not as a checkbox.
+
+Offline caching and installability are useful. Everything else is optional.
+
+### Web Vitals
+
+I track real-world performance because synthetic benchmarks are irrelevant.
+
+- LCP: what users actually see
+- FID: how fast it responds
+- CLS: whether layout is stable
+
+### Google Analytics 4
+
+I use GA4 minimally.
+
+Not to track individuals, but to understand:
+
+- what content is actually read
+- where users drop off
+- what paths matter
+
+No behavioral profiling. Just feedback loops.
+
+---
+
+## CI / Deployment
+
+This is where the system becomes fully automated.
+
+### GitHub Actions
+
+All builds, tests, and validations run through GitHub Actions.
+
+No manual checks. No local-only assumptions.
+
+If it's not in CI, it doesn't exist.
+
+### Deploy Script
+
+Deployment is handled through a simple scripted pipeline.
+
+Build → validate → publish.
+
+No multi-platform deployment systems. No orchestration layers. Just a deterministic release flow.
+
+### Renovate
+
+Dependency updates are handled automatically via Renovate.
+
+I don't manually chase updates or batch upgrade everything at once.
+
+Instead:
+
+- small, incremental PRs
+- predictable upgrade cadence
+- reduced risk of large breaking changes
+
+This keeps the system continuously up to date without "upgrade weekends".
+
+---
+
+## Why I don't use Next.js, NestJS, or Prisma
+
+These are good tools. They solve real problems.
+
+They're just not the problems this system has.
+
+### Next.js
+
+Next.js is optimized for dynamic applications and hybrid rendering.
+
+This site is neither.
+
+I don't need:
+
+- server components
+- runtime rendering strategies
+- framework-level routing abstractions
+
+Static generation with Vite gives me:
+
+- full control over output
+- simpler mental model
+- fewer runtime dependencies
+
+Adding Next.js would increase complexity without solving a real problem.
+
+---
+
+### NestJS
+
+NestJS introduces structure for large backend systems.
+
+But structure has a cost.
+
+For a small API surface:
+
+- controllers
+- services
+- modules
+- decorators
+
+…become overhead instead of clarity.
+
+Express keeps everything explicit: request → handler → response
+
+No indirection, no framework conventions to fight.
+
+---
+
+### Prisma
+
+Prisma is great when you have a database-heavy application.
+
+This site doesn't.
+
+Adding:
+
+- schema layers
+- migration tooling
+- generated clients
+
+…would introduce an entire data architecture for a problem that doesn't exist.
+
+No database means no ORM.
+
+---
+
+## Quality & Testing
+
+### Vitest
+
+Fast unit testing integrated directly into Vite.
+
+Tests run as part of the development loop, not as a separate phase.
+
+### Playwright
+
+End-to-end testing across real browsers.
+
+Runs in Docker to guarantee consistency between local and CI.
+
+### Axe
+
+Accessibility is not optional.
+
+Axe ensures regressions are caught automatically instead of discovered late.
+
+---
+
+## Developer Experience
+
+### oxlint + oxfmt
+
+I replaced traditional JavaScript linting and formatting tools with Rust-based alternatives.
+
+The goal is simple: eliminate waiting time.
+
+Linting and formatting should not be noticeable.
+
+### Git Hooks (Husky + lint-staged)
+
+Pre-commit hooks enforce a baseline of correctness.
+
+Not as bureaucracy - but as a last line of defense against low-quality changes.
+
+---
+
+## In short
+
+This stack is not designed to be impressive.
+
+It is designed to be stable.
+
+I optimize for:
+
+- fewer dependencies
+- fewer abstractions
+- fewer runtime decisions
+- fewer ways for systems to fail silently
+
+Modern tooling often adds capability at the cost of clarity.
+
+I prefer the opposite tradeoff.
+
+**Clarity compounds. Complexity decays.**

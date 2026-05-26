@@ -1,7 +1,9 @@
 import type { ComponentChildren, FunctionalComponent } from "preact";
+
 import { Link as WLink } from "wouter-preact";
 
 import { useTranslate } from "@/modules/i18n";
+import { LANGUAGE_DEFAULT, useLanguage } from "@/modules/language";
 
 interface LinkComponentProps {
   href?: string;
@@ -22,11 +24,12 @@ export const Link: FunctionalComponent<LinkComponentProps> = ({
   ...otherProps
 }) => {
   const { t } = useTranslate();
+  const { lang } = useLanguage();
   const Comp = useRouter ? WLink : "a";
 
   return (
     <Comp
-      href={href}
+      href={useRouter ? (LANGUAGE_DEFAULT === lang ? href : `/${lang}${href}`) : href}
       aria-label={
         ariaLabel
           ? newWindow

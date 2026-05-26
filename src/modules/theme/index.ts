@@ -1,7 +1,7 @@
 import { useContext } from "preact/hooks";
 
 import { StoreContext } from "@/modules/store";
-import { isBrowser } from "@/utils/browser";
+import { isClient } from "@/utils/client";
 
 export enum Theme {
   Dark = "dark",
@@ -13,7 +13,7 @@ export const THEME_DEFAULT = Theme.Dark;
 export const COLOR_SCHEME_QUERY = `(prefers-color-scheme: ${THEME_DEFAULT})`;
 
 export const getPrefersScheme = (defaultTheme: Theme = THEME_DEFAULT): Theme => {
-  if (isBrowser()) {
+  if (isClient()) {
     return window.matchMedia(COLOR_SCHEME_QUERY).matches ? Theme.Dark : Theme.Light;
   }
 
@@ -21,7 +21,7 @@ export const getPrefersScheme = (defaultTheme: Theme = THEME_DEFAULT): Theme => 
 };
 
 export const getInitialTheme = (defaultTheme: Theme = THEME_DEFAULT): Theme => {
-  if (isBrowser() && window.localStorage) {
+  if (isClient() && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme") as Theme;
     if (typeof storedPrefs === "string") {
       return storedPrefs;
@@ -34,7 +34,7 @@ export const getInitialTheme = (defaultTheme: Theme = THEME_DEFAULT): Theme => {
 };
 
 export const rawSetTheme = (theme: Theme): void => {
-  if (!isBrowser()) {
+  if (!isClient()) {
     return;
   }
 
@@ -53,9 +53,9 @@ export const useTheme = (): {
   const { theme, dispatch } = useContext(StoreContext);
 
   return {
-    setTheme: (theme): void => {
+    setTheme: (newTheme): void => {
       dispatch({
-        payload: { theme },
+        payload: { theme: newTheme },
         type: "SET_THEME",
       });
     },

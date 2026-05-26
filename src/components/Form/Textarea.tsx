@@ -1,4 +1,5 @@
 import type { FunctionalComponent } from "preact";
+
 import { useContext } from "preact/hooks";
 
 import { FormContext } from "./";
@@ -29,9 +30,10 @@ export const FormTextarea: FunctionalComponent<FormTextareaProps> = ({
 
   return (
     <div class="form-field mt-3">
-      <label class="form-label" for={id}>
+      <label class="form-label" htmlFor={id}>
         {label}
       </label>
+      {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label */}
       <textarea
         class={`form-input ${errors[name] ? "error" : ""}`}
         id={id}

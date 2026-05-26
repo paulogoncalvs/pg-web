@@ -1,7 +1,7 @@
 import { useContext } from "preact/hooks";
 
 import { StoreContext } from "@/modules/store";
-import { isBrowser } from "@/utils/browser";
+import { isClient } from "@/utils/client";
 
 export enum Language {
   pt = "pt",
@@ -13,7 +13,7 @@ export const isValidLanguage = (lang: string): boolean => lang in Language;
 export const LANGUAGE_DEFAULT = Language.en;
 
 export const rawSetLanguage = (language: Language): void => {
-  if (!isBrowser()) {
+  if (!isClient()) {
     return;
   }
 
@@ -28,13 +28,13 @@ export const useLanguage = (): {
 
   return {
     lang,
-    setLanguage: (lang): void => {
+    setLanguage: (language): void => {
       dispatch({
-        payload: { lang },
+        payload: { lang: language },
         type: "SET_LANGUAGE",
       });
 
-      rawSetLanguage(lang);
+      rawSetLanguage(language);
     },
   };
 };

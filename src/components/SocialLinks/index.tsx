@@ -5,32 +5,35 @@ import linkedInIcon from "@/assets/icons/logos/linkedin.svg";
 import xIcon from "@/assets/icons/logos/x.svg";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { Tooltip } from "@/components/Tooltip";
+import { socialLinks } from "@/config/global/socialLinks";
 import { trackEvent } from "@/modules/tracking/ga4";
 
-const socialLinks = [
-  { href: "https://www.x.com/paulogoncalvs", icon: xIcon, label: "X" },
-  { href: "https://www.github.com/paulogoncalvs", icon: githubIcon, label: "GitHub" },
-  { href: "https://pt.linkedin.com/in/paulogoncalvs", icon: linkedInIcon, label: "LinkedIn" },
-];
+const iconMap: Record<string, typeof xIcon> = {
+  x: xIcon,
+  github: githubIcon,
+  linkedin: linkedInIcon,
+};
 
 export const SocialLinks: FunctionalComponent = () => (
   <>
     {socialLinks.map((link) => (
-      <Link
-        key={link.label}
-        href={link.href}
-        ariaLabel={link.label}
-        newWindow
-        class="icon-link"
-        onClick={(): void =>
-          trackEvent("link_click", {
-            link_location: "Social",
-            link_name: link.label,
-          })
-        }
-      >
-        <Icon src={link.icon} ariaHidden />
-      </Link>
+      <Tooltip key={link.platform} content={link.label} position="top">
+        <Link
+          href={link.url}
+          ariaLabel={link.label}
+          newWindow
+          class="icon-link"
+          onClick={(): void =>
+            trackEvent("link_click", {
+              link_location: "Social",
+              link_name: link.label,
+            })
+          }
+        >
+          <Icon src={iconMap[link.platform]} ariaHidden />
+        </Link>
+      </Tooltip>
     ))}
   </>
 );

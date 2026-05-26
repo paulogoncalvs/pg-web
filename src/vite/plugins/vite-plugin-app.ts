@@ -1,8 +1,11 @@
-import { createElement } from "preact";
-import { renderToStaticMarkup } from "preact-render-to-string";
 import type { HtmlTagDescriptor, Plugin } from "vite";
 
-import globalConfig, { structuredData } from "../../config/global";
+import { createElement } from "preact";
+import { renderToStaticMarkup } from "preact-render-to-string";
+
+import { globalTitle } from "../../config/global/constants";
+import { structuredData } from "../../config/global/schema";
+import { configMetas, configLinks } from "../../config/global/seo";
 import routesConfig from "../../config/routes";
 import { strScript } from "../templates/html/scripts";
 import { resolveIconsDir, SPRITE_FILENAME } from "../utils/shared";
@@ -39,7 +42,9 @@ export function appPlugin(mode: string): Plugin {
     name: "vite-plugin-app",
 
     transform(code, id) {
-      return id.endsWith(".svg") ? transformSvgToSymbol(code, id) : null;
+      return id.endsWith(".svg") && id.includes("/assets/icons/")
+        ? transformSvgToSymbol(code, id)
+        : code;
     },
 
     buildStart() {
@@ -97,7 +102,7 @@ export function appPlugin(mode: string): Plugin {
       const template = routesConfig[url]?.templateParameters;
 
       const lang = template?.lang ?? "en";
-      const title = template?.head?.title ?? globalConfig.title;
+      const title = template?.head?.title ?? globalTitle;
 
       const cacheKey = `${url}:${lang}`;
       let appHtml = ssrCache.get(cacheKey) ?? "";
@@ -115,19 +120,19 @@ export function appPlugin(mode: string): Plugin {
         }
       }
 
-      const metas = [...globalConfig.metas, ...(template?.head?.metas ?? [])];
-      let links = [...globalConfig.links, ...(template?.head?.links ?? [])];
+      const allMetas = [...configMetas, ...(template?.head?.metas ?? [])];
+      let allLinks = [...configLinks, ...(template?.head?.links ?? [])];
 
       if (!prod) {
-        links = links.filter((link) => link.attributes?.rel !== "preload");
+        allLinks = allLinks.filter((link) => link.attributes?.rel !== "preload");
       }
 
       const store = createStore(url, lang, spriteUrl);
 
       const tags: HtmlTagDescriptor[] = [
         { tag: "title", children: title, injectTo: "head" },
-        ...metasToTags(metas),
-        ...linksToTags(links),
+        ...metasToTags(allMetas),
+        ...linksToTags(allLinks),
         { tag: "script", children: strScript(store), injectTo: "head" },
         {
           tag: "script",

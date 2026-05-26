@@ -1,10 +1,16 @@
 /* =========================
-   CUSTOM UTILITIES
- ========================= */
+     CUSTOM UTILITIES
+   ========================= */
 
 /* Ultra-low opacity */
 @utility op-low {
-  opacity: 0.001;
+  opacity: var(--op-low, 0.001);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .op-low {
+    opacity: 1 !important;
+  }
 }
 
 /* Show when no JS */
@@ -15,7 +21,7 @@ html:not(.js) .opacity-60 {
 
 /* Move Up Slightly on Hover / Focus at md breakpoint */
 @utility translate-up {
-  @apply md:hover:-translate-y-0.5 md:focus:-translate-y-0.5;
+  @apply md:hover:-translate-y-0.5 md:focus-visible:-translate-y-0.5;
 }
 
 /* Superscript fallback for unsupported CSS variables */
@@ -23,4 +29,9 @@ html:not(.js) .opacity-60 {
   @supports not (color: var(--primary)) {
     display: none;
   }
+}
+
+/* Hide when side drawer is open */
+body.side-drawer-open button.fixed.z-40 {
+  display: none;
 }

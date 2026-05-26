@@ -4,15 +4,16 @@ import { classNames } from "@/utils/classNames";
 
 interface ButtonComponentProps {
   mainClasses?: string;
-  classes?: string;
+  class?: string;
   disabled?: boolean;
   otherProps?: unknown;
+  onClick?: () => void;
   children?: ComponentChildren;
 }
 
 export const Button: FunctionalComponent<ButtonComponentProps> = ({
   mainClasses = "btn",
-  classes,
+  class: classes = "",
   children,
   disabled,
   ...otherProps

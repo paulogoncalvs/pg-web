@@ -1,4 +1,5 @@
 import type { FunctionalComponent, JSX } from "preact";
+
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -18,7 +19,7 @@ interface ImageProps extends JSX.HTMLAttributes<HTMLImageElement> {
 
   placeholder?: string;
   blur?: boolean;
-  classes?: string;
+  class?: string;
 
   fetchpriority?: "high" | "low" | "auto";
 }
@@ -41,7 +42,7 @@ export const Image: FunctionalComponent<ImageProps> = ({
   placeholder = DEFAULT_PLACEHOLDER,
   blur = false,
 
-  classes,
+  class: classes = "",
   fetchpriority = "auto",
 
   ...props
@@ -113,11 +114,11 @@ export const Image: FunctionalComponent<ImageProps> = ({
       fetchpriority={fetchpriority}
       onLoad={() => setIsLoaded(true)}
       class={classNames(
-        "transition-all duration-500 ease-out",
+        "transition-all duration-500 ease-out motion-reduce:transition-none",
         {
           "opacity-100": isLoaded,
           "opacity-60": !isLoaded,
-          "scale-100 blur-0": blur && isLoaded,
+          "blur-0 scale-100": blur && isLoaded,
           "scale-105 blur-xs": blur && !isLoaded,
         },
         classes,

@@ -1,7 +1,6 @@
 {
   // Package manager
   "npm.packageManager": "pnpm",
-
   // Tailwind CSS
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
@@ -11,30 +10,35 @@
     "typescript": "typescript",
     "typescriptreact": "typescript"
   },
-
   // Oxlint - run via CLI: pnpm lint, pnpm format
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
-
   // Code actions via CLI: pnpm lint:fix
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-
   // Disable other formatters but keep CSS for Tailwind
   "prettier.enable": false,
   "eslint.enable": false,
   "css.validate": true,
   "scss.validate": true,
   "less.validate": true,
-
   // Language-specific formatter overrides
-  "[javascript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
-  "[javascriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
-  "[typescriptreact]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
-  "[json]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
-
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   // Editor behavior and UX
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
@@ -43,12 +47,14 @@
   "files.insertFinalNewline": true,
   "editor.inlineSuggest.enabled": true,
   "editor.suggestSelection": "first",
-
   // Exclude irrelevant files from search
   "search.exclude": {
     "**/.pnp.*": true,
     "node_modules": true,
     "dist": true,
     "coverage": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   }
 }

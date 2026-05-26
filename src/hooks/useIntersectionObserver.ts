@@ -1,4 +1,5 @@
 import type { RefObject } from "preact";
+
 import { useEffect, useState } from "preact/hooks";
 
 interface Args extends IntersectionObserverInit {
@@ -14,12 +15,12 @@ export const useIntersectionObserver = (
 
   const frozen = entry?.isIntersecting && freezeOnceVisible;
 
-  const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
-    setEntry(entry);
+  const updateEntry = ([intersectionObserverEntry]: IntersectionObserverEntry[]): void => {
+    setEntry(intersectionObserverEntry);
   };
 
   useEffect(() => {
-    const node = elementRef?.current; // DOM Ref
+    const node = elementRef?.current;
     const hasIOSupport = Boolean(window.IntersectionObserver);
 
     if (!hasIOSupport || frozen || !node) {
@@ -27,13 +28,13 @@ export const useIntersectionObserver = (
     }
 
     const observerParams = { root, rootMargin, threshold };
-    const observer = new IntersectionObserver(updateEntry, observerParams);
+    const intersectionObserver = new IntersectionObserver(updateEntry, observerParams);
 
-    observer.observe(node);
-    setObserver(observer);
+    intersectionObserver.observe(node);
+    setObserver(intersectionObserver);
 
     return (): void => {
-      observer.disconnect();
+      intersectionObserver.disconnect();
     };
     // oxlint-disable-next-line eslint-plugin-react-hooks/exhaustive-deps
   }, [elementRef, threshold, root, rootMargin, frozen, updateEntry]);

@@ -1,30 +1,20 @@
+import type { FunctionalComponent } from "preact";
+
 import axe from "axe-core";
 import { JSDOM } from "jsdom";
 import { render } from "preact-render-to-string";
-import { App } from "@/App";
-import routesConfig from "@/config/routes";
 
 interface PageTestsOptions {
   name: string;
   route: string;
-  storeData: PageStore;
+  Component: FunctionalComponent;
 }
 
-const pageTests = ({ name, route, storeData }: PageTestsOptions): void => {
-  if (!storeData) {
-    return;
-  }
-
-  const originalWindowLocation = window.location;
-
-  afterAll(() => {
-    window.history.pushState({}, "", originalWindowLocation.pathname);
-  });
-
+const pageTests = ({ name, route, Component }: PageTestsOptions): void => {
   describe(`[PAGE CONTENT] ${name} Page`, () => {
     window.history.pushState({}, name, route);
 
-    const container = render(<App store={storeData} />);
+    const container = render(<Component />);
 
     it("should render", async () => {
       expect(container).toMatchSnapshot();
@@ -44,19 +34,13 @@ const pageTests = ({ name, route, storeData }: PageTestsOptions): void => {
   });
 };
 
-// Run
-for (const pageKey of Object.keys(routesConfig)) {
-  const routeConfig = routesConfig[pageKey];
-  const name = routeConfig.tests?.name;
+const testableRoutes: PageTestsOptions[] = [
+  { name: "Home", route: "/", Component: (await import("@/pages/Home")).default },
+  { name: "Contact", route: "/contact/", Component: (await import("@/pages/Contact")).default },
+  { name: "Offline", route: "/offline/", Component: (await import("@/pages/Offline")).default },
+  { name: "404", route: "/404/", Component: (await import("@/pages/NotFound")).default },
+];
 
-  if (name) {
-    pageTests({
-      name,
-      route: pageKey,
-      storeData: {
-        lang: routeConfig.templateParameters.lang,
-        url: routeConfig.templateParameters.url,
-      },
-    });
-  }
+for (const routeConfig of testableRoutes) {
+  pageTests(routeConfig);
 }

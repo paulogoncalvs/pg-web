@@ -1,4 +1,5 @@
 import type { FunctionalComponent } from "preact";
+
 import { useEffect, useState } from "preact/hooks";
 
 import { type CookieConsent, getCookieConsent, setCookieConsent } from "@/modules/cookieConsent";
@@ -42,21 +43,21 @@ export const CookieConsentBar: FunctionalComponent = () => {
   }
 
   return (
-    <div class="fixed right-0 bottom-0 left-0 z-50 border-white/80 border-t bg-white/80 p-2 shadow-2xs backdrop-blur-md dark:border-white/15 dark:bg-zinc-900/60">
+    <div class="fixed right-0 bottom-0 left-0 z-50 border-t border-white/80 bg-white/80 p-2 backdrop-blur-md dark:border-white/15 dark:bg-zinc-900/60">
       <div class="flex flex-col items-center justify-between gap-2 text-xs sm:flex-row">
         <p class="text-center sm:text-left">{t("footer_cookie_consent")}</p>
         <div class="flex gap-2">
           <button
             type="button"
             onClick={handleReject}
-            class="cursor-pointer rounded border border-zinc-300 px-4 py-1 transition-colors hover:bg-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800"
+            class="cursor-pointer rounded border border-zinc-300 px-4 py-1 transition-colors hover:bg-zinc-100 motion-reduce:transition-none dark:border-zinc-600 dark:hover:bg-zinc-800"
           >
             {t("footer_cookie_reject")}
           </button>
           <button
             type="button"
             onClick={handleAccept}
-            class="cursor-pointer rounded bg-zinc-900 px-4 py-1 text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-zinc-900"
+            class="cursor-pointer rounded bg-zinc-900 px-4 py-1 text-white transition-opacity hover:opacity-80 motion-reduce:transition-none dark:bg-white dark:text-zinc-900"
           >
             {t("footer_cookie_accept")}
           </button>

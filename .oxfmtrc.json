@@ -5,27 +5,57 @@
 
   "format": {
     "indent": { "style": "space", "width": 4 },
-    "lineWidth": 120,
+    "lineWidth": 100,
     "semi": true,
     "singleQuote": true,
     "jsxSingleQuote": false,
     "trailingCommas": "all",
     "arrowParens": "always",
+    "bracketSpacing": true,
     "lineTerminator": "lf"
+  },
+
+  "sortImports": {
+    "groups": [
+      "type-import",
+      ["value-builtin", "value-external"],
+
+      "type-internal",
+      "value-internal",
+
+      ["type-parent", "type-sibling", "type-index"],
+      ["value-parent", "value-sibling", "value-index"],
+
+      "unknown"
+    ],
+    "separateGroups": true
+  },
+
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles/index.css",
+    "functions": ["clsx", "cn", "cva", "classNames"],
+    "preserveWhitespace": false
+  },
+
+  "sortPackageJson": {
+    "sortScripts": true,
+    "sortDependencies": true
   },
 
   "overrides": [
     {
-      "files": ["**/*.json", "**/.*rc/**", "**/*.yml", "**/*.css"],
+      "files": ["**/*.json", "**/*.jsonc", "**/*.yml", "**/*.yaml", "**/*.css"],
       "options": {
-        "indent": { "style": "space", "width": 2 }
+        "indent": { "style": "space", "width": 2 },
+        "lineWidth": 80
       }
     },
     {
-      "files": ["**/*.md"],
+      "files": ["**/*.md", "**/*.mdx"],
       "options": {
         "lineWidth": 80,
-        "indent": { "style": "space", "width": 2 }
+        "indent": { "style": "space", "width": 2 },
+        "proseWrap": "always"
       }
     }
   ]

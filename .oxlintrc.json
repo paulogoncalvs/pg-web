@@ -1,22 +1,74 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
 
-  "plugins": ["typescript", "oxc"],
+  "plugins": ["typescript", "oxc", "jsx-a11y", "react"],
+
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn",
+    "style": "off",
+    "pedantic": "off"
+  },
 
   "rules": {
+    // --- TS first (disable core duplicates) ---
     "no-unused-vars": "off",
-    "no-undef": "error",
-    "no-unreachable": "error",
-    "typescript/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "typescript/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
 
+    "no-undef": "off", // TS handles this better
+
+    // --- Core correctness ---
+    "no-unreachable": "error",
+    "no-constant-condition": "warn",
+    "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
+
+    // --- Safer JS ---
+    "eqeqeq": ["error", "always"],
+    "no-implicit-coercion": ["warn", { "boolean": true, "number": true, "string": true }],
+    "no-new-func": "error",
+    "no-eval": "error",
+
+    // --- Variables ---
+    "no-var": "error",
+    "prefer-const": ["warn", { "destructuring": "all" }],
+
+    // --- Debugging ---
     "no-debugger": "warn",
     "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
 
-    "no-var": "error",
-    "prefer-const": "warn",
+    // --- Code clarity ---
+    "curly": ["error", "all"],
 
-    "eqeqeq": "error",
-    "curly": "error"
+    // --- Imports ---
+    "import/no-cycle": "warn",
+    "import/no-duplicates": "error",
+    "import/no-self-import": "error",
+
+    // --- React / Preact ---
+    "react/jsx-no-undef": "error",
+    "react/jsx-key": ["error", { "checkFragmentShorthand": true }],
+    "react/jsx-no-duplicate-props": "error",
+    "react/react-in-jsx-scope": "off",
+
+    // --- Hooks ---
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    // --- Accessibility ---
+    "jsx-a11y/alt-text": "warn",
+    "jsx-a11y/no-autofocus": "warn",
+    "jsx-a11y/anchor-is-valid": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "jsx-a11y/iframe-has-title": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "jsx-a11y/role-supports-aria-props": "warn",
+    "jsx-a11y/aria-props": "warn",
+    "jsx-a11y/aria-unsupported-elements": "warn",
+    "jsx-a11y/aria-activedescendant-has-tabindex": "warn",
+    "jsx-a11y/aria-proptypes": "warn",
+    "jsx-a11y/aria-role": "warn"
   },
 
   "settings": {
@@ -32,7 +84,7 @@
   },
 
   "globals": {
-    "__STORE__": "readonly",
+    "STORE": "readonly",
     "describe": "readonly",
     "it": "readonly",
     "test": "readonly",
