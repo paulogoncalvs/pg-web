@@ -7,9 +7,9 @@
   opacity: var(--op-low, 0.001);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .op-low {
-    opacity: 1 !important;
+@variant motion-reduce {
+  .op-low.op-low {
+    opacity: 1;
   }
 }
 
@@ -31,7 +31,25 @@ html:not(.js) .opacity-60 {
   }
 }
 
-/* Hide when side drawer is open */
-body.side-drawer-open button.fixed.z-40 {
+/* Hide scroll-to-top when side drawer is open */
+body.side-drawer-open [data-scroll-btn] {
   display: none;
+}
+
+@media print {
+  header,
+  footer,
+  nav,
+  .cookie-consent-bar,
+  [data-scroll-btn],
+  .overlay,
+  .interactive,
+  button,
+  [role="tooltip"] {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
 }

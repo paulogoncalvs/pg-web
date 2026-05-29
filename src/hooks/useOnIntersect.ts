@@ -71,12 +71,3 @@ export const useOnIntersect = (
     };
   }, [elementRef]);
 };
-
-export const disconnectAll = (): void => {
-  if (sharedObserver) {
-    sharedObserver.disconnect();
-    sharedObserver = null;
-  }
-  callbacks.clear();
-  observedElements.clear();
-};

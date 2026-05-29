@@ -7,21 +7,29 @@ if (import.meta.env.DEV) {
 
 import { hydrate } from "preact";
 
-import App from "@/App";
+import { App } from "@/App";
 import "@/styles/index.css";
-import { githubRepoUrl } from "@/config/global/socialLinks";
 import { reportWebVitalsToGA } from "@/modules/webVitals";
 
 hydrate(<App store={STORE} />, document.getElementById("root") as Element);
 
-console.info(`%c🌀 Check ${githubRepoUrl} to view the code.`, "font-size:16px;font-weight:bold;");
+if (import.meta.env.DEV) {
+  console.info(
+    "%c🌀 Check https://github.com/paulogoncalvs/pg-web to view the code.",
+    "font-size:16px;font-weight:bold;",
+  );
+}
 
 // PWA - Register service worker after page loads
 if (import.meta.env.PROD) {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       setTimeout(() => {
-        navigator.serviceWorker.register("/sw.js");
+        navigator.serviceWorker.register("/sw.js").catch((err) => {
+          if (import.meta.env.DEV) {
+            console.warn("SW registration failed:", err);
+          }
+        });
       }, 1000);
     });
   }

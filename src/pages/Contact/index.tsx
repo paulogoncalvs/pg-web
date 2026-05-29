@@ -107,7 +107,7 @@ const ContactPage: FunctionalComponent = () => {
           </ScrollReveal>
 
           <FormInput
-            label={t("contact_page_contact_form_message_label")}
+            label={t("contact_page_contact_form_company_label")}
             type="text"
             name="company"
             id="company"
@@ -137,7 +137,7 @@ const ContactPage: FunctionalComponent = () => {
             </Button>
           </ScrollReveal>
           {submittedName && (
-            <p class="pt-8">
+            <p class="pt-8" role="alert">
               {t("contact_page_contact_form_success_msg", {
                 name: submittedName,
               })}

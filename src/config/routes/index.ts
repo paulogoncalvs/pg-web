@@ -36,7 +36,6 @@ type PageContent = {
 
 const LANG_CFG = {
   en: { prefix: "", dir: "", base: baseUrl },
-  "en-explicit": { prefix: "/en", dir: "", base: baseUrl },
   pt: { prefix: "/pt", dir: "pt/", base: `${baseUrl}pt/` },
 } as const;
 
@@ -59,26 +58,70 @@ const createRoute = (
   const url = `${cfg.prefix}${path}`;
 
   const metas: { attributes: Record<string, string> }[] = [
-    { attributes: { name: "description", content: params.content.description } },
+    {
+      attributes: {
+        "data-route-meta": "true",
+        name: "description",
+        content: params.content.description,
+      },
+    },
+    {
+      attributes: {
+        "data-route-meta": "true",
+        property: "og:locale",
+        content: lang === "pt" ? "pt_PT" : "en_US",
+      },
+    },
   ];
 
   if (params.og) {
     metas.push(
-      { attributes: { property: "og:title", content: params.content.title } },
-      { attributes: { property: "og:description", content: params.content.description } },
-      { attributes: { property: "og:url", content: `${cfg.base}${cleanPath}` } },
+      {
+        attributes: {
+          "data-route-meta": "true",
+          property: "og:title",
+          content: params.content.title,
+        },
+      },
+      {
+        attributes: {
+          "data-route-meta": "true",
+          property: "og:description",
+          content: params.content.description,
+        },
+      },
+      {
+        attributes: {
+          "data-route-meta": "true",
+          property: "og:url",
+          content: `${cfg.base}${cleanPath}`,
+        },
+      },
     );
   }
+
+  const links: { path: string; attributes: Record<string, string> }[] = [
+    { path: "", attributes: { href: `${cfg.base}${cleanPath}`, rel: "canonical" } },
+    { path: "", attributes: { rel: "alternate", hreflang: "en", href: `${baseUrl}${cleanPath}` } },
+    {
+      path: "",
+      attributes: { rel: "alternate", hreflang: "pt", href: `${baseUrl}pt/${cleanPath}` },
+    },
+    {
+      path: "",
+      attributes: { rel: "alternate", hreflang: "x-default", href: `${baseUrl}${cleanPath}` },
+    },
+  ];
 
   return {
     filename: `${prefix}${prefix ? "/" : ""}${cleanPath}/index.html`,
     templateParameters: {
-      lang: lang === "en-explicit" ? "en" : lang,
+      lang,
       url,
       View: params.View,
       head: {
         title: params.content.title,
-        links: [{ path: "", attributes: { href: `${cfg.base}${cleanPath}`, rel: "canonical" } }],
+        links,
         metas,
       },
       ...(params.date && { date: params.date }),
@@ -96,8 +139,6 @@ const menuItems: Record<string, { labelKey: string }> = {
   "/blog/": { labelKey: "sidedrawer_menu_link_blog" },
   "/contact/": { labelKey: "sidedrawer_menu_link_contact" },
 };
-
-const menuConfigs: Record<string, { labelKey: string }> = {};
 
 // ---- Static pages ----
 
@@ -227,11 +268,7 @@ for (const [path, def] of Object.entries(pages)) {
   const tests = def.tests ? { name: def.tests } : undefined;
   const menu = def.menuKey ? { labelKey: def.menuKey } : undefined;
 
-  if (menu) {
-    menuConfigs[path] = menu;
-  }
-
-  for (const lang of ["en", "en-explicit"] as const) {
+  for (const lang of ["en"] as const) {
     routes[`${LANG_CFG[lang].prefix}${path}`] = createRoute(path, lang, {
       View: def.View,
       content: def.content.en,
@@ -256,9 +293,10 @@ for (const post of blogPosts) {
       date: post.date,
       readingTime: post.readingTime,
       og: true,
+      tests: { name: `BlogPost-${post.slug}` },
     });
   }
 }
 
-export { menuItems, menuConfigs };
+export { menuItems };
 export default routes;

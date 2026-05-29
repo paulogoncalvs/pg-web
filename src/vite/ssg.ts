@@ -70,7 +70,7 @@ const vite = await createServer({
   appType: "custom",
 });
 
-const { default: App } = await vite.ssrLoadModule("/src/App.tsx");
+const { App } = await vite.ssrLoadModule("/src/App.tsx");
 
 const routesConfig = (
   await import(pathToFileURL(path.join(rootDir, "src/config/routes/index")).href)
@@ -132,18 +132,20 @@ function renderPage(
   lang: string,
   title: string,
   pageMetas?: Array<{ attributes?: Record<string, string> }>,
+  pageLinks?: Array<{ attributes?: Record<string, string> }>,
 ) {
   const canonicalUrl = `${globalConfig.baseUrl}${route === "/" ? "" : route}`;
 
-  const globalMetaKeys = new Set(
-    globalConfig.metas.map((m) => m.attributes?.name ?? m.attributes?.property).filter(Boolean),
+  const routeMetaKeys = new Set(
+    (pageMetas ?? []).map((m) => m.attributes?.name ?? m.attributes?.property).filter(Boolean),
   );
   const filteredGlobalMetas = globalConfig.metas.filter(
-    (m) => !globalMetaKeys.has(m.attributes?.name) && !globalMetaKeys.has(m.attributes?.property),
+    (m) => !routeMetaKeys.has(m.attributes?.name) && !routeMetaKeys.has(m.attributes?.property),
   );
   const allMetas = [...filteredGlobalMetas, ...(pageMetas ?? [])];
   const metas = renderMetas(allMetas.map(resolveItem));
-  const links = renderLinks(globalConfig.links.map(resolveItem));
+  const allLinks = [...globalConfig.links, ...(pageLinks ?? [])];
+  const links = renderLinks(allLinks.map(resolveItem));
 
   const jsScript = entry ? `<script type="module" src="${entry}"></script>` : "";
   const cssLink = css ? `<link rel="stylesheet" href="${css}">` : "";
@@ -186,26 +188,34 @@ async function build() {
   for (const [route, config] of Object.entries(routesConfig)) {
     console.info(`[SSG] Rendering ${route}...`);
 
-    const store = { url: route, lang: config.templateParameters.lang, filenames: { sprite } };
-    const appHtml = renderToStaticMarkup(createElement(App, { store }));
+    try {
+      const store = { url: route, lang: config.templateParameters.lang, filenames: { sprite } };
+      const appHtml = renderToStaticMarkup(createElement(App, { store }));
 
-    const html = renderPage(
-      appHtml,
-      route,
-      config.templateParameters.lang,
-      config.templateParameters.head.title,
-      config.templateParameters.head.metas,
-    );
+      const html = renderPage(
+        appHtml,
+        route,
+        config.templateParameters.lang,
+        config.templateParameters.head.title,
+        config.templateParameters.head.metas,
+        config.templateParameters.head.links,
+      );
 
-    const filePath = getOutputPath(route);
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    fs.writeFileSync(filePath, html);
+      const filePath = getOutputPath(route);
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      fs.writeFileSync(filePath, html);
 
-    console.info(`[SSG] Generated: ${filePath}`);
+      console.info(`[SSG] Generated: ${filePath}`);
+    } catch (error) {
+      console.error(`[SSG] Failed to render ${route}:`, error);
+    }
   }
 
   await vite.close();
   console.info("[SSG] Pre-rendering complete!");
 }
 
-build();
+build().catch((err) => {
+  console.error("[SSG] Fatal error:", err);
+  process.exit(1);
+});

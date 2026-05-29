@@ -5,7 +5,7 @@ import { renderToStaticMarkup } from "preact-render-to-string";
 
 import { globalTitle } from "../../config/global/constants";
 import { structuredData } from "../../config/global/schema";
-import { configMetas, configLinks } from "../../config/global/seo";
+import { configMetas, configLinks, type Meta, type Link } from "../../config/global/seo";
 import routesConfig from "../../config/routes";
 import { strScript } from "../templates/html/scripts";
 import { resolveIconsDir, SPRITE_FILENAME } from "../utils/shared";
@@ -21,10 +21,10 @@ const createStore = (url: string, lang: string, sprite: string) => ({
   filenames: { sprite },
 });
 
-const metasToTags = (metas: any[]): HtmlTagDescriptor[] =>
+const metasToTags = (metas: Meta[]): HtmlTagDescriptor[] =>
   metas.map((m) => ({ tag: "meta", attrs: m.attributes ?? {}, injectTo: "head" }));
 
-const linksToTags = (links: any[]): HtmlTagDescriptor[] =>
+const linksToTags = (links: Link[]): HtmlTagDescriptor[] =>
   links.map((l) => ({ tag: "link", attrs: l.attributes ?? {}, injectTo: "head" }));
 
 /* ---------------------------------- */
@@ -98,7 +98,7 @@ export function appPlugin(mode: string): Plugin {
         return;
       }
 
-      const url = (ctx as any).originalUrl?.split("?")[0].split("#")[0] ?? "/";
+      const url = ctx.originalUrl?.split("?")[0].split("#")[0] ?? "/";
       const template = routesConfig[url]?.templateParameters;
 
       const lang = template?.lang ?? "en";
@@ -109,18 +109,31 @@ export function appPlugin(mode: string): Plugin {
 
       if (!appHtml) {
         try {
-          const { default: App } = await ctx.server.ssrLoadModule("/src/App.tsx");
+          const { App } = await ctx.server.ssrLoadModule("/src/App.tsx");
           const store = createStore(url, lang, spriteUrl);
-          appHtml = renderToStaticMarkup(createElement(App as any, { store }));
+          appHtml = renderToStaticMarkup(createElement(App, { store }));
           ssrCache.set(cacheKey, appHtml);
         } catch (e) {
           const msg = e instanceof Error ? e.message : "Unknown error";
           appHtml = `<!-- SSR failed: ${msg} -->`;
           console.error(`[vite-plugin-app] SSR failed for ${url}:`, e);
+          if (import.meta.env.PROD) {
+            throw e;
+          }
         }
       }
 
-      const allMetas = [...configMetas, ...(template?.head?.metas ?? [])];
+      const routeMetaKeys = new Set(
+        (template?.head?.metas ?? [])
+          .map((m) => m.attributes?.name ?? m.attributes?.property)
+          .filter((k): k is string => Boolean(k)),
+      );
+      const filteredGlobalMetas = configMetas.filter((m) => {
+        const name = m.attributes?.name;
+        const prop = m.attributes?.property;
+        return (!name || !routeMetaKeys.has(name)) && (!prop || !routeMetaKeys.has(prop));
+      });
+      const allMetas = [...filteredGlobalMetas, ...(template?.head?.metas ?? [])];
       let allLinks = [...configLinks, ...(template?.head?.links ?? [])];
 
       if (!prod) {

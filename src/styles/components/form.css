@@ -53,13 +53,12 @@ select {
 }
 
 /* Form component classes */
-.form-input.error,
-.form-textarea.error {
+.form-input.error {
   @apply border-rose-400;
 }
 
 .form-error-message {
-  @apply text-rose-400;
+  @apply text-rose-600;
   @apply text-xs;
   @apply mt-2;
 }

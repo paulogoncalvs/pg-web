@@ -33,11 +33,8 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
   const { formData, errors, errorMessages, handleFormChange } = context;
 
   return (
-    <div class={classNames("form-field mt-3", classes)}>
-      <label class="form-label" for={id}>
-        {label}
-      </label>
-      {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label */}
+    <div class={classNames("mt-3", classes)}>
+      <label htmlFor={id}>{label}</label>
       <input
         class={`form-input ${errors[name] ? "error" : ""}`}
         id={id}
@@ -47,9 +44,14 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
         onInput={handleFormChange}
         disabled={disabled}
         autoComplete={autoComplete}
+        aria-label={label}
+        aria-invalid={errors[name] ? "true" : undefined}
+        aria-describedby={errors[name] ? `${id}-error` : undefined}
       />
       {errors[name] && (
-        <p class="form-error-message">{errorMessages[errors[name]] || errors[name]}</p>
+        <p class="form-error-message" role="alert" id={`${id}-error`}>
+          {errorMessages[errors[name]] || errors[name]}
+        </p>
       )}
     </div>
   );

@@ -9,6 +9,18 @@
 @theme {
   --font-sans: "Poppins", "Roboto", sans-serif;
 
+  /* Interactive elements */
+  --interactive-bg: rgb(231 229 228 / 0.8);
+  --interactive-bg-dark: rgb(255 255 255 / 0.05);
+  --interactive-border: rgb(255 255 255 / 0.5);
+  --interactive-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 0 1px rgb(0 0 0 / 0.2), 0 3px 6px rgb(0 0 0 / 0.15);
+  --interactive-shadow-hover:
+    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 0 1px rgb(0 0 0 / 0.2), 0 6px 12px rgb(0 0 0 / 0.2);
+  --interactive-shadow-dark-hover:
+    inset 0 1px 0 rgb(255 255 255 / 0.75), 0 0 9px rgb(255 255 255 / 0.2),
+    0 3px 12px rgb(255 255 255 / 0.15);
+
   /* Background gradients */
   --gradient-bg-light:
     radial-gradient(

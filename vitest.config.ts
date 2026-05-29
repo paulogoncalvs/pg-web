@@ -1,7 +1,14 @@
+import mdx from "@mdx-js/rollup";
 import { resolve } from "node:path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  plugins: [
+    mdx({
+      providerImportSource: "@mdx-js/preact",
+      jsxImportSource: "preact",
+    }),
+  ],
   test: {
     silent: false,
     environment: "jsdom",
@@ -17,6 +24,12 @@ export default defineConfig({
       provider: "v8",
       include: ["src/**"],
       exclude: ["src/tests/**"],
+      thresholds: {
+        statements: 70,
+        branches: 60,
+        functions: 65,
+        lines: 70,
+      },
     },
   },
   resolve: {

@@ -2,7 +2,6 @@ export default {
   accessibility_new_window: "%text% (opens in a new window)",
   contact_page_contact_email_title: "By e-mail:",
   contact_page_contact_form_company_label: "Company",
-  contact_page_contact_form_disabled_text: "Disabled",
   contact_page_contact_form_email_label: "E-mail",
   contact_page_contact_form_error: "Failed to send message. Please try again.",
   contact_page_contact_form_first_name_label: "First name",
@@ -72,7 +71,6 @@ export default {
   blog_page_subtitle: "Guides and insights",
   blog_back_link: "Back to Blog",
   blog_post_not_found: "Post not found",
-  blog_loading: "Loading...",
   blog_posts_english_only: "All posts are written in English only",
   blog_post_footer:
     "Thanks for reading! If you have questions or feedback, feel free to reach out.",

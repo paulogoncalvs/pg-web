@@ -5,20 +5,19 @@ import { useContext } from "preact/hooks";
 import burgerIcon from "@/assets/icons/burger.svg";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
-import { toggleSideDrawer } from "@/components/SideDrawer";
 import { SocialLinks } from "@/components/SocialLinks";
 import routesConfig from "@/config/routes";
 import { useTranslate } from "@/modules/i18n";
 import { StoreContext } from "@/modules/store";
 
 export const Header: FunctionalComponent = () => {
-  const { url } = useContext(StoreContext);
+  const { url, dispatch } = useContext(StoreContext);
   const { t } = useTranslate();
   const isHome = routesConfig[url || "/"]?.templateParameters?.View === "Home";
 
   const onBurgerClick = (event: Event): void => {
     event.preventDefault();
-    toggleSideDrawer(true);
+    dispatch({ type: "SET_SIDE_DRAWER", payload: { isSideDrawerOpen: true } });
   };
 
   return (
@@ -33,7 +32,7 @@ export const Header: FunctionalComponent = () => {
           {isHome && <SocialLinks />}
         </div>
         <div class="flex justify-end">
-          {/* oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions*/}
+          {/* oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <label
             htmlFor="sd-tog"
             class="icon-link"

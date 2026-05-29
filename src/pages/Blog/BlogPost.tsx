@@ -10,7 +10,6 @@ import { Link } from "@/components/Link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { useTranslate } from "@/modules/i18n";
 
-import { blogPath } from "./constants";
 import { blogPostComponents, getBlogPost } from "./posts";
 
 const BlogPost: FunctionalComponent = () => {
@@ -45,7 +44,7 @@ const BlogPost: FunctionalComponent = () => {
         <ScrollReveal
           delay={3}
           as="div"
-          class="text-md flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-stone-600 dark:text-zinc-400"
+          class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-base text-stone-600 dark:text-zinc-400"
         >
           <span class="flex items-center gap-2">
             <Icon src={calendarIcon} class="size-4" aria-hidden="true" />
@@ -57,7 +56,7 @@ const BlogPost: FunctionalComponent = () => {
           </span>
         </ScrollReveal>
         <ScrollReveal direction="up" delay={3.5}>
-          <Link useRouter href={blogPath} class="btn interactive interactive-icon interactive-sm">
+          <Link useRouter href="/blog/" class="interactive interactive-icon interactive-sm">
             <Icon src={arrowBackIcon} class="size-3" aria-hidden />
             {t("blog_back_link")}
           </Link>

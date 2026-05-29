@@ -1,59 +1,33 @@
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useContext } from "preact/hooks";
 
-import { toggleSideDrawer } from "@/components/SideDrawer";
-
-let setVisible: ((v: boolean | ((prev: boolean) => boolean)) => void) | null = null;
-
-export const toggleOverlay = (shouldShow?: boolean): void => {
-  if (!setVisible) {
-    return;
-  }
-
-  setVisible((prev) => (typeof shouldShow === "boolean" ? shouldShow : !prev));
-};
-
-const overlayOnClick = (): void => {
-  toggleSideDrawer(false);
-};
+import { useTranslate } from "@/modules/i18n";
+import { StoreContext } from "@/modules/store";
+import { classNames } from "@/utils/classNames";
 
 export const Overlay: FunctionalComponent = (): JSX.Element => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, _setVisible] = useState(false);
+  const { isSideDrawerOpen, dispatch } = useContext(StoreContext);
+  const { t } = useTranslate();
 
-  useEffect(() => {
-    setVisible = _setVisible;
-
-    return () => {
-      setVisible = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", visible);
-  }, [visible]);
+  const closeDrawer = (): void => {
+    dispatch({ type: "SET_SIDE_DRAWER", payload: { isSideDrawerOpen: false } });
+  };
 
   return (
-    <div
-      ref={ref}
-      onClick={overlayOnClick}
-      aria-hidden="true"
-      class={[
+    <button
+      type="button"
+      disabled={!isSideDrawerOpen}
+      onClick={closeDrawer}
+      aria-hidden={isSideDrawerOpen ? undefined : "true"}
+      aria-label={isSideDrawerOpen ? t("sidedrawer_close") : undefined}
+      class={classNames(
         "fixed inset-0 z-10",
         "bg-white/40 dark:bg-zinc-900/60",
-
-        // blur (modern browsers)
         "backdrop-blur-xs supports-backdrop-filter:backdrop-blur-xs",
-
-        // animation
         "transition-opacity duration-300 ease-out",
-
-        // performance hints
-        "will-change-[opacity]",
-
-        visible ? "opacity-100" : "opacity-0 pointer-events-none",
-      ].join(" ")}
+        isSideDrawerOpen ? "opacity-100 will-change-[opacity]" : "pointer-events-none opacity-0",
+      )}
     />
   );
 };

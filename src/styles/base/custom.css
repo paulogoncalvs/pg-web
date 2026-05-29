@@ -6,11 +6,9 @@ html {
   @apply scroll-smooth;
 }
 
-@layer utilities {
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+@variant motion-reduce {
+  html {
+    scroll-behavior: auto;
   }
 }
 
@@ -26,11 +24,9 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-@layer utilities {
-  @media (prefers-reduced-motion: reduce) {
-    a {
-      transition: none;
-    }
+@variant motion-reduce {
+  a {
+    transition: none;
   }
 }
 

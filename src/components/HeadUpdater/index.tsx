@@ -1,21 +1,27 @@
-import { useEffect } from "preact/hooks";
+import type { FunctionalComponent } from "preact";
+
+import { useContext, useEffect } from "preact/hooks";
 
 import routesConfig from "@/config/routes";
-import { useRouterLocation, useRouter } from "@/modules/router";
-import { isClient } from "@/utils/client";
+import { useRouterLocation } from "@/modules/router";
+import { StoreContext } from "@/modules/store";
 
-export const HeadUpdater = (): null => {
+export const HeadUpdater: FunctionalComponent = (): null => {
   const [pathname] = useRouterLocation();
-  useRouter();
+  const { lang } = useContext(StoreContext);
 
   useEffect(() => {
-    if (!isClient()) {
+    if (typeof window === "undefined") {
       return;
     }
 
     const normalizedPath = (pathname ?? window.location.pathname).replace(/\/+$/, "/");
-    const routeConfig =
-      routesConfig[normalizedPath] ?? routesConfig[normalizedPath.replace(/\/$/, "")];
+
+    // Derive route key from current path and language:
+    // strip any existing language prefix, then re-prefix with active lang
+    const basePath = normalizedPath.replace(/^\/(?:en|pt)\//, "/");
+    const routeKey = lang === "pt" ? `/pt${basePath}` : basePath;
+    const routeConfig = routesConfig[routeKey];
     const templateParameters = routeConfig?.templateParameters;
     const head = templateParameters?.head;
 
@@ -30,10 +36,6 @@ export const HeadUpdater = (): null => {
 
     const { title, metas, links } = head;
 
-    // Update title
-    document.title = title ?? document.title ?? "";
-
-    // Update title
     document.title = title ?? document.title ?? "";
 
     // Clear previous route meta/link tags only
@@ -76,7 +78,7 @@ export const HeadUpdater = (): null => {
       const link = createElementWithAttributes("link", l.attributes, "data-route-link");
       document.head.appendChild(link);
     });
-  }, [pathname]);
+  }, [pathname, lang]);
 
   return null;
 };

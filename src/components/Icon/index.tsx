@@ -12,7 +12,7 @@ interface IconComponentProps {
   viewBox?: string;
   ariaHidden?: boolean;
   onClick?(): unknown;
-  otherProps?: unknown;
+  onAnimationEnd?(): void;
 }
 
 export const Icon: FunctionalComponent<IconComponentProps> = ({
@@ -51,8 +51,7 @@ export const Icon: FunctionalComponent<IconComponentProps> = ({
   return (
     <svg
       {...otherProps}
-      aria-hidden={ariaHidden}
-      aria-label={hash.replace("#", "")}
+      aria-hidden={ariaHidden ?? true}
       class={classes}
       width={width}
       height={height}

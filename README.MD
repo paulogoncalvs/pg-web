@@ -17,6 +17,7 @@
 
 - **Preact** — Fast, lightweight React alternative
 - **Vite 8** — Modern build tool with SSG support
+- **MDX** — Markdown with JSX for blog content
 - **Tailwind CSS 4** — Utility-first styling framework
 - **TypeScript** — Strongly typed JavaScript
 - **Vitest** — Fast unit testing framework
@@ -31,7 +32,8 @@
 - **Static Site Generation (SSG)** — Pre-rendered HTML for performance
 - **Progressive Web App (PWA)** — Offline support and caching
 - **SVG Sprite Icons** — Efficient icon management
-- **SEO Optimized** — Sitemap generation and meta tags
+- **MDX Blog** — Markdown blog posts with embedded Preact components
+- **SEO Optimized** — Per-post meta tags, sitemap, and OG images
 - **Unit Testing** — Powered by Vitest
 - **Accessibility Testing** — Automated checks with axe
 - **Visual Regression Testing** — Catch UI changes with Playwright
@@ -148,11 +150,14 @@ Key variables in `.env.example`:
 ```
 src/
 ├── components/        # Preact UI components
-├── config/            # Global config, routes, translations
+├── config/            # Global config, routes, i18n
 ├── hooks/             # Custom Preact hooks
 ├── modules/           # Feature modules (router, store, i18n, etc.)
-├── pages/             # Page components
-├── styles/            # CSS with Tailwind
+├── pages/
+│   ├── Blog/          # Blog list, post, and MDX content
+│   │   └── posts/     # MDX blog posts
+│   └── ...
+├── styles/            # CSS with Tailwind (including prose)
 ├── tests/
 │   ├── vitest/        # Unit tests
 │   └── playwright/    # E2E visual regression tests

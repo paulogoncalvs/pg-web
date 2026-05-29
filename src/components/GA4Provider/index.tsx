@@ -54,7 +54,8 @@ export const GA4Provider: FunctionalComponent = () => {
     window.addEventListener("keydown", fire, { once: true });
 
     return cleanup;
-  }, [shouldLoad]);
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!shouldLoad || !GA_MEASUREMENT_ID || typeof document === "undefined") {

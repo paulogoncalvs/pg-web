@@ -15,18 +15,18 @@ export const ScrollToTop: FunctionalComponent = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let frame = 0;
+    const raf = { current: 0 };
 
     const updateVisibility = () => {
-      frame = 0;
+      raf.current = 0;
       setIsVisible(window.scrollY > SCROLL_THRESHOLD);
     };
 
     const onScroll = () => {
-      if (frame) {
+      if (raf.current) {
         return;
       }
-      frame = requestAnimationFrame(updateVisibility);
+      raf.current = requestAnimationFrame(updateVisibility);
     };
 
     updateVisibility();
@@ -38,8 +38,8 @@ export const ScrollToTop: FunctionalComponent = () => {
     return () => {
       window.removeEventListener("scroll", onScroll);
 
-      if (frame) {
-        cancelAnimationFrame(frame);
+      if (raf.current) {
+        cancelAnimationFrame(raf.current);
       }
     };
   }, []);
@@ -64,6 +64,7 @@ export const ScrollToTop: FunctionalComponent = () => {
         "pointer-events-auto opacity-100": isVisible,
         "pointer-events-none opacity-0": !isVisible,
       })}
+      data-scroll-btn
     >
       <Icon src={scrollTopIcon} />
     </button>
