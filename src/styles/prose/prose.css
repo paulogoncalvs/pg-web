@@ -4,7 +4,7 @@
 
 @layer components {
   .prose {
-    @apply text-sm text-zinc-700 sm:text-base dark:text-zinc-300;
+    @apply text-sm text-zinc-800 sm:text-base dark:text-zinc-300;
 
     /* -------------------------
        Headings
@@ -57,7 +57,7 @@
     }
 
     li::marker {
-      @apply text-zinc-400;
+      @apply text-stone-400 dark:text-zinc-400;
     }
 
     /* -------------------------

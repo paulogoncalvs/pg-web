@@ -1,6 +1,6 @@
 import { useEffect } from "preact/hooks";
 
-import type { StoreContextAction } from "@/modules/store";
+import type { StoreContextAction } from "@/modules/store/context";
 
 import { COLOR_SCHEME_QUERY, type Theme, getPrefersScheme, rawSetTheme } from "@/modules/theme";
 

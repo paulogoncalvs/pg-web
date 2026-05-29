@@ -1,5 +1,5 @@
 import { type ComponentChildren, type FunctionalComponent, type JSX, createContext } from "preact";
-import { useEffect, useMemo, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 export type FormComponentData = Record<string, string>;
 
@@ -59,13 +59,15 @@ export const Form: FunctionalComponent<FormComponentProps> = ({
 }) => {
   const [formData, setFormData] = useState<FormComponentData>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
+  const initialRef = useRef(initialValues);
+  initialRef.current = initialValues;
 
   useEffect(() => {
     if (resetTrigger !== undefined && resetTrigger > 0) {
-      setFormData(initialValues);
+      setFormData(initialRef.current);
       setErrors({});
     }
-  }, [resetTrigger, initialValues]);
+  }, [resetTrigger]);
 
   const validateField = (name: string, value: string): ValidationError | "" => {
     const rules = validationRules[name];

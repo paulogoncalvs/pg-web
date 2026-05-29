@@ -16,11 +16,11 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({
 }) => {
   const [, setLocation] = useRouterLocation();
   const { t, l } = useTranslate();
-  const [, , params] = useRouterRoute(/^\/(?<langParam>[a-zA-Z]{2})(\/.*)?$/);
+  const [, params] = useRouterRoute(/^\/(?<langParam>[a-zA-Z]{2})(\/.*)?$/);
 
   const onLanguageSelect = useCallback(
     (event: Event): void => {
-      const value = (event.target as HTMLInputElement).value as Language | "";
+      const value = (event.target as HTMLSelectElement).value as Language | "";
       const base = value === LANGUAGE_DEFAULT ? "" : `/${value}`;
 
       if (!params) {
@@ -53,5 +53,3 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({
     </select>
   );
 };
-
-export default LanguageSelector;

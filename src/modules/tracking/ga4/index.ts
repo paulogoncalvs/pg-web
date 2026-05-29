@@ -1,4 +1,4 @@
-import { type CookieConsent, getCookieConsent } from "@/modules/cookieConsent";
+import type { CookieConsent } from "@/modules/cookieConsent";
 
 declare global {
   interface Window {
@@ -58,43 +58,4 @@ export const updateConsent = (consent: CookieConsent): void => {
   if (granted) {
     trackPageView();
   }
-};
-
-/**
- * Initialize GA4 safely with Consent Mode
- */
-export const initGA4 = (): void => {
-  if (typeof window === "undefined" || hasGtag() || !GA_MEASUREMENT_ID) {
-    return;
-  }
-
-  // Setup dataLayer + gtag BEFORE loading script
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]): void {
-    window.dataLayer.push(args);
-  };
-
-  // Set default consent BEFORE GA loads
-  window.gtag("consent", "default", {
-    ad_storage: getCookieConsent() || "denied",
-    analytics_storage: getCookieConsent() || "denied",
-    wait_for_update: 500,
-  });
-
-  // Inject GA script
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
-
-  // Initialize GA
-  window.gtag("js", new Date());
-
-  // Configure WITHOUT automatic pageview (SPA safe)
-  window.gtag("config", GA_MEASUREMENT_ID, {
-    send_page_view: false,
-    ...(import.meta.env.DEV && {
-      debug_mode: true,
-    }),
-  });
 };

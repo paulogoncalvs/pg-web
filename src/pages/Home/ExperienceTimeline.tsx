@@ -1,5 +1,7 @@
 import type { FunctionalComponent } from "preact";
 
+import { useMemo } from "preact/hooks";
+
 import { Link } from "@/components/Link";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { socialLinks } from "@/config/global/socialLinks";
@@ -176,14 +178,14 @@ const ExperienceItem: FunctionalComponent<{
   return (
     <div class="relative pl-6">
       <span
-        class={`absolute top-1 -left-2.25 h-4 w-4 rounded-full border-3 border-stone-400 ${
+        class={`absolute top-1 -left-[0.5625rem] h-4 w-4 rounded-full border-[3px] border-stone-400 ${
           isCurrent
             ? "bg-black dark:border-zinc-500 dark:bg-white"
             : "bg-stone-100 dark:border-white/10 dark:bg-zinc-700"
         }`}
       />
       <h4 class="font-semibold text-zinc-900 dark:text-white">{t(titleKey)}</h4>
-      <p class="text-xs text-stone-500 dark:text-zinc-400">{dateRange}</p>
+      <p class="text-xs text-stone-600 dark:text-zinc-400">{dateRange}</p>
     </div>
   );
 };
@@ -192,7 +194,7 @@ const CompanySection: FunctionalComponent<CompanyGroup> = ({ name, duration, exp
   return (
     <div class="my-11 last:mb-0">
       <h3 class="text-lg font-semibold text-zinc-800 dark:text-zinc-200">{name}</h3>
-      <p class="mb-3 text-sm text-stone-500 dark:text-zinc-400">{duration}</p>
+      <p class="mb-3 text-sm text-stone-600 dark:text-zinc-400">{duration}</p>
       <div class="relative ml-3">
         <span class="absolute top-3 bottom-0 -left-0.5 w-2 -translate-x-1/3 rounded bg-stone-300/60 dark:bg-white/5" />
         <div class="space-y-4">
@@ -209,7 +211,7 @@ const CompanySection: FunctionalComponent<CompanyGroup> = ({ name, duration, exp
 
 export const ExperienceTimeline: FunctionalComponent = () => {
   const { t } = useTranslate();
-  const companyGroups = groupByCompany(myExperience, t);
+  const companyGroups = useMemo(() => groupByCompany(myExperience, t), [t]);
 
   return (
     <section class="flex flex-col items-center border-t border-white/80 bg-white/5 px-6 py-16 text-center dark:border-white/15 dark:bg-zinc-900/15">

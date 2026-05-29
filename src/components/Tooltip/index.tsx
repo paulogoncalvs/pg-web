@@ -1,6 +1,6 @@
 import type { FunctionalComponent, ComponentChildren } from "preact";
 
-import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "preact/hooks";
+import { useState, useRef, useLayoutEffect, useEffect, useCallback, useId } from "preact/hooks";
 
 import { classNames } from "@/utils/classNames";
 
@@ -32,7 +32,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   const touchTimeout = useRef<number>();
   const rafRef = useRef<number>();
 
-  const idRef = useRef(`tooltip-${Math.random().toString(36).slice(2)}`);
+  const idRef = useRef(`tooltip-${useId()}`);
 
   const ANIMATION_DURATION = 200;
   const OFFSET = 8;
@@ -41,7 +41,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
     window.clearTimeout(showTimeout.current);
     window.clearTimeout(hideTimeout.current);
     window.clearTimeout(touchTimeout.current);
-    cancelAnimationFrame(rafRef.current!);
+    cancelAnimationFrame(rafRef.current ?? 0);
   }, []);
 
   const show = useCallback(() => {
@@ -104,7 +104,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   }, [pos, align]);
 
   const scheduleUpdate = useCallback(() => {
-    cancelAnimationFrame(rafRef.current!);
+    cancelAnimationFrame(rafRef.current ?? 0);
     rafRef.current = requestAnimationFrame(updatePosition);
   }, [updatePosition]);
 
@@ -157,7 +157,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
           class={classNames(
             "absolute z-50 rounded px-2 py-1 text-center text-xs transition-all duration-200 motion-reduce:transition-none",
             "bg-zinc-800 text-white dark:bg-zinc-200 dark:text-zinc-800",
-            "max-w-xs wrap-break-word",
+            "max-w-xs break-words",
             alignmentClass,
             classes,
             {

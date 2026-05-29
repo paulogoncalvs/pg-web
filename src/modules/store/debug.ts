@@ -12,9 +12,10 @@ declare global {
   }
 }
 
-const withDevTools = typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__;
-
-const devTools = withDevTools ? window.__REDUX_DEVTOOLS_EXTENSION__!()!.connect() : null;
+const devTools =
+  typeof window !== "undefined"
+    ? (window.__REDUX_DEVTOOLS_EXTENSION__?.()?.connect() ?? null)
+    : null;
 
 const debug = (type: string, state: unknown): void => {
   if (import.meta.env.DEV) {

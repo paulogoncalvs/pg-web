@@ -95,24 +95,24 @@ export const Footer: FunctionalComponent = () => {
             "footer_description_2",
             {
               privacy: (
-                <a
-                  class="underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
                   href="https://policies.google.com/privacy"
+                  class="underline"
+                  newWindow
+                  ariaLabel={t("footer_recaptcha_privacy_link_text")}
                 >
                   {t("footer_recaptcha_privacy_link_text")}
-                </a>
+                </Link>
               ),
               terms: (
-                <a
-                  class="underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
                   href="https://policies.google.com/terms"
+                  class="underline"
+                  newWindow
+                  ariaLabel={t("footer_recaptcha_terms_link_text")}
                 >
                   {t("footer_recaptcha_terms_link_text")}
-                </a>
+                </Link>
               ),
             },
             false,

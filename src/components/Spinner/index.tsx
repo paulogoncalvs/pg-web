@@ -1,4 +1,6 @@
-export const Spinner = () => (
+import type { FunctionalComponent, JSX } from "preact";
+
+export const Spinner: FunctionalComponent = (): JSX.Element => (
   <svg aria-hidden="true" class="h-5 w-5 animate-spin" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" class="opacity-25" />
     <path

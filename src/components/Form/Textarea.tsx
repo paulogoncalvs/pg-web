@@ -29,11 +29,8 @@ export const FormTextarea: FunctionalComponent<FormTextareaProps> = ({
   const { formData, errors, errorMessages, handleFormChange } = context;
 
   return (
-    <div class="form-field mt-3">
-      <label class="form-label" htmlFor={id}>
-        {label}
-      </label>
-      {/* oxlint-disable-next-line jsx-a11y/control-has-associated-label */}
+    <div class="mt-3">
+      <label htmlFor={id}>{label}</label>
       <textarea
         class={`form-input ${errors[name] ? "error" : ""}`}
         id={id}
@@ -43,9 +40,14 @@ export const FormTextarea: FunctionalComponent<FormTextareaProps> = ({
         onInput={handleFormChange}
         disabled={disabled}
         autoComplete={autoComplete}
+        aria-label={label}
+        aria-invalid={errors[name] ? "true" : undefined}
+        aria-describedby={errors[name] ? `${id}-error` : undefined}
       />
       {errors[name] && (
-        <p class="form-error-message">{errorMessages[errors[name]] || errors[name]}</p>
+        <p class="form-error-message" role="alert" id={`${id}-error`}>
+          {errorMessages[errors[name]] || errors[name]}
+        </p>
       )}
     </div>
   );

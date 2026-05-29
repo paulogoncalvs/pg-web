@@ -70,6 +70,7 @@ test.describe("PAGES SNAPSHOTS", () => {
   });
 
   const seenTestNames = new Set<string>();
+  let testedBlogSlug: string | null = null;
 
   for (const pageKey of Object.keys(routesConfig)) {
     const route = routesConfig[pageKey];
@@ -78,6 +79,15 @@ test.describe("PAGES SNAPSHOTS", () => {
 
     if (!name || lang.includes("explicit")) {
       continue;
+    }
+
+    // Only test one blog post — all share the same BlogPost template
+    if (name.startsWith("BlogPost-")) {
+      const slug = name.replace("BlogPost-", "");
+      if (testedBlogSlug !== null && slug !== testedBlogSlug) {
+        continue;
+      }
+      testedBlogSlug = slug;
     }
 
     const testKey = `${name}|${lang}`;

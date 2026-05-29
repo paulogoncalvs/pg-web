@@ -11,3 +11,4 @@ src/tests/**/report
 .env.production
 .opencode
 api
+CHANGELOG_RELEASE.md

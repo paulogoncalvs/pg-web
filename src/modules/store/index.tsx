@@ -1,43 +1,23 @@
-import { type FunctionalComponent, createContext } from "preact";
-import { useContext, useReducer, useMemo } from "preact/hooks";
+import { type FunctionalComponent } from "preact";
+import { useReducer, useMemo } from "preact/hooks";
 
 import { useIsFirstRender } from "@/hooks/useIsFirstRender";
-import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
-import { THEME_DEFAULT, type Theme, getInitialTheme } from "@/modules/theme";
-import { isClient } from "@/utils/client";
+import { LANGUAGE_DEFAULT } from "@/modules/language";
+import { THEME_DEFAULT, getInitialTheme } from "@/modules/theme";
 
+import { StoreContext, type StoreContextAction, type StoreContextState } from "./context";
 import debug from "./debug";
 import { useStoreLanguage } from "./hooks/useStoreLanguage";
 import { useStoreTheme } from "./hooks/useStoreTheme";
 
-export interface StorePayload {
-  theme?: Theme;
-  lang?: Language;
-  url?: string;
-  isOffline?: boolean;
-}
-
-export interface StoreContextAction {
-  type: string;
-  payload: StorePayload;
-}
-
-interface StoreContextState extends PageStore {
-  dispatch(action: StoreContextAction): void;
-}
+export { StoreContext, type StoreContextAction, type StorePayload } from "./context";
 
 const getInitialState = (store: PageStore): StoreContextState => ({
   dispatch: (action: StoreContextAction): void => console.warn("INVALID DISPATCH:", action),
-  isOffline: isClient() && !navigator?.onLine,
+  isOffline: typeof window !== "undefined" && !navigator?.onLine,
   theme: store.theme || getInitialTheme(),
   ...store,
 });
-
-export const useStoreDispatch = (): ((payload: StorePayload, type?: string) => void) => {
-  const { dispatch } = useContext(StoreContext);
-
-  return (payload: StorePayload, type = "UPDATE") => dispatch({ payload, type });
-};
 
 export const StoreReducer = (
   StoreContextState: StoreContextState,
@@ -47,15 +27,34 @@ export const StoreReducer = (
 
   switch (type) {
     case "SET_ROUTE": {
-      newState = { ...StoreContextState, url: payload.url || "/" };
+      const url = payload.url || "/";
+      if (StoreContextState.url === url) {
+        return StoreContextState;
+      }
+      newState = { ...StoreContextState, url };
       break;
     }
     case "SET_LANGUAGE": {
-      newState = { ...StoreContextState, lang: payload.lang || LANGUAGE_DEFAULT };
+      const lang = payload.lang || LANGUAGE_DEFAULT;
+      if (StoreContextState.lang === lang) {
+        return StoreContextState;
+      }
+      newState = { ...StoreContextState, lang };
+      break;
+    }
+    case "SET_SIDE_DRAWER": {
+      if (StoreContextState.isSideDrawerOpen === payload.isSideDrawerOpen) {
+        return StoreContextState;
+      }
+      newState = { ...StoreContextState, isSideDrawerOpen: payload.isSideDrawerOpen };
       break;
     }
     case "SET_THEME": {
-      newState = { ...StoreContextState, theme: payload.theme || THEME_DEFAULT };
+      const theme = payload.theme || THEME_DEFAULT;
+      if (StoreContextState.theme === theme) {
+        return StoreContextState;
+      }
+      newState = { ...StoreContextState, theme };
       break;
     }
     case "UPDATE": {
@@ -73,8 +72,6 @@ export const StoreReducer = (
 
   return newState;
 };
-
-export const StoreContext = createContext(getInitialState({}));
 
 export const StoreContextProvider: FunctionalComponent<{ store: PageStore }> = ({
   store,

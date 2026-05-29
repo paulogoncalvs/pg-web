@@ -15,5 +15,3 @@ export const InteractiveButton: FunctionalComponent = () => {
     </div>
   );
 };
-
-export default InteractiveButton;

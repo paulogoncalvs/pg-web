@@ -1,24 +1,4 @@
 /* =========================
-   DESIGN TOKENS
-========================= */
-@theme {
-  --interactive-bg: rgb(231 229 228 / 0.8);
-  --interactive-bg-dark: rgb(255 255 255 / 0.05);
-
-  --interactive-border: rgb(255 255 255 / 0.5);
-
-  --interactive-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 0 1px rgb(0 0 0 / 0.2), 0 3px 6px rgb(0 0 0 / 0.15);
-
-  --interactive-shadow-hover:
-    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 0 1px rgb(0 0 0 / 0.2), 0 6px 12px rgb(0 0 0 / 0.2);
-
-  --interactive-shadow-dark-hover:
-    inset 0 1px 0 rgb(255 255 255 / 0.75), 0 0 9px rgb(255 255 255 / 0.2),
-    0 3px 12px rgb(255 255 255 / 0.15);
-}
-
-/* =========================
    SHARED BASES
 ========================= */
 @utility interactive-base {
@@ -103,19 +83,6 @@
 /* =========================
    VISUAL VARIANTS
 ========================= */
-@utility interactive-ghost {
-  @apply border-transparent bg-transparent shadow-none;
-
-  &:is(:hover, :focus-visible, :active) {
-    @apply bg-white/20 dark:bg-white/10;
-  }
-
-  &::before,
-  &::after {
-    @apply hidden;
-  }
-}
-
 @utility interactive-icon {
   @apply interactive-base interactive-text;
   @apply gap-2 p-3 pl-8;
@@ -135,13 +102,9 @@
   @apply hover:text-zinc-500 focus-visible:text-zinc-500;
 }
 
-@utility icon-link-hdr {
-  @apply ml-2 p-2 md:ml-8;
-}
-
 /* =========================
    CARDS
-========================= */
+   ========================= */
 @utility interactive-card {
   @apply flex flex-col justify-between;
   @apply rounded-lg border p-5;

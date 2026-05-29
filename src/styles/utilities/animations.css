@@ -29,6 +29,10 @@
   animation-timing-function: var(--ease, ease-in-out);
   animation-fill-mode: forwards;
   animation-delay: var(--delay, 0s);
+
+  @variant motion-reduce {
+    animation: none;
+  }
 }
 
 /* =========================
@@ -36,11 +40,6 @@
 ========================= */
 @utility animate-fade-in {
   animation-name: fade;
-}
-
-@utility animate-fade-out {
-  animation-name: fade;
-  animation-direction: reverse;
 }
 
 @utility animate-fade-in-up {
@@ -54,13 +53,22 @@
 }
 
 /* =========================
-   REDUCED MOTION
+   THEME TOGGLE
 ========================= */
-@utility animate-base {
-  animation-duration: var(--duration, 0.4s);
-  animation-timing-function: var(--ease, ease-in-out);
-  animation-fill-mode: forwards;
-  animation-delay: var(--delay, 0s);
+@keyframes theme-spin {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.7);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@utility animate-theme-toggle {
+  animation: theme-spin 0.4s ease-in-out;
 
   @variant motion-reduce {
     animation: none;

@@ -24,7 +24,7 @@ export const sendToGoogleAnalytics = ({
   });
 
 export const reportWebVitals = (onPerfEntry?: (metric: MetricType) => void): void => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
+  if (typeof onPerfEntry === "function") {
     import("web-vitals").then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
       onCLS(onPerfEntry);
       onINP(onPerfEntry);

@@ -3,58 +3,59 @@ import type { FunctionalComponent, JSX } from "preact";
 import { useContext, useEffect } from "preact/hooks";
 import { useLocation, useRoute } from "wouter-preact";
 
-import { toggleSideDrawer } from "@/components/SideDrawer";
-import { LANGUAGE_DEFAULT, type Language, isValidLanguage, useLanguage } from "@/modules/language";
-import { StoreContext } from "@/modules/store";
+import { LANGUAGE_DEFAULT, type Language, isValidLanguage } from "@/modules/language";
+import { type StoreContextAction, type StorePayload, StoreContext } from "@/modules/store/context";
 import { trackPageView } from "@/modules/tracking/ga4";
-import { isClient } from "@/utils/client";
-
 export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
-  const { url, setRoute } = useRouter();
-  const { lang, setLanguage } = useLanguage();
+  const { url, dispatch } = useRouter();
+  const { lang } = useContext(StoreContext);
   const [location] = useLocation();
-  const [, , params] = useRouterRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
+  const [, params] = useRouterRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
 
   const langParam = (
     isValidLanguage(params?.lParam as Language) ? params?.lParam : lang
   ) as Language;
 
   useEffect(() => {
+    const payload: StorePayload = {};
+
     if (langParam !== lang) {
-      setLanguage(langParam);
+      payload.lang = langParam;
     } else if (!params?.lParam && lang !== LANGUAGE_DEFAULT) {
-      setLanguage(LANGUAGE_DEFAULT);
+      payload.lang = LANGUAGE_DEFAULT;
     }
 
     if (location !== url) {
-      setRoute(location);
+      payload.url = location;
+      payload.isSideDrawerOpen = false;
       window.scrollTo({ behavior: "smooth", top: 0 });
-      toggleSideDrawer(false);
       trackPageView();
     }
-  }, [langParam, location, lang, setLanguage, setRoute, url, params?.lParam]);
+
+    if (Object.keys(payload).length > 0) {
+      dispatch({ type: "UPDATE", payload });
+    }
+  }, [langParam, location, lang, url, params?.lParam, dispatch]);
 
   return null;
 };
 
 type RouteParams = Record<string, string | undefined>;
-type RouteResult = [boolean, (to: string) => void, RouteParams | null];
 
 export const useRouterLocation = (): [string, (to: string) => void] => {
-  /* oxlint-disable-next-line react-hooks/rules-of-hooks because of ssg */
-  const [match, setLocation] = isClient() ? useLocation() : ["", () => {}];
-  return [match as string, setLocation];
+  const [location, setLocation] = useLocation();
+  return [location, setLocation];
 };
 
-export const useRouterRoute = (route: string | RegExp): RouteResult => {
-  /* oxlint-disable-next-line react-hooks/rules-of-hooks because of ssg */
-  const [match, params] = isClient() ? useRoute(route) : [false, null];
-  return [match, () => {}, params as RouteParams];
+export const useRouterRoute = (route: string | RegExp): [boolean, RouteParams | null] => {
+  const [match, params] = useRoute(route);
+  return [match, params];
 };
 
 export const useRouter = (): {
   url: string;
   setRoute(url: string): void;
+  dispatch: (action: StoreContextAction) => void;
 } => {
   const { url, dispatch } = useContext(StoreContext);
 
@@ -66,5 +67,6 @@ export const useRouter = (): {
       });
     },
     url: url || "",
+    dispatch,
   };
 };
