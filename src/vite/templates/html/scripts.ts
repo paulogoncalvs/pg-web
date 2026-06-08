@@ -7,6 +7,11 @@ const iifeScript = (): void => {
       if (ct) {
         window.document.documentElement.classList.add(ct);
       }
+
+      const fs = window.localStorage.getItem("font-size");
+      if (fs === "large") {
+        window.document.documentElement.classList.add("font-large");
+      }
     }
   }
 };

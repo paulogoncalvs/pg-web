@@ -1,0 +1,311 @@
+import { TLDR } from "@/components/TLDR";
+
+# Static-First Code Splitting
+
+<TLDR>
+  This site now lazy-loads pages, MDX blog posts, and translation files independently, reducing the
+  initial JavaScript bundle from 109 kB to 19 kB while preserving full static pre-rendering,
+  seamless hydration, and zero layout shift.
+</TLDR>
+
+I have a simple rule:
+
+**If the user doesn't need it on the first paint, don't send it.**
+
+Every unnecessary byte delays interaction, consumes battery, and forces the browser to parse code
+the user may never execute.
+
+The challenge is that code splitting often introduces its own costs: loading states, hydration edge
+cases, layout shifts, and coordination complexity between build-time rendering and the client.
+
+This post covers how I split this site into independently loaded chunks without giving up the
+static-first experience.
+
+---
+
+## The problem
+
+Originally, the entire application was bundled into a single entry file.
+
+`main.js` weighed in at **109 kB** (37 kB gzipped) and contained:
+
+- all page components
+- all MDX blog posts
+- both translation files
+- shared utility modules
+- reusable UI components
+
+Even visiting the homepage required downloading and parsing code that might never be used.
+
+This wasn't a mistake.
+
+The site is relatively small: a handful of pages, a few blog posts, and two languages. At that
+scale, code splitting often adds more complexity than value. The simplest architecture is usually
+the right one until measurements suggest otherwise.
+
+Eventually, the bundle size reached the point where the trade-off became worthwhile.
+
+---
+
+## Step 1: lazy-load page components
+
+The application originally imported every page eagerly:
+
+```ts
+import Home from "@/pages/Home";
+import Blog from "@/pages/Blog";
+import Contact from "@/pages/Contact";
+// ...
+
+const pages = {
+  Home,
+  Blog,
+  Contact,
+  NotFound,
+  Offline,
+};
+```
+
+That guaranteed every page ended up inside the initial bundle.
+
+I replaced the static imports with a loader map backed by a small module cache:
+
+```ts
+const loaders: Record<string, () => Promise<{ default: ComponentType }>> = {
+  Home: () => import("@/pages/Home"),
+  Blog: () => import("@/pages/Blog"),
+  // ...
+};
+
+const cache: Record<string, ComponentType | undefined> = {};
+
+function usePageComponent(view: string): ComponentType | null {
+  const [Page, setPage] = useState<ComponentType | null>(() => cache[view] ?? null);
+
+  useEffect(() => {
+    if (cache[view]) {
+      setPage(() => cache[view]!);
+      return;
+    }
+
+    loaders[view]().then((mod) => {
+      cache[view] = mod.default;
+      setPage(() => mod.default);
+    });
+  }, [view]);
+
+  return Page;
+}
+```
+
+Each page now becomes its own chunk and remains cached for the lifetime of the session.
+
+The browser only downloads code for pages the user actually visits.
+
+---
+
+## Step 2: split MDX posts into separate chunks
+
+The blog represented a significant portion of the bundle.
+
+All MDX posts were previously included up front, even though most visitors would only ever read one.
+
+I switched from an eager `import.meta.glob()` to a lazy one:
+
+```ts
+const blogPostModules = import.meta.glob<MDXModule>("./*/index.mdx");
+
+export const blogPostLoaders: Record<string, () => Promise<MDXModule>> = {};
+
+for (const [path, loader] of Object.entries(blogPostModules)) {
+  const slug = path.split("/").slice(-2, -1)[0];
+  blogPostLoaders[slug] = loader;
+}
+```
+
+Each post now becomes an independent chunk that loads only when visited.
+
+The important detail is that every article is still fully pre-rendered at build time.
+
+For static generation, a separate entry uses an eager glob:
+
+```ts
+const blogPostModules = import.meta.glob<MDXModule>("./*/index.mdx", { eager: true });
+```
+
+The generated HTML already contains the full article content.
+
+The client only downloads the MDX module if the user actually visits that page.
+
+This gives me the best of both worlds:
+
+- fully pre-rendered HTML
+- no content flashes
+- no unnecessary MDX downloads
+
+---
+
+## Step 3: load only the active language
+
+Originally, both translation files were bundled together.
+
+Most users only ever see a single language, so half of that code was effectively dead weight.
+
+I replaced the static aggregator with a lazy loader:
+
+```ts
+const languageLoaders = {
+  en: () => import("@/config/i18n/en"),
+  pt: () => import("@/config/i18n/pt"),
+};
+
+const cache: Record<string, Translation> = {};
+
+export const useTranslate = () => {
+  const { lang } = useContext(StoreContext);
+  const [translation, setTranslation] = useState(() => cache[lang]);
+
+  useEffect(() => {
+    if (!cache[lang]) {
+      languageLoaders[lang]().then((mod) => {
+        cache[lang] = mod.default;
+        setTranslation(mod.default);
+      });
+    }
+  }, [lang]);
+
+  return {
+    l: lang,
+    t: (key) => translation?.[key] ?? key,
+  };
+};
+```
+
+The active language is loaded before hydration.
+
+The alternative language becomes a separate chunk and is only requested if the user switches
+languages.
+
+A small optimization, but one that's essentially free.
+
+---
+
+## The hard part: preserving static generation
+
+This was the most interesting challenge.
+
+Static generation runs synchronously through `renderToStaticMarkup()`.
+
+Dynamic imports do not.
+
+The solution was maintaining two implementations of the same registry:
+
+- `pages.tsx` — lazy client loaders
+- `pages.ssg.tsx` — eager build-time loaders
+
+`App.tsx` receives the appropriate implementation via props.
+
+The same pattern is used for blog posts.
+
+During static generation, `BlogPost` receives a fully resolved `MDXComponent`.
+
+During hydration, that prop is omitted and the client falls back to lazy loading when necessary.
+
+The result is surprisingly simple:
+
+- no environment checks
+- no conditional rendering paths
+- no Vite plugin tricks
+- no runtime SSG detection
+
+Just dependency injection through props.
+
+Separating eager and lazy implementations behind the same interface made the build-time and client
+boundaries explicit.
+
+---
+
+## Making lazy loading invisible
+
+Code splitting is only an improvement if users don't notice it.
+
+### Navigation feedback
+
+After introducing code splitting, page transitions became asynchronous.
+
+Once pages were cached, transitions felt instant.
+
+The problem was that users sometimes received no feedback that navigation had started.
+
+I added a lightweight loading overlay driven by the application store.
+
+Even when a route resolves quickly, the interaction now feels intentional rather than ambiguous.
+
+### Preventing layout shift
+
+One subtle issue remained.
+
+When navigating to a blog post, the page shell renders immediately but the MDX content loads
+asynchronously.
+
+Without a placeholder, the footer briefly jumps upward before returning to its final position.
+
+The fix was simple: skeleton placeholders that reserve space until the content arrives.
+
+The layout remains stable regardless of loading state.
+
+No jumping.
+
+No flickering.
+
+No CLS regressions.
+
+---
+
+## Results
+
+| Metric          | Before                  | After                  |
+| --------------- | ----------------------- | ---------------------- |
+| `main.js`       | **109 kB** (37 kB gzip) | **19 kB** (7 kB gzip)  |
+| Page components | bundled eagerly         | separate lazy chunks   |
+| MDX posts       | bundled eagerly         | 7–16 kB per post, lazy |
+| Translations    | bundled eagerly         | loaded on demand       |
+| Utility modules | bundled eagerly         | split automatically    |
+| Total chunks    | 2                       | 27                     |
+
+The number of chunks increased dramatically.
+
+The amount of JavaScript required for first paint dropped by more than 80%.
+
+That's a trade I'll take every time.
+
+---
+
+## What I learned
+
+Code splitting itself is easy.
+
+The hard part is preserving the guarantees users already have:
+
+- fully rendered HTML
+- predictable hydration
+- stable layouts
+- responsive navigation
+
+The breakthrough was treating build-time rendering and client-side loading as separate
+implementations behind the same interface.
+
+The static build gets eager modules.
+
+The browser gets lazy modules.
+
+Everything else stays the same.
+
+The result is a site that ships 80% less JavaScript on first load while keeping the benefits that
+made static generation attractive in the first place.
+
+Less code shipped.
+
+Same HTML.
+
+Better performance.

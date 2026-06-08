@@ -2,21 +2,15 @@
      CUSTOM UTILITIES
    ========================= */
 
-/* Ultra-low opacity */
-@utility op-low {
-  opacity: var(--op-low, 0.001);
-}
-
 @variant motion-reduce {
-  .op-low.op-low {
-    opacity: 1;
+  :root {
+    --op-low: 1;
   }
 }
 
-/* Show when no JS */
-html:not(.js) .op-low,
-html:not(.js) .opacity-60 {
-  @apply opacity-100;
+/* Ultra-low opacity */
+@utility op-low {
+  opacity: var(--op-low, 0.001);
 }
 
 /* Move Up Slightly on Hover / Focus at md breakpoint */
@@ -28,28 +22,5 @@ html:not(.js) .opacity-60 {
 @utility sup-novar {
   @supports not (color: var(--primary)) {
     display: none;
-  }
-}
-
-/* Hide scroll-to-top when side drawer is open */
-body.side-drawer-open [data-scroll-btn] {
-  display: none;
-}
-
-@media print {
-  header,
-  footer,
-  nav,
-  .cookie-consent-bar,
-  [data-scroll-btn],
-  .overlay,
-  .interactive,
-  button,
-  [role="tooltip"] {
-    display: none !important;
-  }
-  body {
-    background: white !important;
-    color: black !important;
   }
 }

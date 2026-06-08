@@ -109,9 +109,29 @@ export function appPlugin(mode: string): Plugin {
 
       if (!appHtml) {
         try {
-          const { App } = await ctx.server.ssrLoadModule("/src/App.tsx");
+          const [{ App }, { RouterPage: SSR_RouterPage }, { setTranslations }] = await Promise.all([
+            ctx.server.ssrLoadModule("/src/App.tsx"),
+            ctx.server.ssrLoadModule("/src/modules/router/pages.ssr.tsx"),
+            ctx.server.ssrLoadModule("/src/modules/i18n/index.ts"),
+          ]);
+
+          const i18nModule = (await ctx.server.ssrLoadModule("/src/config/i18n/index.ts")) as {
+            languageLoaders: Record<string, () => Promise<{ default: Record<string, string> }>>;
+          };
+
+          const entries: Record<string, Record<string, string>> = {};
+          const loaded = await Promise.all(
+            Object.entries(i18nModule.languageLoaders).map(async ([code, loader]) => {
+              const mod = await loader();
+              return [code, mod.default] as const;
+            }),
+          );
+          for (const [code, tr] of loaded) {
+            entries[code] = tr;
+          }
+          setTranslations(entries);
           const store = createStore(url, lang, spriteUrl);
-          appHtml = renderToStaticMarkup(createElement(App, { store }));
+          appHtml = renderToStaticMarkup(createElement(App, { store, routerPage: SSR_RouterPage }));
           ssrCache.set(cacheKey, appHtml);
         } catch (e) {
           const msg = e instanceof Error ? e.message : "Unknown error";

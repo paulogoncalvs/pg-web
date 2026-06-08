@@ -27,6 +27,8 @@ interface ManifestEntry {
   file: string;
   src?: string;
   css?: string[];
+  imports?: string[];
+  isEntry?: boolean;
 }
 
 const manifest: Record<string, ManifestEntry> = JSON.parse(
@@ -70,7 +72,27 @@ const vite = await createServer({
   appType: "custom",
 });
 
-const { App } = await vite.ssrLoadModule("/src/App.tsx");
+const [{ App }, { RouterPage: SSR_RouterPage }, { setTranslations }] = await Promise.all([
+  vite.ssrLoadModule("/src/App.tsx"),
+  vite.ssrLoadModule("/src/modules/router/pages.ssr.tsx"),
+  vite.ssrLoadModule("/src/modules/i18n/index.ts"),
+]);
+
+const i18nModule = (await vite.ssrLoadModule("/src/config/i18n/index.ts")) as {
+  languageLoaders: Record<string, () => Promise<{ default: Record<string, string> }>>;
+};
+
+const entries: Record<string, Record<string, string>> = {};
+const loaded = await Promise.all(
+  Object.entries(i18nModule.languageLoaders).map(async ([code, loader]) => {
+    const mod = await loader();
+    return [code, mod.default] as const;
+  }),
+);
+for (const [code, tr] of loaded) {
+  entries[code] = tr;
+}
+setTranslations(entries);
 
 const routesConfig = (
   await import(pathToFileURL(path.join(rootDir, "src/config/routes/index")).href)
@@ -79,6 +101,16 @@ const routesConfig = (
 console.info("SSG routes:", Object.keys(routesConfig));
 
 const entry = srcToHashed["/index.html"] ?? "";
+
+/* ---- shared chunk preloads ---- */
+const mainEntryKey = Object.keys(manifest).find((key) => manifest[key].src === "index.html");
+const entryImports = mainEntryKey ? (manifest[mainEntryKey]?.imports ?? []) : [];
+const chunkPreloadLinks = entryImports
+  .map((key) => {
+    const chunk = manifest[key];
+    return chunk ? `<link rel="modulepreload" href="/${chunk.file}">` : "";
+  })
+  .join("");
 
 /* ---------------------------------- */
 /* asset resolvers                     */
@@ -162,7 +194,15 @@ function renderPage(
     canonicalUrl,
     store: { url: route, lang, filenames: { sprite } },
     metas,
-    links: [preconnectLink, cssPreloadLink, jsPreloadLink, cssLink, links, manifestLink]
+    links: [
+      preconnectLink,
+      cssPreloadLink,
+      jsPreloadLink,
+      chunkPreloadLinks,
+      cssLink,
+      links,
+      manifestLink,
+    ]
       .filter(Boolean)
       .join(""),
     appHtml,
@@ -190,7 +230,9 @@ async function build() {
 
     try {
       const store = { url: route, lang: config.templateParameters.lang, filenames: { sprite } };
-      const appHtml = renderToStaticMarkup(createElement(App, { store }));
+      const appHtml = renderToStaticMarkup(
+        createElement(App, { store, routerPage: SSR_RouterPage }),
+      );
 
       const html = renderPage(
         appHtml,

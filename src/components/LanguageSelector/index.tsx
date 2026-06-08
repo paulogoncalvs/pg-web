@@ -2,7 +2,7 @@ import type { FunctionalComponent, JSX } from "preact";
 
 import { useCallback } from "preact/hooks";
 
-import { translations, useTranslate } from "@/modules/i18n";
+import { getAvailableLanguages, useTranslate } from "@/modules/i18n";
 import { LANGUAGE_DEFAULT, type Language } from "@/modules/language";
 import { useRouterLocation, useRouterRoute } from "@/modules/router";
 import { classNames } from "@/utils/classNames";
@@ -49,7 +49,7 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({
       onChange={onLanguageSelect}
       aria-label={t("language_selection")}
     >
-      {(Object.keys(translations) as Language[]).map((lang: Language) => renderOption(lang))}
+      {getAvailableLanguages().map((lang: Language) => renderOption(lang))}
     </select>
   );
 };

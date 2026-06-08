@@ -42,7 +42,7 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({
   const themeLabel = t(`theme_${getToggleTheme(theme)}`);
 
   return (
-    <Tooltip content={t("theme_toggle", { theme: themeLabel })} class="capitalize">
+    <Tooltip content={t("theme_toggle", { theme: themeLabel })} class="capitalize" position="top">
       <button
         type="button"
         onClick={handleOnClick}

@@ -19,6 +19,10 @@ declare interface PageStore {
   url?: string;
   isOffline?: boolean;
   isSideDrawerOpen?: boolean;
+  isNavigating?: boolean;
+  animationsEnabled?: boolean;
+  fontSize?: import("@/modules/fontSize").FontSize;
+  cookiesEnabled?: boolean;
 }
 
 declare let STORE: PageStore;

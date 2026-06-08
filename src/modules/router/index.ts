@@ -1,6 +1,6 @@
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useContext, useEffect } from "preact/hooks";
+import { useContext, useEffect, useRef } from "preact/hooks";
 import { useLocation, useRoute } from "wouter-preact";
 
 import { LANGUAGE_DEFAULT, type Language, isValidLanguage } from "@/modules/language";
@@ -11,6 +11,8 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
   const { lang } = useContext(StoreContext);
   const [location] = useLocation();
   const [, params] = useRouterRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
+
+  const prevLocation = useRef(location);
 
   const langParam = (
     isValidLanguage(params?.lParam as Language) ? params?.lParam : lang
@@ -28,7 +30,6 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
     if (location !== url) {
       payload.url = location;
       payload.isSideDrawerOpen = false;
-      window.scrollTo({ behavior: "smooth", top: 0 });
       trackPageView();
     }
 
@@ -36,6 +37,23 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
       dispatch({ type: "UPDATE", payload });
     }
   }, [langParam, location, lang, url, params?.lParam, dispatch]);
+
+  useEffect(() => {
+    if (prevLocation.current !== location) {
+      prevLocation.current = location;
+      dispatch({ type: "UPDATE", payload: { isNavigating: true } });
+      const start = performance.now();
+      const raf = requestAnimationFrame(() => {
+        const elapsed = performance.now() - start;
+        const remaining = Math.max(0, 150 - elapsed);
+        setTimeout(() => {
+          window.scrollTo({ behavior: "instant", top: 0 });
+          dispatch({ type: "UPDATE", payload: { isNavigating: false } });
+        }, remaining);
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [location, dispatch]);
 
   return null;
 };

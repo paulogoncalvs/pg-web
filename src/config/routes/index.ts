@@ -242,6 +242,23 @@ const blogPosts: BlogPostDef[] = [
     },
   },
   {
+    slug: "code-splitting-journey",
+    date: "2026-05-30",
+    readingTime: 6,
+    content: {
+      en: {
+        title: "Static-First Code Splitting",
+        description:
+          "A static-first approach to code splitting that reduced the initial bundle from 109 kB to 19 kB without layout shifts or hydration issues.",
+      },
+      pt: {
+        title: "Static-First Code Splitting",
+        description:
+          "Uma abordagem static-first ao code splitting que reduziu o bundle inicial de 109 kB para 19 kB sem layout shifts nem problemas de hidratação.",
+      },
+    },
+  },
+  {
     slug: "migration-vite",
     date: "2026-05-18",
     readingTime: 7,

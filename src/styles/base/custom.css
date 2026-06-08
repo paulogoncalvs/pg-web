@@ -3,13 +3,7 @@
    ========================= */
 
 html {
-  @apply scroll-smooth;
-}
-
-@variant motion-reduce {
-  html {
-    scroll-behavior: auto;
-  }
+  @apply scroll-smooth motion-reduce:scroll-auto;
 }
 
 body {
@@ -22,12 +16,6 @@ a {
   @apply transition-all duration-300 motion-reduce:transition-none;
   @apply hover:text-zinc-500 focus-visible:text-zinc-500;
   -webkit-tap-highlight-color: transparent;
-}
-
-@variant motion-reduce {
-  a {
-    transition: none;
-  }
 }
 
 /* -------------------------
@@ -55,7 +43,7 @@ h2,
 h3,
 h4,
 h5 {
-  @apply filter-[drop-shadow(0_1px_0_rgba(255,255,255,0.7))] dark:filter-[drop-shadow(0_1px_0_rgba(0,0,0,0.7))];
+  @apply drop-shadow-[0_1px_0_rgba(255,255,255,0.7)] dark:drop-shadow-[0_1px_0_rgba(0,0,0,0.7)];
 }
 
 h1 {
@@ -65,5 +53,31 @@ h1 {
     + span {
       @apply mt-2 text-xl font-light tracking-normal lowercase sm:text-2xl;
     }
+  }
+}
+
+/* Hide native details marker */
+summary {
+  @apply list-none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@media print {
+  header,
+  footer,
+  nav,
+  .cookie-consent-bar,
+  [data-scroll-btn],
+  .overlay,
+  .interactive,
+  button,
+  [role="tooltip"] {
+    @apply !hidden;
+  }
+  body {
+    @apply !bg-white !text-black;
   }
 }

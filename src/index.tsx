@@ -8,10 +8,37 @@ if (import.meta.env.DEV) {
 import { hydrate } from "preact";
 
 import { App } from "@/App";
-import "@/styles/index.css";
+import routesConfig from "@/config/routes";
+import { preloadTranslation } from "@/modules/i18n";
+import { LANGUAGE_DEFAULT } from "@/modules/language";
+import { preloadPage, RouterPage } from "@/modules/router/pages";
 import { reportWebVitalsToGA } from "@/modules/webVitals";
+import "@/styles/index.css";
+import { preloadBlogPost } from "@/pages/Blog/posts";
 
-hydrate(<App store={STORE} />, document.getElementById("root") as Element);
+// Pre-load the initial page chunk so lazy() resolves before hydration
+const url = STORE.url || "/";
+const route = routesConfig[url.replace("index.html", "")];
+const view = route?.templateParameters?.View;
+
+if (view === "BlogPost") {
+  const slug = url.split("/blog/")[1]?.replace("/", "");
+  if (slug) {
+    await Promise.all([preloadPage(view), preloadBlogPost(slug)]);
+  } else {
+    await preloadPage(view || "NotFound");
+  }
+} else {
+  await preloadPage(view || "NotFound");
+}
+
+const initialLang = STORE.lang || LANGUAGE_DEFAULT;
+await Promise.all([
+  preloadTranslation(initialLang),
+  initialLang !== LANGUAGE_DEFAULT ? preloadTranslation(LANGUAGE_DEFAULT) : Promise.resolve(),
+]);
+
+hydrate(<App store={STORE} routerPage={RouterPage} />, document.getElementById("root") as Element);
 
 if (import.meta.env.DEV) {
   console.info(
@@ -26,9 +53,7 @@ if (import.meta.env.PROD) {
     window.addEventListener("load", () => {
       setTimeout(() => {
         navigator.serviceWorker.register("/sw.js").catch((err) => {
-          if (import.meta.env.DEV) {
-            console.warn("SW registration failed:", err);
-          }
+          console.warn("SW registration failed:", err);
         });
       }, 1000);
     });

@@ -44,7 +44,7 @@ input[type="file"]::file-selector-button {
 
 /* Labels */
 label {
-  @apply mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-200;
+  @apply block text-sm font-medium text-zinc-700 dark:text-zinc-200;
 }
 
 /* Select */
@@ -58,7 +58,7 @@ select {
 }
 
 .form-error-message {
-  @apply text-rose-600;
+  @apply text-rose-400;
   @apply text-xs;
   @apply mt-2;
 }
@@ -68,9 +68,9 @@ textarea + .form-error-message {
 }
 
 .grecaptcha-badge {
-  visibility: hidden;
+  @apply invisible;
 }
 
 body.show-recaptcha .grecaptcha-badge {
-  visibility: visible;
+  @apply visible;
 }
