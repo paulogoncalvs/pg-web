@@ -1,11 +1,6 @@
-import en from "./en";
-import pt from "./pt";
-
 export type Translation = Record<string, string>;
 
-export type Translations = Record<string, Translation>;
-
-export const translations: Translations = {
-  en,
-  pt,
+export const languageLoaders: Record<string, () => Promise<{ default: Translation }>> = {
+  en: () => import("./en"),
+  pt: () => import("./pt"),
 };

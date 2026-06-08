@@ -11,7 +11,7 @@ export const HeroSection: FunctionalComponent = () => {
   const { t } = useTranslate();
 
   return (
-    <section class="flex flex-col items-center space-y-14 px-6 pt-16">
+    <section class="flex flex-col items-center space-y-14 pt-16">
       <h1>
         <ScrollReveal delay={1} as="span">
           {t("home_page_title")}

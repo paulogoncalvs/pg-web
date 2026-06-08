@@ -1,33 +1,61 @@
+/* oxlint-disable jsx-a11y/prefer-tag-over-role */
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useContext } from "preact/hooks";
+import { useContext, useEffect } from "preact/hooks";
 
-import { useTranslate } from "@/modules/i18n";
+import { Spinner } from "@/components/Spinner";
 import { StoreContext } from "@/modules/store";
 import { classNames } from "@/utils/classNames";
 
-export const Overlay: FunctionalComponent = (): JSX.Element => {
-  const { isSideDrawerOpen, dispatch } = useContext(StoreContext);
-  const { t } = useTranslate();
+interface OverlayProps {
+  isOpen: boolean;
+  onClose?: () => void;
+  children?: JSX.Element;
+  className?: string;
+}
 
-  const closeDrawer = (): void => {
+export const Overlay: FunctionalComponent<OverlayProps> = ({
+  isOpen,
+  onClose,
+  children,
+  className = "",
+}) => {
+  useEffect(() => {
+    document.body.classList.toggle("show-overlay", isOpen);
+  }, [isOpen]);
+
+  return (
+    <div
+      role="presentation"
+      tabIndex={-1}
+      class={classNames(
+        "fixed inset-0 z-30 flex items-center justify-center",
+        "bg-white/60 dark:bg-zinc-900/70",
+        "transition-opacity duration-300 will-change-[opacity] motion-reduce:transition-none",
+        "backdrop-blur-sm",
+        isOpen ? "opacity-100" : "pointer-events-none opacity-0",
+        className,
+      )}
+      onClick={onClose}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const OverlayWithStore: FunctionalComponent = () => {
+  const { isSideDrawerOpen, isNavigating, dispatch } = useContext(StoreContext);
+
+  const closeDrawer = () => {
+    if (isNavigating) {
+      return;
+    }
     dispatch({ type: "SET_SIDE_DRAWER", payload: { isSideDrawerOpen: false } });
   };
 
   return (
-    <button
-      type="button"
-      disabled={!isSideDrawerOpen}
-      onClick={closeDrawer}
-      aria-hidden={isSideDrawerOpen ? undefined : "true"}
-      aria-label={isSideDrawerOpen ? t("sidedrawer_close") : undefined}
-      class={classNames(
-        "fixed inset-0 z-10",
-        "bg-white/40 dark:bg-zinc-900/60",
-        "backdrop-blur-xs supports-backdrop-filter:backdrop-blur-xs",
-        "transition-opacity duration-300 ease-out",
-        isSideDrawerOpen ? "opacity-100 will-change-[opacity]" : "pointer-events-none opacity-0",
-      )}
-    />
+    <Overlay isOpen={Boolean(isSideDrawerOpen || isNavigating)} onClose={closeDrawer}>
+      {isNavigating ? <Spinner class="h-8 w-8" /> : undefined}
+    </Overlay>
   );
 };

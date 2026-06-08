@@ -17,7 +17,7 @@
 @utility interactive-state {
   &:disabled,
   &[aria-current="page"] {
-    @apply pointer-events-none bg-white text-stone-400 dark:bg-zinc-600 dark:text-zinc-400;
+    @apply pointer-events-none bg-white text-stone-500 dark:bg-zinc-600 dark:text-zinc-300;
   }
 }
 
@@ -61,6 +61,29 @@
     &:is(:hover, :focus-visible, :active) {
       @apply bg-white/30;
       box-shadow: var(--interactive-shadow-dark-hover);
+    }
+  }
+}
+
+/* =========================
+   SOLID VARIANT (no transparency, no backdrop-blur)
+   For elements inside animated containers (side drawer)
+   to avoid expensive GPU compositing during animation.
+========================= */
+@utility interactive-solid {
+  @apply interactive-state interactive-base interactive-text;
+  @apply font-bold;
+  @apply border border-zinc-300 bg-white shadow-sm;
+
+  &:is(:hover, :focus-visible, :active) {
+    @apply bg-zinc-100 shadow-md sm:-translate-y-0.5;
+  }
+
+  @variant dark {
+    @apply border-zinc-700 bg-zinc-800 shadow-sm;
+
+    &:is(:hover, :focus-visible, :active) {
+      @apply bg-zinc-700 shadow-md;
     }
   }
 }

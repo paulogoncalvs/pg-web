@@ -31,9 +31,11 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   const hideTimeout = useRef<number>();
   const touchTimeout = useRef<number>();
   const rafRef = useRef<number>();
+  const lastTouchTime = useRef(0);
 
   const idRef = useRef(`tooltip-${useId()}`);
 
+  const TOUCH_DEBOUNCE = 500;
   const ANIMATION_DURATION = 200;
   const OFFSET = 8;
 
@@ -43,6 +45,43 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
     window.clearTimeout(touchTimeout.current);
     cancelAnimationFrame(rafRef.current ?? 0);
   }, []);
+
+  const updatePosition = useCallback(() => {
+    if (!tooltipRef.current || !triggerRef.current) {
+      return;
+    }
+
+    const trigger = triggerRef.current.getBoundingClientRect();
+    const tooltip = tooltipRef.current.getBoundingClientRect();
+
+    const spaceBelow = window.innerHeight - trigger.bottom;
+    const spaceAbove = trigger.top;
+
+    const nextVertical =
+      spaceBelow < tooltip.height + OFFSET && spaceAbove > tooltip.height + OFFSET
+        ? "top"
+        : "bottom";
+
+    let nextAlign: "center" | "left" | "right" = "center";
+
+    if (trigger.left < OFFSET) {
+      nextAlign = "left";
+    } else if (trigger.right > window.innerWidth - OFFSET) {
+      nextAlign = "right";
+    }
+
+    if (pos === nextVertical && align === nextAlign) {
+      return;
+    }
+
+    setPos(nextVertical);
+    setAlign(nextAlign);
+  }, [pos, align]);
+
+  const scheduleUpdate = useCallback(() => {
+    cancelAnimationFrame(rafRef.current ?? 0);
+    rafRef.current = requestAnimationFrame(updatePosition);
+  }, [updatePosition]);
 
   const show = useCallback(() => {
     clearTimers();
@@ -63,6 +102,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   }, [clearTimers]);
 
   const handleTouch = useCallback(() => {
+    lastTouchTime.current = Date.now();
     if (isVisible) {
       hide();
     } else {
@@ -71,42 +111,26 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
     }
   }, [isVisible, show, hide]);
 
-  const updatePosition = useCallback(() => {
-    if (!tooltipRef.current || !triggerRef.current) {
+  const handleMouseEnter = useCallback(() => {
+    if (Date.now() - lastTouchTime.current < TOUCH_DEBOUNCE) {
       return;
     }
+    show();
+  }, [show]);
 
-    const trigger = triggerRef.current.getBoundingClientRect();
-    const tooltip = tooltipRef.current.getBoundingClientRect();
-
-    const spaceBelow = window.innerHeight - trigger.bottom;
-    const spaceAbove = trigger.top;
-
-    const nextVertical =
-      spaceBelow < tooltip.height + OFFSET && spaceAbove > tooltip.height + OFFSET
-        ? "top"
-        : "bottom";
-
-    let nextAlign: "center" | "left" | "right" = "center";
-
-    if (tooltip.left < OFFSET) {
-      nextAlign = "left";
-    } else if (tooltip.right > window.innerWidth - OFFSET) {
-      nextAlign = "right";
-    }
-
-    if (pos === nextVertical && align === nextAlign) {
+  const handleMouseLeave = useCallback(() => {
+    if (Date.now() - lastTouchTime.current < TOUCH_DEBOUNCE) {
       return;
     }
+    hide();
+  }, [hide]);
 
-    setPos(nextVertical);
-    setAlign(nextAlign);
-  }, [pos, align]);
-
-  const scheduleUpdate = useCallback(() => {
-    cancelAnimationFrame(rafRef.current ?? 0);
-    rafRef.current = requestAnimationFrame(updatePosition);
-  }, [updatePosition]);
+  useLayoutEffect(() => {
+    if (!isMounted) {
+      return;
+    }
+    updatePosition();
+  }, [isMounted, updatePosition]);
 
   useLayoutEffect(() => {
     if (!isVisible) {
@@ -133,14 +157,14 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
       ? "left-1/2 -translate-x-1/2"
       : align === "left"
         ? "left-0 translate-x-0"
-        : "right-0 translate-x-0";
+        : "right-0 -translate-x-full";
 
   return (
     <div
       ref={triggerRef}
-      class="relative inline-block"
-      onMouseEnter={show}
-      onMouseLeave={hide}
+      class="relative inline-block text-[0px]"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onFocus={show}
       onBlur={hide}
       onTouchStart={handleTouch}

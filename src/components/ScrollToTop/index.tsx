@@ -60,7 +60,8 @@ export const ScrollToTop: FunctionalComponent = () => {
       aria-label={t("scroll_to_top")}
       aria-hidden={!isVisible}
       tabIndex={isVisible ? 0 : -1}
-      class={classNames("interactive interactive-icon fixed right-6 bottom-6 z-40 p-2", {
+      style={{ bottom: "calc(20px + var(--banner-stack-height, 0px))" }}
+      class={classNames("interactive interactive-icon fixed right-6 z-40 p-2", {
         "pointer-events-auto opacity-100": isVisible,
         "pointer-events-none opacity-0": !isVisible,
       })}

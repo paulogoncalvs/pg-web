@@ -1,0 +1,28 @@
+/* Show when no JS */
+html:not(.js) .op-low,
+html:not(.js) .opacity-60 {
+  @apply opacity-100;
+}
+
+html.animations-off * {
+  @apply animate-none;
+  @apply transition-none;
+}
+
+/* When Overlay is shown, prevent body scroll and hide scroll-to-top button */
+body.show-overlay {
+  @apply overflow-hidden;
+
+  [data-scroll-btn] {
+    @apply hidden;
+  }
+}
+
+/* Large font size mode */
+html.font-large {
+  @apply text-[115%];
+}
+
+html.animations-off .op-low {
+  @apply opacity-100;
+}
