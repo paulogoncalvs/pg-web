@@ -9,7 +9,7 @@ const NotFoundPage: FunctionalComponent = () => {
 
   return (
     <>
-      <h1 class="px-6 pt-16">
+      <h1 class="pt-16">
         <ScrollReveal delay={1} as="span">
           {t("not_found_page_title")}
         </ScrollReveal>
@@ -17,7 +17,7 @@ const NotFoundPage: FunctionalComponent = () => {
           {t("not_found_page_subtitle")}
         </ScrollReveal>
       </h1>
-      <ScrollReveal delay={4} direction="up" class="px-6 pb-16">
+      <ScrollReveal delay={4} direction="up" class="pb-16">
         <Link useRouter class="interactive interactive-lg" href="/">
           {t("not_found_page_button_label")}
         </Link>

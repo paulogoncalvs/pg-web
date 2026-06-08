@@ -1,4 +1,5 @@
-import routes from "../routes";
+import routes from "@/config/routes";
+
 import { baseUrl, globalTitle, globalDescription } from "./constants";
 import { pwa, type Pwa } from "./pwa";
 import { structuredData, type StructuredData } from "./schema";

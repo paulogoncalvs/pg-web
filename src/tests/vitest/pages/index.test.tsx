@@ -36,6 +36,12 @@ const pageTests = ({ name, route, Component }: PageTestsOptions): void => {
 
 const testableRoutes: PageTestsOptions[] = [
   { name: "Home", route: "/", Component: (await import("@/pages/Home")).default },
+  { name: "Blog", route: "/blog/", Component: (await import("@/pages/Blog")).default },
+  {
+    name: "BlogPost",
+    route: "/blog/mdx-preact-blog/",
+    Component: (await import("@/pages/Blog")).default,
+  },
   { name: "Contact", route: "/contact/", Component: (await import("@/pages/Contact")).default },
   { name: "Offline", route: "/offline/", Component: (await import("@/pages/Offline")).default },
   { name: "404", route: "/404/", Component: (await import("@/pages/NotFound")).default },

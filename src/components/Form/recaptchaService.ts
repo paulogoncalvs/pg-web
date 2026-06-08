@@ -2,7 +2,7 @@ let scriptLoadingPromise: Promise<void> | null = null;
 
 export const loadRecaptcha = (siteKey: string): Promise<void> => {
   if (!scriptLoadingPromise) {
-    scriptLoadingPromise = new Promise((resolve) => {
+    scriptLoadingPromise = new Promise((resolve, reject) => {
       if (window.grecaptcha) {
         resolve();
         return;
@@ -14,6 +14,10 @@ export const loadRecaptcha = (siteKey: string): Promise<void> => {
       script.defer = true;
 
       script.onload = () => resolve();
+      script.onerror = () => {
+        scriptLoadingPromise = null;
+        reject(new Error("Failed to load reCAPTCHA script"));
+      };
 
       document.head.appendChild(script);
     });

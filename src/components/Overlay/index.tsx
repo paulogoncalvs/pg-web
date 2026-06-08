@@ -1,59 +1,61 @@
+/* oxlint-disable jsx-a11y/prefer-tag-over-role */
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useContext, useEffect } from "preact/hooks";
 
-import { toggleSideDrawer } from "@/components/SideDrawer";
+import { Spinner } from "@/components/Spinner";
+import { StoreContext } from "@/modules/store";
+import { classNames } from "@/utils/classNames";
 
-let setVisible: ((v: boolean | ((prev: boolean) => boolean)) => void) | null = null;
+interface OverlayProps {
+  isOpen: boolean;
+  onClose?: () => void;
+  children?: JSX.Element;
+  className?: string;
+}
 
-export const toggleOverlay = (shouldShow?: boolean): void => {
-  if (!setVisible) {
-    return;
-  }
-
-  setVisible((prev) => (typeof shouldShow === "boolean" ? shouldShow : !prev));
-};
-
-const overlayOnClick = (): void => {
-  toggleSideDrawer(false);
-};
-
-export const Overlay: FunctionalComponent = (): JSX.Element => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, _setVisible] = useState(false);
-
+export const Overlay: FunctionalComponent<OverlayProps> = ({
+  isOpen,
+  onClose,
+  children,
+  className = "",
+}) => {
   useEffect(() => {
-    setVisible = _setVisible;
-
-    return () => {
-      setVisible = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", visible);
-  }, [visible]);
+    document.body.classList.toggle("show-overlay", isOpen);
+  }, [isOpen]);
 
   return (
     <div
-      ref={ref}
-      onClick={overlayOnClick}
-      aria-hidden="true"
-      class={[
-        "fixed inset-0 z-10",
-        "bg-white/40 dark:bg-zinc-900/60",
+      role="presentation"
+      tabIndex={-1}
+      class={classNames(
+        "fixed inset-0 z-30 flex items-center justify-center",
+        "bg-white/60 dark:bg-zinc-900/70",
+        "transition-opacity duration-300 will-change-[opacity] motion-reduce:transition-none",
+        "backdrop-blur-sm",
+        isOpen ? "opacity-100" : "pointer-events-none opacity-0",
+        className,
+      )}
+      onClick={onClose}
+    >
+      {children}
+    </div>
+  );
+};
 
-        // blur (modern browsers)
-        "backdrop-blur-xs supports-backdrop-filter:backdrop-blur-xs",
+export const OverlayWithStore: FunctionalComponent = () => {
+  const { isSideDrawerOpen, isNavigating, dispatch } = useContext(StoreContext);
 
-        // animation
-        "transition-opacity duration-300 ease-out",
+  const closeDrawer = () => {
+    if (isNavigating) {
+      return;
+    }
+    dispatch({ type: "SET_SIDE_DRAWER", payload: { isSideDrawerOpen: false } });
+  };
 
-        // performance hints
-        "will-change-[opacity]",
-
-        visible ? "opacity-100" : "opacity-0 pointer-events-none",
-      ].join(" ")}
-    />
+  return (
+    <Overlay isOpen={Boolean(isSideDrawerOpen || isNavigating)} onClose={closeDrawer}>
+      {isNavigating ? <Spinner class="h-8 w-8" /> : undefined}
+    </Overlay>
   );
 };

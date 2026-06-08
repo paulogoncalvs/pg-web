@@ -18,15 +18,14 @@ declare interface PageStore {
   lang?: Language;
   url?: string;
   isOffline?: boolean;
-  preloadedMDX?: {
-    slug: string;
-    Component: unknown;
-  };
+  isSideDrawerOpen?: boolean;
+  isNavigating?: boolean;
+  animationsEnabled?: boolean;
+  fontSize?: import("@/modules/fontSize").FontSize;
+  cookiesEnabled?: boolean;
 }
 
 declare let STORE: PageStore;
-
-declare module "wouter-preact/static-location";
 
 declare interface NodeModule {
   hot?: ImportMeta["hot"] | undefined;
@@ -146,5 +145,4 @@ interface Window {
     ) => string;
     reset: (widgetId?: string) => void;
   };
-  onRecaptchaLoad?: () => void;
 }

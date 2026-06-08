@@ -1,5 +1,19 @@
-export const Spinner = () => (
-  <svg aria-hidden="true" class="h-5 w-5 animate-spin" viewBox="0 0 24 24">
+import type { FunctionalComponent, JSX } from "preact";
+
+import { classNames } from "@/utils/classNames";
+
+interface SpinnerProps {
+  class?: string;
+}
+
+export const Spinner: FunctionalComponent<SpinnerProps> = ({
+  class: className,
+}: SpinnerProps): JSX.Element => (
+  <svg
+    aria-hidden="true"
+    class={classNames("h-5 w-5 animate-spin motion-reduce:animate-none", className)}
+    viewBox="0 0 24 24"
+  >
     <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" class="opacity-25" />
     <path
       fill="currentColor"

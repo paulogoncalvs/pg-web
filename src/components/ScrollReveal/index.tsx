@@ -1,6 +1,6 @@
 import type { ComponentChildren, FunctionalComponent, JSX } from "preact";
 
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 import { useOnIntersect } from "@/hooks/useOnIntersect";
 import { classNames } from "@/utils/classNames";
@@ -43,13 +43,16 @@ export const ScrollReveal: FunctionalComponent<ScrollRevealProps> = ({
     }
   }, [forceVisible]);
 
+  const style = useMemo(
+    () => ({ "--delay": `${delay * 100}ms` }) as preact.JSX.CSSProperties,
+    [delay],
+  );
+
   return (
     <Component
       ref={ref}
       class={classNames("animate-base op-low", isVisible && animations[direction], classes)}
-      style={{
-        "--delay": `${delay * 100}ms`,
-      }}
+      style={style}
     >
       {children}
     </Component>

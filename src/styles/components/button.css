@@ -1,24 +1,4 @@
 /* =========================
-   DESIGN TOKENS
-========================= */
-@theme {
-  --interactive-bg: rgb(231 229 228 / 0.8);
-  --interactive-bg-dark: rgb(255 255 255 / 0.05);
-
-  --interactive-border: rgb(255 255 255 / 0.5);
-
-  --interactive-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 0 1px rgb(0 0 0 / 0.2), 0 3px 6px rgb(0 0 0 / 0.15);
-
-  --interactive-shadow-hover:
-    inset 0 1px 0 rgb(255 255 255 / 0.95), 0 0 1px rgb(0 0 0 / 0.2), 0 6px 12px rgb(0 0 0 / 0.2);
-
-  --interactive-shadow-dark-hover:
-    inset 0 1px 0 rgb(255 255 255 / 0.75), 0 0 9px rgb(255 255 255 / 0.2),
-    0 3px 12px rgb(255 255 255 / 0.15);
-}
-
-/* =========================
    SHARED BASES
 ========================= */
 @utility interactive-base {
@@ -37,7 +17,7 @@
 @utility interactive-state {
   &:disabled,
   &[aria-current="page"] {
-    @apply pointer-events-none bg-white text-stone-400 dark:bg-zinc-600 dark:text-zinc-400;
+    @apply pointer-events-none bg-white text-stone-500 dark:bg-zinc-600 dark:text-zinc-300;
   }
 }
 
@@ -86,6 +66,29 @@
 }
 
 /* =========================
+   SOLID VARIANT (no transparency, no backdrop-blur)
+   For elements inside animated containers (side drawer)
+   to avoid expensive GPU compositing during animation.
+========================= */
+@utility interactive-solid {
+  @apply interactive-state interactive-base interactive-text;
+  @apply font-bold;
+  @apply border border-zinc-300 bg-white shadow-sm;
+
+  &:is(:hover, :focus-visible, :active) {
+    @apply bg-zinc-100 shadow-md sm:-translate-y-0.5;
+  }
+
+  @variant dark {
+    @apply border-zinc-700 bg-zinc-800 shadow-sm;
+
+    &:is(:hover, :focus-visible, :active) {
+      @apply bg-zinc-700 shadow-md;
+    }
+  }
+}
+
+/* =========================
    SIZE VARIANTS
 ========================= */
 @utility interactive-sm {
@@ -103,19 +106,6 @@
 /* =========================
    VISUAL VARIANTS
 ========================= */
-@utility interactive-ghost {
-  @apply border-transparent bg-transparent shadow-none;
-
-  &:is(:hover, :focus-visible, :active) {
-    @apply bg-white/20 dark:bg-white/10;
-  }
-
-  &::before,
-  &::after {
-    @apply hidden;
-  }
-}
-
 @utility interactive-icon {
   @apply interactive-base interactive-text;
   @apply gap-2 p-3 pl-8;
@@ -135,13 +125,9 @@
   @apply hover:text-zinc-500 focus-visible:text-zinc-500;
 }
 
-@utility icon-link-hdr {
-  @apply ml-2 p-2 md:ml-8;
-}
-
 /* =========================
    CARDS
-========================= */
+   ========================= */
 @utility interactive-card {
   @apply flex flex-col justify-between;
   @apply rounded-lg border p-5;

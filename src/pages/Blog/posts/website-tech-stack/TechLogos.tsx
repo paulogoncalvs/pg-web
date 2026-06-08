@@ -38,7 +38,7 @@ export const TechLogos: FunctionalComponent = () => (
   <div class="flex flex-row flex-wrap justify-center gap-6 py-8">
     {techLogos.map((tech) => (
       <Tooltip key={tech.name} content={tech.name} position="top">
-        <Icon src={tech.src} width="48" height="48" />
+        <Icon src={tech.src} width="48" height="48" ariaHidden />
       </Tooltip>
     ))}
   </div>

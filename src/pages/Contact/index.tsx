@@ -40,7 +40,7 @@ const ContactPage: FunctionalComponent = () => {
 
   return (
     <>
-      <h1 class="px-6 pt-16">
+      <h1 class="pt-16">
         <ScrollReveal delay={1} as="span">
           {t("contact_page_title")}
         </ScrollReveal>
@@ -49,7 +49,7 @@ const ContactPage: FunctionalComponent = () => {
         </ScrollReveal>
       </h1>
 
-      <div class="flex flex-col items-center px-6 text-left">
+      <div class="flex flex-col items-center text-left">
         <Form
           class="w-full max-w-md space-y-4"
           onSubmit={submit}
@@ -107,7 +107,7 @@ const ContactPage: FunctionalComponent = () => {
           </ScrollReveal>
 
           <FormInput
-            label={t("contact_page_contact_form_message_label")}
+            label={t("contact_page_contact_form_company_label")}
             type="text"
             name="company"
             id="company"
@@ -137,7 +137,7 @@ const ContactPage: FunctionalComponent = () => {
             </Button>
           </ScrollReveal>
           {submittedName && (
-            <p class="pt-8">
+            <p class="pt-8" role="alert">
               {t("contact_page_contact_form_success_msg", {
                 name: submittedName,
               })}
@@ -145,7 +145,7 @@ const ContactPage: FunctionalComponent = () => {
           )}
         </Form>
       </div>
-      <div class="flex flex-col items-center px-6 pb-16 text-left">
+      <div class="flex flex-col items-center pb-16 text-left">
         <div class="w-full max-w-md space-y-8">
           <ScrollReveal delay={1} as="h2" direction="up">
             {t("contact_page_contact_email_title")}

@@ -44,21 +44,16 @@ export default defineConfig(({ mode }) => {
         registerType: "autoUpdate",
         manifestFilename: "manifest.webmanifest",
         devOptions: {
-          enabled: true,
+          enabled: false,
         },
         workbox: {
           globDirectory: "dist/",
           globPatterns: ["**/*.{js,css,svg,webp,woff2}"],
           swDest: "dist/sw.js",
-          navigateFallback: null,
+          navigateFallback: "/offline/",
           navigateFallbackDenylist: [/^\/api\//, /^\/server\//],
           ignoreURLParametersMatching: [/^utm_/, /^fbclid$/],
           runtimeCaching: [
-            // HTML / navigation requests → ALWAYS network
-            {
-              urlPattern: ({ request }) => request.mode === "navigate",
-              handler: "NetworkOnly",
-            },
             // API / server calls → network only
             {
               urlPattern: /^https:\/\/.*\.(server|api)\/.*/i,

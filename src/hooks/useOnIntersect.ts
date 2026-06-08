@@ -18,7 +18,7 @@ const createObserver = (): IntersectionObserver => {
         }
       });
     },
-    { threshold: 0.1, rootMargin: "0px 0px -20px 0px" },
+    { threshold: 0, rootMargin: "0px 0px -20px 0px" },
   );
 };
 
@@ -70,13 +70,4 @@ export const useOnIntersect = (
       getSharedObserver().unobserve(element);
     };
   }, [elementRef]);
-};
-
-export const disconnectAll = (): void => {
-  if (sharedObserver) {
-    sharedObserver.disconnect();
-    sharedObserver = null;
-  }
-  callbacks.clear();
-  observedElements.clear();
 };

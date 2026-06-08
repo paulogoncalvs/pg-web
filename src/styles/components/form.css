@@ -44,7 +44,7 @@ input[type="file"]::file-selector-button {
 
 /* Labels */
 label {
-  @apply mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-200;
+  @apply block text-sm font-medium text-zinc-700 dark:text-zinc-200;
 }
 
 /* Select */
@@ -53,8 +53,7 @@ select {
 }
 
 /* Form component classes */
-.form-input.error,
-.form-textarea.error {
+.form-input.error {
   @apply border-rose-400;
 }
 
@@ -69,9 +68,9 @@ textarea + .form-error-message {
 }
 
 .grecaptcha-badge {
-  visibility: hidden;
+  @apply invisible;
 }
 
 body.show-recaptcha .grecaptcha-badge {
-  visibility: visible;
+  @apply visible;
 }

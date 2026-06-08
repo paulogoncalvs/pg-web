@@ -6,13 +6,12 @@ interface ButtonComponentProps {
   mainClasses?: string;
   class?: string;
   disabled?: boolean;
-  otherProps?: unknown;
   onClick?: () => void;
   children?: ComponentChildren;
 }
 
 export const Button: FunctionalComponent<ButtonComponentProps> = ({
-  mainClasses = "btn",
+  mainClasses = "",
   class: classes = "",
   children,
   disabled,

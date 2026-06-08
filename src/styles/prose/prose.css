@@ -4,7 +4,7 @@
 
 @layer components {
   .prose {
-    @apply text-sm text-zinc-700 sm:text-base dark:text-zinc-300;
+    @apply text-sm text-zinc-800 sm:text-base dark:text-zinc-300;
 
     /* -------------------------
        Headings
@@ -57,7 +57,7 @@
     }
 
     li::marker {
-      @apply text-zinc-400;
+      @apply text-stone-400 dark:text-zinc-400;
     }
 
     /* -------------------------
@@ -144,19 +144,21 @@
     ------------------------- */
 
     table {
-      @apply my-8 w-full border-collapse text-sm;
+      @apply my-8 block w-full max-w-full border-collapse overflow-x-auto text-sm;
+      -webkit-overflow-scrolling: touch;
     }
 
     thead {
       @apply bg-zinc-100 dark:bg-zinc-800;
     }
 
-    th {
-      @apply border border-zinc-200 px-4 py-2 text-left font-semibold text-zinc-900 dark:border-zinc-700 dark:text-zinc-100;
-    }
-
+    th,
     td {
       @apply border border-zinc-200 px-4 py-2 dark:border-zinc-700;
+    }
+
+    th {
+      @apply text-left font-semibold text-zinc-900 dark:text-zinc-100;
     }
 
     tbody tr:nth-child(even) {

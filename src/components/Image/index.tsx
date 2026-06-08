@@ -27,6 +27,8 @@ interface ImageProps extends JSX.HTMLAttributes<HTMLImageElement> {
 const DEFAULT_PLACEHOLDER =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 
+const OBSERVER_ARGS = { threshold: 0.25 };
+
 export const Image: FunctionalComponent<ImageProps> = ({
   src,
   alt = "",
@@ -52,9 +54,7 @@ export const Image: FunctionalComponent<ImageProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [shouldLoad, setShouldLoad] = useState(!lazy);
 
-  const [entry, observer] = useIntersectionObserver(imgRef, {
-    threshold: 0.25,
-  });
+  const [entry, observer] = useIntersectionObserver(imgRef, OBSERVER_ARGS);
 
   const isVisible = Boolean(entry?.isIntersecting);
 
@@ -85,6 +85,7 @@ export const Image: FunctionalComponent<ImageProps> = ({
       return;
     }
 
+    let cancelled = false;
     const img = new window.Image();
 
     if (srcset) {
@@ -93,7 +94,14 @@ export const Image: FunctionalComponent<ImageProps> = ({
     img.src = src;
 
     img.onload = () => {
-      setIsLoaded(true);
+      if (!cancelled) {
+        setIsLoaded(true);
+      }
+    };
+
+    return () => {
+      cancelled = true;
+      img.onload = null;
     };
   }, [shouldLoad, src, srcset]);
 
@@ -112,9 +120,8 @@ export const Image: FunctionalComponent<ImageProps> = ({
       loading={lazy ? "lazy" : "eager"}
       decoding="async"
       fetchpriority={fetchpriority}
-      onLoad={() => setIsLoaded(true)}
       class={classNames(
-        "transition-all duration-500 ease-out motion-reduce:transition-none",
+        "transition-opacity duration-500 ease-out motion-reduce:transition-none",
         {
           "opacity-100": isLoaded,
           "opacity-60": !isLoaded,

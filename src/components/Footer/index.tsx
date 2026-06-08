@@ -1,5 +1,6 @@
 import type { FunctionalComponent } from "preact";
 
+import arrowDiagonalIcon from "@/assets/icons/arrow_diagonal.svg";
 import axeLogo from "@/assets/icons/logos/axe.svg";
 import dockerLogo from "@/assets/icons/logos/docker.svg";
 import expressLogo from "@/assets/icons/logos/express.svg";
@@ -17,6 +18,7 @@ import vitestLogo from "@/assets/icons/logos/vitest.svg";
 import workboxLogo from "@/assets/icons/logos/workbox.svg";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { Popup } from "@/components/Popup";
 import { Tooltip } from "@/components/Tooltip";
 import { githubRepoUrl } from "@/config/global/socialLinks";
 import { useTranslate } from "@/modules/i18n";
@@ -46,11 +48,30 @@ const logos = [
 export const Footer: FunctionalComponent = () => {
   const { t } = useTranslate();
 
+  const sourceCodeLink = (
+    <Link
+      href={githubRepoUrl}
+      class="underline"
+      newWindow
+      onClick={(): void =>
+        trackEvent("link_click", {
+          link_location: "Footer",
+          link_name: "GitHub",
+        })
+      }
+    >
+      {t("footer_description_1_link_text")}
+    </Link>
+  );
+
   return (
     <footer>
-      <div class="border border-r-0 border-l-0 border-white/90 bg-white/20 px-6 py-16 text-center shadow-xs shadow-black/7 dark:border-white/15 dark:bg-zinc-900/35 dark:shadow-black/20">
+      <div class="@container border border-r-0 border-l-0 border-white/90 bg-white/20 px-6 py-16 text-center shadow-xs shadow-black/7 dark:border-white/15 dark:bg-zinc-900/35 dark:shadow-black/20">
         <div class="flex flex-col items-center">
-          <div class="flex flex-wrap justify-center align-middle">
+          <p class="mb-6 text-xs font-bold tracking-widest uppercase">
+            {t("footer_technologies_title")}
+          </p>
+          <div class="flex flex-wrap justify-center gap-2 align-middle @md:gap-3">
             {logos.map((logo) => (
               <Tooltip key={logo.label} content={logo.label}>
                 <Link
@@ -64,65 +85,75 @@ export const Footer: FunctionalComponent = () => {
               </Tooltip>
             ))}
           </div>
-          <p class="pt-8 text-xs">
-            {t(
-              "footer_description_1",
-              {
-                link: (
-                  <Link
-                    href={githubRepoUrl}
-                    class="underline"
-                    newWindow
-                    onClick={(): void =>
-                      trackEvent("link_click", {
-                        link_location: "Footer",
-                        link_name: "GitHub",
-                      })
-                    }
-                  >
-                    {t("footer_description_1_link_text")}
-                  </Link>
-                ),
-              },
-              false,
-            )}
-          </p>
         </div>
       </div>
       <div class="flex flex-col items-center px-6 py-16 text-center text-xs">
-        <p class="mb-2">
+        <p class="flex flex-col items-center gap-4 sm:flex-row">
+          <label
+            htmlFor="popup-tog-source-code"
+            class="cursor-pointer underline hover:no-underline"
+            aria-label={t("footer_source_code_label")}
+          >
+            <span class="inline-flex items-center gap-1">
+              <span>{t("footer_source_code_label")}</span>
+              <span class="shrink-0">
+                <Icon src={arrowDiagonalIcon} width="12" height="12" ariaHidden />
+              </span>
+            </span>
+          </label>
+          <label
+            htmlFor="popup-tog-recaptcha"
+            class="cursor-pointer underline hover:no-underline"
+            aria-label={t("footer_recaptcha_notice")}
+          >
+            <span class="inline-flex items-center gap-2">
+              <span>{t("footer_recaptcha_notice")}</span>
+              <span class="shrink-0">
+                <Icon src={arrowDiagonalIcon} width="12" height="12" ariaHidden />
+              </span>
+            </span>
+          </label>
+        </p>
+        <p class="pt-6 font-bold">
+          paulogoncalves.dev ©️ {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ""}{" "}
+          🤘🏻
+        </p>
+      </div>
+
+      <Popup title={t("footer_source_code_label")} id="source-code">
+        <p>{t("footer_description_1", { link: sourceCodeLink }, false)}</p>
+      </Popup>
+
+      <Popup title={t("footer_recaptcha_label")} id="recaptcha">
+        <p>
           {t(
             "footer_description_2",
             {
               privacy: (
-                <a
-                  class="underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
                   href="https://policies.google.com/privacy"
+                  class="underline"
+                  newWindow
+                  ariaLabel={t("footer_recaptcha_privacy_link_text")}
                 >
                   {t("footer_recaptcha_privacy_link_text")}
-                </a>
+                </Link>
               ),
               terms: (
-                <a
-                  class="underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
                   href="https://policies.google.com/terms"
+                  class="underline"
+                  newWindow
+                  ariaLabel={t("footer_recaptcha_terms_link_text")}
                 >
                   {t("footer_recaptcha_terms_link_text")}
-                </a>
+                </Link>
               ),
             },
             false,
           )}
         </p>
-        <p class="pt-2 font-bold">
-          paulogoncalves.dev ©️ {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ""}{" "}
-          🤘🏻
-        </p>
-      </div>
+      </Popup>
     </footer>
   );
 };

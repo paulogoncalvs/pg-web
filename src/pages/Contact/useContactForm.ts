@@ -77,7 +77,13 @@ export const useContactForm = () => {
         method: "POST",
       });
 
-      const data = await response.json();
+      let data: Record<string, string> = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        // Response body is not valid JSON (e.g. server error page, empty body)
+      }
 
       if (!response.ok) {
         throw new Error(data.error || t("contact_page_contact_form_error"));

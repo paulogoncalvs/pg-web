@@ -27,4 +27,8 @@
    Prose - MDX Content
 ========================= */
 @import "./prose/prose.css";
-@import "./prose/tldr.css";
+
+/* =========================
+   Overrides
+========================= */
+@import "./base/overrides.css";
