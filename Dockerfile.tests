@@ -8,7 +8,7 @@ FROM node:24-slim@sha256:2c87ef9bd3c6a3bd4b472b4bec2ce9d16354b0c574f736c476489d0
 # -----------------------------
 ENV PNPM_HOME=/root/.local/share/pnpm
 ENV PATH=$PATH:$PNPM_HOME
-RUN npm i -g pnpm@11.5.2
+RUN npm i -g pnpm@11.6.0
 
 # -----------------------------
 # Working directory
