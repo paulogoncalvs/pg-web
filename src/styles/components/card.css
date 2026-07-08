@@ -1,0 +1,60 @@
+/* ==========================================================
+   GLASS CARD
+========================================================== */
+
+@utility interactive-card {
+  @apply relative flex flex-col justify-between;
+  @apply rounded-2xl border p-5;
+
+  @apply text-zinc-900 dark:text-white;
+
+  @apply transition-[transform,background-color,border-color,box-shadow];
+  @apply duration-300;
+  @apply ease-[cubic-bezier(.22,1,.36,1)];
+
+  contain: paint;
+
+  @apply border-white/50;
+  @apply bg-white/35;
+  @apply shadow-md;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  &::before {
+    content: "";
+
+    @apply pointer-events-none absolute inset-0 rounded-2xl;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 45%);
+
+    @apply opacity-45;
+
+    @apply transition-opacity duration-300;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translate3d(0, -4px, 0);
+
+    @apply bg-white/55;
+    @apply border-white/70;
+
+    @apply shadow-xl;
+
+    &::before {
+      @apply opacity-75;
+    }
+  }
+
+  @variant dark {
+    @apply bg-zinc-900/30;
+    @apply border-white/10;
+
+    &:hover,
+    &:focus-visible {
+      @apply bg-zinc-900/45;
+      @apply border-white/20;
+    }
+  }
+}

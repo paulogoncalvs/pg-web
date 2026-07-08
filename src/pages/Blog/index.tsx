@@ -8,7 +8,8 @@ import BlogPost from "./BlogPost";
 const BlogPage: FunctionalComponent = () => {
   const [location] = useLocation();
 
-  const isPost = location.includes("/blog/") && !location.endsWith("/blog/");
+  const path = location.split("?")[0];
+  const isPost = path.includes("/blog/") && !path.endsWith("/blog/");
 
   if (isPost) {
     return <BlogPost />;

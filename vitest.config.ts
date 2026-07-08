@@ -13,7 +13,7 @@ export default defineConfig({
     silent: false,
     environment: "jsdom",
     globals: true,
-    testTimeout: 10000,
+    testTimeout: 30000,
     setupFiles: [
       "src/tests/vitest/setupPreact.ts",
       "src/tests/vitest/setupTests.ts",

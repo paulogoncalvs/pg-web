@@ -3,6 +3,8 @@
 
   "plugins": ["typescript", "oxc", "jsx-a11y", "react"],
 
+  "jsPlugins": ["eslint-plugin-better-tailwindcss"],
+
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -55,6 +57,25 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
 
+    // --- Tailwind CSS ---
+    // Note: enforce-canonical-classes, no-conflicting-classes, enforce-consistent-class-order,
+    // and enforce-consistent-line-wrapping are disabled due to synckit timeout issues
+    // with the current oxlint JS plugin integration (Atomics.wait() timeouts on certain files).
+    "better-tailwindcss/enforce-consistent-class-order": "off",
+    "better-tailwindcss/enforce-consistent-line-wrapping": "off",
+    "better-tailwindcss/no-deprecated-classes": "warn",
+    "better-tailwindcss/no-duplicate-classes": "warn",
+    "better-tailwindcss/no-unnecessary-whitespace": "warn",
+    "better-tailwindcss/enforce-canonical-classes": "off",
+    "better-tailwindcss/no-conflicting-classes": "off",
+    "better-tailwindcss/no-unknown-classes": [
+      "error",
+      {
+        "ignore": ["^form-error-message$", "^prose$"],
+        "detectComponentClasses": true
+      }
+    ],
+
     // --- Accessibility ---
     "jsx-a11y/alt-text": "warn",
     "jsx-a11y/no-autofocus": "warn",
@@ -68,12 +89,17 @@
     "jsx-a11y/aria-unsupported-elements": "warn",
     "jsx-a11y/aria-activedescendant-has-tabindex": "warn",
     "jsx-a11y/aria-proptypes": "warn",
-    "jsx-a11y/aria-role": "warn"
+    "jsx-a11y/aria-role": "warn",
+    "jsx-a11y/prefer-tag-over-role": "off"
   },
 
   "settings": {
     "vitest": {
       "typecheck": false
+    },
+    "better-tailwindcss": {
+      "entryPoint": "src/styles/index.css",
+      "config": "tailwind.config.ts"
     }
   },
 

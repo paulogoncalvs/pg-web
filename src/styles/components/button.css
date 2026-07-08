@@ -1,96 +1,107 @@
-/* =========================
+/* ==========================================================
    SHARED BASES
-========================= */
+========================================================== */
+
 @utility interactive-base {
-  @apply inline-flex items-center justify-center;
-  @apply relative rounded-full;
-  @apply transition-all duration-300 motion-reduce:transition-none;
-  @apply cursor-pointer text-center select-none;
-  @apply tracking-tight antialiased;
+  @apply relative inline-flex items-center justify-center;
+  @apply cursor-pointer rounded-full;
+  @apply text-center tracking-tight antialiased select-none;
+  @apply motion-reduce:transition-none;
+
   -webkit-tap-highlight-color: transparent;
+
+  @apply transition-[transform,background-color,border-color,opacity,box-shadow,translate];
+  @apply duration-300;
+  @apply ease-[cubic-bezier(.22,1,.36,1)];
+
+  transform: translate3d(0, 0, 0);
+
+  contain: paint;
 }
 
 @utility interactive-text {
-  @apply fill-current text-zinc-900 dark:text-white;
+  @apply text-zinc-900 dark:text-white;
+
+  fill: currentColor;
 }
 
 @utility interactive-state {
-  &:disabled,
-  &[aria-current="page"] {
-    @apply pointer-events-none bg-white text-stone-500 dark:bg-zinc-600 dark:text-zinc-300;
+  &:disabled {
+    @apply pointer-events-none;
+    @apply bg-white text-stone-500;
+    @apply dark:bg-zinc-700 dark:text-zinc-400;
+    @apply opacity-65;
   }
 }
 
-/* =========================
-   INTERACTIVE
-========================= */
+/* ==========================================================
+   BUTTON (primary glass button)
+========================================================== */
+
 @utility interactive {
-  @apply interactive-state interactive-base interactive-text;
-  @apply font-bold;
-  @apply border border-white/50;
-  @apply backdrop-blur-md;
+  @apply interactive-base;
+  @apply interactive-state;
+  @apply interactive-text;
 
-  background: var(--interactive-bg);
-  border-color: var(--interactive-border);
-  box-shadow: var(--interactive-shadow);
+  @apply border font-bold;
 
-  @variant dark {
-    background: var(--interactive-bg-dark);
-  }
-
-  &::before,
-  &::after {
-    content: "";
-    @apply pointer-events-none absolute inset-0 rounded-full;
-  }
+  @apply border-white/50;
+  @apply bg-white/40;
+  @apply shadow-sm;
 
   &::before {
-    @apply bg-linear-to-br from-white/60 via-transparent to-transparent opacity-70;
+    content: "";
+
+    @apply pointer-events-none absolute inset-0 rounded-full;
+
+    background:
+      linear-gradient(to bottom right, rgba(255, 255, 255, 0.6), transparent 35%),
+      linear-gradient(to top left, rgba(231, 229, 228, 0.25), transparent 55%);
+
+    @apply opacity-75;
+    @apply transition-opacity duration-300;
   }
 
-  &::after {
-    @apply bg-linear-to-tl from-stone-200/30 via-transparent to-transparent opacity-50;
+  &:hover,
+  &:focus-visible {
+    transform: translate3d(0, -2px, 0);
+
+    @apply bg-white/55;
+    @apply border-white/75;
+
+    box-shadow:
+      0 0 1px rgba(0, 0, 0, 0.18),
+      0 6px 12px rgba(0, 0, 0, 0.18);
+
+    &::before {
+      @apply opacity-100;
+    }
   }
 
-  &:is(:hover, :focus-visible, :active) {
-    @apply bg-white/80 sm:-translate-y-0.5;
-    box-shadow: var(--interactive-shadow-hover);
+  &:active {
+    transform: translate3d(0, 0, 0);
   }
 
   @variant dark {
-    &:is(:hover, :focus-visible, :active) {
-      @apply bg-white/30;
-      box-shadow: var(--interactive-shadow-dark-hover);
+    @apply bg-zinc-800/25;
+    @apply border-white/15;
+
+    &:hover,
+    &:focus-visible {
+      @apply bg-zinc-700/35;
+      @apply border-white/25;
     }
   }
 }
 
-/* =========================
-   SOLID VARIANT (no transparency, no backdrop-blur)
-   For elements inside animated containers (side drawer)
-   to avoid expensive GPU compositing during animation.
-========================= */
-@utility interactive-solid {
-  @apply interactive-state interactive-base interactive-text;
-  @apply font-bold;
-  @apply border border-zinc-300 bg-white shadow-sm;
+/* ==========================================================
+   SIZES
+========================================================== */
 
-  &:is(:hover, :focus-visible, :active) {
-    @apply bg-zinc-100 shadow-md sm:-translate-y-0.5;
-  }
-
-  @variant dark {
-    @apply border-zinc-700 bg-zinc-800 shadow-sm;
-
-    &:is(:hover, :focus-visible, :active) {
-      @apply bg-zinc-700 shadow-md;
-    }
-  }
+@utility interactive-xs {
+  @apply px-2 py-1 text-xs;
 }
 
-/* =========================
-   SIZE VARIANTS
-========================= */
 @utility interactive-sm {
   @apply px-3 py-1.5 text-sm;
 }
@@ -103,11 +114,14 @@
   @apply px-6 py-3 text-xl;
 }
 
-/* =========================
-   VISUAL VARIANTS
-========================= */
+/* ==========================================================
+   ICON VARIANTS
+========================================================== */
+
 @utility interactive-icon {
-  @apply interactive-base interactive-text;
+  @apply interactive-base;
+  @apply interactive-text;
+
   @apply gap-2 p-3 pl-8;
 
   & > :is(svg, i) {
@@ -115,51 +129,13 @@
   }
 }
 
-/* =========================
-   ICON LINKS
-========================= */
 @utility icon-link {
   @apply interactive-base;
   @apply p-3;
   @apply text-zinc-900 dark:text-zinc-200;
-  @apply hover:text-zinc-500 focus-visible:text-zinc-500;
-}
 
-/* =========================
-   CARDS
-   ========================= */
-@utility interactive-card {
-  @apply flex flex-col justify-between;
-  @apply rounded-lg border p-5;
-  @apply transition-all duration-300 motion-reduce:transition-none;
-  @apply text-zinc-900 dark:text-white;
-
-  --card-bg: rgb(255 255 255 / 0.5);
-  --card-border: rgb(255 255 255 / 0.3);
-  --card-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
-
-  background: var(--card-bg);
-  border-color: var(--card-border);
-  box-shadow: var(--card-shadow);
-
-  @variant dark {
-    --card-bg: rgb(255 255 255 / 0.05);
-    --card-border: rgb(255 255 255 / 0.15);
-    --card-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
-  }
-
-  &:is(:hover, :focus-visible, :active) {
-    @apply sm:-translate-y-1;
-
-    --card-bg: rgb(255 255 255 / 0.8);
-    --card-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
-  }
-
-  @variant dark {
-    &:is(:hover, :focus-visible, :active) {
-      --card-bg: rgb(255 255 255 / 0.1);
-      --card-border: rgb(255 255 255 / 0.3);
-      --card-shadow: 0 8px 24px rgb(0 0 0 / 0.4);
-    }
+  &:hover,
+  &:focus-visible {
+    @apply text-zinc-500;
   }
 }

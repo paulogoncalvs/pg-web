@@ -55,7 +55,7 @@ export const OverlayWithStore: FunctionalComponent = () => {
 
   return (
     <Overlay isOpen={Boolean(isSideDrawerOpen || isNavigating)} onClose={closeDrawer}>
-      {isNavigating ? <Spinner class="h-8 w-8" /> : undefined}
+      {isNavigating ? <Spinner class="size-8" /> : undefined}
     </Overlay>
   );
 };

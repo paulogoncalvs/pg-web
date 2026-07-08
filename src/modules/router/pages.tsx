@@ -1,9 +1,10 @@
 import type { ComponentType, JSX } from "preact";
 
-import { useState, useEffect } from "preact/hooks";
+import { useContext, useState, useEffect } from "preact/hooks";
 
 import { Spinner } from "@/components/Spinner";
 import routesConfig from "@/config/routes";
+import { StoreContext } from "@/modules/store/context";
 
 const loaders: Record<string, () => Promise<{ default: ComponentType }>> = {
   Home: () => import("@/pages/Home"),
@@ -14,38 +15,56 @@ const loaders: Record<string, () => Promise<{ default: ComponentType }>> = {
   Offline: () => import("@/pages/Offline"),
 };
 
-const cache: Record<string, ComponentType | undefined> = {};
+export const pageCache: Record<string, ComponentType | undefined> = {};
 
 export const preloadPage = async (view: string): Promise<void> => {
   const loader = loaders[view];
   if (loader) {
     const mod = await loader();
-    cache[view] = mod.default;
+    pageCache[view] = mod.default;
   }
 };
 
 function usePageComponent(view: string): ComponentType | null {
-  const [Page, setPage] = useState<ComponentType | null>(() => cache[view] ?? null);
+  const [Page, setPage] = useState<ComponentType | null>(() => pageCache[view] ?? null);
+  const { dispatch } = useContext(StoreContext);
 
   useEffect(() => {
-    if (cache[view]) {
-      setPage(() => cache[view]!);
+    let current = true;
+    const loader = loaders[view] || loaders.NotFound;
+    const startTime = Date.now();
+
+    if (pageCache[view]) {
+      setPage(() => pageCache[view]!);
       return;
     }
 
-    let current = true;
-    const loader = loaders[view] || loaders.NotFound;
-
     loader().then((mod) => {
       if (current) {
+        pageCache[view] = mod.default;
         setPage(() => mod.default);
       }
+
+      const elapsed = Date.now() - startTime;
+      setTimeout(
+        () => {
+          dispatch({
+            type: "UPDATE",
+            payload: { isNavigating: false },
+          });
+        },
+        Math.max(0, 100 - elapsed),
+      );
     });
 
     return () => {
       current = false;
+      dispatch({
+        type: "UPDATE",
+        payload: { isNavigating: false },
+      });
     };
-  }, [view]);
+  }, [view, dispatch]);
 
   return Page;
 }

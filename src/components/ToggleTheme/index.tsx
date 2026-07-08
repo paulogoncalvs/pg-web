@@ -4,6 +4,7 @@ import { useCallback, useState } from "preact/hooks";
 
 import darkModeIcon from "@/assets/icons/dark_mode.svg";
 import lightModeIcon from "@/assets/icons/light_mode.svg";
+import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { Tooltip } from "@/components/Tooltip";
 import { useTranslate } from "@/modules/i18n";
@@ -43,11 +44,11 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({
 
   return (
     <Tooltip content={t("theme_toggle", { theme: themeLabel })} class="capitalize" position="top">
-      <button
+      <Button
         type="button"
         onClick={handleOnClick}
         class={classNames("icon-link sup-novar", classes)}
-        aria-label={t("theme_toggle", { theme: themeLabel })}
+        ariaLabel={t("theme_toggle", { theme: themeLabel })}
       >
         <Icon
           src={getToggleIcon(theme)}
@@ -55,7 +56,7 @@ export const ToggleTheme: FunctionalComponent<ToggleThemeComponentProps> = ({
           class={animating ? "animate-theme-toggle fill-current" : undefined}
           onAnimationEnd={handleAnimationEnd}
         />
-      </button>
+      </Button>
     </Tooltip>
   );
 };

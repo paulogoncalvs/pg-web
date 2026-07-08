@@ -1,28 +1,17 @@
 import type { FunctionalComponent } from "preact";
 
-import { Link } from "@/components/Link";
-import { ScrollReveal } from "@/components/ScrollReveal";
+import { ErrorPageLayout } from "@/components/ErrorPageLayout";
 import { useTranslate } from "@/modules/i18n";
 
 const NotFoundPage: FunctionalComponent = () => {
   const { t } = useTranslate();
 
   return (
-    <>
-      <h1 class="pt-16">
-        <ScrollReveal delay={1} as="span">
-          {t("not_found_page_title")}
-        </ScrollReveal>
-        <ScrollReveal delay={2} as="span">
-          {t("not_found_page_subtitle")}
-        </ScrollReveal>
-      </h1>
-      <ScrollReveal delay={4} direction="up" class="pb-16">
-        <Link useRouter class="interactive interactive-lg" href="/">
-          {t("not_found_page_button_label")}
-        </Link>
-      </ScrollReveal>
-    </>
+    <ErrorPageLayout
+      title={t("not_found_page_title")}
+      subtitle={t("not_found_page_subtitle")}
+      buttonLabel={t("not_found_page_button_label")}
+    />
   );
 };
 

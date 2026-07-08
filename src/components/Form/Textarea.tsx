@@ -2,6 +2,8 @@ import type { FunctionalComponent } from "preact";
 
 import { useContext } from "preact/hooks";
 
+import { classNames } from "@/utils/classNames";
+
 import { FormContext } from "./";
 
 interface FormTextareaProps {
@@ -32,7 +34,7 @@ export const FormTextarea: FunctionalComponent<FormTextareaProps> = ({
     <div class="mt-3">
       <label htmlFor={id}>{label}</label>
       <textarea
-        class={`form-input ${errors[name] ? "error" : ""}`}
+        class={classNames("form-input", errors[name] && "error")}
         id={id}
         name={name}
         rows={rows}

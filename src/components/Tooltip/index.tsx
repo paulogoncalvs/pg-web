@@ -10,6 +10,8 @@ interface TooltipProps {
   delay?: number;
   class?: string;
   children: ComponentChildren;
+  hideOnOutsideClick?: boolean;
+  forcedHide?: boolean;
 }
 
 export const Tooltip: FunctionalComponent<TooltipProps> = ({
@@ -18,6 +20,8 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   position = "bottom",
   class: classes = "",
   delay = 0,
+  hideOnOutsideClick = false,
+  forcedHide = false,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -33,10 +37,11 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   const rafRef = useRef<number>();
   const lastTouchTime = useRef(0);
 
-  const idRef = useRef(`tooltip-${useId()}`);
+  const id = useId();
+  const idRef = useRef(`tooltip-${id}`);
 
   const TOUCH_DEBOUNCE = 500;
-  const ANIMATION_DURATION = 200;
+  const ANIMATION_DURATION = 300;
   const OFFSET = 8;
 
   const clearTimers = useCallback(() => {
@@ -84,21 +89,33 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   }, [updatePosition]);
 
   const show = useCallback(() => {
+    if (forcedHide) {
+      return;
+    }
+
     clearTimers();
     setIsMounted(true);
 
     showTimeout.current = window.setTimeout(() => {
       setIsVisible(true);
     }, delay);
-  }, [clearTimers, delay]);
+  }, [clearTimers, delay, forcedHide]);
 
   const hide = useCallback(() => {
     clearTimers();
     setIsVisible(false);
 
-    hideTimeout.current = window.setTimeout(() => {
-      setIsMounted(false);
-    }, ANIMATION_DURATION);
+    const off =
+      typeof document !== "undefined" &&
+      (document.documentElement.classList.contains("animations-off") ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+    hideTimeout.current = window.setTimeout(
+      () => {
+        setIsMounted(false);
+      },
+      off ? 0 : ANIMATION_DURATION,
+    );
   }, [clearTimers]);
 
   const handleTouch = useCallback(() => {
@@ -149,6 +166,27 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   }, [isVisible, content, scheduleUpdate]);
 
   useEffect(() => {
+    if (!hideOnOutsideClick || !isVisible) {
+      return;
+    }
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (triggerRef.current && !triggerRef.current.contains(e.target as Node)) {
+        hide();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [hideOnOutsideClick, isVisible, hide]);
+
+  useEffect(() => {
+    if (forcedHide) {
+      hide();
+    }
+  }, [forcedHide, hide]);
+
+  useEffect(() => {
     return () => clearTimers();
   }, [clearTimers]);
 
@@ -179,7 +217,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
           role="tooltip"
           aria-hidden={!isVisible}
           class={classNames(
-            "absolute z-50 rounded px-2 py-1 text-center text-xs transition-all duration-200 motion-reduce:transition-none",
+            "absolute z-50 rounded px-2 py-1 text-center text-xs transition-all duration-300 motion-reduce:transition-none",
             "bg-zinc-800 text-white dark:bg-zinc-200 dark:text-zinc-800",
             "max-w-xs break-words",
             alignmentClass,

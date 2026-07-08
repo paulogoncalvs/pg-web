@@ -3,13 +3,11 @@
    ========================= */
 
 html {
-  @apply scroll-smooth motion-reduce:scroll-auto;
+  @apply [scrollbar-gutter:stable] scroll-smooth motion-reduce:scroll-auto;
 }
 
 body {
-  @apply font-sans text-base text-gray-900 dark:text-gray-100;
-  font-synthesis-weight: none;
-  text-rendering: optimizeLegibility;
+  @apply bg-gradient font-sans text-base text-zinc-900 min-block-svh selection:bg-zinc-400 selection:text-zinc-100 dark:text-zinc-200 dark:selection:bg-zinc-100 dark:selection:text-zinc-900;
 }
 
 a {
@@ -63,6 +61,27 @@ summary {
 
 summary::-webkit-details-marker {
   display: none;
+}
+
+/* Show scrollbar on horizontal snap containers when JS is disabled */
+.snap-x::-webkit-scrollbar,
+.snap-x::-webkit-scrollbar-thumb {
+  @apply rounded-full;
+}
+
+.snap-x::-webkit-scrollbar {
+  height: 0.375rem;
+  width: 0.375rem;
+}
+
+.snap-x::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .snap-x::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.6);
+  }
 }
 
 @media print {

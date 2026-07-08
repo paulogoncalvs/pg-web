@@ -145,4 +145,14 @@ interface Window {
     ) => string;
     reset: (widgetId?: string) => void;
   };
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
+  __REDUX_DEVTOOLS_EXTENSION__?: () => {
+    connect(): {
+      send(action: string, state: unknown): void;
+      init(state: unknown): void;
+      subscribe(listener: (message: unknown) => void): () => void;
+      unsubscribe(): void;
+    };
+  };
 }

@@ -18,6 +18,10 @@ test.describe("HOMEPAGE WITH SIDEDRAWER OPEN", () => {
       const url = lang === "pt" ? "/pt/" : "/";
 
       await basePage.goto(url, colorScheme);
+      const viewport = page.viewportSize()!;
+
+      await page.setViewportSize({ width: viewport.width, height: 800 });
+      await page.waitForTimeout(200);
       await basePage.openSideDrawer();
       await basePage.takeScreenshot();
     });
