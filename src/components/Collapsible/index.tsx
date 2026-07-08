@@ -50,10 +50,17 @@ export const Collapsible: FunctionalComponent<CollapsibleProps> = ({
           width="12"
           height="12"
           ariaHidden
-          class="transition-transform duration-200 group-open:rotate-180"
+          class="transition-transform duration-300 group-open:rotate-180"
         />
       </summary>
-      <div class={classNames(contentClass)}>{children}</div>
+      <div
+        class={classNames(
+          "max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out group-open:max-h-[5000px] group-open:opacity-100",
+          contentClass,
+        )}
+      >
+        {children}
+      </div>
     </details>
   );
 };

@@ -36,7 +36,7 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
     <div class={classNames("mt-3", classes)}>
       <label htmlFor={id}>{label}</label>
       <input
-        class={`form-input ${errors[name] ? "error" : ""}`}
+        class={classNames("form-input", errors[name] && "error")}
         id={id}
         type={type}
         name={name}

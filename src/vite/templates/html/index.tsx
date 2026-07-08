@@ -63,5 +63,5 @@ export const HtmlTemplate = ({
 
   const bodyContent = `<div id="root">${appHtml}</div>`;
 
-  return `<!DOCTYPE html><html lang="${lang}" class="[scrollbar-gutter:stable]"><head>${headParts.join("")}</head><body class="bg-gradient font-sans text-zinc-900 selection:bg-zinc-400 selection:text-zinc-100 dark:text-zinc-200 dark:selection:bg-zinc-100 dark:selection:text-zinc-900 min-block-svh">${bodyContent}</body></html>`;
+  return `<!DOCTYPE html><html lang="${lang}"><head>${headParts.join("")}</head><body class="bg-gradient font-sans text-zinc-900 selection:bg-zinc-400 selection:text-zinc-100 dark:text-zinc-200 dark:selection:bg-zinc-100 dark:selection:text-zinc-900 min-block-svh">${bodyContent}</body></html>`;
 };

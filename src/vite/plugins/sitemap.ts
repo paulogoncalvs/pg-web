@@ -3,8 +3,9 @@ import type { Plugin } from "vite";
 import { baseUrl } from "../../config/global/constants";
 import routesConfig from "../../config/routes";
 
+const SHOULD_SKIP = ["/404/", "/offline/"];
 const shouldIgnoreRoute = (route: string): boolean =>
-  ["/offline/", "/404/"].some((ignored) => route === ignored || route.startsWith(ignored));
+  SHOULD_SKIP.some((ignored) => route === ignored || route.endsWith(ignored));
 
 const cleanBaseUrl = baseUrl.replace(/\/+$/, "");
 
@@ -25,16 +26,16 @@ const toSitemapUrl = (route: string): string => {
     ? "    <priority>0.8</priority>"
     : "    <priority>0.6</priority>";
 
-  const cleanPath = route.replace(/^\/|\/$/g, "");
-  const enUrl = `${cleanBaseUrl}/${cleanPath}`;
-  const ptUrl = `${cleanBaseUrl}/pt/${cleanPath}`;
+  const isPt = route.startsWith("/pt");
+  const ptRoute = isPt ? route : `/pt${route}`;
+  const enRoute = isPt ? route.replace(/^\/pt/, "") : route;
 
   const parts = [
     "  <url>",
     `    <loc>${cleanBaseUrl}${route}</loc>`,
-    `    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}" />`,
-    `    <xhtml:link rel="alternate" hreflang="pt" href="${ptUrl}" />`,
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${enUrl}" />`,
+    `    <xhtml:link rel="alternate" hreflang="en" href="${cleanBaseUrl}${enRoute}" />`,
+    `    <xhtml:link rel="alternate" hreflang="pt" href="${cleanBaseUrl}${ptRoute}" />`,
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${cleanBaseUrl}${enRoute}" />`,
   ];
   if (lastmod) {
     parts.push(lastmod);

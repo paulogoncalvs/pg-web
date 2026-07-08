@@ -4,11 +4,12 @@ import { useState, useEffect } from "preact/hooks";
 import { useLocation } from "wouter-preact";
 
 import arrowBackIcon from "@/assets/icons/arrow_back.svg";
-import calendarIcon from "@/assets/icons/calendar.svg";
-import clockIcon from "@/assets/icons/clock.svg";
+import { BlogMeta } from "@/components/BlogMeta";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { PageHeading } from "@/components/PageHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { Tag } from "@/components/Tag";
 import { useTranslate } from "@/modules/i18n";
 
 import { blogPostLoaders, getCachedBlogPostComponent, getBlogPost } from "./posts";
@@ -46,17 +47,21 @@ function useMDXComponent(slug: string | undefined): {
       return;
     }
 
-    setState({ Component: null, loading: true });
+    const loadingTimer = setTimeout(() => {
+      setState({ Component: null, loading: true });
+    }, 200);
 
     let current = true;
     loader().then((mod) => {
       if (current) {
+        clearTimeout(loadingTimer);
         setState({ Component: mod.default, loading: false });
       }
     });
 
     return () => {
       current = false;
+      clearTimeout(loadingTimer);
     };
   }, [slug]);
 
@@ -89,31 +94,29 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
   return (
     <>
       <div class="flex flex-col gap-5 pt-16">
-        <h1>
-          <ScrollReveal delay={1} as="span" class="block">
-            {post?.title}
-          </ScrollReveal>
-          <ScrollReveal delay={2} as="span">
-            {post?.description}
-          </ScrollReveal>
-        </h1>
+        <PageHeading title={post?.title} subtitle={post?.description} titleClass="block" class="" />
 
-        <ScrollReveal
-          delay={3}
-          as="div"
-          class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-base text-stone-600 dark:text-zinc-400"
-        >
-          <span class="flex items-center gap-2">
-            <Icon src={calendarIcon} class="size-4" aria-hidden="true" />
-            {post?.date}
-          </span>
-          <span class="flex items-center gap-2">
-            <Icon src={clockIcon} class="size-4" aria-hidden="true" />
-            {t("blog_reading_time", { min: String(post?.readingTime ?? 0) })}
-          </span>
+        <ScrollReveal as="div" delay={1}>
+          <BlogMeta date={post?.date ?? ""} readingTime={post?.readingTime ?? 0} size="base" />
         </ScrollReveal>
-        <ScrollReveal direction="up" delay={3.5}>
-          <Link useRouter href="/blog/" class="interactive interactive-icon interactive-sm">
+        {post?.tags && post.tags.length > 0 && (
+          <div class="flex flex-wrap items-center justify-center gap-1.5">
+            {post.tags.map((tag, index) => (
+              <ScrollReveal delay={0.5 * index} key={tag}>
+                <Tag key={"tag-" + tag} tag={tag} />
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
+        <ScrollReveal direction="up" delay={1}>
+          <Link
+            href="/blog/"
+            onClick={(e) => {
+              e.preventDefault();
+              history.back();
+            }}
+            class="interactive interactive-icon interactive-sm"
+          >
             <Icon src={arrowBackIcon} class="size-3" aria-hidden />
             {t("blog_back_link")}
           </Link>
@@ -122,7 +125,7 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
       <div class="pb-16 text-left text-sm sm:text-base @3xl:max-w-prose @3xl:self-center">
         {MDXComponent ? (
           <>
-            <ScrollReveal class="prose" delay={5}>
+            <ScrollReveal class="prose" delay={1}>
               <MDXComponent />
             </ScrollReveal>
             <ScrollReveal
@@ -136,41 +139,48 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
         ) : isLoading ? (
           <div class="relative min-h-[60dvh]">
             <ScrollReveal delay={3} class="flex flex-col gap-3">
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-5/6 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-2/3 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-4/5 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-3/4 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-11/12 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-3/4 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-5/6 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-4/5 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-2/3 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-7/8 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-5/6 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-3/4 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-11/12 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-4/5 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-11/12 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-3/4 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-5/6 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-4/5 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-2/3 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-7/8 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-5/6 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-3/4 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-11/12 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-full animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
-              <div class="h-4 w-4/5 animate-pulse rounded bg-stone-400/60 dark:bg-zinc-600/60" />
+              {[
+                "w-full",
+                "w-5/6",
+                "w-2/3",
+                "w-4/5",
+                "w-3/4",
+                "w-full",
+                "w-11/12",
+                "w-3/4",
+                "w-full",
+                "w-5/6",
+                "w-4/5",
+                "w-full",
+                "w-2/3",
+                "w-7/8",
+                "w-full",
+                "w-5/6",
+                "w-3/4",
+                "w-11/12",
+                "w-full",
+                "w-4/5",
+                "w-full",
+                "w-11/12",
+                "w-3/4",
+                "w-full",
+                "w-5/6",
+                "w-4/5",
+                "w-full",
+                "w-2/3",
+                "w-7/8",
+                "w-full",
+                "w-5/6",
+                "w-3/4",
+                "w-11/12",
+                "w-full",
+                "w-4/5",
+              ].map((w, i) => (
+                <div
+                  key={`blog-post-sklt-${i + 1}`}
+                  class={`h-4 ${w} animate-pulse rounded-sm bg-stone-400/60 dark:bg-zinc-600/60`}
+                />
+              ))}
             </ScrollReveal>
           </div>
         ) : (

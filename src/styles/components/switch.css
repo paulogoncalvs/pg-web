@@ -1,0 +1,87 @@
+/* ==========================================================
+   SWITCH TRACK
+========================================================== */
+
+@utility interactive-switch {
+  @apply relative flex items-center overflow-hidden rounded-full border;
+
+  @apply transition-[transform,background-color,border-color,box-shadow];
+  @apply duration-300;
+  @apply ease-[cubic-bezier(.22,1,.36,1)];
+
+  width: 2.25rem;
+  height: 1.25rem;
+  padding: 0.125rem;
+
+  @apply border-white/90;
+  @apply bg-white/40;
+  @apply shadow-sm;
+
+  contain: paint;
+
+  &::before {
+    content: "";
+
+    @apply pointer-events-none absolute inset-0 rounded-full;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), transparent 45%);
+  }
+
+  &:hover,
+  &:focus-visible {
+    @apply bg-white;
+  }
+
+  &:has(input:checked) {
+    @apply bg-zinc-900/90;
+    @apply border-black/10;
+  }
+
+  @variant dark {
+    @apply bg-zinc-600/80;
+    @apply border-white/15;
+
+    &:hover,
+    &:focus-visible {
+      @apply bg-zinc-800/80;
+    }
+
+    &:has(input:checked) {
+      @apply bg-white/90;
+    }
+  }
+}
+
+/* ==========================================================
+   SWITCH THUMB
+========================================================== */
+
+@utility interactive-switch-thumb {
+  @apply relative z-10 block rounded-full;
+
+  @apply transition-transform;
+  @apply duration-300;
+  @apply ease-[cubic-bezier(.22,1,.36,1)];
+
+  width: 1rem;
+  height: 1rem;
+
+  @apply bg-black/70;
+  @apply border border-black/20;
+
+  .peer:checked ~ .interactive-switch & {
+    transform: translateX(1rem);
+
+    @apply bg-black/95;
+  }
+
+  @variant dark {
+    @apply bg-zinc-300/50;
+    @apply border-white/15;
+
+    .peer:checked ~ .interactive-switch & {
+      @apply bg-white/95;
+      @apply border-white/70;
+    }
+  }
+}

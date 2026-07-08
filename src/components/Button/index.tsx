@@ -1,23 +1,35 @@
-import type { ComponentChildren, FunctionalComponent } from "preact";
+import type { ComponentChildren, FunctionalComponent, JSX } from "preact";
 
 import { classNames } from "@/utils/classNames";
 
 interface ButtonComponentProps {
-  mainClasses?: string;
   class?: string;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: JSX.MouseEventHandler<HTMLButtonElement>;
   children?: ComponentChildren;
+  type?: "button" | "submit" | "reset";
+  ariaLabel?: string;
+  ariaCurrent?: string;
+  tabIndex?: number;
+  style?: Record<string, string | number | undefined>;
+  [key: string]: unknown;
 }
 
 export const Button: FunctionalComponent<ButtonComponentProps> = ({
-  mainClasses = "",
   class: classes = "",
   children,
   disabled,
+  type = "button",
+  ariaLabel,
   ...otherProps
 }) => (
-  <button disabled={disabled} class={classNames(mainClasses, classes)} {...otherProps}>
+  <button
+    type={type}
+    disabled={disabled}
+    class={classNames(classes)}
+    aria-label={ariaLabel}
+    {...otherProps}
+  >
     {children}
   </button>
 );

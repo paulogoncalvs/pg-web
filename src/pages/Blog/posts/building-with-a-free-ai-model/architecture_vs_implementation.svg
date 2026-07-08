@@ -1,0 +1,21 @@
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" rx="10" fill="#1F2937"/>
+  
+  <rect x="50" y="50" width="320" height="300" rx="8" stroke="#3B82F6" stroke-width="4"/>
+  <text x="210" y="90" text-anchor="middle" fill="#3B82F6" font-family="Arial, sans-serif" font-size="24" font-weight="bold">ENGINEERING JUDGMENT</text>
+  <text x="70" y="140" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• System Architecture</text>
+  <text x="70" y="180" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Component Structure</text>
+  <text x="70" y="220" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Deployment Pipeline</text>
+  <text x="70" y="260" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Security Assessment</text>
+  <text x="70" y="300" fill="#3B82F6" font-family="Arial, sans-serif" font-size="18" font-weight="bold">(HUMAN ONLY)</text>
+
+  <path d="M370 200 H430" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <rect x="430" y="50" width="320" height="300" rx="8" stroke="#10B981" stroke-width="4"/>
+  <text x="590" y="90" text-anchor="middle" fill="#10B981" font-family="Arial, sans-serif" font-size="24" font-weight="bold">IMPLEMENTATION</text>
+  <text x="450" y="140" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Boilerplate Generation</text>
+  <text x="450" y="180" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Refactoring/Renaming</text>
+  <text x="450" y="220" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Unit Test Scaffolding</text>
+  <text x="450" y="260" fill="#E5E7EB" font-family="Arial, sans-serif" font-size="18">• Codebase Exploration</text>
+  <text x="450" y="300" fill="#10B981" font-family="Arial, sans-serif" font-size="18" font-weight="bold">(AI ASSISTED)</text>
+</svg>

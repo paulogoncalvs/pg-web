@@ -42,7 +42,7 @@ export const BannerStack: FunctionalComponent = () => {
   }, []);
 
   return (
-    <div ref={ref} class="fixed right-0 bottom-0 left-0 z-50 flex flex-col">
+    <div ref={ref} class="fixed inset-x-0 bottom-0 z-50 flex flex-col">
       <OfflineBanner />
       <CookieConsentBar />
     </div>

@@ -1,5 +1,7 @@
 import type { FunctionalComponent, JSX } from "preact";
 
+import { classNames } from "@/utils/classNames";
+
 export type BannerVariant = "info" | "warning" | "error" | "neutral";
 
 interface BannerProps {
@@ -17,7 +19,7 @@ const variantStyles: Record<BannerVariant, string> = {
   error:
     "border-red-600/30 bg-red-600/10 text-red-800 dark:border-red-400/20 dark:bg-red-400/5 dark:text-red-200",
   neutral:
-    "border-white/80 bg-white/80 text-zinc-900 dark:border-white/15 dark:bg-zinc-900/60 dark:text-zinc-100",
+    "border-white/80 bg-white/50 text-zinc-900 dark:border-white/15 dark:bg-zinc-900/50 dark:text-zinc-100",
 };
 
 export const Banner: FunctionalComponent<BannerProps> = ({
@@ -33,7 +35,12 @@ export const Banner: FunctionalComponent<BannerProps> = ({
 
   return (
     <div
-      class={`${isFixed ? "fixed right-0 bottom-0 left-0 z-50" : ""} border-t px-4 py-3 text-center text-sm backdrop-blur-md ${variantStyles[variant]} ${className}`}
+      class={classNames(
+        "border-t px-4 py-3 text-center text-sm backdrop-blur-md",
+        variantStyles[variant],
+        isFixed && "fixed right-0 bottom-0 left-0 z-50",
+        className,
+      )}
       role="alert"
     >
       {children}

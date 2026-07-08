@@ -4,7 +4,7 @@ textarea,
 select {
   @apply w-full rounded-md border px-3 py-2 text-sm shadow-sm;
   @apply border-stone-300 bg-stone-100/80 dark:border-zinc-300/30 dark:bg-zinc-800/30 dark:text-zinc-300;
-  @apply transition-colors duration-200 motion-reduce:transition-none;
+  @apply transition-colors duration-300 motion-reduce:transition-none;
 }
 
 /* Placeholder */
@@ -44,7 +44,7 @@ input[type="file"]::file-selector-button {
 
 /* Labels */
 label {
-  @apply block text-sm font-medium text-zinc-700 dark:text-zinc-200;
+  @apply inline-block text-sm font-medium text-zinc-700 dark:text-zinc-200;
 }
 
 /* Select */

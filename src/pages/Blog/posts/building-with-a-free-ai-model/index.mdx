@@ -1,0 +1,216 @@
+import { TLDR } from "@/components/TLDR";
+import headerImage from "./header.svg";
+import simpleSetupImage from "./simple_setup_workflow.svg";
+import architectureImage from "./architecture_vs_implementation.svg";
+import economicsImage from "./economics_ai_tools.svg";
+import reviewImage from "./review.svg";
+
+# Building This Site with a Free AI Model
+
+<TLDR>
+  Every component, test, script, and configuration file behind this website was built by a human
+  developer working alongside an AI model. Not a premium subscription. Not a stack of monthly AI
+  tools. Just a local workflow, a free model, and a lot of engineering decisions.
+</TLDR>
+
+<img src={headerImage} class="w-full h-auto" alt="" />
+
+That matters because it challenges one of the assumptions emerging in modern software development:
+that serious work requires increasingly expensive AI tooling.
+
+## AI Didn't Build This Site
+
+The architecture, component structure, styling system, routing, and build pipeline were designed and
+implemented by me.
+
+AI entered the process later.
+
+I use it the same way I would use a junior developer who works quickly, asks few questions, and
+occasionally makes confident mistakes. It accelerates implementation, reduces repetitive work, and
+helps me explore unfamiliar parts of the codebase. It does not make the important decisions.
+
+That's an important distinction.
+
+The value of AI isn't that it replaces engineering judgment. It's that it lets that judgment operate
+faster.
+
+## My Setup
+
+The workflow is intentionally simple:
+
+- Visual Studio Code
+- Opencode for agentic workflows
+- DeepSeek V4 through OpenAI
+- Local development environment
+- Human review for every change
+
+<img src={simpleSetupImage} class="w-full h-auto" alt="" />
+
+The model writes code. I evaluate it. I modify it. I decide whether it ships.
+
+Nothing gets merged because a model suggested it.
+
+## Where AI Delivers Real Value
+
+### Codebase Exploration
+
+One of AI's strongest capabilities is understanding large codebases.
+
+Questions like:
+
+- "What code depends on this component?"
+- "What changed between these two implementations?"
+
+can be answered in seconds. The model can traverse the project faster than I can manually search
+through files and often presents the results in a more structured way.
+
+### Refactoring
+
+Refactoring is largely mechanical work, which makes it a good fit for AI assistance.
+
+Moving files, extracting components, renaming symbols, updating imports, and reorganizing modules
+are all tasks where the model can remove a significant amount of manual effort while still remaining
+easy to verify.
+
+### Large-Scale Migrations
+
+Framework upgrades and syntax migrations are tedious but predictable.
+
+Updating Tailwind patterns, converting APIs, replacing deprecated options, or applying project-wide
+transformations is exactly the kind of repetitive work where AI provides leverage.
+
+### Boilerplate Generation
+
+Test scaffolding, route definitions, configuration files, storage interfaces, and similar patterns
+rarely require deep creativity.
+
+The model handles the typing so I can focus on the parts that actually require engineering
+decisions.
+
+### Learning in Context
+
+Documentation explains a library in the abstract.
+
+AI can explain it in the context of _your codebase_.
+
+That contextualization often makes learning faster than switching between documentation, examples,
+and source code.
+
+## Where AI Still Falls Short
+
+### Architecture
+
+Architecture is ultimately about tradeoffs.
+
+AI doesn't know the users, business constraints, performance goals, maintenance requirements, or
+future direction of a project. It can generate plausible structures, but the decisions remain human.
+
+The most important technical decisions on this site were made before AI touched the code.
+
+### Debugging Complex Runtime Issues
+
+Race conditions, hydration mismatches, timing bugs, and state synchronization issues are
+fundamentally runtime problems.
+
+AI sees source code.
+
+Developers see the running system.
+
+The model can suggest hypotheses, but identifying root causes still requires observation,
+instrumentation, and experimentation.
+
+### Subtle Frontend Behavior
+
+Frontend bugs often emerge from interactions between the DOM, browser behavior, CSS specificity,
+accessibility semantics, and JavaScript event handling.
+
+These problems frequently require browser tooling, visual inspection, and real user interaction.
+
+Code alone rarely tells the entire story.
+
+### Security and Correctness
+
+AI-generated code should be treated as untrusted until reviewed.
+
+Models can suggest insecure patterns, introduce edge-case failures, misunderstand requirements, or
+produce code that appears correct while being subtly wrong.
+
+The output is a starting point, not a final answer.
+
+### Visual Quality
+
+AI can generate Playwright tests.
+
+It cannot reliably judge whether a layout feels right, whether spacing is balanced, or whether a
+responsive design works well across devices.
+
+Good interfaces still require human eyes.
+
+<img src={architectureImage} class="w-full h-auto" alt="" />
+
+## The Economics of AI Development
+
+The current AI tooling market is increasingly subscription-driven.
+
+Many developers now combine multiple services:
+
+- GitHub Copilot
+- ChatGPT Plus
+- Claude Pro
+- Cursor Pro
+- JetBrains AI
+
+<img src={economicsImage} class="w-full h-auto" alt="" />
+
+Individually, none of these subscriptions are particularly expensive. Together, they can easily
+become one of the larger recurring costs in a personal development stack.
+
+The underlying message is often implicit:
+
+> If you're serious about software development, you need premium AI tools.
+
+I'm not convinced.
+
+For many workflows, affordable models are already good enough.
+
+Not perfect. Not state-of-the-art. Good enough.
+
+And once a model crosses a certain capability threshold, the limiting factor often becomes the
+developer's ability to evaluate, guide, and refine the output.
+
+The difference between a great engineer and an average engineer is usually larger than the
+difference between two capable models.
+
+## What This Says About the Future
+
+I see two competing visions for AI-assisted development.
+
+The first treats AI as infrastructure: inexpensive, widely available, and accessible to anyone with
+an internet connection. In this world, competitive advantage comes from judgment, creativity, domain
+expertise, and execution.
+
+The second follows a more familiar software pattern: increasingly powerful tools packaged behind
+subscriptions, differentiated by pricing tiers, and optimized for revenue growth.
+
+Both paths are technically possible.
+
+I hope the industry moves toward the first.
+
+Not because paid tools are inherently bad. Many are excellent.
+
+But because the ability to build quality software should not depend on accumulating a growing
+collection of monthly subscriptions.
+
+This site exists as a small example of that idea.
+
+A human designed it.
+
+A human reviewed it.
+
+A human decided what mattered.
+
+AI helped along the way.
+
+<img src={reviewImage} class="w-full h-auto" alt="" />
+
+And for this project, that was more than enough.

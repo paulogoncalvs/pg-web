@@ -15,6 +15,7 @@ export interface RouteConfig {
     };
     date?: string;
     readingTime?: number;
+    tags?: string[];
   };
   menu?: {
     labelKey: string;
@@ -47,6 +48,7 @@ const createRoute = (
     content: LangContent;
     date?: string;
     readingTime?: number;
+    tags?: string[];
     menu?: { labelKey: string };
     tests?: { name: string };
     og?: boolean;
@@ -55,6 +57,7 @@ const createRoute = (
   const cfg = LANG_CFG[lang];
   const prefix = cfg.prefix.replace(/^\//, "");
   const cleanPath = path.replace(/^\/|\/$/g, "");
+  const slashPath = cleanPath ? `${cleanPath}/` : cleanPath;
   const url = `${cfg.prefix}${path}`;
 
   const metas: { attributes: Record<string, string> }[] = [
@@ -94,22 +97,22 @@ const createRoute = (
         attributes: {
           "data-route-meta": "true",
           property: "og:url",
-          content: `${cfg.base}${cleanPath}`,
+          content: `${cfg.base}${slashPath}`,
         },
       },
     );
   }
 
   const links: { path: string; attributes: Record<string, string> }[] = [
-    { path: "", attributes: { href: `${cfg.base}${cleanPath}`, rel: "canonical" } },
-    { path: "", attributes: { rel: "alternate", hreflang: "en", href: `${baseUrl}${cleanPath}` } },
+    { path: "", attributes: { href: `${cfg.base}${slashPath}`, rel: "canonical" } },
+    { path: "", attributes: { rel: "alternate", hreflang: "en", href: `${baseUrl}${slashPath}` } },
     {
       path: "",
-      attributes: { rel: "alternate", hreflang: "pt", href: `${baseUrl}pt/${cleanPath}` },
+      attributes: { rel: "alternate", hreflang: "pt", href: `${baseUrl}pt/${slashPath}` },
     },
     {
       path: "",
-      attributes: { rel: "alternate", hreflang: "x-default", href: `${baseUrl}${cleanPath}` },
+      attributes: { rel: "alternate", hreflang: "x-default", href: `${baseUrl}${slashPath}` },
     },
   ];
 
@@ -126,6 +129,7 @@ const createRoute = (
       },
       ...(params.date && { date: params.date }),
       ...(params.readingTime && { readingTime: params.readingTime }),
+      ...(params.tags && { tags: params.tags }),
     },
     ...(params.menu && { menu: params.menu }),
     ...(params.tests && { tests: params.tests }),
@@ -207,6 +211,7 @@ interface BlogPostDef {
   slug: string;
   date: string;
   readingTime: number;
+  tags: string[];
   content: PageContent;
 }
 
@@ -215,6 +220,7 @@ const blogPosts: BlogPostDef[] = [
     slug: "mdx-preact-blog",
     date: "2026-04-04",
     readingTime: 5,
+    tags: ["frontend", "architecture"],
     content: {
       en: {
         title: "Building My Blog with Preact and MDX",
@@ -230,6 +236,7 @@ const blogPosts: BlogPostDef[] = [
     slug: "website-tech-stack",
     date: "2026-05-05",
     readingTime: 7,
+    tags: ["frontend", "performance", "typescript"],
     content: {
       en: {
         title: "My Website Tech Stack",
@@ -245,16 +252,17 @@ const blogPosts: BlogPostDef[] = [
     slug: "code-splitting-journey",
     date: "2026-05-30",
     readingTime: 6,
+    tags: ["performance", "architecture"],
     content: {
       en: {
         title: "Static-First Code Splitting",
         description:
-          "A static-first approach to code splitting that reduced the initial bundle from 109 kB to 19 kB without layout shifts or hydration issues.",
+          "A static-first approach to code splitting that reduced the initial bundle from 109 kB to 19 kB without layout shifts or hydration issues",
       },
       pt: {
         title: "Static-First Code Splitting",
         description:
-          "Uma abordagem static-first ao code splitting que reduziu o bundle inicial de 109 kB para 19 kB sem layout shifts nem problemas de hidratação.",
+          "Uma abordagem static-first ao code splitting que reduziu o bundle inicial de 109 kB para 19 kB sem layout shifts nem problemas de hidratação",
       },
     },
   },
@@ -262,6 +270,7 @@ const blogPosts: BlogPostDef[] = [
     slug: "migration-vite",
     date: "2026-05-18",
     readingTime: 7,
+    tags: ["performance", "productivity", "frontend"],
     content: {
       en: {
         title: "Migrating from Webpack to Vite",
@@ -272,6 +281,24 @@ const blogPosts: BlogPostDef[] = [
         title: "Migração de Webpack para Vite",
         description:
           "Como a migração de Webpack, Jest, ESLint e Prettier para Vite, Vitest, Oxlint e Oxfmt melhorou o desempenho em 10x",
+      },
+    },
+  },
+  {
+    slug: "building-with-a-free-ai-model",
+    date: "2026-06-16",
+    readingTime: 6,
+    tags: ["ai", "productivity"],
+    content: {
+      en: {
+        title: "Building This Site with a Free AI Model",
+        description:
+          "Building a real website with a free AI model: what helped, what didn't, and why it matters",
+      },
+      pt: {
+        title: "Construir Este Site com um Modelo de IA Gratuito",
+        description:
+          "Construir um site real com um modelo de IA gratuito: o que ajudou, o que não resultou e porque é que isso é importante",
       },
     },
   },
@@ -309,6 +336,7 @@ for (const post of blogPosts) {
       content: post.content[lang],
       date: post.date,
       readingTime: post.readingTime,
+      tags: post.tags,
       og: true,
       tests: { name: `BlogPost-${post.slug}` },
     });

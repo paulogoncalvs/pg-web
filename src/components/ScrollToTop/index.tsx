@@ -1,16 +1,19 @@
 import type { FunctionalComponent } from "preact";
 
-import { useEffect, useState } from "preact/hooks";
+import { useContext, useEffect, useState } from "preact/hooks";
 
 import scrollTopIcon from "@/assets/icons/scroll_top.svg";
+import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { useTranslate } from "@/modules/i18n";
+import { StoreContext } from "@/modules/store";
 import { classNames } from "@/utils/classNames";
 
 const SCROLL_THRESHOLD = 300;
 
 export const ScrollToTop: FunctionalComponent = () => {
   const { t } = useTranslate();
+  const { animationsEnabled } = useContext(StoreContext);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -45,7 +48,8 @@ export const ScrollToTop: FunctionalComponent = () => {
   }, []);
 
   const scrollToTop = () => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches || !animationsEnabled;
 
     window.scrollTo({
       top: 0,
@@ -54,20 +58,20 @@ export const ScrollToTop: FunctionalComponent = () => {
   };
 
   return (
-    <button
+    <Button
       type="button"
       onClick={scrollToTop}
-      aria-label={t("scroll_to_top")}
+      ariaLabel={t("scroll_to_top")}
       aria-hidden={!isVisible}
       tabIndex={isVisible ? 0 : -1}
       style={{ bottom: "calc(20px + var(--banner-stack-height, 0px))" }}
-      class={classNames("interactive interactive-icon fixed right-6 z-40 p-2", {
+      class={classNames("interactive fixed right-6 z-40 p-2 backdrop-blur-sm", {
         "pointer-events-auto opacity-100": isVisible,
         "pointer-events-none opacity-0": !isVisible,
       })}
       data-scroll-btn
     >
       <Icon src={scrollTopIcon} />
-    </button>
+    </Button>
   );
 };
