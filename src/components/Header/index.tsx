@@ -21,12 +21,19 @@ export const Header: FunctionalComponent = () => {
   };
 
   return (
-    <header class="sticky top-0 z-10 rounded-br-xl rounded-bl-xl border-t-0 border-b border-white/80 bg-white/10 shadow-xl backdrop-blur-md dark:border-white/15 dark:bg-zinc-900/15">
+    <header class="sticky top-0 z-10 rounded-b-xl border-t-0 border-b border-white/80 bg-white/35 shadow-xl backdrop-blur-md dark:border-white/15 dark:bg-zinc-900/35">
       <div class="flex items-center justify-between p-4">
         <div class="flex flex-wrap items-center gap-2 sm:gap-4">
           {!isHome && (
-            <Link useRouter href="/" class="px-3 py-2 text-xl font-bold tracking-tight">
-              {t("home_page_title")}
+            <Link
+              useRouter
+              href="/"
+              class="px-3 text-xl leading-none drop-shadow-[0_1px_0_rgba(255,255,255,0.4)] dark:drop-shadow-[0_1px_0_rgba(0,0,0,0.7)]"
+            >
+              <div class="font-bold">{t("home_page_title")}</div>
+              <span class="text-sm text-stone-800 lowercase dark:text-zinc-400">
+                {t("home_page_subtitle")}
+              </span>
             </Link>
           )}
           {isHome && <SocialLinks />}

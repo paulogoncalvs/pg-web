@@ -3,6 +3,9 @@ import type { FunctionalComponent, JSX } from "preact";
 import { useCallback, useContext, useMemo } from "preact/hooks";
 import { useLocation } from "wouter-preact";
 
+const menuActive =
+  "!border-zinc-900 !bg-zinc-900 !text-white hover:!border-zinc-900 hover:!bg-zinc-900 hover:!text-white focus:!border-zinc-900 focus:!bg-zinc-900 focus:!text-white active:!border-zinc-900 active:!bg-zinc-900 active:!text-white dark:!border-white dark:!bg-white dark:!text-zinc-900 dark:hover:!border-white dark:hover:!bg-white dark:hover:!text-zinc-900 dark:focus:!border-white dark:focus:!bg-white dark:focus:!text-zinc-900 dark:active:!border-white dark:active:!bg-white dark:active:!text-zinc-900";
+
 import closeIcon from "@/assets/icons/close.svg";
 import { Collapsible } from "@/components/Collapsible";
 import { Icon } from "@/components/Icon";
@@ -16,16 +19,10 @@ import { menuItems } from "@/config/routes";
 import { setCookieConsent } from "@/modules/cookieConsent";
 import { FontSize } from "@/modules/fontSize";
 import { useTranslate } from "@/modules/i18n";
-import { useLanguage } from "@/modules/language";
+import { LANGUAGE_DEFAULT, useLanguage } from "@/modules/language";
 import { StoreContext } from "@/modules/store";
 import { trackEvent } from "@/modules/tracking/ga4";
-
-const handleMenuClick = (trackingData: { category: string; label: string }): void => {
-  trackEvent("link_click", {
-    link_location: trackingData.category,
-    link_name: trackingData.label,
-  });
-};
+import { classNames } from "@/utils/classNames";
 
 export const SideDrawer: FunctionalComponent = (): JSX.Element => {
   const {
@@ -37,7 +34,7 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
   } = useContext(StoreContext);
   const { t } = useTranslate();
   const { lang } = useLanguage();
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -76,6 +73,24 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
     [dispatch, isSideDrawerOpen],
   );
 
+  const handleMenuClick = useCallback(
+    (e: Event, href: string, labelKey: string) => {
+      e.preventDefault();
+      trackEvent("link_click", {
+        link_location: "SideDrawer Menu Link",
+        link_name: labelKey,
+      });
+      dispatch({ type: "SET_SIDE_DRAWER", payload: { isSideDrawerOpen: false } });
+      setTimeout(
+        () => {
+          setLocation(LANGUAGE_DEFAULT === lang ? href : `/${lang}${href}`);
+        },
+        animationsEnabled ? 200 : 0,
+      );
+    },
+    [dispatch, setLocation, lang, animationsEnabled],
+  );
+
   const items = useMemo(() => {
     return Object.keys(menuItems).map((item) => {
       const href = item;
@@ -102,10 +117,10 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
         onKeyDown={handleKeyDown}
         aria-label={t("sidedrawer_toggle")}
       />
-      <div class="fixed top-0 right-0 z-40 flex h-full w-[65vw] translate-x-full flex-col overflow-y-auto rounded-tl-xl rounded-bl-xl border-b border-l border-white/50 bg-white/30 shadow-xl backdrop-blur-md transition-transform duration-300 ease-in-out will-change-transform peer-checked:translate-x-0 motion-reduce:transition-none sm:w-[55vw] md:w-[45vw] lg:w-[35vw] dark:border-white/10 dark:bg-zinc-900/30">
+      <div class="fixed top-0 right-0 z-40 flex h-full w-[65vw] translate-x-full flex-col overflow-y-auto rounded-tl-xl rounded-bl-xl border-b border-l border-white/50 bg-white/30 shadow-xl backdrop-blur-md transition-transform duration-200 ease-in-out will-change-transform peer-checked:translate-x-0 motion-reduce:transition-none sm:w-[55vw] md:w-[45vw] lg:w-[35vw] dark:border-white/10 dark:bg-zinc-900/30">
         <div class="flex items-center justify-between py-4 pr-4 pl-6">
           <div class="flex items-center gap-4">
-            <LanguageSelector class="w-12.5 min-w-12.5" />
+            <LanguageSelector />
             <ToggleTheme class="p-2" />
           </div>
           <Tooltip content={t("sidedrawer_close")}>
@@ -127,20 +142,15 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
             </label>
           </Tooltip>
         </div>
-        <div class="flex flex-col border-t border-white/80 p-6 dark:border-white/10">
+        <div class="flex flex-col gap-4 border-t border-white/80 p-6 dark:border-white/10">
           {items.map((item) => (
             <Link
               key={item.href}
               useRouter
               aria-current={item.isActive ? "page" : undefined}
-              class="interactive-solid mt-4 interactive-md first:mt-0"
+              class={classNames("interactive interactive-md", item.isActive && menuActive)}
               href={item.href}
-              onClick={() =>
-                handleMenuClick({
-                  category: "SideDrawer Menu Link",
-                  label: item.labelKey,
-                })
-              }
+              onClick={(e: Event) => handleMenuClick(e, item.href, item.labelKey)}
             >
               {t(item.labelKey)}
             </Link>
@@ -153,7 +163,7 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
               summaryClass="p-6"
               contentClass="px-6 pb-6"
             >
-              <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between text-sm">
                   <span>{t("sidedrawer_font_size")}</span>
                   <div class="flex divide-x divide-zinc-300 overflow-hidden rounded-md border border-zinc-300 shadow-sm dark:divide-zinc-600 dark:border-zinc-600">

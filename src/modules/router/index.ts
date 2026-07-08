@@ -1,73 +1,102 @@
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useContext, useEffect, useRef } from "preact/hooks";
+import { useContext, useEffect, useRef, useCallback } from "preact/hooks";
 import { useLocation, useRoute } from "wouter-preact";
 
+import routesConfig from "@/config/routes";
 import { LANGUAGE_DEFAULT, type Language, isValidLanguage } from "@/modules/language";
-import { type StoreContextAction, type StorePayload, StoreContext } from "@/modules/store/context";
+import { pageCache } from "@/modules/router/pages";
+import { type StoreContextAction, StoreContext } from "@/modules/store/context";
 import { trackPageView } from "@/modules/tracking/ga4";
+
 export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
   const { url, dispatch } = useRouter();
   const { lang } = useContext(StoreContext);
+
   const [location] = useLocation();
-  const [, params] = useRouterRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
+  const [, params] = useRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
 
   const prevLocation = useRef(location);
 
-  const langParam = (
-    isValidLanguage(params?.lParam as Language) ? params?.lParam : lang
-  ) as Language;
+  const langParam: Language = isValidLanguage(params?.lParam ?? "")
+    ? (params?.lParam ?? lang)
+    : lang;
 
+  // Sync language from route
   useEffect(() => {
-    const payload: StorePayload = {};
-
     if (langParam !== lang) {
-      payload.lang = langParam;
-    } else if (!params?.lParam && lang !== LANGUAGE_DEFAULT) {
-      payload.lang = LANGUAGE_DEFAULT;
-    }
-
-    if (location !== url) {
-      payload.url = location;
-      payload.isSideDrawerOpen = false;
-      trackPageView();
-    }
-
-    if (Object.keys(payload).length > 0) {
-      dispatch({ type: "UPDATE", payload });
-    }
-  }, [langParam, location, lang, url, params?.lParam, dispatch]);
-
-  useEffect(() => {
-    if (prevLocation.current !== location) {
-      prevLocation.current = location;
-      dispatch({ type: "UPDATE", payload: { isNavigating: true } });
-      const start = performance.now();
-      const raf = requestAnimationFrame(() => {
-        const elapsed = performance.now() - start;
-        const remaining = Math.max(0, 150 - elapsed);
-        setTimeout(() => {
-          window.scrollTo({ behavior: "instant", top: 0 });
-          dispatch({ type: "UPDATE", payload: { isNavigating: false } });
-        }, remaining);
+      dispatch({
+        type: "UPDATE",
+        payload: { lang: langParam },
       });
-      return () => cancelAnimationFrame(raf);
+      return;
     }
+
+    if (!params?.lParam && lang !== LANGUAGE_DEFAULT) {
+      dispatch({
+        type: "UPDATE",
+        payload: { lang: LANGUAGE_DEFAULT },
+      });
+    }
+  }, [langParam, lang, params?.lParam, dispatch]);
+
+  // Sync URL and track navigation
+  useEffect(() => {
+    if (location === url) {
+      return;
+    }
+
+    dispatch({
+      type: "UPDATE",
+      payload: {
+        url: location,
+        isSideDrawerOpen: false,
+      },
+    });
+
+    trackPageView();
+  }, [location, url, dispatch]);
+
+  // Handle page transition state and scroll restoration
+  useEffect(() => {
+    if (prevLocation.current === location) {
+      return;
+    }
+
+    prevLocation.current = location;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+
+    const route = routesConfig[location];
+    const view = route?.templateParameters?.View;
+    if (!view || pageCache[view]) {
+      return;
+    }
+
+    dispatch({
+      type: "UPDATE",
+      payload: { isNavigating: true },
+    });
   }, [location, dispatch]);
 
   return null;
 };
 
-type RouteParams = Record<string, string | undefined>;
+type RouteParams<T extends string = string> = Partial<Record<T, string>>;
 
 export const useRouterLocation = (): [string, (to: string) => void] => {
-  const [location, setLocation] = useLocation();
-  return [location, setLocation];
+  return useLocation();
 };
 
-export const useRouterRoute = (route: string | RegExp): [boolean, RouteParams | null] => {
+export const useRouterRoute = <T extends string = string>(
+  route: string | RegExp,
+): [boolean, RouteParams<T> | null] => {
   const [match, params] = useRoute(route);
-  return [match, params];
+
+  return [match, params as RouteParams<T> | null];
 };
 
 export const useRouter = (): {
@@ -77,14 +106,19 @@ export const useRouter = (): {
 } => {
   const { url, dispatch } = useContext(StoreContext);
 
-  return {
-    setRoute: (newUrl): void => {
+  const setRoute = useCallback(
+    (newUrl: string): void => {
       dispatch({
-        payload: { url: newUrl },
         type: "SET_ROUTE",
+        payload: { url: newUrl },
       });
     },
-    url: url || "",
+    [dispatch],
+  );
+
+  return {
+    url: url ?? "",
+    setRoute,
     dispatch,
   };
 };

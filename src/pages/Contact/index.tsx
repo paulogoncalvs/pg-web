@@ -8,6 +8,7 @@ import { FormInput } from "@/components/Form/Input";
 import { FormTextarea } from "@/components/Form/Textarea";
 import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
+import { PageHeading } from "@/components/PageHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Spinner } from "@/components/Spinner";
 import { useTranslate } from "@/modules/i18n";
@@ -15,8 +16,7 @@ import { trackEvent } from "@/modules/tracking/ga4";
 
 import { useContactForm } from "./useContactForm";
 
-const baseDelay = 2;
-const delayStep = 0.2;
+const delayStep = 0.5;
 
 const ContactPage: FunctionalComponent = () => {
   const { t } = useTranslate();
@@ -40,14 +40,11 @@ const ContactPage: FunctionalComponent = () => {
 
   return (
     <>
-      <h1 class="pt-16">
-        <ScrollReveal delay={1} as="span">
-          {t("contact_page_title")}
-        </ScrollReveal>
-        <ScrollReveal delay={2} as="span">
-          {t("contact_page_subtitle")}
-        </ScrollReveal>
-      </h1>
+      <PageHeading
+        title={t("contact_page_title")}
+        subtitle={t("contact_page_subtitle")}
+        subtitleClass="font-medium"
+      />
 
       <div class="flex flex-col items-center text-left">
         <Form
@@ -58,16 +55,11 @@ const ContactPage: FunctionalComponent = () => {
           errorMessages={errorMessages}
           resetTrigger={resetTrigger}
         >
-          <ScrollReveal
-            delay={baseDelay}
-            as="h2"
-            class="mb-8 text-xl font-bold sm:text-2xl"
-            direction="up"
-          >
+          <ScrollReveal as="h2" class="mb-8 text-xl font-bold sm:text-2xl" direction="up">
             {t("contact_page_contact_form_title")}
           </ScrollReveal>
 
-          <ScrollReveal delay={baseDelay + Number(delayStep)}>
+          <ScrollReveal delay={Number(delayStep)}>
             <FormInput
               label={t("contact_page_contact_form_first_name_label")}
               type="text"
@@ -77,7 +69,7 @@ const ContactPage: FunctionalComponent = () => {
             />
           </ScrollReveal>
 
-          <ScrollReveal delay={baseDelay + delayStep * 2}>
+          <ScrollReveal delay={delayStep * 2}>
             <FormInput
               label={t("contact_page_contact_form_last_name_label")}
               type="text"
@@ -87,7 +79,7 @@ const ContactPage: FunctionalComponent = () => {
             />
           </ScrollReveal>
 
-          <ScrollReveal delay={baseDelay + delayStep * 3}>
+          <ScrollReveal delay={delayStep * 3}>
             <FormInput
               label={t("contact_page_contact_form_email_label")}
               type="email"
@@ -97,7 +89,7 @@ const ContactPage: FunctionalComponent = () => {
             />
           </ScrollReveal>
 
-          <ScrollReveal delay={baseDelay + delayStep * 4}>
+          <ScrollReveal delay={delayStep * 4}>
             <FormTextarea
               label={t("contact_page_contact_form_message_label")}
               name="message"
@@ -127,8 +119,12 @@ const ContactPage: FunctionalComponent = () => {
             </p>
           )}
 
-          <ScrollReveal delay={baseDelay + delayStep * 5}>
-            <Button class="interactive interactive-icon interactive-md" disabled={isSubmitting}>
+          <ScrollReveal delay={delayStep * 5}>
+            <Button
+              type="submit"
+              class="interactive interactive-icon interactive-md"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? <Spinner /> : <Icon src={mailIcon} ariaHidden />}
 
               {isSubmitting
@@ -147,11 +143,11 @@ const ContactPage: FunctionalComponent = () => {
       </div>
       <div class="flex flex-col items-center pb-16 text-left">
         <div class="w-full max-w-md space-y-8">
-          <ScrollReveal delay={1} as="h2" direction="up">
+          <ScrollReveal as="h2" direction="up">
             {t("contact_page_contact_email_title")}
           </ScrollReveal>
 
-          <ScrollReveal delay={2}>
+          <ScrollReveal delay={0.5}>
             <Link
               href="mailto:contact@paulogoncalves.dev"
               class="interactive interactive-icon interactive-md"

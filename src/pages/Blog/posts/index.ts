@@ -2,7 +2,7 @@ import type { ComponentType } from "preact";
 
 import routesConfig from "@/config/routes";
 
-interface MDXModule {
+export interface MDXModule {
   default: ComponentType;
 }
 
@@ -12,6 +12,7 @@ export interface BlogPost {
   description: string;
   date: string;
   readingTime: number;
+  tags: string[];
 }
 
 const blogPostModules = import.meta.glob<MDXModule>("./*/index.mdx");
@@ -54,6 +55,7 @@ export const getBlogPosts = (lang: string): BlogPost[] => {
       const head = routeConfig.templateParameters.head;
       const date = routeConfig.templateParameters.date;
       const readingTime = routeConfig.templateParameters.readingTime;
+      const tags = routeConfig.templateParameters.tags;
 
       const descriptionMeta = head.metas.find((m) => m.attributes?.name === "description");
 
@@ -63,6 +65,7 @@ export const getBlogPosts = (lang: string): BlogPost[] => {
         description: descriptionMeta?.attributes?.content ?? "",
         date: date ?? "",
         readingTime: readingTime ?? 0,
+        tags: tags ?? [],
       });
     }
   }
@@ -82,6 +85,7 @@ export const getBlogPost = (slug: string, lang: string) => {
   const head = routeConfig.templateParameters.head;
   const date = routeConfig.templateParameters.date;
   const readingTime = routeConfig.templateParameters.readingTime;
+  const tags = routeConfig.templateParameters.tags;
   const descriptionMeta = head.metas.find((m) => m.attributes?.name === "description");
 
   return {
@@ -90,5 +94,6 @@ export const getBlogPost = (slug: string, lang: string) => {
     description: descriptionMeta?.attributes?.content ?? "",
     date: date ?? "",
     readingTime: readingTime ?? 0,
+    tags: tags ?? [],
   };
 };

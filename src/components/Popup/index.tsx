@@ -69,7 +69,7 @@ export const Popup: FunctionalComponent<PopupProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? `dialog-title-${id}` : undefined}
-        class="pointer-events-none invisible fixed right-0 bottom-0 left-0 z-50 w-full rounded-t-xl border border-white bg-white/30 px-6 pt-4 pb-8 shadow-xl backdrop-blur-md transition-all duration-300 ease-out peer-checked:pointer-events-auto peer-checked:visible motion-reduce:transition-none max-sm:translate-y-full max-sm:peer-checked:translate-y-0 sm:top-1/2 sm:bottom-auto sm:left-1/2 sm:max-w-lg sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:pt-6 sm:pb-6 sm:opacity-0 sm:peer-checked:opacity-100 dark:border-white/10 dark:bg-zinc-900/30 dark:text-white"
+        class="pointer-events-none invisible fixed inset-x-0 bottom-0 z-50 w-full rounded-t-xl border border-white glass-panel px-6 pt-4 pb-8 shadow-[0_-5px_20px_rgba(0,0,0,0.22)] transition-all duration-300 peer-checked:pointer-events-auto peer-checked:visible motion-reduce:transition-none max-sm:translate-y-full max-sm:peer-checked:translate-y-0 sm:top-1/2 sm:bottom-auto sm:left-1/2 sm:max-w-lg sm:-translate-1/2 sm:rounded-xl sm:py-6 sm:opacity-0 sm:shadow-xl sm:peer-checked:opacity-100 dark:border-white/10 dark:bg-zinc-900/30 dark:text-white"
       >
         <div class="mb-2 flex justify-center sm:hidden">
           <div class="h-1.5 w-10 rounded-full bg-black/20 dark:bg-white/20" />

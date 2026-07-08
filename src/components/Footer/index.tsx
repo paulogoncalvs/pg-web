@@ -45,6 +45,20 @@ const logos = [
   { href: "https://expressjs.com/", label: "Express", src: expressLogo },
 ] as const;
 
+interface FooterLinkLabelProps {
+  htmlFor: string;
+  label: string;
+}
+
+const FooterLinkLabel: FunctionalComponent<FooterLinkLabelProps> = ({ htmlFor, label }) => (
+  <label htmlFor={htmlFor} class="cursor-pointer" aria-label={label}>
+    <span class="inline-flex items-center gap-1 p-2 underline hover:no-underline">
+      {label}
+      <Icon src={arrowDiagonalIcon} width="12" height="12" ariaHidden class="shrink-0" />
+    </span>
+  </label>
+);
+
 export const Footer: FunctionalComponent = () => {
   const { t } = useTranslate();
 
@@ -66,7 +80,7 @@ export const Footer: FunctionalComponent = () => {
 
   return (
     <footer>
-      <div class="@container border border-r-0 border-l-0 border-white/90 bg-white/20 px-6 py-16 text-center shadow-xs shadow-black/7 dark:border-white/15 dark:bg-zinc-900/35 dark:shadow-black/20">
+      <div class="@container border border-x-0 border-white/90 bg-white/20 px-6 py-16 text-center shadow-xs shadow-black/7 dark:border-white/15 dark:bg-zinc-900/35 dark:shadow-black/20">
         <div class="flex flex-col items-center">
           <p class="mb-6 text-xs font-bold tracking-widest uppercase">
             {t("footer_technologies_title")}
@@ -88,35 +102,13 @@ export const Footer: FunctionalComponent = () => {
         </div>
       </div>
       <div class="flex flex-col items-center px-6 py-16 text-center text-xs">
-        <p class="flex flex-col items-center gap-4 sm:flex-row">
-          <label
-            htmlFor="popup-tog-source-code"
-            class="cursor-pointer underline hover:no-underline"
-            aria-label={t("footer_source_code_label")}
-          >
-            <span class="inline-flex items-center gap-1">
-              <span>{t("footer_source_code_label")}</span>
-              <span class="shrink-0">
-                <Icon src={arrowDiagonalIcon} width="12" height="12" ariaHidden />
-              </span>
-            </span>
-          </label>
-          <label
-            htmlFor="popup-tog-recaptcha"
-            class="cursor-pointer underline hover:no-underline"
-            aria-label={t("footer_recaptcha_notice")}
-          >
-            <span class="inline-flex items-center gap-2">
-              <span>{t("footer_recaptcha_notice")}</span>
-              <span class="shrink-0">
-                <Icon src={arrowDiagonalIcon} width="12" height="12" ariaHidden />
-              </span>
-            </span>
-          </label>
+        <p class="flex flex-col items-center gap-2 sm:flex-row">
+          <FooterLinkLabel htmlFor="popup-tog-source-code" label={t("footer_source_code_label")} />
+          <FooterLinkLabel htmlFor="popup-tog-recaptcha" label={t("footer_recaptcha_notice")} />
         </p>
         <p class="pt-6 font-bold">
           paulogoncalves.dev ©️ {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ""}{" "}
-          🤘🏻
+          — MIT
         </p>
       </div>
 

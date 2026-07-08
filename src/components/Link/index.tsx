@@ -10,7 +10,7 @@ interface LinkComponentProps {
   class?: string;
   newWindow?: boolean;
   ariaLabel?: string;
-  onClick?(): void;
+  onClick?(e: Event): void;
   useRouter?: boolean;
   children?: ComponentChildren;
 }

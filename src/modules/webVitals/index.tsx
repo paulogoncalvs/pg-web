@@ -1,6 +1,6 @@
 import type { MetricType } from "web-vitals";
 
-import { hasGtag, trackEvent } from "@/modules/tracking/ga4";
+import { getGtag, trackEvent } from "@/modules/tracking/ga4";
 
 export const sendToGoogleAnalytics = ({
   name,
@@ -36,7 +36,7 @@ export const reportWebVitals = (onPerfEntry?: (metric: MetricType) => void): voi
 };
 
 export const reportWebVitalsToGA = (): void => {
-  if (hasGtag()) {
+  if (getGtag()) {
     reportWebVitals(sendToGoogleAnalytics);
   }
 };

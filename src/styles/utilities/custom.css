@@ -24,3 +24,17 @@
     display: none;
   }
 }
+
+/* Repeated Tailwind Combinations */
+
+@utility text-muted {
+  @apply text-stone-600 dark:text-zinc-400;
+}
+
+@utility text-subtle {
+  @apply text-stone-500 dark:text-zinc-500;
+}
+
+@utility glass-panel {
+  @apply bg-white/30 backdrop-blur-md;
+}
