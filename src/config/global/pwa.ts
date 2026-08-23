@@ -1,3 +1,5 @@
+import { Language } from "../../modules/language/index.ts";
+
 export interface Pwa {
   name: string;
   shortName: string;
@@ -14,7 +16,7 @@ export const pwa: Pwa = {
   description: "Personal Website",
   backgroundColor: "#ffffff",
   themeColor: "#42b883",
-  lang: "en",
+  lang: Language.en,
   icons: [
     { src: "/assets/manifest/pwa-192x192.png", sizes: "192x192", type: "image/png" },
     { src: "/assets/manifest/pwa-512x512.png", sizes: "512x512", type: "image/png" },

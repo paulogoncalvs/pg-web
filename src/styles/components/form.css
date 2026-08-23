@@ -33,15 +33,6 @@ input[type="radio"] {
   @apply h-4 w-4 border-zinc-300 text-blue-600;
 }
 
-/* File input */
-input[type="file"] {
-  @apply text-sm text-zinc-600;
-}
-
-input[type="file"]::file-selector-button {
-  @apply mr-4 rounded-md border border-zinc-300 bg-zinc-50 px-3 py-1 text-sm font-medium text-zinc-700 hover:bg-zinc-100;
-}
-
 /* Labels */
 label {
   @apply inline-block text-sm font-medium text-zinc-700 dark:text-zinc-200;

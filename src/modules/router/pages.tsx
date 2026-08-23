@@ -17,6 +17,8 @@ const loaders: Record<string, () => Promise<{ default: ComponentType }>> = {
 
 export const pageCache: Record<string, ComponentType | undefined> = {};
 
+const MIN_LOADER_MS = 600;
+
 export const preloadPage = async (view: string): Promise<void> => {
   const loader = loaders[view];
   if (loader) {
@@ -26,7 +28,7 @@ export const preloadPage = async (view: string): Promise<void> => {
 };
 
 function usePageComponent(view: string): ComponentType | null {
-  const [Page, setPage] = useState<ComponentType | null>(() => pageCache[view] ?? null);
+  const [, setTick] = useState(0);
   const { dispatch } = useContext(StoreContext);
 
   useEffect(() => {
@@ -35,38 +37,37 @@ function usePageComponent(view: string): ComponentType | null {
     const startTime = Date.now();
 
     if (pageCache[view]) {
-      setPage(() => pageCache[view]!);
       return;
     }
 
     loader().then((mod) => {
-      if (current) {
-        pageCache[view] = mod.default;
-        setPage(() => mod.default);
+      if (!current) {
+        return;
       }
+
+      pageCache[view] = mod.default;
+      setTick((tick) => tick + 1);
 
       const elapsed = Date.now() - startTime;
       setTimeout(
         () => {
-          dispatch({
-            type: "UPDATE",
-            payload: { isNavigating: false },
-          });
+          if (current) {
+            dispatch({
+              type: "UPDATE",
+              payload: { isNavigating: false },
+            });
+          }
         },
-        Math.max(0, 100 - elapsed),
+        Math.max(0, MIN_LOADER_MS - elapsed),
       );
     });
 
     return () => {
       current = false;
-      dispatch({
-        type: "UPDATE",
-        payload: { isNavigating: false },
-      });
     };
   }, [view, dispatch]);
 
-  return Page;
+  return pageCache[view] ?? null;
 }
 
 export const RouterPage = (url: string): JSX.Element => {

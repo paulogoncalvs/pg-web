@@ -28,12 +28,13 @@ export const FormTextarea: FunctionalComponent<FormTextareaProps> = ({
     return null;
   }
 
-  const { formData, errors, errorMessages, handleFormChange } = context;
+  const { formData, errors, errorMessages, handleFormChange, registerField } = context;
 
   return (
     <div class="mt-3">
       <label htmlFor={id}>{label}</label>
       <textarea
+        ref={(element) => registerField(name, element)}
         class={classNames("form-input", errors[name] && "error")}
         id={id}
         name={name}

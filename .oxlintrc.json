@@ -57,6 +57,12 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
 
+    // React Compiler port (oxlint 1.79): these reject every ref mutation,
+    // including the legal ones inside useEffect, event handlers and callback
+    // refs. Keep off until the port understands those contexts.
+    "react/immutability": "off",
+    "react/refs": "off",
+
     // --- Tailwind CSS ---
     // Note: enforce-canonical-classes, no-conflicting-classes, enforce-consistent-class-order,
     // and enforce-consistent-line-wrapping are disabled due to synckit timeout issues

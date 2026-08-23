@@ -16,7 +16,7 @@ interface Experience {
   start: string;
   end?: string;
   location?: string;
-  description?: string;
+  descriptionKey?: string;
 }
 
 interface CompanyGroup {
@@ -94,8 +94,7 @@ const myExperience: Experience[] = [
     start: "2022-10-02",
     titleKey: "home_page_experience_jumia_principal_title",
     location: "Porto, Portugal",
-    description:
-      "Expertise in delivering scalable, high-performance applications across SPA, SSR, and CSR architectures.\n\nSpecialized in semantic HTML5, accessibility (A11y), SEO, and styling systems with SCSS, CSS-in-JS, Utility CSS, Atomic BEM, TailwindCSS, shadcn-ui, and Radix UI.\n\nExtensive experience in JavaScript (ES6+) and TypeScript, with deep knowledge of React 19, Next.js 15, and Preact for lightweight, high-performance UI development.\n\nSkilled in state and data management with Zustand, Unistore, TanStack (React Query, Router, Table), nuqs, React Hook Form, Zod, Dice Table, cmdk, and kbar.\n\nDesigned modular architectures with Module Federation, Turborepo, Turbo, Vite, Vitest, Vite-plugin-federation, Rollup, and Webpack.\n\nDelivered backend integration with Express.js, PostgreSQL, and Prisma ORM.\n\nEnsured reliability and maintainability with testing and QA: Jest, Testing Library, Puppeteer, Playwright, Vitest, Lighthouse, Axe, and Autocannon.\n\nMaintained strict code quality standards with ESLint, StyleLint, Prettier, Husky, Lint-Staged, Knip, Renovate, Dependabot, and CSpell.\n\nImplemented observability, monitoring, and logging with Sentry, Winston, Prom-client, New Relic, Grafana, and OpenSearch.\n\nAutomated CI/CD pipelines with GitHub Actions, Jenkins, Rundeck, Docker, pnpm workspaces, npm, and Yarn.\n\nValidated compatibility across browsers and devices using BrowserStack.\n\nIntegrated analytics and ad-tech ecosystems including GA4, GTM, Clarity, AdManager, MoEngage, Mabaya, Mirakl Ads, Facebook Conversions API, Google Ads, Verbolia, ThreatMetrix, Sprinklr, Modiface, Leaflet, and qeen.ai.\n\nEnhanced user experience with Recharts, Storybook, and SVG sprites, while streamlining workflows with VSCode, Windsurf, JetBrains WebStorm/PHPStorm, Sublime, Linux (Ubuntu), and AI-assisted coding (Copilot, Gemini, Cascade, Claude).\n\nProven ability to deliver modern, modular, and performant platforms with a focus on accessibility, resilience, and scalability.",
+    descriptionKey: "home_page_experience_jumia_principal_description",
   },
   {
     company: "Jumia Porto Tech Center",
@@ -103,8 +102,7 @@ const myExperience: Experience[] = [
     start: "2021-09-01",
     titleKey: "home_page_experience_jumia_manager_title",
     location: "Porto, Portugal",
-    description:
-      "Led engineering teams across Jumia Mall — managed a full-stack team (1 FE + 2 BE + 2 Android + 1 iOS + 2 QAA + 1 PO) and a front-end team (4 FE + 1 QAE + 1 PO).\n\nDrove technical execution, code quality, and delivery timelines.",
+    descriptionKey: "home_page_experience_jumia_manager_description",
   },
   {
     company: "Jumia Porto Tech Center",
@@ -112,8 +110,7 @@ const myExperience: Experience[] = [
     start: "2020-06-30",
     titleKey: "home_page_experience_jumia_lead_title",
     location: "Portugal",
-    description:
-      "Lead Front-End Engineer for Jumia Mall.\n\nArchitected front-end solutions, established best practices, and mentored junior engineers while delivering e-commerce features at scale.",
+    descriptionKey: "home_page_experience_jumia_lead_description",
   },
   {
     company: "Jumia Porto Tech Center",
@@ -121,8 +118,7 @@ const myExperience: Experience[] = [
     start: "2016-04-30",
     titleKey: "home_page_experience_jumia_senior_web_title",
     location: "Porto, Portugal",
-    description:
-      "Front-end and back-end development of e-commerce solutions for desktop and mobile (including Opera Mini).\n\nBuilt micro-services clients, Jumia Blog, and Jumia Group website.\n\nWorked with JavaScript, ECMAScript 5/6, AngularJS (1/2/4), React, Redux, Preact, SSR, Webpack, PWA, Service Workers, AMP, SASS, BEM, Node, Gulp, PHP, MySQL, and Docker.",
+    descriptionKey: "home_page_experience_jumia_senior_web_description",
   },
   {
     company: "Jumia Porto Tech Center",
@@ -130,16 +126,14 @@ const myExperience: Experience[] = [
     start: "2014-11-01",
     titleKey: "home_page_experience_jumia_senior_dev_title",
     location: "Porto, Portugal",
-    description:
-      "E-commerce solutions - front-end development for desktop and mobile foundation.\n\nBuilt with Node, Gulp, HTML5, SASS, BEM, JavaScript, jQuery, Ext JS, PHP, MySQL, and Solr.",
+    descriptionKey: "home_page_experience_jumia_senior_dev_description",
   },
   {
     company: "Rocket Internet GmbH",
     end: "2014-11-30",
     start: "2012-06-01",
     titleKey: "home_page_experience_rocket_title",
-    description:
-      "E-commerce solutions - front-end and back-end development.\n\nWorked with PHP, MySQL, JavaScript, jQuery, Ext JS, Zend Framework, Yii Framework, Solr, Nginx, Apache2, Memcache, and RabbitMQ.",
+    descriptionKey: "home_page_experience_rocket_description",
   },
   {
     company: "Myone - Comunicação Multimédia",
@@ -147,8 +141,7 @@ const myExperience: Experience[] = [
     start: "2008-10-01",
     titleKey: "home_page_experience_myone_title",
     location: "Vila Nova de Gaia",
-    description:
-      "Back-end and front-end development (PHP, MySQL, JSON, AJAX, JavaScript, jQuery, XML, CSS3, HTML5, Flash ActionScript 3.0).\n\nUI/UX design (Adobe Photoshop, Fireworks, Illustrator, Flash, Corel Draw).\n\nProject management.",
+    descriptionKey: "home_page_experience_myone_description",
   },
   {
     company: "Medula - Design de Comunicação",
@@ -156,15 +149,13 @@ const myExperience: Experience[] = [
     start: "2007-09-01",
     titleKey: "home_page_experience_medula_title",
     location: "Vila Nova de Gaia",
-    description:
-      "PHP, MySQL, JavaScript, AS3 developer.\n\nInterface and web designer.\n\nProject management.",
+    descriptionKey: "home_page_experience_medula_description",
   },
   {
     end: "2007-08-30",
     start: "2004-01-01",
     titleKey: "home_page_experience_freelancer_title",
-    description:
-      "Freelance web development and design projects.\n\nFull-stack development, client communication, and project delivery.",
+    descriptionKey: "home_page_experience_freelancer_description",
   },
 ];
 
@@ -224,9 +215,9 @@ const ExperienceItem: FunctionalComponent<{
   start: string;
   end?: string;
   location?: string;
-  description?: string;
+  descriptionKey?: string;
   compact?: boolean;
-}> = ({ titleKey, start, end, location, description, compact }) => {
+}> = ({ titleKey, start, end, location, descriptionKey, compact }) => {
   const { t } = useTranslate();
   const { lang } = useLanguage();
 
@@ -239,10 +230,10 @@ const ExperienceItem: FunctionalComponent<{
     <div class="relative pl-6">
       <span
         class={classNames(
-          "absolute top-1 -left-2.25 h-4 w-4 rounded-full border-[3px] border-stone-400",
+          "glass-dot absolute top-1 -left-2.25 h-4 w-4",
           isCurrent
-            ? "bg-black dark:border-zinc-500 dark:bg-white"
-            : "bg-stone-100 dark:border-white/10 dark:bg-zinc-700",
+            ? "bg-black ring-2 ring-white/80 dark:bg-white dark:ring-white/40"
+            : "bg-stone-100 dark:bg-zinc-700",
         )}
       />
       <h4 class="font-semibold text-zinc-900 dark:text-white">{t(titleKey)}</h4>
@@ -250,9 +241,9 @@ const ExperienceItem: FunctionalComponent<{
       {!compact && location && (
         <p class="mt-1 text-xs text-stone-500 dark:text-zinc-500">{location}</p>
       )}
-      {!compact && description && (
+      {!compact && descriptionKey && (
         <div class="mt-3 border-t border-white/30 pt-3 dark:border-white/5">
-          <DescriptionText text={description} />
+          <DescriptionText text={t(descriptionKey)} />
         </div>
       )}
     </div>
@@ -270,7 +261,7 @@ const CompanySection: FunctionalComponent<CompanyGroup & { compact?: boolean }> 
       <h3 class="text-lg font-semibold text-zinc-800 dark:text-zinc-200">{name}</h3>
       <p class="mb-3 text-sm text-stone-600 dark:text-zinc-400">{duration}</p>
       <div class="relative ml-3">
-        <span class="absolute top-3 bottom-0 -left-0.5 w-2 -translate-x-1/3 rounded-sm bg-stone-300/50 dark:bg-white/5" />
+        <span class="glass-bar absolute top-3 bottom-0 -left-0.5 w-2 -translate-x-1/3" />
         <div class={compact ? "space-y-2" : "space-y-6"}>
           {experiences.map((exp, index) => (
             <ScrollReveal key={exp.titleKey} delay={0.3 * index}>
@@ -299,7 +290,7 @@ export const ExperienceTimeline: FunctionalComponent = () => {
             class="mt-2 flex items-center gap-2 sm:mt-0"
             direction="up"
           >
-            <span class="hidden text-[0px] sm:inline-block">
+            <span class="icon-wrapper hidden sm:inline-block">
               <Tooltip content={t("sidedrawer_compact_timeline")}>
                 <Switch
                   checked={compactTimeline}
@@ -308,7 +299,7 @@ export const ExperienceTimeline: FunctionalComponent = () => {
                 />
               </Tooltip>
             </span>
-            <span class="inline text-[0px] sm:hidden">
+            <span class="icon-wrapper inline sm:hidden">
               <Switch
                 checked={compactTimeline}
                 onChange={setCompactTimeline}

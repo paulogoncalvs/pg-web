@@ -1,5 +1,5 @@
-import { baseUrl } from "./constants";
-import { socialLinks } from "./socialLinks";
+import { baseUrl } from "./constants.ts";
+import { socialLinks } from "./socialLinks.ts";
 
 export type StructuredData = {
   "@context": string;

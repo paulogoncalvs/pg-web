@@ -1,7 +1,9 @@
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useCallback, useContext, useMemo } from "preact/hooks";
+import { useCallback, useContext, useMemo, useRef } from "preact/hooks";
 import { useLocation } from "wouter-preact";
+
+import { useCloseOnBack } from "@/hooks/useCloseOnBack";
 
 const menuActive =
   "!border-zinc-900 !bg-zinc-900 !text-white hover:!border-zinc-900 hover:!bg-zinc-900 hover:!text-white focus:!border-zinc-900 focus:!bg-zinc-900 focus:!text-white active:!border-zinc-900 active:!bg-zinc-900 active:!text-white dark:!border-white dark:!bg-white dark:!text-zinc-900 dark:hover:!border-white dark:hover:!bg-white dark:hover:!text-zinc-900 dark:focus:!border-white dark:focus:!bg-white dark:focus:!text-zinc-900 dark:active:!border-white dark:active:!bg-white dark:active:!text-zinc-900";
@@ -36,6 +38,10 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
   const { lang } = useLanguage();
   const [location, setLocation] = useLocation();
 
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  /* Focus trap for the drawer menu: cycles Tab within the registered links.
+     Attached to the panel so it also catches Escape from any control inside */
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -46,26 +52,19 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
         return;
       }
 
-      const nav = document.querySelector<HTMLElement>("nav[aria-label]");
-      if (!nav) {
-        return;
-      }
-      const focusable = nav.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]):not([type="checkbox"]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      );
+      const focusable = linkRefs.current.filter((el): el is HTMLAnchorElement => el !== null);
       if (focusable.length === 0) {
         return;
       }
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
 
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      } else if (document.activeElement === last) {
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
         e.preventDefault();
         first.focus();
       }
@@ -91,6 +90,14 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
     [dispatch, setLocation, lang, animationsEnabled],
   );
 
+  useCloseOnBack(
+    Boolean(isSideDrawerOpen),
+    useCallback(
+      () => dispatch({ type: "SET_SIDE_DRAWER", payload: { isSideDrawerOpen: false } }),
+      [dispatch],
+    ),
+  );
+
   const items = useMemo(() => {
     return Object.keys(menuItems).map((item) => {
       const href = item;
@@ -108,16 +115,16 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
   }, [lang, location]);
 
   return (
-    <nav aria-label={t("sidedrawer_toggle")}>
+    // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <aside aria-label={t("sidedrawer_menu_label")} onKeyDown={handleKeyDown}>
       <input
         id="sd-tog"
         type="checkbox"
         checked={Boolean(isSideDrawerOpen)}
         class="peer sr-only"
-        onKeyDown={handleKeyDown}
         aria-label={t("sidedrawer_toggle")}
       />
-      <div class="fixed top-0 right-0 z-40 flex h-full w-[65vw] translate-x-full flex-col overflow-y-auto rounded-tl-xl rounded-bl-xl border-b border-l border-white/50 bg-white/30 shadow-xl backdrop-blur-md transition-transform duration-200 ease-in-out will-change-transform peer-checked:translate-x-0 motion-reduce:transition-none sm:w-[55vw] md:w-[45vw] lg:w-[35vw] dark:border-white/10 dark:bg-zinc-900/30">
+      <div class="fixed top-0 right-0 z-40 flex h-full w-full translate-x-full flex-col overflow-y-auto rounded-tl-xl rounded-bl-xl border-b border-l border-white/50 bg-white/30 shadow-xl backdrop-blur-md transition-transform duration-200 ease-in-out will-change-transform peer-checked:translate-x-0 motion-reduce:transition-none sm:w-[55vw] md:w-[45vw] lg:w-[35vw] dark:border-white/10 dark:bg-zinc-900/30">
         <div class="flex items-center justify-between py-4 pr-4 pl-6">
           <div class="flex items-center gap-4">
             <LanguageSelector />
@@ -142,10 +149,16 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
             </label>
           </Tooltip>
         </div>
-        <div class="flex flex-col gap-4 border-t border-white/80 p-6 dark:border-white/10">
-          {items.map((item) => (
+        <nav
+          class="flex flex-col gap-4 border-t border-white/80 p-6 shadow-[inset_0_1px_0_rgba(0,0,0,0.06)] dark:border-white/15 dark:shadow-[inset_0_1px_0_rgba(0,0,0,0.12)]"
+          aria-label={t("sidedrawer_menu_label")}
+        >
+          {items.map((item, index) => (
             <Link
               key={item.href}
+              ref={(el) => {
+                linkRefs.current[index] = el;
+              }}
               useRouter
               aria-current={item.isActive ? "page" : undefined}
               class={classNames("interactive interactive-md", item.isActive && menuActive)}
@@ -155,9 +168,9 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
               {t(item.labelKey)}
             </Link>
           ))}
-        </div>
+        </nav>
         <div class="mx-auto mt-auto flex w-full flex-col">
-          <div class="border-t border-b border-white/80 dark:border-white/10">
+          <div class="border-t border-b border-white/80 bg-linear-to-br from-transparent to-black/3 shadow-[inset_0_1px_0_rgba(0,0,0,0.06)] dark:border-white/15 dark:to-white/3 dark:shadow-[inset_0_1px_0_rgba(0,0,0,0.12)]">
             <Collapsible
               title={t("sidedrawer_settings")}
               summaryClass="p-6"
@@ -166,8 +179,8 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
               <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between text-sm">
                   <span>{t("sidedrawer_font_size")}</span>
-                  <div class="flex divide-x divide-zinc-300 overflow-hidden rounded-md border border-zinc-300 shadow-sm dark:divide-zinc-600 dark:border-zinc-600">
-                    <label class="cursor-pointer">
+                  <div class="relative flex overflow-hidden rounded-full border border-white/50 bg-white/40 shadow-sm before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-br before:from-white/60 before:to-transparent before:opacity-75 dark:border-white/15 dark:bg-zinc-800/25">
+                    <label class="relative cursor-pointer">
                       <input
                         type="radio"
                         name="font-size"
@@ -181,11 +194,11 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
                           })
                         }
                       />
-                      <span class="block px-3 py-1 text-xs leading-none font-medium text-zinc-500 transition-colors peer-checked:bg-zinc-900 peer-checked:text-white peer-focus-visible:bg-zinc-900 peer-focus-visible:text-white peer-focus-visible:outline-2 peer-focus-visible:-outline-offset-2 peer-focus-visible:outline-zinc-400 hover:bg-zinc-900 hover:text-white dark:text-zinc-400 dark:peer-checked:bg-white dark:peer-checked:text-zinc-900 dark:peer-focus-visible:bg-white dark:peer-focus-visible:text-zinc-900 dark:peer-focus-visible:outline-zinc-500 dark:hover:bg-white dark:hover:text-zinc-900">
+                      <span class="relative block px-3 py-1 text-xs leading-none font-medium text-zinc-700 transition-colors duration-300 peer-checked:bg-zinc-900 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:-outline-offset-2 peer-focus-visible:outline-zinc-400 hover:bg-zinc-900 hover:text-white dark:text-zinc-300 dark:peer-checked:bg-white dark:peer-checked:text-zinc-900 dark:peer-focus-visible:outline-zinc-500 dark:hover:bg-white dark:hover:text-zinc-900">
                         A
                       </span>
                     </label>
-                    <label class="cursor-pointer">
+                    <label class="relative cursor-pointer">
                       <input
                         type="radio"
                         name="font-size"
@@ -196,7 +209,7 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
                           dispatch({ type: "SET_FONT_SIZE", payload: { fontSize: FontSize.Large } })
                         }
                       />
-                      <span class="block px-3 py-1 text-xs leading-none font-medium text-zinc-500 transition-colors peer-checked:bg-zinc-900 peer-checked:text-white peer-focus-visible:bg-zinc-900 peer-focus-visible:text-white peer-focus-visible:outline-2 peer-focus-visible:-outline-offset-2 peer-focus-visible:outline-zinc-400 hover:bg-zinc-900 hover:text-white dark:text-zinc-400 dark:peer-checked:bg-white dark:peer-checked:text-zinc-900 dark:peer-focus-visible:bg-white dark:peer-focus-visible:text-zinc-900 dark:peer-focus-visible:outline-zinc-500 dark:hover:bg-white dark:hover:text-zinc-900">
+                      <span class="relative block px-3 py-1 text-xs leading-none font-medium text-zinc-700 transition-colors duration-300 peer-checked:bg-zinc-900 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:-outline-offset-2 peer-focus-visible:outline-zinc-400 hover:bg-zinc-900 hover:text-white dark:text-zinc-300 dark:peer-checked:bg-white dark:peer-checked:text-zinc-900 dark:peer-focus-visible:outline-zinc-500 dark:hover:bg-white dark:hover:text-zinc-900">
                         A+
                       </span>
                     </label>
@@ -231,6 +244,6 @@ export const SideDrawer: FunctionalComponent = (): JSX.Element => {
           </div>
         </div>
       </div>
-    </nav>
+    </aside>
   );
 };

@@ -1,4 +1,6 @@
-export default {
+import type { TranslationKey } from "./en";
+
+const pt: Record<TranslationKey, string> = {
   accessibility_new_window: "%text% (abre numa nova janela)",
   contact_page_contact_email_title: "Através de e-mail:",
   contact_page_contact_form_company_label: "Empresa",
@@ -21,18 +23,19 @@ export default {
   footer_cookie_accept: "Aceitar",
   footer_cookie_consent: "🍪 Este website usa cookies para analisar o tráfego.",
   footer_cookie_reject: "Recusar",
-  footer_description_1: "O código-fonte completo deste website está disponível no %link%.",
+  footer_description_1:
+    "O código-fonte completo está disponível no %link% para qualquer pessoa o explorar. Quer tenha curiosidade em perceber como funciona, queira aprender com a sua implementação ou contribuir para o projeto, é muito bem-vindo(a) a explorá-lo.",
   footer_description_1_link_text: "GitHub",
   footer_description_2:
     "Este site está protegido pelo reCAPTCHA e aplicam-se a %privacy% e os %terms% da Google.",
   footer_recaptcha_label: "reCAPTCHA",
   footer_recaptcha_notice: "Protegido por reCAPTCHA",
   footer_source_code_label: "Código Fonte",
-  footer_technologies_title: "Desenvolvido com",
+  footer_technologies_title: "Site desenvolvido com",
   footer_recaptcha_privacy_link_text: "Política de Privacidade",
   footer_recaptcha_terms_link_text: "Termos de Serviço",
   home_page_description_1:
-    "Natural de Vila Nova de Gaia, Porto, Portugal.<br /><br />Com mais de 20 anos de experiência profissional, sou atualmente <strong>Principal Front-End Engineer</strong> na empresa <strong>Porto Tech Center - Jumia</strong>, focado no desenvolvimento de aplicações web escaláveis e de alto desempenho.<br /><br />Lidero a arquitetura de front-end, defino a direção técnica e promovo boas práticas, recorrendo a frameworks e ferramentas modernas.<br /><br />Orientado para a performance e experiência do utilizador, colaboro com equipas multidisciplinares para entregar soluções robustas e centradas no utilizador, enfrentando desafios de engenharia complexos.",
+    "Natural de Vila Nova de Gaia, Porto, Portugal.<br /><br />Com mais de 20 anos de experiência profissional, sou atualmente <strong>Principal Engineer</strong> na empresa <strong>Porto Tech Center - Jumia</strong>, focado no desenvolvimento de aplicações web escaláveis e de alto desempenho.<br /><br />Lidero a arquitetura de front-end, defino a direção técnica e promovo boas práticas, recorrendo a frameworks e ferramentas modernas.<br /><br />Orientado para a performance e experiência do utilizador, colaboro com equipas multidisciplinares para entregar soluções robustas e centradas no utilizador, enfrentando desafios de engenharia complexos.",
   home_page_competences_title: "Competências Principais",
   home_page_competences_frontend_architecture: "Arquitetura Front-End",
   home_page_competences_react_ecosystem: "Ecossistema React & TypeScript",
@@ -50,20 +53,40 @@ export default {
   home_page_duration_months: "meses",
   home_page_duration_year: "ano",
   home_page_duration_years: "anos",
-  home_page_experience_jumia_lead_title: "Lead Front-End Engineer",
-  home_page_experience_jumia_manager_title: "Engineering Manager / Lead Front-End Engineer",
-  home_page_experience_jumia_senior_web_title: "Web Engineer (Senior Front-End Engineer)",
-  home_page_experience_jumia_senior_dev_title: "Senior Front-End Developer",
-  home_page_experience_jumia_principal_title: "Principal Front-End Engineer",
-  home_page_experience_medula_title: "Web Designer | New Media Developer",
-  home_page_experience_myone_title: "Multimedia Engineer",
+  home_page_experience_freelancer_description:
+    "Projetos freelance de desenvolvimento e design web.\n\nDesenvolvimento full-stack, comunicação com clientes e entrega de projetos.",
   home_page_experience_freelancer_title: "Desenvolvedor/Designer Web Freelancer",
+  home_page_experience_jumia_lead_description:
+    "Lead Front-End Engineer da Jumia Mall.\n\nDesenhei soluções front-end, estabeleci boas práticas e orientei engenheiros juniores, enquanto disponibilizava funcionalidades de e-commerce à escala.",
+  home_page_experience_jumia_lead_title: "Lead Front-End Engineer",
+  home_page_experience_jumia_manager_description:
+    "Liderei equipas de engenharia na Jumia Mall — geri uma equipa full-stack (1 FE + 2 BE + 2 Android + 1 iOS + 2 QAA + 1 PO) e uma equipa de front-end (4 FE + 1 QAE + 1 PO).\n\nConduzi a execução técnica, a qualidade do código e os prazos de entrega.",
+  home_page_experience_jumia_manager_title: "Engineering Manager / Lead Front-End Engineer",
+  home_page_experience_jumia_principal_description:
+    "Especialista em engenharia de software potenciada por Inteligência Artificial, tirando partido de ferramentas e workflows assistidos por AI (Copilot, Claude, Gemini) para acelerar a entrega, elevar a qualidade de código e orientar decisões de arquitetura moderna ao longo de todo o ciclo de desenvolvimento, desde a geração de código até à automação de testes e integração de AI em produtos.\n\nEntrega aplicações escaláveis e de alta performance em arquiteturas SPA, SSR e CSR, com forte foco em acessibilidade (A11y), SEO e sistemas de estilo modernos (SCSS, CSS-in-JS, TailwindCSS, shadcn-ui, Radix UI).\n\nExperiência aprofundada em JavaScript (ES6+), TypeScript, React 19, Next.js 15 e Preact, com competências sólidas em gestão de estado e dados através de Zustand, TanStack (Query, Router, Table), React Hook Form e Zod. Desenha arquiteturas modulares com Module Federation, Turborepo, Vite e Webpack, complementadas com integração backend usando Express.js, PostgreSQL e Prisma ORM.\n\nGarante fiabilidade através de testing e QA cada vez mais reforçados por AI na geração e triagem de testes, utilizando Jest, Testing Library, Playwright, Lighthouse e Axe. Mantém padrões rigorosos de qualidade de código com ESLint, Prettier, Husky, e gestão automatizada de dependências via Renovate e Dependabot.\n\nImplementa observabilidade e monitorização com Sentry, Grafana, New Relic e OpenSearch. Automatiza pipelines de CI/CD com GitHub Actions, Jenkins e Docker, validando compatibilidade cross-browser com BrowserStack.\n\nIntegra ecossistemas de analytics e ad-tech com componentes de AI/ML, incluindo GA4, GTM, AdManager, MoEngage, Mirakl Ads, Google Ads e Sprinklr.\n\nMelhora a experiência do utilizador com Recharts, Storybook e SVG sprites, apoiado por workflows eficientes em VSCode, JetBrains e Linux (Ubuntu).\n\nCapacidade comprovada de entregar plataformas modernas, modulares e performantes, com forte foco em acessibilidade, resiliência e escalabilidade, impulsionando a adoção estratégica de AI como fator-chave de produtividade e inovação.",
+  home_page_experience_jumia_principal_title: "Principal Engineer",
+  home_page_experience_jumia_senior_dev_description:
+    "Soluções de e-commerce - desenvolvimento front-end para desktop e dispositivos móveis.\n\nConstruído com Node, Gulp, HTML5, SASS, BEM, JavaScript, jQuery, Ext JS, PHP, MySQL e Solr.",
+  home_page_experience_jumia_senior_dev_title: "Senior Front-End Developer",
+  home_page_experience_jumia_senior_web_description:
+    "Desenvolvimento front-end e back-end de soluções de e-commerce para desktop e dispositivos móveis (incluindo o Opera Mini).\n\nConstruí clientes de micro-serviços, o blog da Jumia e o site do Jumia Group.\n\nTrabalhei com JavaScript, ECMAScript 5/6, AngularJS (1/2/4), React, Redux, Preact, SSR, Webpack, PWA, Service Workers, AMP, SASS, BEM, Node, Gulp, PHP, MySQL e Docker.",
+  home_page_experience_jumia_senior_web_title: "Web Engineer (Senior Front-End Engineer)",
+  home_page_experience_medula_description:
+    "Programador PHP, MySQL, JavaScript, AS3.\n\nDesigner de interfaces e web.\n\nGestão de projetos.",
+  home_page_experience_medula_title: "Web Designer | New Media Developer",
+  home_page_experience_myone_description:
+    "Desenvolvimento back-end e front-end (PHP, MySQL, JSON, AJAX, JavaScript, jQuery, XML, CSS3, HTML5, Flash ActionScript 3.0).\n\nDesign UI/UX (Adobe Photoshop, Fireworks, Illustrator, Flash, Corel Draw).\n\nGestão de projetos.",
+  home_page_experience_myone_title: "Multimedia Engineer",
   home_page_experience_present: "o momento",
+  home_page_experience_rocket_description:
+    "Soluções de e-commerce - desenvolvimento front-end e back-end.\n\nTrabalhei com PHP, MySQL, JavaScript, jQuery, Ext JS, Zend Framework, Yii Framework, Solr, Nginx, Apache2, Memcache e RabbitMQ.",
   home_page_experience_rocket_title: "Advanced Developer",
   home_page_professional_experience: "Experiência Profissional",
   home_page_subtitle: "Front-End Engineer",
   home_page_title: "PAULO GONÇALVES",
-  home_page_portrait_alt: "retrato de Paulo Gonçalves",
+  home_page_portrait_alt: "Retrato de Paulo Gonçalves",
+  language_en: "English",
+  language_pt: "Português",
   language_selection: "Seleccionar língua",
   not_found_page_button_label: "Ir para a página inicial",
   not_found_page_subtitle: "Página não encontrada",
@@ -77,6 +100,7 @@ export default {
   sidedrawer_menu_link_home: "Início",
   sidedrawer_menu_link_blog: "Blog",
   sidedrawer_toggle: "Alternar menu lateral",
+  sidedrawer_menu_label: "Menu de navegação",
   sidedrawer_close: "Fechar",
   sidedrawer_settings: "Definições",
   sidedrawer_animations: "Animações",
@@ -114,6 +138,7 @@ export default {
   blog_no_posts_found: "Nenhum artigo encontrado para esta tag.",
   blog_pagination_previous: "Anterior",
   blog_pagination_page: "Página",
+  blog_pagination_label: "Paginação do blog",
   blog_pagination_next: "Seguinte",
   blog_filter_all: "Todas",
   scroll_left: "Rolar para a esquerda",
@@ -125,3 +150,5 @@ export default {
   tag_productivity: "Produtividade",
   tag_ai: "IA",
 };
+
+export default pt;

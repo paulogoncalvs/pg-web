@@ -1,4 +1,5 @@
-import { baseUrl } from "../global/constants";
+import { Language } from "../../modules/language/index.ts";
+import { baseUrl } from "../global/constants.ts";
 
 export interface RouteConfig {
   filename: string;
@@ -30,14 +31,15 @@ type LangContent = {
   description: string;
 };
 
-type PageContent = {
-  en: LangContent;
-  pt: LangContent;
-};
+type PageContent = Record<Language, LangContent>;
 
 const LANG_CFG = {
-  en: { prefix: "", dir: "", base: baseUrl },
-  pt: { prefix: "/pt", dir: "pt/", base: `${baseUrl}pt/` },
+  [Language.en]: { prefix: "", dir: "", base: baseUrl },
+  [Language.pt]: {
+    prefix: `/${Language.pt}`,
+    dir: `${Language.pt}/`,
+    base: `${baseUrl}${Language.pt}/`,
+  },
 } as const;
 
 const createRoute = (
@@ -72,7 +74,7 @@ const createRoute = (
       attributes: {
         "data-route-meta": "true",
         property: "og:locale",
-        content: lang === "pt" ? "pt_PT" : "en_US",
+        content: lang === Language.pt ? `${Language.pt}_PT` : `${Language.en}_US`,
       },
     },
   ];
@@ -105,10 +107,17 @@ const createRoute = (
 
   const links: { path: string; attributes: Record<string, string> }[] = [
     { path: "", attributes: { href: `${cfg.base}${slashPath}`, rel: "canonical" } },
-    { path: "", attributes: { rel: "alternate", hreflang: "en", href: `${baseUrl}${slashPath}` } },
     {
       path: "",
-      attributes: { rel: "alternate", hreflang: "pt", href: `${baseUrl}pt/${slashPath}` },
+      attributes: { rel: "alternate", hreflang: Language.en, href: `${baseUrl}${slashPath}` },
+    },
+    {
+      path: "",
+      attributes: {
+        rel: "alternate",
+        hreflang: Language.pt,
+        href: `${baseUrl}${Language.pt}/${slashPath}`,
+      },
     },
     {
       path: "",
@@ -159,11 +168,11 @@ const pages: Record<string, PageDef> = {
     menuKey: "sidedrawer_menu_link_home",
     tests: "Home",
     content: {
-      en: {
+      [Language.en]: {
         title: "Paulo Gonçalves - Front-End Engineer from Portugal",
         description: "Personal Website",
       },
-      pt: {
+      [Language.pt]: {
         title: "Paulo Gonçalves - Front-End Engineer de Portugal [PT]",
         description: "Website pessoal",
       },
@@ -173,8 +182,8 @@ const pages: Record<string, PageDef> = {
     View: "NotFound",
     tests: "404",
     content: {
-      en: { title: "404", description: "Page not found" },
-      pt: { title: "404 [PT]", description: "Página não encontrada" },
+      [Language.en]: { title: "404", description: "Page not found" },
+      [Language.pt]: { title: "404 [PT]", description: "Página não encontrada" },
     },
   },
   "/blog/": {
@@ -182,8 +191,8 @@ const pages: Record<string, PageDef> = {
     menuKey: "sidedrawer_menu_link_blog",
     tests: "Blog",
     content: {
-      en: { title: "Blog", description: "Guides and Insights" },
-      pt: { title: "Blog [PT]", description: "Guias e Perspectivas" },
+      [Language.en]: { title: "Blog", description: "Guides and Insights" },
+      [Language.pt]: { title: "Blog [PT]", description: "Guias e Perspectivas" },
     },
   },
   "/contact/": {
@@ -191,16 +200,16 @@ const pages: Record<string, PageDef> = {
     menuKey: "sidedrawer_menu_link_contact",
     tests: "Contact",
     content: {
-      en: { title: "Contact", description: "Send me a message" },
-      pt: { title: "Contactar [PT]", description: "Envie-me uma mensagem" },
+      [Language.en]: { title: "Contact", description: "Send me a message" },
+      [Language.pt]: { title: "Contactar [PT]", description: "Envie-me uma mensagem" },
     },
   },
   "/offline/": {
     View: "Offline",
     tests: "Offline",
     content: {
-      en: { title: "Offline", description: "Offline" },
-      pt: { title: "Offline", description: "Offline" },
+      [Language.en]: { title: "Offline", description: "Offline" },
+      [Language.pt]: { title: "Offline", description: "Offline" },
     },
   },
 };
@@ -222,11 +231,11 @@ const blogPosts: BlogPostDef[] = [
     readingTime: 5,
     tags: ["frontend", "architecture"],
     content: {
-      en: {
+      [Language.en]: {
         title: "Building My Blog with Preact and MDX",
         description: "Sharing my journey into the world of MDX",
       },
-      pt: {
+      [Language.pt]: {
         title: "A construir o meu blog com Preact e MDX",
         description: "A minha jornada no mundo do MDX",
       },
@@ -238,11 +247,11 @@ const blogPosts: BlogPostDef[] = [
     readingTime: 7,
     tags: ["frontend", "performance", "typescript"],
     content: {
-      en: {
+      [Language.en]: {
         title: "My Website Tech Stack",
         description: "A deep dive into the technologies powering this website",
       },
-      pt: {
+      [Language.pt]: {
         title: "Stack de tecnologias do meu website",
         description: "Análise das tecnologias que constituem este website",
       },
@@ -254,12 +263,12 @@ const blogPosts: BlogPostDef[] = [
     readingTime: 6,
     tags: ["performance", "architecture"],
     content: {
-      en: {
+      [Language.en]: {
         title: "Static-First Code Splitting",
         description:
           "A static-first approach to code splitting that reduced the initial bundle from 109 kB to 19 kB without layout shifts or hydration issues",
       },
-      pt: {
+      [Language.pt]: {
         title: "Static-First Code Splitting",
         description:
           "Uma abordagem static-first ao code splitting que reduziu o bundle inicial de 109 kB para 19 kB sem layout shifts nem problemas de hidratação",
@@ -272,12 +281,12 @@ const blogPosts: BlogPostDef[] = [
     readingTime: 7,
     tags: ["performance", "productivity", "frontend"],
     content: {
-      en: {
+      [Language.en]: {
         title: "Migrating from Webpack to Vite",
         description:
           "How migrating from Webpack, Jest, ESLint and Prettier to Vite, Vitest, Oxlint, and Oxfmt improved performance by 10x",
       },
-      pt: {
+      [Language.pt]: {
         title: "Migração de Webpack para Vite",
         description:
           "Como a migração de Webpack, Jest, ESLint e Prettier para Vite, Vitest, Oxlint e Oxfmt melhorou o desempenho em 10x",
@@ -290,12 +299,12 @@ const blogPosts: BlogPostDef[] = [
     readingTime: 6,
     tags: ["ai", "productivity"],
     content: {
-      en: {
+      [Language.en]: {
         title: "Building This Site with a Free AI Model",
         description:
           "Building a real website with a free AI model: what helped, what didn't, and why it matters",
       },
-      pt: {
+      [Language.pt]: {
         title: "Construir Este Site com um Modelo de IA Gratuito",
         description:
           "Construir um site real com um modelo de IA gratuito: o que ajudou, o que não resultou e porque é que isso é importante",
@@ -312,24 +321,24 @@ for (const [path, def] of Object.entries(pages)) {
   const tests = def.tests ? { name: def.tests } : undefined;
   const menu = def.menuKey ? { labelKey: def.menuKey } : undefined;
 
-  for (const lang of ["en"] as const) {
+  for (const lang of [Language.en] as const) {
     routes[`${LANG_CFG[lang].prefix}${path}`] = createRoute(path, lang, {
       View: def.View,
-      content: def.content.en,
+      content: def.content[Language.en],
       menu,
       tests,
     });
   }
 
-  routes[`/pt${path}`] = createRoute(path, "pt", {
+  routes[`/${Language.pt}${path}`] = createRoute(path, Language.pt, {
     View: def.View,
-    content: def.content.pt,
+    content: def.content[Language.pt],
     tests,
   });
 }
 
 for (const post of blogPosts) {
-  for (const lang of ["en", "pt"] as const) {
+  for (const lang of [Language.en, Language.pt] as const) {
     const blogPath = `/blog/${post.slug}/`;
     routes[`${LANG_CFG[lang].prefix}${blogPath}`] = createRoute(blogPath, lang, {
       View: "BlogPost",
@@ -339,6 +348,22 @@ for (const post of blogPosts) {
       tags: post.tags,
       og: true,
       tests: { name: `BlogPost-${post.slug}` },
+    });
+  }
+}
+
+// ---- Pagination pages ----
+
+const POSTS_PER_PAGE = 4;
+const blogPageDef = pages["/blog/"];
+
+for (const lang of [Language.en, Language.pt] as const) {
+  const totalPages = Math.max(1, Math.ceil(blogPosts.length / POSTS_PER_PAGE));
+  for (let page = 2; page <= totalPages; page++) {
+    const pagePath = `/blog/page/${page}/`;
+    routes[`${LANG_CFG[lang].prefix}${pagePath}`] = createRoute(pagePath, lang, {
+      View: blogPageDef.View,
+      content: blogPageDef.content[lang],
     });
   }
 }

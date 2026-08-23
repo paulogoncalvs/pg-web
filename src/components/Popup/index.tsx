@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import closeIcon from "@/assets/icons/close.svg";
 import { Icon } from "@/components/Icon";
 import { Overlay } from "@/components/Overlay";
+import { useCloseOnBack } from "@/hooks/useCloseOnBack";
 import { useTranslate } from "@/modules/i18n";
 
 interface PopupProps {
@@ -52,6 +53,8 @@ export const Popup: FunctionalComponent<PopupProps> = ({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen, close]);
+
+  useCloseOnBack(isOpen, close);
 
   return (
     <div>

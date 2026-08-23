@@ -5,10 +5,9 @@ import remarkGfm from "remark-gfm";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
-import { pwa } from "./src/config/global/pwa";
-import { sitemapPlugin } from "./src/vite/plugins/sitemap";
-import { appPlugin } from "./src/vite/plugins/vite-plugin-app";
-
+import { pwa } from "./src/config/global/pwa.ts";
+import { sitemapPlugin } from "./src/vite/plugins/sitemap.ts";
+import { appPlugin } from "./src/vite/plugins/vite-plugin-app.ts";
 const rules: Array<{ test: RegExp; dir: string; ext?: string }> = [
   { test: /\.(woff2?|ttf|otf)$/i, dir: "fonts" },
   { test: /\.(webp|svg|jpg|jpeg|png|avif)$/i, dir: "img" },

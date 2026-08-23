@@ -14,8 +14,6 @@
   @apply duration-300;
   @apply ease-[cubic-bezier(.22,1,.36,1)];
 
-  transform: translate3d(0, 0, 0);
-
   contain: paint;
 }
 
@@ -137,5 +135,36 @@
   &:hover,
   &:focus-visible {
     @apply text-zinc-500;
+  }
+}
+
+/* Header logo image (hover / focus / tap on the SVG only) */
+@utility logo-image {
+  @apply transition-[filter,translate,fill] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.4));
+  @apply group-hover:drop-shadow-[0_3px_0_rgba(0,0,0,0.4)] group-focus-visible:drop-shadow-[0_3px_0_rgba(0,0,0,0.4)];
+
+  @apply group-hover:-translate-y-0.5 group-focus-visible:-translate-y-0.5;
+
+  &:active rect {
+    fill: #adadad;
+  }
+
+  @variant dark {
+    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 1));
+
+    @apply group-hover:drop-shadow-[0_3px_0_rgba(0,0,0,0.4)] group-focus-visible:drop-shadow-[0_3px_0_rgba(0,0,0,0.4)];
+  }
+}
+
+/* Static logo (non-interactive, e.g. homepage) — bevel shadow only */
+@utility logo-image-static {
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.4));
+
+  @variant dark {
+    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 1));
   }
 }

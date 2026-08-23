@@ -1,13 +1,11 @@
-import { useRef } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
 
 function useIsFirstRender(): boolean {
   const isFirst = useRef(true);
 
-  if (isFirst.current) {
+  useEffect(() => {
     isFirst.current = false;
-
-    return true;
-  }
+  }, []);
 
   return isFirst.current;
 }

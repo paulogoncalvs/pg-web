@@ -30,12 +30,13 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
     return null;
   }
 
-  const { formData, errors, errorMessages, handleFormChange } = context;
+  const { formData, errors, errorMessages, handleFormChange, registerField } = context;
 
   return (
     <div class={classNames("mt-3", classes)}>
       <label htmlFor={id}>{label}</label>
       <input
+        ref={(element) => registerField(name, element)}
         class={classNames("form-input", errors[name] && "error")}
         id={id}
         type={type}

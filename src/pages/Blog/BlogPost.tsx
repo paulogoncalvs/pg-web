@@ -11,6 +11,7 @@ import { PageHeading } from "@/components/PageHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Tag } from "@/components/Tag";
 import { useTranslate } from "@/modules/i18n";
+import { Language } from "@/modules/language";
 
 import { blogPostLoaders, getCachedBlogPostComponent, getBlogPost } from "./posts";
 
@@ -73,7 +74,7 @@ interface BlogPostProps {
 }
 
 const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { t, l: lang } = useTranslate();
 
   const slug = location.split("/blog/")[1]?.replace("/", "");
@@ -83,22 +84,21 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
   const MDXComponent = props.MDXComponent ?? lazyComponent;
   const isLoading = loading && !props.MDXComponent;
 
-  if (!slug && !isLoading) {
-    return (
-      <div class="flex flex-col items-center px-6 py-16">
-        <h1>{t("blog_post_not_found")}</h1>
-      </div>
-    );
-  }
-
   return (
     <>
       <div class="flex flex-col gap-5 pt-16">
-        <PageHeading title={post?.title} subtitle={post?.description} titleClass="block" class="" />
+        <PageHeading
+          title={post?.title || (!MDXComponent && t("blog_post_not_found"))}
+          subtitle={post?.description || ""}
+          titleClass="block"
+          class=""
+        />
 
-        <ScrollReveal as="div" delay={1}>
-          <BlogMeta date={post?.date ?? ""} readingTime={post?.readingTime ?? 0} size="base" />
-        </ScrollReveal>
+        {(post?.date || post?.readingTime) && (
+          <ScrollReveal as="div" delay={1}>
+            <BlogMeta date={post?.date ?? ""} readingTime={post?.readingTime ?? 0} size="base" />
+          </ScrollReveal>
+        )}
         {post?.tags && post.tags.length > 0 && (
           <div class="flex flex-wrap items-center justify-center gap-1.5">
             {post.tags.map((tag, index) => (
@@ -113,7 +113,12 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
             href="/blog/"
             onClick={(e) => {
               e.preventDefault();
-              history.back();
+              const from = history.state?.from;
+              if (typeof from === "string" && from.includes("/blog/")) {
+                setLocation(from);
+              } else {
+                setLocation(lang === Language.en ? "/blog/" : `/${lang}/blog/`);
+              }
             }}
             class="interactive interactive-icon interactive-sm"
           >
@@ -136,57 +141,55 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
               🏁 {t("blog_post_footer")}
             </ScrollReveal>
           </>
-        ) : isLoading ? (
-          <div class="relative min-h-[60dvh]">
-            <ScrollReveal delay={3} class="flex flex-col gap-3">
-              {[
-                "w-full",
-                "w-5/6",
-                "w-2/3",
-                "w-4/5",
-                "w-3/4",
-                "w-full",
-                "w-11/12",
-                "w-3/4",
-                "w-full",
-                "w-5/6",
-                "w-4/5",
-                "w-full",
-                "w-2/3",
-                "w-7/8",
-                "w-full",
-                "w-5/6",
-                "w-3/4",
-                "w-11/12",
-                "w-full",
-                "w-4/5",
-                "w-full",
-                "w-11/12",
-                "w-3/4",
-                "w-full",
-                "w-5/6",
-                "w-4/5",
-                "w-full",
-                "w-2/3",
-                "w-7/8",
-                "w-full",
-                "w-5/6",
-                "w-3/4",
-                "w-11/12",
-                "w-full",
-                "w-4/5",
-              ].map((w, i) => (
-                <div
-                  key={`blog-post-sklt-${i + 1}`}
-                  class={`h-4 ${w} animate-pulse rounded-sm bg-stone-400/60 dark:bg-zinc-600/60`}
-                />
-              ))}
-            </ScrollReveal>
-          </div>
         ) : (
-          <div class="flex flex-col items-center">
-            <h1>{t("blog_post_not_found")}</h1>
-          </div>
+          isLoading && (
+            <div class="relative min-h-[60dvh]">
+              <ScrollReveal delay={3} class="flex flex-col gap-3">
+                {[
+                  "w-full",
+                  "w-5/6",
+                  "w-2/3",
+                  "w-4/5",
+                  "w-3/4",
+                  "w-full",
+                  "w-11/12",
+                  "w-3/4",
+                  "w-full",
+                  "w-5/6",
+                  "w-4/5",
+                  "w-full",
+                  "w-2/3",
+                  "w-7/8",
+                  "w-full",
+                  "w-5/6",
+                  "w-3/4",
+                  "w-11/12",
+                  "w-full",
+                  "w-4/5",
+                  "w-full",
+                  "w-11/12",
+                  "w-3/4",
+                  "w-full",
+                  "w-5/6",
+                  "w-4/5",
+                  "w-full",
+                  "w-2/3",
+                  "w-7/8",
+                  "w-full",
+                  "w-5/6",
+                  "w-3/4",
+                  "w-11/12",
+                  "w-full",
+                  "w-4/5",
+                ].map((w, i) => (
+                  <div
+                    key={`blog-post-sklt-${i + 1}`}
+                    class={`h-4 ${w} animate-pulse rounded-sm bg-stone-400/60 dark:bg-zinc-600/60`}
+                  />
+                ))}
+              </ScrollReveal>
+            </div>
+          )
         )}
       </div>
     </>

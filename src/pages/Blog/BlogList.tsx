@@ -1,37 +1,71 @@
 import type { FunctionalComponent } from "preact";
 
-import { useCallback, useMemo, useRef, useEffect, useState } from "preact/hooks";
-import { useSearchParams } from "wouter-preact";
+import { useCallback, useMemo, useRef, useEffect } from "preact/hooks";
+import { useLocation, useSearchParams } from "wouter-preact";
 
 import { BlogMeta } from "@/components/BlogMeta";
-import { Link } from "@/components/Link";
 import { PageHeading } from "@/components/PageHeading";
 import { Pagination } from "@/components/Pagination";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Tag } from "@/components/Tag";
 import { useTranslate } from "@/modules/i18n";
+import { Language } from "@/modules/language";
 
 import { getBlogPosts } from "./posts";
 
 const POSTS_PER_PAGE = 4;
 
+const readSearchParams = (): URLSearchParams => {
+  if (typeof window !== "undefined" && window.location.search) {
+    return new URLSearchParams(window.location.search);
+  }
+  return new URLSearchParams();
+};
+
 const BlogList: FunctionalComponent = () => {
   const { t, l: lang } = useTranslate();
+  const [location, navigate] = useLocation();
+  const [wouterParams] = useSearchParams();
+  const searchParams =
+    wouterParams.toString() === "" && typeof window !== "undefined" && window.location.search
+      ? readSearchParams()
+      : wouterParams;
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const sortOrder = useMemo(() => {
+    const sort = searchParams.get("sort");
+    return sort === "oldest" ? "oldest" : "newest";
+  }, [searchParams]);
 
   const postsRef = useRef<HTMLDivElement>(null);
+  const tagRef = useRef<HTMLSelectElement>(null);
+  const sortRef = useRef<HTMLSelectElement>(null);
   const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (tagRef.current && searchParams.get("tag")) {
+      tagRef.current.value = searchParams.get("tag")!;
+    }
+    if (sortRef.current && searchParams.get("sort")) {
+      sortRef.current.value = searchParams.get("sort")!;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const blogPosts = useMemo(() => getBlogPosts(lang), [lang]);
 
   const selectedTag = useMemo(() => searchParams.get("tag") || null, [searchParams]);
 
   const currentPage = useMemo(() => {
-    const page = Number.parseInt(searchParams.get("page") ?? "1", 10);
-    return Number.isNaN(page) ? 1 : page;
-  }, [searchParams]);
+    const fromPath = location.split("/page/")[1]?.split("/")[0];
+    if (fromPath) {
+      const page = Number.parseInt(fromPath, 10);
+      if (!Number.isNaN(page)) {
+        return page;
+      }
+    }
+    const fromQuery = Number.parseInt(searchParams.get("page") ?? "", 10);
+    return Number.isNaN(fromQuery) ? 1 : fromQuery;
+  }, [location, searchParams]);
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -71,44 +105,40 @@ const BlogList: FunctionalComponent = () => {
     return sortedPosts.slice(start, start + POSTS_PER_PAGE);
   }, [sortedPosts, safeCurrentPage]);
 
-  const updateSearchParams = useCallback(
-    (updates: Record<string, string | null>) => {
-      const next = new URLSearchParams(searchParams);
-
-      Object.entries(updates).forEach(([key, value]) => {
+  const buildBlogUrl = useCallback(
+    (extraParams: Record<string, string | null>) => {
+      const currentPath = location.split("?")[0];
+      const basePath = currentPath.replace(/\/page\/\d+\/?$/, "/");
+      const pageUrl = safeCurrentPage <= 1 ? basePath : `${basePath}page/${safeCurrentPage}/`;
+      const params = new URLSearchParams(searchParams.toString());
+      Object.entries(extraParams).forEach(([key, value]) => {
         if (!value) {
-          next.delete(key);
+          params.delete(key);
         } else {
-          next.set(key, value);
+          params.set(key, value);
         }
       });
-
-      setSearchParams(next, { replace: true });
+      params.delete("page");
+      const qs = params.toString();
+      return `${pageUrl}${qs ? `?${qs}` : ""}`;
     },
-    [searchParams, setSearchParams],
+    [location, safeCurrentPage, searchParams],
   );
 
   const handleTagChange = useCallback(
     (event: Event) => {
       const tag = (event.currentTarget as HTMLSelectElement).value;
-
-      updateSearchParams({
-        tag: tag || null,
-        page: null,
-      });
+      navigate(buildBlogUrl({ tag: tag || null }));
     },
-    [updateSearchParams],
+    [navigate, buildBlogUrl],
   );
 
   const handleSortChange = useCallback(
     (event: Event) => {
-      setSortOrder((event.currentTarget as HTMLSelectElement).value as "newest" | "oldest");
-
-      updateSearchParams({
-        page: null,
-      });
+      const sort = (event.currentTarget as HTMLSelectElement).value;
+      navigate(buildBlogUrl({ sort: sort !== "newest" ? sort : null }));
     },
-    [updateSearchParams],
+    [navigate, buildBlogUrl],
   );
 
   useEffect(() => {
@@ -146,11 +176,11 @@ const BlogList: FunctionalComponent = () => {
                   </label>
 
                   <select
+                    ref={tagRef}
                     id="tag-filter"
                     value={selectedTag ?? ""}
                     onChange={handleTagChange}
                     class="w-auto cursor-pointer capitalize"
-                    aria-label={t("blog_filter_tag")}
                   >
                     <option value="">{t("blog_filter_all")}</option>
 
@@ -174,11 +204,11 @@ const BlogList: FunctionalComponent = () => {
                 </label>
 
                 <select
+                  ref={sortRef}
                   id="sort-order"
                   value={sortOrder}
                   onChange={handleSortChange}
                   class="w-auto cursor-pointer"
-                  aria-label={t("blog_sort_label")}
                 >
                   <option value="newest">{t("blog_sort_newest")}</option>
 
@@ -195,7 +225,17 @@ const BlogList: FunctionalComponent = () => {
         >
           {paginatedPosts.map((post, index) => (
             <ScrollReveal key={post.slug} delay={index * 0.15} class="flex w-full">
-              <Link useRouter href={`/blog/${post.slug}/`} class="group interactive-card w-full">
+              <a
+                href={lang === Language.en ? `/blog/${post.slug}/` : `/${lang}/blog/${post.slug}/`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href") ?? "";
+                  navigate(href, {
+                    state: { from: window.location.pathname + window.location.search },
+                  });
+                }}
+                class="group interactive-card w-full"
+              >
                 <article>
                   <h2>{post.title}</h2>
 
@@ -213,7 +253,7 @@ const BlogList: FunctionalComponent = () => {
                     </div>
                   )}
                 </article>
-              </Link>
+              </a>
             </ScrollReveal>
           ))}
         </div>
@@ -224,7 +264,7 @@ const BlogList: FunctionalComponent = () => {
             direction="up"
             delay={1}
           >
-            <Pagination totalPages={totalPages} />
+            <Pagination totalPages={totalPages} currentPage={safeCurrentPage} />
           </ScrollReveal>
         )}
 

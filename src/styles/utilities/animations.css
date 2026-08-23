@@ -1,15 +1,6 @@
 /* =========================
    KEYFRAMES
 ========================= */
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes fade-y {
   from {
     opacity: 0;
@@ -38,10 +29,6 @@
 /* =========================
    VARIANTS
 ========================= */
-@utility animate-fade-in {
-  animation-name: fade;
-}
-
 @utility animate-fade-in-up {
   animation-name: fade-y;
   --tw-translate-y: 10px;

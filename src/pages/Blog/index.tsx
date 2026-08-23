@@ -9,7 +9,8 @@ const BlogPage: FunctionalComponent = () => {
   const [location] = useLocation();
 
   const path = location.split("?")[0];
-  const isPost = path.includes("/blog/") && !path.endsWith("/blog/");
+  const isPost =
+    path.includes("/blog/") && !path.endsWith("/blog/") && !path.includes("/blog/page/");
 
   if (isPost) {
     return <BlogPost />;
