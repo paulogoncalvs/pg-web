@@ -65,7 +65,10 @@ export const Form: FunctionalComponent<FormComponentProps> = ({
   const [errors, setErrors] = useState<FormErrors>({});
   const initialRef = useRef(initialValues);
   const fields = useRef<Record<string, HTMLElement | null>>({});
-  initialRef.current = initialValues;
+
+  useEffect(() => {
+    initialRef.current = initialValues;
+  }, [initialValues]);
 
   useEffect(() => {
     if (resetTrigger !== undefined && resetTrigger > 0) {
