@@ -27,14 +27,44 @@
 
 /* Repeated Tailwind Combinations */
 
-@utility text-muted {
-  @apply text-stone-600 dark:text-zinc-400;
-}
-
-@utility text-subtle {
-  @apply text-stone-500 dark:text-zinc-500;
-}
-
 @utility glass-panel {
   @apply bg-white/30 backdrop-blur-md;
+}
+
+/* Glass bar (adapted from .interactive button, for vertical bars) */
+@utility glass-bar {
+  @apply rounded-full border-x border-white/50 bg-white/40 shadow-sm dark:border-white/15 dark:bg-zinc-800/25;
+
+  &::before {
+    content: "";
+
+    @apply pointer-events-none absolute inset-0 rounded-full;
+
+    background:
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent 35%),
+      linear-gradient(to top, rgba(231, 229, 228, 0.25), transparent 55%);
+
+    @apply opacity-75;
+  }
+}
+
+/* Glass dot (adapted from .interactive button, for circular markers) */
+@utility glass-dot {
+  @apply rounded-full border border-white/50 shadow-sm dark:border-white/15;
+
+  &::before {
+    content: "";
+
+    @apply pointer-events-none absolute inset-0 rounded-full;
+
+    background:
+      linear-gradient(to bottom right, rgba(255, 255, 255, 0.6), transparent 35%),
+      linear-gradient(to top left, rgba(231, 229, 228, 0.25), transparent 55%);
+
+    @apply opacity-75;
+  }
+}
+
+@utility icon-wrapper {
+  @apply relative inline-block text-[0px];
 }

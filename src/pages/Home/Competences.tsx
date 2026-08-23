@@ -153,7 +153,7 @@ export const Competences: FunctionalComponent = () => {
             class="flex shrink-0 snap-start flex-col"
             direction="up"
           >
-            <div class="ml-6 flex w-72 grow flex-col rounded-2xl border border-white/60 bg-white/30 p-4 shadow-sm dark:border-white/10 dark:bg-zinc-800/30">
+            <div class="ml-6 flex w-[calc(100vw-3rem)] max-w-72 grow flex-col rounded-2xl border border-white/60 bg-white/30 p-4 shadow-sm sm:w-72 dark:border-white/10 dark:bg-zinc-800/30">
               <h3 class="text-sm font-semibold tracking-wider uppercase">{t(group.titleKey)}</h3>
               <div class="mt-3 flex flex-wrap gap-1 text-xs">
                 {group.items.map((skill) => (
@@ -169,6 +169,18 @@ export const Competences: FunctionalComponent = () => {
           </ScrollReveal>
         ))}
       </div>
+      <div
+        class={classNames(
+          "pointer-events-none absolute inset-y-0 right-0 z-10 w-4 bg-gradient-to-l from-zinc-400/35 to-transparent transition-opacity duration-500 md:hidden dark:from-black/30",
+          canScrollRight ? "opacity-100" : "opacity-0",
+        )}
+      />
+      <div
+        class={classNames(
+          "pointer-events-none absolute inset-y-0 left-0 z-10 w-4 bg-gradient-to-r from-zinc-400/35 to-transparent transition-opacity duration-500 md:hidden dark:from-black/30",
+          canScrollLeft ? "opacity-100" : "opacity-0",
+        )}
+      />
       <Button
         onClick={() => scroll("left")}
         disabled={!canScrollLeft}

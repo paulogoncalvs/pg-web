@@ -3,6 +3,7 @@ import type { FunctionalComponent } from "preact";
 import { useContext, useEffect } from "preact/hooks";
 
 import routesConfig from "@/config/routes";
+import { Language } from "@/modules/language";
 import { useRouterLocation } from "@/modules/router";
 import { StoreContext } from "@/modules/store";
 
@@ -19,8 +20,11 @@ export const HeadUpdater: FunctionalComponent = (): null => {
 
     // Derive route key from current path and language:
     // strip any existing language prefix, then re-prefix with active lang
-    const basePath = normalizedPath.replace(/^\/(?:en|pt)\//, "/");
-    const routeKey = lang === "pt" ? `/pt${basePath}` : basePath;
+    const basePath = normalizedPath.replace(
+      new RegExp(`^/(?:${Language.en}|${Language.pt})/`),
+      "/",
+    );
+    const routeKey = lang === Language.pt ? `/${Language.pt}${basePath}` : basePath;
     const routeConfig = routesConfig[routeKey];
     const templateParameters = routeConfig?.templateParameters;
     const head = templateParameters?.head;

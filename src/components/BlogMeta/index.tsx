@@ -34,14 +34,18 @@ export const BlogMeta: FunctionalComponent<BlogMetaProps> = ({
         classes,
       )}
     >
-      <span class="flex items-center gap-1">
-        <Icon src={calendarIcon} class={s.icon} aria-hidden="true" />
-        {date}
-      </span>
-      <span class="flex items-center gap-1">
-        <Icon src={clockIcon} class={s.icon} aria-hidden="true" />
-        {t("blog_reading_time", { min: String(readingTime) })}
-      </span>
+      {date && (
+        <span class="flex items-center gap-1">
+          <Icon src={calendarIcon} class={s.icon} aria-hidden="true" />
+          {date}
+        </span>
+      )}
+      {readingTime > 0 && (
+        <span class="flex items-center gap-1">
+          <Icon src={clockIcon} class={s.icon} aria-hidden="true" />
+          {t("blog_reading_time", { min: String(readingTime) })}
+        </span>
+      )}
     </div>
   );
 };

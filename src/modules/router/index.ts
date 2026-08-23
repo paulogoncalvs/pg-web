@@ -1,11 +1,9 @@
 import type { FunctionalComponent, JSX } from "preact";
 
-import { useContext, useEffect, useRef, useCallback } from "preact/hooks";
+import { useContext, useEffect, useCallback } from "preact/hooks";
 import { useLocation, useRoute } from "wouter-preact";
 
-import routesConfig from "@/config/routes";
 import { LANGUAGE_DEFAULT, type Language, isValidLanguage } from "@/modules/language";
-import { pageCache } from "@/modules/router/pages";
 import { type StoreContextAction, StoreContext } from "@/modules/store/context";
 import { trackPageView } from "@/modules/tracking/ga4";
 
@@ -15,8 +13,6 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
 
   const [location] = useLocation();
   const [, params] = useRoute(/^\/(?<lParam>[a-zA-Z]{2})(\/.*)?$/);
-
-  const prevLocation = useRef(location);
 
   const langParam: Language = isValidLanguage(params?.lParam ?? "")
     ? (params?.lParam ?? lang)
@@ -56,31 +52,6 @@ export const RouterOnChange: FunctionalComponent = (): JSX.Element | null => {
 
     trackPageView();
   }, [location, url, dispatch]);
-
-  // Handle page transition state and scroll restoration
-  useEffect(() => {
-    if (prevLocation.current === location) {
-      return;
-    }
-
-    prevLocation.current = location;
-
-    window.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
-
-    const route = routesConfig[location];
-    const view = route?.templateParameters?.View;
-    if (!view || pageCache[view]) {
-      return;
-    }
-
-    dispatch({
-      type: "UPDATE",
-      payload: { isNavigating: true },
-    });
-  }, [location, dispatch]);
 
   return null;
 };

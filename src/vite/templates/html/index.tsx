@@ -1,4 +1,5 @@
 import { structuredData } from "@/config/global/schema";
+import { Language } from "@/modules/language";
 
 import { strScript } from "./scripts";
 
@@ -38,7 +39,7 @@ export const HtmlTemplate = ({
   links,
   store,
   appHtml = "",
-  lang = "en",
+  lang = Language.en,
 }: Partial<PageProps>): string => {
   const headParts: string[] = [
     '<meta charSet="utf-8" />',

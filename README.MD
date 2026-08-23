@@ -67,13 +67,21 @@ pnpm dev
 
 ### Build & Development
 
-| Command        | Description                                                      |
-| -------------- | ---------------------------------------------------------------- |
-| `pnpm build`   | Build production site + SSG (copies .env.test → .env.production) |
-| `pnpm ssg`     | Generate static site from dist using SSG                         |
-| `pnpm preview` | Preview production build locally                                 |
-| `pnpm prod`    | Run typecheck, lint, format, build, and preview                  |
-| `pnpm dev`     | Start Vite dev server on port 4005                               |
+| Command            | Description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| `pnpm build`       | Subset fonts + build production site + SSG (copies .env.test → .env.production)  |
+| `pnpm ssg`         | Generate static site from dist using SSG                                         |
+| `pnpm preview`     | Preview production build locally                                                 |
+| `pnpm prod`        | Run typecheck, lint, format, build, and preview                                  |
+| `pnpm dev`         | Start Vite dev server on port 4005                                               |
+| `pnpm fonts:subset`| Subset Poppins woff2 files to the glyphs used by the site (~48 kB → ~5 kB each)  |
+
+### Font Subsetting
+
+Poppins ships with all unicode sets (Devanagari, etc.), which is unnecessary. The originals are kept
+untouched in `src/assets/fonts/original/`, and `pnpm fonts:subset` (runs automatically as part of
+`pnpm build`) generates latin-only woff2 subsets into `src/assets/fonts/` based on the characters
+actually used in `src/`. To swap font files, replace the ones in `original/` and rebuild.
 
 ### Unit Tests (Vitest)
 

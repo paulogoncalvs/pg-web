@@ -31,7 +31,7 @@ export const BannerStack: FunctionalComponent = () => {
       for (const entry of entries) {
         document.documentElement.style.setProperty(
           "--banner-stack-height",
-          `${entry.contentRect.height}px`,
+          `${Math.round(entry.contentRect.height)}px`,
         );
       }
     });

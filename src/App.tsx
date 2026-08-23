@@ -13,6 +13,7 @@ import { OverlayWithStore } from "@/components/Overlay";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SideDrawer } from "@/components/SideDrawer";
 import { RouterOnChange } from "@/modules/router";
+import { PageTransition } from "@/modules/router/PageTransition";
 import { StoreContextProvider } from "@/modules/store";
 
 const DEFAULT_STORE: PageStore = {};
@@ -44,7 +45,10 @@ export const App: FunctionalComponent<AppProps> = ({
             <main class="@container flex flex-1 flex-col space-y-16 px-6 text-center">
               {routerPage ? (
                 <Route path="*">
-                  {(params): JSX.Element => routerPage(params["*"] ? `/${params["*"]}` : "/")}
+                  {(params): JSX.Element => {
+                    const path = params["*"] ? `/${params["*"]}` : "/";
+                    return <PageTransition path={path} render={routerPage} />;
+                  }}
                 </Route>
               ) : null}
             </main>

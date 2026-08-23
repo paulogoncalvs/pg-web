@@ -18,9 +18,6 @@
   @apply bg-white/35;
   @apply shadow-md;
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
   &::before {
     content: "";
 

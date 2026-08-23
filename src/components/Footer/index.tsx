@@ -5,6 +5,7 @@ import axeLogo from "@/assets/icons/logos/axe.svg";
 import dockerLogo from "@/assets/icons/logos/docker.svg";
 import expressLogo from "@/assets/icons/logos/express.svg";
 import gaLogo from "@/assets/icons/logos/ga.svg";
+import githubLogo from "@/assets/icons/logos/github.svg";
 import mdxLogo from "@/assets/icons/logos/mdx.svg";
 import nodejsLogo from "@/assets/icons/logos/nodejs.svg";
 import oxcLogo from "@/assets/icons/logos/oxc.svg";
@@ -48,11 +49,16 @@ const logos = [
 interface FooterLinkLabelProps {
   htmlFor: string;
   label: string;
+  class?: string;
 }
 
-const FooterLinkLabel: FunctionalComponent<FooterLinkLabelProps> = ({ htmlFor, label }) => (
+const FooterLinkLabel: FunctionalComponent<FooterLinkLabelProps> = ({
+  htmlFor,
+  label,
+  class: classes = "",
+}) => (
   <label htmlFor={htmlFor} class="cursor-pointer" aria-label={label}>
-    <span class="inline-flex items-center gap-1 p-2 underline hover:no-underline">
+    <span class={classes}>
       {label}
       <Icon src={arrowDiagonalIcon} width="12" height="12" ariaHidden class="shrink-0" />
     </span>
@@ -65,7 +71,7 @@ export const Footer: FunctionalComponent = () => {
   const sourceCodeLink = (
     <Link
       href={githubRepoUrl}
-      class="underline"
+      class="interactive interactive-icon interactive-xs"
       newWindow
       onClick={(): void =>
         trackEvent("link_click", {
@@ -74,6 +80,7 @@ export const Footer: FunctionalComponent = () => {
         })
       }
     >
+      <Icon src={githubLogo} width="16" height="16" ariaHidden />
       {t("footer_description_1_link_text")}
     </Link>
   );
@@ -100,11 +107,19 @@ export const Footer: FunctionalComponent = () => {
             ))}
           </div>
         </div>
+        <FooterLinkLabel
+          class="interactive interactive-icon mt-8 interactive-sm"
+          htmlFor="popup-tog-source-code"
+          label={t("footer_source_code_label")}
+        />
       </div>
       <div class="flex flex-col items-center px-6 py-16 text-center text-xs">
         <p class="flex flex-col items-center gap-2 sm:flex-row">
-          <FooterLinkLabel htmlFor="popup-tog-source-code" label={t("footer_source_code_label")} />
-          <FooterLinkLabel htmlFor="popup-tog-recaptcha" label={t("footer_recaptcha_notice")} />
+          <FooterLinkLabel
+            htmlFor="popup-tog-recaptcha"
+            label={t("footer_recaptcha_notice")}
+            class="inline-flex items-center p-2 underline hover:no-underline"
+          />
         </p>
         <p class="pt-6 font-bold">
           paulogoncalves.dev ©️ {initialYear} {currentYear > initialYear ? `- ${currentYear}` : ""}{" "}

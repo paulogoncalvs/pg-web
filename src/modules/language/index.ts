@@ -1,6 +1,6 @@
 import { useContext } from "preact/hooks";
 
-import { StoreContext } from "@/modules/store/context";
+import { StoreContext } from "../store/context.ts";
 
 export enum Language {
   pt = "pt",

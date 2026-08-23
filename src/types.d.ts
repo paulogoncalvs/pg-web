@@ -147,7 +147,7 @@ interface Window {
   };
   dataLayer?: unknown[];
   gtag?: (...args: unknown[]) => void;
-  __REDUX_DEVTOOLS_EXTENSION__?: () => {
+  __REDUX_DEVTOOLS_EXTENSION__?: {
     connect(): {
       send(action: string, state: unknown): void;
       init(state: unknown): void;
