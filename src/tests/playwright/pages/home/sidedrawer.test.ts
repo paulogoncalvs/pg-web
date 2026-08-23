@@ -1,5 +1,6 @@
 import { test } from "@playwright/test";
 
+import { Language } from "@/modules/language";
 import { BasePage } from "@/tests/playwright/utils/basePage";
 
 test.describe("HOMEPAGE WITH SIDEDRAWER OPEN", () => {
@@ -8,14 +9,14 @@ test.describe("HOMEPAGE WITH SIDEDRAWER OPEN", () => {
     await page.clock.setFixedTime(new Date("2026-01-01T00:00:00Z"));
   });
 
-  const langs = ["en", "pt"];
+  const langs = [Language.en, Language.pt];
 
   for (const lang of langs) {
     test(`Home--sidedrawer-open (${lang})`, async ({ page }, testInfo) => {
       const colorScheme = testInfo.project.name.includes("dark") ? "dark" : "light";
       const testName = `Home--sidedrawer-open (${lang})`;
       const basePage = new BasePage(testName, page);
-      const url = lang === "pt" ? "/pt/" : "/";
+      const url = lang === Language.pt ? `/${Language.pt}/` : "/";
 
       await basePage.goto(url, colorScheme);
       const viewport = page.viewportSize()!;

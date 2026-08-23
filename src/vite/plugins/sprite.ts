@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path, { resolve } from "node:path";
 
-import { ICONS_DIR } from "../utils/shared";
+import { ICONS_DIR } from "../utils/shared.ts";
 
 export function generateSprite(folder: string = ICONS_DIR): string {
-  const iconsDir = resolve(__dirname, "../../../", folder);
+  const iconsDir = resolve(import.meta.dirname, "../../../", folder);
   const files: string[] = [];
 
   const getSvgFiles = (dir: string) => {

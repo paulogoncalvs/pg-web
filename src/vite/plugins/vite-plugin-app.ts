@@ -3,14 +3,15 @@ import type { HtmlTagDescriptor, Plugin } from "vite";
 import { createElement } from "preact";
 import { renderToStaticMarkup } from "preact-render-to-string";
 
-import { globalTitle } from "../../config/global/constants";
-import { structuredData } from "../../config/global/schema";
-import { configMetas, configLinks, type Meta, type Link } from "../../config/global/seo";
-import routesConfig from "../../config/routes";
-import { strScript } from "../templates/html/scripts";
-import { resolveIconsDir, SPRITE_FILENAME } from "../utils/shared";
-import { transformSvgToSymbol } from "../utils/svg";
-import { generateSprite } from "./sprite";
+import { globalTitle } from "../../config/global/constants.ts";
+import { structuredData } from "../../config/global/schema.ts";
+import { configMetas, configLinks, type Meta, type Link } from "../../config/global/seo.ts";
+import routesConfig from "../../config/routes/index.ts";
+import { Language } from "../../modules/language/index.ts";
+import { strScript } from "../templates/html/scripts.ts";
+import { resolveIconsDir, SPRITE_FILENAME } from "../utils/shared.ts";
+import { transformSvgToSymbol } from "../utils/svg.ts";
+import { generateSprite } from "./sprite.ts";
 
 /* ---------------------------------- */
 /* helpers                            */
@@ -99,12 +100,15 @@ export function appPlugin(mode: string): Plugin {
       }
 
       const url = ctx.originalUrl?.split("?")[0].split("#")[0] ?? "/";
+      const search = ctx.originalUrl?.includes("?")
+        ? `?${ctx.originalUrl.split("?")[1]?.split("#")[0] ?? ""}`
+        : "";
       const template = routesConfig[url]?.templateParameters;
 
-      const lang = template?.lang ?? "en";
+      const lang = template?.lang ?? Language.en;
       const title = template?.head?.title ?? globalTitle;
 
-      const cacheKey = `${url}:${lang}`;
+      const cacheKey = `${url}:${lang}:${search}`;
       let appHtml = ssrCache.get(cacheKey) ?? "";
 
       if (!appHtml) {
@@ -130,7 +134,7 @@ export function appPlugin(mode: string): Plugin {
             entries[code] = tr;
           }
           setTranslations(entries);
-          const store = createStore(url, lang, spriteUrl);
+          const store = createStore(ctx.originalUrl ?? url, lang, spriteUrl);
           appHtml = renderToStaticMarkup(createElement(App, { store, routerPage: SSR_RouterPage }));
           ssrCache.set(cacheKey, appHtml);
         } catch (e) {

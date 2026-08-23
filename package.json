@@ -20,9 +20,10 @@
   },
   "type": "module",
   "scripts": {
-    "build": "vite build && pnpm ssg && pnpm sw-precache",
+    "build": "pnpm fonts:subset && vite build && pnpm ssg && pnpm sw-precache",
     "check": "pnpm typecheck && pnpm lint && pnpm format",
     "dev": "vite --port 4005 --host",
+    "fonts:subset": "node scripts/subset-fonts.mjs",
     "format": "oxfmt . --check",
     "format:fix": "oxfmt .",
     "lint": "oxlint .",
@@ -36,7 +37,7 @@
     "test:all": "pnpm test && pnpm test:e2e",
     "test:all:update": "pnpm test:update && pnpm test:e2e:update",
     "test:e2e": "docker compose run --remove-orphans pg-tests-runner",
-    "test:e2e:install": "docker compose --progress=plain build pg-tests-runner",
+    "test:e2e:install": "docker compose --progress=plain build pg-tests-runner --no-cache --pull",
     "test:e2e:update": "docker compose run --remove-orphans pg-tests-runner pnpm exec playwright test --update-snapshots",
     "test:update": "cross-env NODE_ENV=production vitest run -u",
     "typecheck": "tsc --noEmit"
@@ -67,6 +68,7 @@
     "oxlint": "^1.68.0",
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
+    "subset-font": "^2.5.0",
     "tailwindcss": "^4.3.0",
     "tsx": "^4.22.4",
     "typescript": "^7.0.0",

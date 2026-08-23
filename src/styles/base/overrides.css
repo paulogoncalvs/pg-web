@@ -4,6 +4,12 @@ html:not(.js) .opacity-60 {
   @apply opacity-100;
 }
 
+/* Show when a JS error occurred after `.js` was added */
+html.js-error .op-low,
+html.js-error .opacity-60 {
+  @apply opacity-100;
+}
+
 html.animations-off * {
   @apply animate-none;
   @apply transition-none;
@@ -25,9 +31,4 @@ html.font-large {
 
 html.animations-off .op-low {
   @apply opacity-100;
-}
-
-html:not(.js) .snap-x::-webkit-scrollbar {
-  height: 0.375rem;
-  width: 0.375rem;
 }

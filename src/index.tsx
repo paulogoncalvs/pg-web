@@ -14,7 +14,6 @@ import { LANGUAGE_DEFAULT } from "@/modules/language";
 import { preloadPage, RouterPage } from "@/modules/router/pages";
 import { reportWebVitalsToGA } from "@/modules/webVitals";
 import "@/styles/index.css";
-import { preloadBlogPost } from "@/pages/Blog/posts";
 
 // Pre-load the initial page chunk so lazy() resolves before hydration
 const url = STORE.url || "/";
@@ -24,7 +23,11 @@ const view = route?.templateParameters?.View;
 if (view === "BlogPost") {
   const slug = url.split("/blog/")[1]?.replace("/", "");
   if (slug) {
-    await Promise.all([preloadPage(view), preloadBlogPost(slug)]);
+    const [{ preloadBlogPost }] = await Promise.all([
+      import("@/pages/Blog/posts"),
+      preloadPage(view),
+    ]);
+    await preloadBlogPost(slug);
   } else {
     await preloadPage(view || "NotFound");
   }
@@ -33,10 +36,7 @@ if (view === "BlogPost") {
 }
 
 const initialLang = STORE.lang || LANGUAGE_DEFAULT;
-await Promise.all([
-  preloadTranslation(initialLang),
-  initialLang !== LANGUAGE_DEFAULT ? preloadTranslation(LANGUAGE_DEFAULT) : Promise.resolve(),
-]);
+await preloadTranslation(initialLang);
 
 hydrate(<App store={STORE} routerPage={RouterPage} />, document.getElementById("root") as Element);
 

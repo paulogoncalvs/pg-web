@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Restrict automatic content detection: lockfiles, CI configs and test
+   snapshots contain class-like strings that generate phantom utilities. */
+@source not "../../pnpm-lock.yaml";
+@source not "../../src/tests";
+@source not "../../.github";
+
 /* =========================
    Custom Base Layer
 ========================= */

@@ -60,7 +60,7 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({
   );
 
   return (
-    <div ref={containerRef} class={classNames("relative inline-block text-[0px]", classes)}>
+    <div ref={containerRef} class={classNames("icon-wrapper", classes)}>
       <input
         type="checkbox"
         id={checkboxId}
@@ -90,6 +90,7 @@ export const LanguageSelector: FunctionalComponent<LanguageSelectorProps> = ({
           "absolute top-full left-0 z-50 mt-1 min-w-full overflow-hidden rounded-md border border-white/50 bg-white/80 shadow-lg backdrop-blur-md transition-opacity duration-150 dark:border-white/15 dark:bg-zinc-800/80",
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
+        role="listbox"
         aria-label={t("language_selection")}
       >
         {getAvailableLanguages().map((code: Language) => (

@@ -1,6 +1,6 @@
 const devTools =
-  typeof window !== "undefined"
-    ? (window.__REDUX_DEVTOOLS_EXTENSION__?.()?.connect() ?? null)
+  import.meta.env.DEV && typeof window !== "undefined"
+    ? (window.__REDUX_DEVTOOLS_EXTENSION__?.connect?.() ?? null)
     : null;
 
 const debug = (type: string, state: unknown): void => {

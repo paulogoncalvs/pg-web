@@ -17,7 +17,7 @@ export const setTranslations = (entries: Record<string, Translation>): void => {
   }
 };
 
-export const preloadTranslation = async (lang: string): Promise<void> => {
+export const preloadTranslation = async (lang: Language): Promise<void> => {
   if (cache[lang]) {
     return;
   }

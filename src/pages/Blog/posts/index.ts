@@ -1,6 +1,7 @@
 import type { ComponentType } from "preact";
 
 import routesConfig from "@/config/routes";
+import { Language } from "@/modules/language";
 
 export interface MDXModule {
   default: ComponentType;
@@ -39,7 +40,7 @@ export function getCachedBlogPostComponent(slug: string): ComponentType | undefi
 }
 
 const getLanguagePrefix = (lang: string): string => {
-  return lang === "pt" ? "/pt" : "";
+  return lang === Language.pt ? `/${Language.pt}` : "";
 };
 
 export const getBlogPosts = (lang: string): BlogPost[] => {

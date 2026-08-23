@@ -1,5 +1,4 @@
 import mdx from "@mdx-js/rollup";
-import { resolve } from "node:path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -34,7 +33,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
+      "@": import.meta.dirname + "/src",
     },
   },
   optimizeDeps: {

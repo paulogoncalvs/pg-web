@@ -200,7 +200,7 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   return (
     <div
       ref={triggerRef}
-      class="relative inline-block text-[0px]"
+      class="icon-wrapper"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={show}

@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-gradient font-sans text-base text-zinc-900 min-block-svh selection:bg-zinc-400 selection:text-zinc-100 dark:text-zinc-200 dark:selection:bg-zinc-100 dark:selection:text-zinc-900;
+  @apply font-sans text-base text-zinc-900 bg-gradient min-block-svh selection:bg-zinc-400 selection:text-zinc-100 dark:text-zinc-200 dark:selection:bg-zinc-100 dark:selection:text-zinc-900;
 }
 
 a {
@@ -88,7 +88,6 @@ summary::-webkit-details-marker {
   header,
   footer,
   nav,
-  .cookie-consent-bar,
   [data-scroll-btn],
   .overlay,
   .interactive,
