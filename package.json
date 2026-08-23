@@ -46,7 +46,7 @@
     "@mdx-js/preact": "^3.1.1",
     "preact": "^10.29.2",
     "preact-render-to-string": "^6.7.0",
-    "web-vitals": "^5.3.0",
+    "web-vitals": "^6.0.0",
     "workbox-precaching": "^7.4.1",
     "workbox-routing": "^7.4.1",
     "workbox-strategies": "^7.4.1",
