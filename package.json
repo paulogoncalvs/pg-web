@@ -64,7 +64,7 @@
     "husky": "^9.1.7",
     "jsdom": "^30.0.0",
     "lint-staged": "^17.0.7",
-    "oxfmt": "^0.63.0",
+    "oxfmt": "^0.64.0",
     "oxlint": "^1.68.0",
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
@@ -84,5 +84,5 @@
   "engines": {
     "node": ">=24"
   },
-  "packageManager": "pnpm@11.21.0"
+  "packageManager": "pnpm@11.22.0"
 }
