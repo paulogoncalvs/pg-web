@@ -48,7 +48,10 @@ export const useOnIntersect = (
   onIntersect: () => void,
 ): void => {
   const onIntersectRef = useRef(onIntersect);
-  onIntersectRef.current = onIntersect;
+
+  useEffect(() => {
+    onIntersectRef.current = onIntersect;
+  });
 
   useEffect(() => {
     const element = elementRef.current;
