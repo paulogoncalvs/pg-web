@@ -50,7 +50,7 @@
     "workbox-precaching": "^7.4.1",
     "workbox-routing": "^7.4.1",
     "workbox-strategies": "^7.4.1",
-    "wouter-preact": "^3.10.0"
+    "wouter-preact": "^3.13.0"
   },
   "devDependencies": {
     "@mdx-js/rollup": "^3.1.1",

@@ -1,4 +1,4 @@
-import type { FunctionalComponent, JSX } from "preact";
+import type { FunctionalComponent, GenericEventHandler } from "preact";
 
 import { classNames } from "@/utils/classNames";
 
@@ -15,7 +15,7 @@ export const Switch: FunctionalComponent<SwitchProps> = ({
   class: classes = "",
   label = "",
 }) => {
-  const handleChange: JSX.GenericEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: GenericEventHandler<HTMLInputElement> = (e) => {
     onChange((e.target as HTMLInputElement).checked);
   };
 

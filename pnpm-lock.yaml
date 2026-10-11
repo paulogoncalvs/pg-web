@@ -193,8 +193,8 @@ importers:
         specifier: ^7.4.1
         version: 7.4.1
       wouter-preact:
-        specifier: ^3.10.0
-        version: 3.11.1(preact@11.0.1)
+        specifier: ^3.13.0
+        version: 3.13.0(preact@11.0.1)
     devDependencies:
       '@mdx-js/rollup':
         specifier: ^3.1.1
@@ -3702,10 +3702,10 @@ packages:
   workbox-window@7.4.1:
     resolution: {integrity: sha512-notZDH2u8VXaqyuD7xaqIfEFi6SRM4SUSd7ewe9PDsVqADuepxX2ZMY3uvuZGxzY5ZOsGC/vD3A/3smFtJt4/A==}
 
-  wouter-preact@3.11.1:
-    resolution: {integrity: sha512-44+fVR6YegxQsMi89zbfE0vH294zqLwBlNPS2E3TOByYuE1od+CtdaNALP/d62YZjJAEwvPn2w7N/CkypiQTJw==}
+  wouter-preact@3.13.0:
+    resolution: {integrity: sha512-fRDI34kdE20xE6MEyAJ9J8wa5sNmVnBGg8SLzHq0bZFlewRKxh/OoXMiLyX+xqlSfqZmUzYfsOvSIppPeBictg==}
     peerDependencies:
-      preact: ^10.0.0
+      preact: ^10.0.0 || ^11.0.0-0
 
   xml-name-validator@5.0.0:
     resolution: {integrity: sha512-EvGK8EJ3DhaHfbRlETOWAS5pO9MZITeauHKJyb8wyajUfQUenkIg2MvLDTZ4T/TgIcm3HU0TFBgWWboAZ30UHg==}
@@ -7506,7 +7506,7 @@ snapshots:
       '@types/trusted-types': 2.0.7
       workbox-core: 7.4.1
 
-  wouter-preact@3.11.1(preact@11.0.1):
+  wouter-preact@3.13.0(preact@11.0.1):
     dependencies:
       preact: 11.0.1(preact-render-to-string@6.7.0)
       regexparam: 3.0.0

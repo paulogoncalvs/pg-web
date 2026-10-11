@@ -1,11 +1,11 @@
-import type { ComponentChildren, FunctionalComponent, JSX } from "preact";
+import type { ComponentChildren, FunctionalComponent, MouseEventHandler } from "preact";
 
 import { classNames } from "@/utils/classNames";
 
 interface ButtonComponentProps {
   class?: string;
   disabled?: boolean;
-  onClick?: JSX.MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   children?: ComponentChildren;
   type?: "button" | "submit" | "reset";
   ariaLabel?: string;
