@@ -39,6 +39,16 @@ export const PageTransition: FunctionalComponent<PageTransitionProps> = ({ path,
   const prevPath = useRef(path);
   const targetRef = useRef(path);
   const preloadRef = useRef<Promise<void> | null>(null);
+  const keepScrollRef = useRef(false);
+
+  /* Jumping to the top only makes sense when the destination is a different
+     page. Same-view navigations (blog pagination) keep the scroll position and
+     let the page component scroll to its own content. */
+  const scrollTopUnlessKept = (): void => {
+    if (!keepScrollRef.current) {
+      scrollToTop();
+    }
+  };
 
   useEffect(() => {
     if (path === prevPath.current) {
@@ -48,12 +58,15 @@ export const PageTransition: FunctionalComponent<PageTransitionProps> = ({ path,
        flipped all translated text, so fading out/in would replay the animation
        over identical content */
     const isLocaleSwitch = stripLangPrefix(path) === stripLangPrefix(prevPath.current);
+    /* Same view under a different path, e.g. `/blog/` → `/blog/page/2/`:
+       BlogList owns the scroll position for its own filters and pagination */
+    keepScrollRef.current = !isLocaleSwitch && viewOf(path) === viewOf(prevPath.current);
     prevPath.current = path;
 
     if (!animationsEnabled || isLocaleSwitch) {
       setDisplayPath(path);
       setPhase("idle");
-      scrollToTop();
+      scrollTopUnlessKept();
       dispatch({ type: "UPDATE", payload: { isNavigating: needsLoading(path) } });
       return;
     }
@@ -76,7 +89,7 @@ export const PageTransition: FunctionalComponent<PageTransitionProps> = ({ path,
         dispatch({ type: "UPDATE", payload: { isNavigating: true } });
         setPhase("loading");
       } else {
-        scrollToTop();
+        scrollTopUnlessKept();
         dispatch({ type: "UPDATE", payload: { isNavigating: false } });
         setDisplayPath(path);
         setPhase("entering");
@@ -98,7 +111,7 @@ export const PageTransition: FunctionalComponent<PageTransitionProps> = ({ path,
       if (!current || targetRef.current !== target) {
         return;
       }
-      scrollToTop();
+      scrollTopUnlessKept();
       dispatch({ type: "UPDATE", payload: { isNavigating: false } });
       setDisplayPath(target);
       setPhase("entering");

@@ -125,6 +125,7 @@ const en = {
   blog_tldr: "tl;dr:",
   popup_toggle: "Toggle popup",
   popup_close: "Close",
+  loading_content: "Loading content...",
   error_boundary_title: "Something went wrong",
   error_boundary_description: "Try refreshing the page.",
   show_more: "+ Show more",

@@ -1,6 +1,6 @@
 import type { FunctionalComponent } from "preact";
 
-import { useCallback, useMemo, useRef, useEffect } from "preact/hooks";
+import { useCallback, useContext, useMemo, useRef, useEffect } from "preact/hooks";
 import { useLocation, useSearchParams } from "wouter-preact";
 
 import { BlogMeta } from "@/components/BlogMeta";
@@ -10,10 +10,18 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { Tag } from "@/components/Tag";
 import { useTranslate } from "@/modules/i18n";
 import { Language } from "@/modules/language";
+import { StoreContext } from "@/modules/store";
 
 import { getBlogPosts } from "./posts";
 
 const POSTS_PER_PAGE = 4;
+
+/* Gap left above the list so the heading stays visible after scrolling */
+const SCROLL_OFFSET = 120;
+
+/* Below this distance the list is already "where it should be" — scrolling
+   would be a no-op the user only perceives as a flicker */
+const SCROLL_SLACK = 0;
 
 const readSearchParams = (): URLSearchParams => {
   if (typeof window !== "undefined" && window.location.search) {
@@ -24,6 +32,7 @@ const readSearchParams = (): URLSearchParams => {
 
 const BlogList: FunctionalComponent = () => {
   const { t, l: lang } = useTranslate();
+  const { animationsEnabled } = useContext(StoreContext);
   const [location, navigate] = useLocation();
   const [wouterParams] = useSearchParams();
   const searchParams =
@@ -141,6 +150,8 @@ const BlogList: FunctionalComponent = () => {
     [navigate, buildBlogUrl],
   );
 
+  /* Scroll to the list — not to the top of the page — whenever the result set
+     changes, so the heading stays put and the new posts start right below it */
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -151,13 +162,17 @@ const BlogList: FunctionalComponent = () => {
       return;
     }
 
-    const top = postsRef.current.getBoundingClientRect().top + window.scrollY - 120;
+    const top = postsRef.current.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+
+    if (Math.abs(top - window.scrollY) <= SCROLL_SLACK) {
+      return;
+    }
 
     window.scrollTo({
       top,
-      behavior: "smooth",
+      behavior: animationsEnabled ? "smooth" : "instant",
     });
-  }, [safeCurrentPage]);
+  }, [safeCurrentPage, selectedTag, sortOrder, animationsEnabled]);
 
   return (
     <>

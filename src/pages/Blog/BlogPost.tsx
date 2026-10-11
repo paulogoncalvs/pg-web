@@ -9,6 +9,7 @@ import { Icon } from "@/components/Icon";
 import { Link } from "@/components/Link";
 import { PageHeading } from "@/components/PageHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { Spinner } from "@/components/Spinner";
 import { Tag } from "@/components/Tag";
 import { useTranslate } from "@/modules/i18n";
 import { Language } from "@/modules/language";
@@ -27,7 +28,9 @@ function useMDXComponent(slug: string | undefined): {
       return { Component: null, loading: false };
     }
     const cached = getCachedBlogPostComponent(slug);
-    return { Component: cached ?? null, loading: !cached };
+    /* Not flagged as loading yet: the effect starts a 200ms grace timer, so a
+       chunk that resolves faster never flashes the skeleton */
+    return { Component: cached ?? null, loading: false };
   });
 
   useEffect(() => {
@@ -144,6 +147,12 @@ const BlogPost: FunctionalComponent<BlogPostProps> = (props) => {
         ) : (
           isLoading && (
             <div class="relative min-h-[60dvh]">
+              <div class="flex flex-col items-center gap-3 pb-10">
+                <Spinner />
+                <p role="status" class="text-sm text-stone-600 dark:text-zinc-400">
+                  {t("loading_content")}
+                </p>
+              </div>
               <ScrollReveal delay={3} class="flex flex-col gap-3">
                 {[
                   "w-full",

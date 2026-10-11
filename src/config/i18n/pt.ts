@@ -127,6 +127,7 @@ const pt: Record<TranslationKey, string> = {
   blog_tldr: "tl;dr:",
   popup_toggle: "Alternar popup",
   popup_close: "Fechar",
+  loading_content: "A carregar o conteúdo...",
   error_boundary_title: "Algo correu mal",
   error_boundary_description: "Tente recarregar a página.",
   show_more: "+ Mostrar mais",
