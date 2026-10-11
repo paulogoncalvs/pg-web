@@ -1,11 +1,11 @@
-import type { FunctionalComponent, JSX } from "preact";
+import type { FunctionalComponent, HTMLAttributes, JSX } from "preact";
 
 import { useEffect, useRef, useState } from "preact/hooks";
 
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { classNames } from "@/utils/classNames";
 
-interface ImageProps extends JSX.HTMLAttributes<HTMLImageElement> {
+interface ImageProps extends HTMLAttributes<HTMLImageElement> {
   src: string;
   alt?: string;
 
@@ -110,7 +110,7 @@ export const Image: FunctionalComponent<ImageProps> = ({
   return (
     <img
       ref={imgRef}
-      {...props}
+      {...(props as Omit<JSX.IntrinsicElements["img"], "role">)}
       alt={alt}
       width={width}
       height={height}

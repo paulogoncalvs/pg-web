@@ -1,4 +1,9 @@
-import { type ComponentChildren, type FunctionalComponent, type JSX, createContext } from "preact";
+import {
+  type ComponentChildren,
+  type FunctionalComponent,
+  type TargetedEvent,
+  createContext,
+} from "preact";
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "preact/hooks";
 
 import { StoreContext } from "@/modules/store";
@@ -21,7 +26,7 @@ export type ValidationRules = Record<
 interface FormContextValue {
   formData: FormComponentData;
   errors: FormErrors;
-  handleFormChange: (event: JSX.TargetedEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleFormChange: (event: TargetedEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   validateField: (name: string, value: string) => ValidationError | "";
   errorMessages: Record<string, string>;
   resetForm: () => void;
@@ -137,9 +142,7 @@ export const Form: FunctionalComponent<FormComponentProps> = ({
     }
   }, []);
 
-  const handleFormChange = (
-    event: JSX.TargetedEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ): void => {
+  const handleFormChange = (event: TargetedEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = event.currentTarget;
 
     setFormData((prev) => ({
@@ -161,7 +164,7 @@ export const Form: FunctionalComponent<FormComponentProps> = ({
     });
   };
 
-  const triggerSubmit = (event: JSX.TargetedEvent<HTMLFormElement>): void => {
+  const triggerSubmit = (event: TargetedEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     const newErrors = getValidationErrors();

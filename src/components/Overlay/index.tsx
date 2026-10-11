@@ -4,6 +4,7 @@ import type { FunctionalComponent, JSX } from "preact";
 import { useContext, useEffect } from "preact/hooks";
 
 import { Spinner } from "@/components/Spinner";
+import { useTranslate } from "@/modules/i18n";
 import { StoreContext } from "@/modules/store";
 import { classNames } from "@/utils/classNames";
 
@@ -45,6 +46,7 @@ export const Overlay: FunctionalComponent<OverlayProps> = ({
 
 export const OverlayWithStore: FunctionalComponent = () => {
   const { isSideDrawerOpen, isNavigating, dispatch } = useContext(StoreContext);
+  const { t } = useTranslate();
 
   const closeDrawer = () => {
     if (isNavigating) {
@@ -55,7 +57,14 @@ export const OverlayWithStore: FunctionalComponent = () => {
 
   return (
     <Overlay isOpen={Boolean(isSideDrawerOpen || isNavigating)} onClose={closeDrawer}>
-      {isNavigating ? <Spinner class="size-8" /> : undefined}
+      {isNavigating ? (
+        <div class="flex flex-col items-center gap-3">
+          <Spinner class="size-8" />
+          <p role="status" class="text-sm text-zinc-700 dark:text-zinc-200">
+            {t("loading_content")}
+          </p>
+        </div>
+      ) : undefined}
     </Overlay>
   );
 };

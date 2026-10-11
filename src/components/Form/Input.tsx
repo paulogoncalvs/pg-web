@@ -1,4 +1,4 @@
-import type { FunctionalComponent } from "preact";
+import type { FunctionalComponent, HTMLInputTypeAttribute, JSX } from "preact";
 
 import { useContext } from "preact/hooks";
 
@@ -8,7 +8,7 @@ import { FormContext } from "./";
 
 interface FormInputComponentProps {
   label: string;
-  type?: string;
+  type?: HTMLInputTypeAttribute;
   name: string;
   disabled?: boolean;
   id: string;
@@ -36,18 +36,20 @@ export const FormInput: FunctionalComponent<FormInputComponentProps> = ({
     <div class={classNames("mt-3", classes)}>
       <label htmlFor={id}>{label}</label>
       <input
-        ref={(element) => registerField(name, element)}
-        class={classNames("form-input", errors[name] && "error")}
-        id={id}
-        type={type}
-        name={name}
-        value={formData[name]}
-        onInput={handleFormChange}
-        disabled={disabled}
-        autoComplete={autoComplete}
-        aria-label={label}
-        aria-invalid={errors[name] ? "true" : undefined}
-        aria-describedby={errors[name] ? `${id}-error` : undefined}
+        {...({
+          ref: (element: HTMLInputElement | null) => registerField(name, element),
+          class: classNames("form-input", errors[name] && "error"),
+          id,
+          type,
+          name,
+          value: formData[name],
+          onInput: handleFormChange,
+          disabled,
+          autoComplete,
+          "aria-label": label,
+          "aria-invalid": errors[name] ? "true" : undefined,
+          "aria-describedby": errors[name] ? `${id}-error` : undefined,
+        } as JSX.IntrinsicElements["input"])}
       />
       {errors[name] && (
         <p class="form-error-message" role="alert" id={`${id}-error`}>

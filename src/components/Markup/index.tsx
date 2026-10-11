@@ -1,6 +1,6 @@
-import type { FunctionalComponent, JSX } from "preact";
+import type { FunctionalComponent, HTMLAttributes, JSX } from "preact";
 
-interface MarkupProps extends JSX.HTMLAttributes<HTMLElement> {
+interface MarkupProps extends HTMLAttributes<HTMLElement> {
   html: string;
   as?: JSX.ElementType;
   sanitize?: (html: string) => string;

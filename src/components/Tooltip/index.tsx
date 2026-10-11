@@ -31,10 +31,10 @@ export const Tooltip: FunctionalComponent<TooltipProps> = ({
   const triggerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const showTimeout = useRef<number>();
-  const hideTimeout = useRef<number>();
-  const touchTimeout = useRef<number>();
-  const rafRef = useRef<number>();
+  const showTimeout = useRef<number | undefined>(undefined);
+  const hideTimeout = useRef<number | undefined>(undefined);
+  const touchTimeout = useRef<number | undefined>(undefined);
+  const rafRef = useRef<number | undefined>(undefined);
   const lastTouchTime = useRef(0);
 
   const id = useId();

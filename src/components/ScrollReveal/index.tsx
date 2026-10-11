@@ -1,4 +1,4 @@
-import type { ComponentChildren, FunctionalComponent, JSX } from "preact";
+import type { ComponentChildren, CSSProperties, FunctionalComponent, JSX } from "preact";
 
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 
@@ -43,10 +43,7 @@ export const ScrollReveal: FunctionalComponent<ScrollRevealProps> = ({
     }
   }, [forceVisible]);
 
-  const style = useMemo(
-    () => ({ "--delay": `${delay * 100}ms` }) as preact.JSX.CSSProperties,
-    [delay],
-  );
+  const style = useMemo(() => ({ "--delay": `${delay * 100}ms` }) as CSSProperties, [delay]);
 
   return (
     <Component
