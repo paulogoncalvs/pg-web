@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@mdx-js/preact": "^3.1.1",
-    "preact": "^10.29.8",
+    "preact": "^11.0.0",
     "preact-render-to-string": "^6.7.0",
     "web-vitals": "^6.1.1",
     "workbox-precaching": "^7.4.1",
