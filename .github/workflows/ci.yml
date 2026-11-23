@@ -17,7 +17,7 @@ jobs:
       - name: Set Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
-          node-version: "24.x"
+          node-version: "26.x"
           cache: "pnpm"
 
       - name: Install Dependencies
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     container:
-      image: node:24-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+      image: node:26-slim@sha256:e6bedef217677b276c591795e169840edd9096dbf13f29df8ef8d1856b8820bc
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
